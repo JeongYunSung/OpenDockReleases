@@ -1,0 +1,37 @@
+opendock: 1
+id: opendock/startup-founder
+summary: Business model, ICP, GTM, pricing, and founder strategy workspace.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - founder
+  - gtm
+  - pricing
+  - business
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/.agents/skills/opendock-startup-founder/SKILL.md
+    to: .agents/skills/opendock-startup-founder/SKILL.md
+  - from: files/.codex/skills/opendock-startup-founder/SKILL.md
+    to: .codex/skills/opendock-startup-founder/SKILL.md
+  - from: files/.claude/skills/opendock-startup-founder/SKILL.md
+    to: .claude/skills/opendock-startup-founder/SKILL.md
+  - from: files/.cursor/rules/opendock-startup-founder.mdc
+    to: .cursor/rules/opendock-startup-founder.mdc
+  - from: files/PROMPTS.md
+    to: PROMPTS.md
+  - from: files/README.md
+    to: README.md
+  - from: files/BUSINESS_MODEL.md
+    to: BUSINESS_MODEL.md
+  - from: files/GTM.md
+    to: GTM.md
+  - from: files/ICP.md
+    to: ICP.md
+  - from: files/PRICING.md
+    to: PRICING.md

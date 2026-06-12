@@ -1,0 +1,53 @@
+opendock: 1
+id: opendock/ultrawork
+summary: All-in-one quality gate for design, frontend, backend, Kotlin/Spring, data, DevOps, docs, product, marketing, mobile, security, and QA work.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - quality
+  - harness
+  - workflow
+  - ai-workspace
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/.opendock/harness/check.mjs
+    to: .opendock/harness/check.mjs
+  - from: files/.opendock/harness/check.sh
+    to: .opendock/harness/check.sh
+  - from: files/.opendock/harness/check.ps1
+    to: .opendock/harness/check.ps1
+  - from: files/.agents/skills/opendock-ultrawork/SKILL.md
+    to: .agents/skills/opendock-ultrawork/SKILL.md
+  - from: files/.codex/skills/opendock-ultrawork/SKILL.md
+    to: .codex/skills/opendock-ultrawork/SKILL.md
+  - from: files/.claude/skills/opendock-ultrawork/SKILL.md
+    to: .claude/skills/opendock-ultrawork/SKILL.md
+  - from: files/.cursor/rules/opendock-ultrawork.mdc
+    to: .cursor/rules/opendock-ultrawork.mdc
+  - from: files/.agents/workflows/opendock-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-ultrawork/quality-gate.md
+  - from: files/.agents/hooks/opendock-ultrawork/hook.json
+    to: .agents/hooks/opendock-ultrawork/hook.json
+doctor:
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/check.mjs
+  - id: oma-skill
+    check: test -f .agents/skills/opendock-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-ultrawork/hook.json

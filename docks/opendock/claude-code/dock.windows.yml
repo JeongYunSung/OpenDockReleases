@@ -1,0 +1,24 @@
+opendock: 1
+id: opendock/claude-code
+summary: Tool dock for installing Claude Code without project payloads.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - claude-code
+  - tool
+  - ai-agent
+requires:
+  runtimes:
+    node: ">=22.0.0"
+    npm: ">=10.0.0"
+install:
+  - id: install-claude-code
+    run: npm install --global @anthropic-ai/claude-code@latest
+    timeout_ms: 600000
+update:
+  - id: update-claude-code
+    run: npm install --global @anthropic-ai/claude-code@latest
+    timeout_ms: 600000
+doctor:
+  - id: check-claude-code
+    run: claude --version

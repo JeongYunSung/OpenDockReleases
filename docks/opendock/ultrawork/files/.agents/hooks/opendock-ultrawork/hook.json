@@ -1,0 +1,9 @@
+{
+  "name": "opendock-ultrawork-quality-gate",
+  "description": "Run the Ultrawork all-in-one quality harness before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/check.mjs",
+  "manualFallback": "If hooks are not active, run this command manually before final response."
+}
