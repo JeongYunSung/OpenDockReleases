@@ -2,43 +2,42 @@
 
 This repository is the source workspace for OpenDock catalog docks.
 
-The OpenDock CLI repository should stay focused on the CLI, core engine, tests,
-and small fixtures. Full production-ready dock payloads live here so Registry
-submissions can be reviewed, reproduced, and updated without bloating the CLI
-package.
+The catalog now keeps only focused Ultrawork quality gates. Each dock installs a small, domain-specific checklist, agent guidance, workflow adapters, hook metadata, and a runnable harness.
 
-## Layout
+## Catalog
 
 ```text
 docks/
   opendock/
-    codex/
-      dock.macos.yml
-      dock.windows.yml
-      DOCK.md
-      logo.png
-      files/
-    designer-ai/
-    designer-ai-pro/
+        design-ultrawork/
+        figma-ultrawork/
+        creative-gen-ultrawork/
+        frontend-ultrawork/
+        backend-ultrawork/
+        kotlin-spring-ultrawork/
+        data-ultrawork/
+        devops-ultrawork/
+        docs-ultrawork/
+        business-ultrawork/
+        mobile-ultrawork/
+        qa-ultrawork/
 ```
-
-Each dock directory is deployable with the OpenDock CLI.
 
 ## Deploy
 
-Run deploy from the dock directory:
+Use exact versions and platform-specific manifests:
 
 ```bash
-opendock deploy opendock/designer-ai@1.0.0 --platform macos --file dock.macos.yml
-opendock deploy opendock/designer-ai@1.0.0 --platform windows --file dock.windows.yml
+opendock deploy opendock/design-ultrawork@1.0.0 --platform macos --file docks/opendock/design-ultrawork/dock.macos.yml
+opendock deploy opendock/design-ultrawork@1.0.0 --platform windows --file docks/opendock/design-ultrawork/dock.windows.yml
 ```
 
-Use exact versions. Do not put release versions inside `dock.*.yml`.
+Do not put release versions inside `dock.*.yml`; the deploy command owns the version.
 
 ## Review Rules
 
-- Keep dock ids in `opendock/<name>` form.
+- Keep dock ids in `opendock/<domain>-ultrawork` form.
 - Keep platform artifacts separate: `dock.macos.yml`, `dock.windows.yml`.
 - Keep `DOCK.md` and `logo.png` next to the manifests.
-- Keep generated agent files, workflows, and command adapters under `files/`.
+- Keep generated agent files, workflows, commands, hooks, and harness files under `files/`.
 - Deploy only from committed source whenever possible.

@@ -1,0 +1,16 @@
+---
+description: Business Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Business Ultrawork before final handoff.
+
+- PRDs need problem, goals, non-goals, success metrics, risks, and requirements.
+- User stories need acceptance criteria.
+- GTM docs need ICP, channel, pricing, and positioning.
+- Marketing copy needs a clear CTA.
+- Claims need evidence or source notes.
+- Release notes need breaking changes and migration notes when relevant.
+
+Run `node .opendock/harness/check.mjs` when possible.

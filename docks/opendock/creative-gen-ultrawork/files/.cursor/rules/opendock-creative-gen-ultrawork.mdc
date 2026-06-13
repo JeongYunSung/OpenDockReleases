@@ -1,0 +1,14 @@
+---
+description: Creative generation quality gate
+globs:
+  - "**/*"
+alwaysApply: false
+---
+
+Use Creative Generation Ultrawork for image, logo, favicon, video, audio, and asset-analysis work.
+
+Before handoff, update `GENERATION_BRIEF.md`, update `OUTPUT_MANIFEST.md`, and run:
+
+```bash
+node .opendock/harness/check.mjs
+```

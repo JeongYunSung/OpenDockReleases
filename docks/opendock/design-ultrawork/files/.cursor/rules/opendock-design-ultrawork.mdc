@@ -1,0 +1,17 @@
+---
+description: Design Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Design Ultrawork before final handoff. Read `DESIGN.md` first and treat it as the design contract.
+
+- Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
+- Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
+- No viewport-based font-size.
+- Buttons, chips, tabs, and compact controls must not overflow text.
+- Mobile viewport must not create horizontal scroll.
+- Hover, focus, disabled, loading, empty, and error states must be represented.
+- Color contrast must target WCAG AA and typography scale must stay restrained unless the contract is stricter.
+
+Run `node .opendock/harness/design/check.mjs` when possible.

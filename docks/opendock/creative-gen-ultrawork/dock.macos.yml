@@ -1,0 +1,64 @@
+opendock: 1
+id: opendock/creative-gen-ultrawork
+summary: Creative generation loop for image, logo, favicon, video, audio, and asset analysis deliverables.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - generation
+  - image
+  - logo
+  - favicon
+  - video
+  - audio
+  - assets
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/GENERATION_BRIEF.md
+    to: GENERATION_BRIEF.md
+  - from: files/OUTPUT_MANIFEST.md
+    to: OUTPUT_MANIFEST.md
+  - from: files/.opendock/harness/check.mjs
+    to: .opendock/harness/check.mjs
+  - from: files/.opendock/harness/check.sh
+    to: .opendock/harness/check.sh
+  - from: files/.opendock/harness/check.ps1
+    to: .opendock/harness/check.ps1
+  - from: files/.agents/skills/opendock-creative-gen-ultrawork/SKILL.md
+    to: .agents/skills/opendock-creative-gen-ultrawork/SKILL.md
+  - from: files/.codex/skills/opendock-creative-gen-ultrawork/SKILL.md
+    to: .codex/skills/opendock-creative-gen-ultrawork/SKILL.md
+  - from: files/.claude/skills/opendock-creative-gen-ultrawork/SKILL.md
+    to: .claude/skills/opendock-creative-gen-ultrawork/SKILL.md
+  - from: files/.cursor/rules/opendock-creative-gen-ultrawork.mdc
+    to: .cursor/rules/opendock-creative-gen-ultrawork.mdc
+  - from: files/.agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-creative-gen-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-creative-gen-ultrawork/quality-gate.md
+  - from: files/.agents/hooks/opendock-creative-gen-ultrawork/hook.json
+    to: .agents/hooks/opendock-creative-gen-ultrawork/hook.json
+doctor:
+  - id: generation-brief
+    check: test -f GENERATION_BRIEF.md
+  - id: output-manifest
+    check: test -f OUTPUT_MANIFEST.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/check.mjs
+  - id: skill
+    check: test -f .agents/skills/opendock-creative-gen-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-creative-gen-ultrawork/hook.json

@@ -1,0 +1,18 @@
+---
+description: Figma Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Figma Ultrawork before final handoff. Read `DESIGN.md` first and treat it as the design contract.
+
+- Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
+- Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
+- Use the official Figma MCP to inspect the node-specific Figma URL provided by the user.
+- Do not ask the user for separate Figma credentials or offline design exports.
+- Figma text layers must not overflow their boxes.
+- Figma frames should be integer-aligned before handoff.
+- Buttons/CTAs need focus and disabled state coverage.
+- Component-like frames should use Auto Layout.
+
+Fix violations through Figma MCP when edit access is available. If edit access is not available, report exact node names, failing properties, expected values, and recommended fixes.

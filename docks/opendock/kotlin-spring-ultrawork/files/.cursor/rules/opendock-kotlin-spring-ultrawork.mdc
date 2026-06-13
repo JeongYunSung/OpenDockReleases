@@ -1,0 +1,16 @@
+---
+description: Kotlin Spring Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Kotlin Spring Ultrawork before final handoff.
+
+- Gradle wrapper must exist.
+- ktlintCheck, detekt, test, build, and bootJar must be available.
+- application.yml must not contain literal secrets.
+- Controller DTOs should use validation.
+- Transaction boundaries must be explicit around write flows.
+- Readiness and health checks should be present.
+
+Run `node .opendock/harness/check.mjs` when possible.

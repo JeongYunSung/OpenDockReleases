@@ -1,0 +1,53 @@
+opendock: 1
+id: opendock/design-ultrawork
+summary: Design implementation quality gate aligned to DESIGN.md plus hard UI checks.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - design
+  - ui
+  - accessibility
+  - harness
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/.opendock/harness/design/check.mjs
+    to: .opendock/harness/design/check.mjs
+  - from: files/.opendock/harness/design/check.sh
+    to: .opendock/harness/design/check.sh
+  - from: files/.opendock/harness/design/check.ps1
+    to: .opendock/harness/design/check.ps1
+  - from: files/.agents/skills/opendock-design-ultrawork/SKILL.md
+    to: .agents/skills/opendock-design-ultrawork/SKILL.md
+  - from: files/.codex/skills/opendock-design-ultrawork/SKILL.md
+    to: .codex/skills/opendock-design-ultrawork/SKILL.md
+  - from: files/.claude/skills/opendock-design-ultrawork/SKILL.md
+    to: .claude/skills/opendock-design-ultrawork/SKILL.md
+  - from: files/.cursor/rules/opendock-design-ultrawork.mdc
+    to: .cursor/rules/opendock-design-ultrawork.mdc
+  - from: files/.agents/workflows/opendock-design-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-design-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-design-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-design-ultrawork/quality-gate.md
+  - from: files/.agents/hooks/opendock-design-ultrawork/hook.json
+    to: .agents/hooks/opendock-design-ultrawork/hook.json
+doctor:
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/design/check.mjs
+  - id: skill
+    check: test -f .agents/skills/opendock-design-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-design-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-design-ultrawork/hook.json

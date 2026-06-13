@@ -1,0 +1,16 @@
+---
+description: Frontend Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Frontend Ultrawork before final handoff.
+
+- Formatter, lint, typecheck, test, and build scripts must exist when package.json exists.
+- No console.log, debugger, broad any usage, or href="#" placeholders.
+- Images need alt text, form controls need labels, and buttons need explicit type.
+- API flows need loading and error states.
+- Route or page smoke tests should exist for user-visible surfaces.
+- Bundle growth and unnecessary duplicate dependencies require review.
+
+Run `node .opendock/harness/check.mjs` when possible.

@@ -1,0 +1,53 @@
+opendock: 1
+id: opendock/data-ultrawork
+summary: Data quality gate for SQL safety, destructive queries, timezone clarity, metric definitions, PII masking, and dashboard cost.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - data
+  - analytics
+  - sql
+  - privacy
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/.opendock/harness/check.mjs
+    to: .opendock/harness/check.mjs
+  - from: files/.opendock/harness/check.sh
+    to: .opendock/harness/check.sh
+  - from: files/.opendock/harness/check.ps1
+    to: .opendock/harness/check.ps1
+  - from: files/.agents/skills/opendock-data-ultrawork/SKILL.md
+    to: .agents/skills/opendock-data-ultrawork/SKILL.md
+  - from: files/.codex/skills/opendock-data-ultrawork/SKILL.md
+    to: .codex/skills/opendock-data-ultrawork/SKILL.md
+  - from: files/.claude/skills/opendock-data-ultrawork/SKILL.md
+    to: .claude/skills/opendock-data-ultrawork/SKILL.md
+  - from: files/.cursor/rules/opendock-data-ultrawork.mdc
+    to: .cursor/rules/opendock-data-ultrawork.mdc
+  - from: files/.agents/workflows/opendock-data-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-data-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-data-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-data-ultrawork/quality-gate.md
+  - from: files/.agents/hooks/opendock-data-ultrawork/hook.json
+    to: .agents/hooks/opendock-data-ultrawork/hook.json
+doctor:
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/check.mjs
+  - id: skill
+    check: test -f .agents/skills/opendock-data-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-data-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-data-ultrawork/hook.json

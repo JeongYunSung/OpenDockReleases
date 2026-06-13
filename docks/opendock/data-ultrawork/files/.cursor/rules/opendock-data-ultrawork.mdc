@@ -1,0 +1,16 @@
+---
+description: Data Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Data Ultrawork before final handoff.
+
+- SQL should avoid select * in shared analytics.
+- Destructive queries require review and rollback notes.
+- Date and timezone assumptions must be explicit.
+- Metric definitions should be documented before dashboard use.
+- PII columns must be masked or excluded.
+- Dashboard query cost and cardinality need review.
+
+Run `node .opendock/harness/check.mjs` when possible.

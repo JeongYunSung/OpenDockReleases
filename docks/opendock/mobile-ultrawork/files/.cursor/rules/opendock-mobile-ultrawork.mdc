@@ -1,0 +1,16 @@
+---
+description: Mobile Ultrawork quality gate
+globs: **/*
+alwaysApply: false
+---
+
+Apply Mobile Ultrawork before final handoff.
+
+- Mobile permissions require a visible rationale.
+- Dart print and debug-only code must not remain.
+- Screens need loading, empty, error, and offline states.
+- Tap targets and accessibility labels need review.
+- Release checklist must cover signing, versioning, and rollback.
+- Network and async failures need explicit handling.
+
+Run `node .opendock/harness/check.mjs` when possible.
