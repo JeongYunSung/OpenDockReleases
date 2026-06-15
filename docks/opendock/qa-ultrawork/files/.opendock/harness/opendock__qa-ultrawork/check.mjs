@@ -56,7 +56,7 @@ const config = {
       "globs": [
         "**/*.md"
       ],
-      "pattern": "(?i)(done|ready|complete)(?![\\s\\S]{0,500}(tested|verified|regression|smoke|coverage))",
+      "pattern": "(?i)(status:\\s*(done|ready|complete)|\\b(done|ready|complete)\\s+(status|for handoff|for release|for review|handoff|implementation|work))(?![\\s\\S]{0,500}(tested|verified|regression|smoke|coverage))",
       "message": "Completion notes should include verification evidence."
     },
     {
@@ -79,7 +79,7 @@ const config = {
         "**/*.yml",
         "**/*.yaml"
       ],
-      "pattern": "(?i)(auth|permission|token|secret|credential|admin)(?![\\s\\S]{0,600}(security review|scan|threat|risk|test))",
+      "pattern": "(?i)(\\b(auth|permission|secret|credential|admin)\\b|\\b(api[-_ ]?token|access[-_ ]?token|refresh[-_ ]?token|bearer[-_ ]?token)\\b)(?![\\s\\S]{0,600}(security review|scan|threat|risk|test))",
       "message": "Security-sensitive changes need review or scan evidence."
     },
     {
@@ -87,7 +87,7 @@ const config = {
       "globs": [
         "**/*.md"
       ],
-      "pattern": "(?i)(release|deploy|ship)(?![\\s\\S]{0,500}(rollback|monitor|owner|risk))",
+      "pattern": "(?i)\\b(release|deploy|ship)\\b(?![\\s\\S]{0,500}(rollback|monitor|owner|risk))",
       "message": "Release handoff needs rollback, monitoring, owner, and risk notes."
     }
   ]

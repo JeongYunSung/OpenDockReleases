@@ -72,7 +72,7 @@ const config = {
         "**/*.yaml",
         "**/*.md"
       ],
-      "pattern": "(?i)\\b(email|phone|address|ssn|resident|passport|birthdate)\\b(?![\\s\\S]{0,200}(mask|hash|redact|exclude))",
+      "pattern": "(?i)\\b(email|phone[-_ ]?number|telephone|address|ssn|resident|passport|birthdate)\\b(?![\\s\\S]{0,200}(mask|hash|redact|exclude))",
       "message": "PII fields need masking or exclusion notes."
     },
     {
@@ -82,7 +82,7 @@ const config = {
         "**/*.yml",
         "**/*.yaml"
       ],
-      "pattern": "(?i)(metric|kpi|conversion|retention)(?![\\s\\S]{0,300}(definition|formula|source|owner))",
+      "pattern": "(?i)(?<!success\\s)(metric|kpi|conversion|retention)(?![\\s\\S]{0,300}(definition|formula|source|owner))",
       "message": "Metrics need definition, formula, source, and owner."
     }
   ]

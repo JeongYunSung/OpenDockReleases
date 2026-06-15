@@ -93,7 +93,7 @@ const config = {
       "globs": [
         "**/*.md"
       ],
-      "pattern": "(?i)(deploy|release|rollback)(?![\\s\\S]{0,400}(runbook|rollback|restore|owner))",
+      "pattern": "(?i)\\b(deploy|release|rollback)\\b(?=[^\\n]{0,120}(canary|handoff|runbook|docs?|checklist))(?![\\s\\S]{0,400}(runbook|rollback|restore|owner))",
       "message": "Deploy docs should include rollback/runbook ownership."
     }
   ]

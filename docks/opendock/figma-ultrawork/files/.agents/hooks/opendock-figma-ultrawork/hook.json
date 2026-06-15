@@ -1,0 +1,9 @@
+{
+  "name": "opendock-figma-ultrawork-quality-gate",
+  "description": "Run the Figma Ultrawork local presence gate before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "opendock verify-hook opendock/figma-ultrawork .opendock/harness/opendock__figma-ultrawork/check.mjs",
+  "manualFallback": "If hooks are not active, run `opendock verify-hook opendock/figma-ultrawork .opendock/harness/opendock__figma-ultrawork/check.mjs` manually before final response. Full canvas review still requires a node-specific Figma URL through Figma MCP."
+}

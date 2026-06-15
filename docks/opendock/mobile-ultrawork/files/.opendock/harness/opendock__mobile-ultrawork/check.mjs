@@ -81,7 +81,7 @@ const config = {
         "**/*.dart",
         "**/*.swift"
       ],
-      "pattern": "(?i)(screen|view)(?![\\s\\S]{0,500}(loading|empty|error|offline))",
+      "pattern": "(?i)\\b(screen|view)\\b(?![\\s\\S]{0,500}(loading|empty|error|offline))",
       "message": "Mobile screens need loading, empty, error, and offline states."
     },
     {
@@ -176,6 +176,18 @@ function compilePattern(pattern) {
   return new RegExp(source, flags);
 }
 
+function isMobileStateRelevant(file, text) {
+  const ext = path.extname(file);
+  if ([".dart", ".swift"].includes(ext)) return true;
+  if ([".tsx", ".jsx"].includes(ext)) {
+    return /react-native|from\s+["']react-native["']|<Screen\b|Screen\b/i.test(text);
+  }
+  if ([".md", ".mdx"].includes(ext)) {
+    return /\b(mobile screen|mobile app|ios screen|android screen|react native|flutter|swiftui|tap target|offline state|screen states?)\b/i.test(text);
+  }
+  return false;
+}
+
 function readPackageJson() {
   const file = path.join(root, "package.json");
   if (!fs.existsSync(file)) return null;
@@ -218,6 +230,7 @@ function run() {
     const re = compilePattern(rule.pattern);
     for (const file of files) {
       if (!matchesAny(file.rel, rule.globs)) continue;
+      if (rule.id === "missing-mobile-states" && !isMobileStateRelevant(file.rel, file.text)) continue;
       if (re.test(file.text)) failures.push({ rule: rule.id, file: file.rel, detail: rule.message });
     }
   }

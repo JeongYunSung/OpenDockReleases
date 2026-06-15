@@ -29,6 +29,14 @@ files:
     to: .agents/workflows/opendock-figma-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-figma-ultrawork/quality-gate.md
     to: .claude/commands/opendock-figma-ultrawork/quality-gate.md
+  - from: files/.agents/hooks/opendock-figma-ultrawork/hook.json
+    to: .agents/hooks/opendock-figma-ultrawork/hook.json
+  - from: files/.opendock/harness/opendock__figma-ultrawork/check.mjs
+    to: .opendock/harness/opendock__figma-ultrawork/check.mjs
+  - from: files/.opendock/harness/opendock__figma-ultrawork/check.sh
+    to: .opendock/harness/opendock__figma-ultrawork/check.sh
+  - from: files/.opendock/harness/opendock__figma-ultrawork/check.ps1
+    to: .opendock/harness/opendock__figma-ultrawork/check.ps1
 doctor:
   - id: harness-doc
     check: test -f HARNESS.md
@@ -36,3 +44,7 @@ doctor:
     check: test -f .agents/skills/opendock-figma-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-figma-ultrawork/quality-gate.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__figma-ultrawork/check.mjs
+  - id: hook
+    check: test -f .agents/hooks/opendock-figma-ultrawork/hook.json

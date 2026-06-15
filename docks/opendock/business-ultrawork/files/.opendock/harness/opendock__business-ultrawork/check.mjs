@@ -70,7 +70,7 @@ const config = {
       "globs": [
         "**/*.md"
       ],
-      "pattern": "(?i)(landing|campaign|email|ad copy|marketing copy)(?![\\s\\S]{0,500}(CTA|call to action|sign up|book|start|buy))",
+      "pattern": "(?i)(landing|campaign|email campaign|marketing email|ad copy|marketing copy)(?![\\s\\S]{0,500}(CTA|call to action|sign up|book|start|buy))",
       "message": "Marketing copy needs a clear CTA."
     },
     {
@@ -78,7 +78,7 @@ const config = {
       "globs": [
         "**/*.md"
       ],
-      "pattern": "(?i)(best|fastest|leading|world-class|revolutionary)(?![\\s\\S]{0,250}(source|evidence|benchmark|proof))",
+      "pattern": "(?i)\\b(best-in-class|fastest|world-class|revolutionary|industry-leading|market-leading)\\b(?![\\s\\S]{0,250}(source|evidence|benchmark|proof))",
       "message": "Strong claims need evidence."
     },
     {
