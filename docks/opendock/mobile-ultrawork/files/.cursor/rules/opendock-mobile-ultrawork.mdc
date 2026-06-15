@@ -13,4 +13,4 @@ Apply Mobile Ultrawork before final handoff.
 - Release checklist must cover signing, versioning, and rollback.
 - Network and async failures need explicit handling.
 
-Run `node .opendock/harness/check.mjs` when possible.
+Run `opendock verify-hook opendock/mobile-ultrawork .opendock/harness/opendock__mobile-ultrawork/check.mjs` when possible.

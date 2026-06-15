@@ -13,4 +13,4 @@ Apply QA Ultrawork before final handoff.
 - Release handoff must include known risks and rollback notes.
 - Final responses should say what was tested and what was not tested.
 
-Run `node .opendock/harness/check.mjs` when possible.
+Run `opendock verify-hook opendock/qa-ultrawork .opendock/harness/opendock__qa-ultrawork/check.mjs` when possible.

@@ -23,10 +23,6 @@ files:
     to: HARNESS.md
   - from: files/.agents/skills/opendock-figma-ultrawork/SKILL.md
     to: .agents/skills/opendock-figma-ultrawork/SKILL.md
-  - from: files/.codex/skills/opendock-figma-ultrawork/SKILL.md
-    to: .codex/skills/opendock-figma-ultrawork/SKILL.md
-  - from: files/.claude/skills/opendock-figma-ultrawork/SKILL.md
-    to: .claude/skills/opendock-figma-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-figma-ultrawork.mdc
     to: .cursor/rules/opendock-figma-ultrawork.mdc
   - from: files/.agents/workflows/opendock-figma-ultrawork/quality-gate.md
@@ -35,8 +31,8 @@ files:
     to: .claude/commands/opendock-figma-ultrawork/quality-gate.md
 doctor:
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath 'HARNESS.md') { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-figma-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/skills/opendock-figma-ultrawork/SKILL.md') { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-figma-ultrawork/quality-gate.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/workflows/opendock-figma-ultrawork/quality-gate.md') { exit 0 } else { exit 1 }"

@@ -14,7 +14,7 @@ Documentation quality gate for markdown hygiene, links, headings, code fences, q
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/docs-ultrawork .opendock/harness/opendock__docs-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for documentation quality gates.

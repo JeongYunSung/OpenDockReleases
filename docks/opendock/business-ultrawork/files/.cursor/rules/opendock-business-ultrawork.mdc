@@ -13,4 +13,4 @@ Apply Business Ultrawork before final handoff.
 - Claims need evidence or source notes.
 - Release notes need breaking changes and migration notes when relevant.
 
-Run `node .opendock/harness/check.mjs` when possible.
+Run `opendock verify-hook opendock/business-ultrawork .opendock/harness/opendock__business-ultrawork/check.mjs` when possible.

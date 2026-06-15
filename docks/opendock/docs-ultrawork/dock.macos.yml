@@ -20,18 +20,14 @@ files:
     to: README.md
   - from: files/HARNESS.md
     to: HARNESS.md
-  - from: files/.opendock/harness/check.mjs
-    to: .opendock/harness/check.mjs
-  - from: files/.opendock/harness/check.sh
-    to: .opendock/harness/check.sh
-  - from: files/.opendock/harness/check.ps1
-    to: .opendock/harness/check.ps1
+  - from: files/.opendock/harness/opendock__docs-ultrawork/check.mjs
+    to: .opendock/harness/opendock__docs-ultrawork/check.mjs
+  - from: files/.opendock/harness/opendock__docs-ultrawork/check.sh
+    to: .opendock/harness/opendock__docs-ultrawork/check.sh
+  - from: files/.opendock/harness/opendock__docs-ultrawork/check.ps1
+    to: .opendock/harness/opendock__docs-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-docs-ultrawork/SKILL.md
     to: .agents/skills/opendock-docs-ultrawork/SKILL.md
-  - from: files/.codex/skills/opendock-docs-ultrawork/SKILL.md
-    to: .codex/skills/opendock-docs-ultrawork/SKILL.md
-  - from: files/.claude/skills/opendock-docs-ultrawork/SKILL.md
-    to: .claude/skills/opendock-docs-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-docs-ultrawork.mdc
     to: .cursor/rules/opendock-docs-ultrawork.mdc
   - from: files/.agents/workflows/opendock-docs-ultrawork/quality-gate.md
@@ -44,7 +40,7 @@ doctor:
   - id: harness-doc
     check: test -f HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/check.mjs
+    check: test -f .opendock/harness/opendock__docs-ultrawork/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-docs-ultrawork/SKILL.md
   - id: workflow

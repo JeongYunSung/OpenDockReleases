@@ -14,7 +14,7 @@ Data quality gate for SQL safety, destructive queries, timezone clarity, metric 
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/data-ultrawork .opendock/harness/opendock__data-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for data and analytics quality gates.

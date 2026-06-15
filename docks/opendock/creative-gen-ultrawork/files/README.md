@@ -11,20 +11,22 @@ This dock prepares a workspace for repeatable generation work:
 
 ## Quick Start
 
-1. Open `GENERATION_BRIEF.md`.
-2. Set `Status` to `active` and choose one or more modes.
-3. Generate or analyze the asset.
-4. Put outputs in the expected folder:
+1. Create a run folder: `.opendock/runs/creative-gen/<run-id>/`.
+2. Copy `.opendock/templates/creative-gen/GENERATION_BRIEF.md` to `brief.md`.
+3. Copy `.opendock/templates/creative-gen/OUTPUT_MANIFEST.md` to `manifest.md`.
+4. Set `Status` to `active` and choose one or more modes in the run brief.
+5. Generate or analyze the asset.
+6. Put outputs in the expected folder:
    - `assets/generated/images/`
    - `assets/generated/logos/`
    - `assets/generated/favicons/`
    - `assets/generated/videos/`
    - `assets/generated/audio/`
-5. Update `OUTPUT_MANIFEST.md`.
-6. Run:
+7. Update the run manifest.
+8. Run:
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
 ```
 
 ## Loop
@@ -34,3 +36,5 @@ brief -> generate -> record -> check -> revise -> handoff
 ```
 
 If the harness fails, fix the output or the manifest, then run it again.
+
+The templates are OpenDock-managed. The run docs are project work products and are safe to edit for each generated asset.

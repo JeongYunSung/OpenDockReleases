@@ -14,7 +14,7 @@ DevOps quality gate for Terraform, Kubernetes, Helm, secrets, public exposure, i
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/devops-ultrawork .opendock/harness/opendock__devops-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for DevOps and infrastructure quality gates.

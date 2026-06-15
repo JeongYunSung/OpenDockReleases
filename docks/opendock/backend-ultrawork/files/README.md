@@ -14,7 +14,7 @@ Backend quality gate for API contracts, validation, authentication, migrations, 
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/backend-ultrawork .opendock/harness/opendock__backend-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for backend API and service quality gates.

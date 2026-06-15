@@ -14,7 +14,7 @@ Kotlin/Spring Boot quality gate for Gradle, ktlint, detekt, DTO validation, prof
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/kotlin-spring-ultrawork .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for Kotlin and Spring Boot quality gates.

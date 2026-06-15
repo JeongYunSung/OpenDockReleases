@@ -20,18 +20,14 @@ files:
     to: README.md
   - from: files/HARNESS.md
     to: HARNESS.md
-  - from: files/.opendock/harness/check.mjs
-    to: .opendock/harness/check.mjs
-  - from: files/.opendock/harness/check.sh
-    to: .opendock/harness/check.sh
-  - from: files/.opendock/harness/check.ps1
-    to: .opendock/harness/check.ps1
+  - from: files/.opendock/harness/opendock__devops-ultrawork/check.mjs
+    to: .opendock/harness/opendock__devops-ultrawork/check.mjs
+  - from: files/.opendock/harness/opendock__devops-ultrawork/check.sh
+    to: .opendock/harness/opendock__devops-ultrawork/check.sh
+  - from: files/.opendock/harness/opendock__devops-ultrawork/check.ps1
+    to: .opendock/harness/opendock__devops-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-devops-ultrawork/SKILL.md
     to: .agents/skills/opendock-devops-ultrawork/SKILL.md
-  - from: files/.codex/skills/opendock-devops-ultrawork/SKILL.md
-    to: .codex/skills/opendock-devops-ultrawork/SKILL.md
-  - from: files/.claude/skills/opendock-devops-ultrawork/SKILL.md
-    to: .claude/skills/opendock-devops-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-devops-ultrawork.mdc
     to: .cursor/rules/opendock-devops-ultrawork.mdc
   - from: files/.agents/workflows/opendock-devops-ultrawork/quality-gate.md
@@ -42,12 +38,12 @@ files:
     to: .agents/hooks/opendock-devops-ultrawork/hook.json
 doctor:
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath 'HARNESS.md') { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: test -f .opendock/harness/check.mjs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.opendock/harness/opendock__devops-ultrawork/check.mjs') { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-devops-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/skills/opendock-devops-ultrawork/SKILL.md') { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-devops-ultrawork/quality-gate.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/workflows/opendock-devops-ultrawork/quality-gate.md') { exit 0 } else { exit 1 }"
   - id: hook
-    check: test -f .agents/hooks/opendock-devops-ultrawork/hook.json
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/hooks/opendock-devops-ultrawork/hook.json') { exit 0 } else { exit 1 }"

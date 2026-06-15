@@ -14,7 +14,7 @@ Business quality gate for PRDs, user stories, GTM, ICP, pricing, marketing claim
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/business-ultrawork .opendock/harness/opendock__business-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for PM, founder, and marketing quality gates.

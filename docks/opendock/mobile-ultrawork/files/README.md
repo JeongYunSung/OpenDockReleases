@@ -14,7 +14,7 @@ Mobile quality gate for Flutter, React Native, Swift, Android, permissions, acce
 ## Run
 
 ```bash
-node .opendock/harness/check.mjs
+opendock verify-hook opendock/mobile-ultrawork .opendock/harness/opendock__mobile-ultrawork/check.mjs
 ```
 
 Use this dock when the workspace needs a focused quality gate for mobile app quality gates.
