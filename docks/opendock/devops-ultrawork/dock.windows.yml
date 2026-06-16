@@ -9,6 +9,11 @@ tags:
   - infra
   - terraform
   - kubernetes
+commands:
+  check:
+    description: Run the devops-ultrawork quality gate.
+    file: .opendock/harness/opendock__devops-ultrawork/check.mjs
+    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

@@ -9,6 +9,11 @@ tags:
   - flutter
   - ios
   - android
+commands:
+  check:
+    description: Run the mobile-ultrawork quality gate.
+    file: .opendock/harness/opendock__mobile-ultrawork/check.mjs
+    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

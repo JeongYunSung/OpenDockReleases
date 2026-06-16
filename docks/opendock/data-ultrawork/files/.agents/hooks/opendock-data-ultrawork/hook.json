@@ -4,6 +4,6 @@
   "events": [
     "Stop"
   ],
-  "command": "opendock verify-hook opendock/data-ultrawork .opendock/harness/opendock__data-ultrawork/check.mjs",
+  "command": "opendock run check --dock opendock/data-ultrawork",
   "manualFallback": "If hooks are not active, run this command manually before final response."
 }

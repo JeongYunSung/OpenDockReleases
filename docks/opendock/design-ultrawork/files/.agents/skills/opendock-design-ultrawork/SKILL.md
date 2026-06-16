@@ -20,7 +20,7 @@ Read `DESIGN.md`, run the OpenDock-managed harness, and apply the checklist befo
 ## Command
 
 ```bash
-opendock verify-hook opendock/design-ultrawork .opendock/harness/opendock__design-ultrawork/check.mjs
+opendock run check --dock opendock/design-ultrawork
 ```
 
 ## Safety Boundary

@@ -9,6 +9,11 @@ tags:
   - founder
   - marketing
   - gtm
+commands:
+  check:
+    description: Run the business-ultrawork quality gate.
+    file: .opendock/harness/opendock__business-ultrawork/check.mjs
+    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

@@ -17,7 +17,7 @@ Use this skill when the user asks for generated creative output or resource anal
 6. Generate or analyze the asset.
 7. Save outputs in the expected folder.
 8. Update the run manifest.
-9. Run `opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+9. Run `opendock run check --dock opendock/creative-gen-ultrawork`.
 10. Fix failures and rerun until the harness passes.
 
 ## Supported Modes
@@ -42,7 +42,7 @@ Use this skill when the user asks for generated creative output or resource anal
 ## Command
 
 ```bash
-opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
+opendock run check --dock opendock/creative-gen-ultrawork
 ```
 
 ## Safety Boundary

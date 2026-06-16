@@ -19,7 +19,7 @@ Run the OpenDock-managed harness and apply the checklist before final handoff.
 ## Command
 
 ```bash
-opendock verify-hook opendock/devops-ultrawork .opendock/harness/opendock__devops-ultrawork/check.mjs
+opendock run check --dock opendock/devops-ultrawork
 ```
 
 ## Safety Boundary

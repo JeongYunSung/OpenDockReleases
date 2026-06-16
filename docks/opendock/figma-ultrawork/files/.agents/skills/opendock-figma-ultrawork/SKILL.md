@@ -41,5 +41,5 @@ Read `DESIGN.md`, inspect the Figma node through the official Figma MCP, and app
 This local command verifies that the procedural Figma MCP gate is installed and documented. It does not replace node-specific canvas inspection.
 
 ```bash
-opendock verify-hook opendock/figma-ultrawork .opendock/harness/opendock__figma-ultrawork/check.mjs
+opendock run check --dock opendock/figma-ultrawork
 ```

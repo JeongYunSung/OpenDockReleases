@@ -7,7 +7,7 @@
 5. Generate or analyze the requested asset.
 6. Save outputs in a stable path under `assets/generated/` unless the brief requires another path.
 7. Update the run manifest with output paths, prompt, tool, model, date, rights, review, and revision history.
-8. Run `opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+8. Run `opendock run check --dock opendock/creative-gen-ultrawork`.
 9. If the harness fails, revise the asset or manifest and run it again.
 10. Report passed checks, remaining exceptions, and exact output paths.
 

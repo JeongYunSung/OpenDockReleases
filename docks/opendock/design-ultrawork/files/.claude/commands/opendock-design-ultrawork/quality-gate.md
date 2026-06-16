@@ -2,7 +2,7 @@
 
 1. Read `DESIGN.md` and `HARNESS.md`.
 2. Review the changed files against the design contract and hard quality checklist.
-3. Run `opendock verify-hook opendock/design-ultrawork .opendock/harness/opendock__design-ultrawork/check.mjs`.
+3. Run `opendock run check --dock opendock/design-ultrawork`.
 4. Fix failures or document an explicit human-approved exception.
 5. Report what passed, what failed, and what was not tested.
 

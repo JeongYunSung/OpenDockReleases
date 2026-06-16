@@ -2,7 +2,7 @@
 
 1. Read `HARNESS.md`.
 2. Review the changed files against the checklist.
-3. Run `opendock verify-hook opendock/kotlin-spring-ultrawork .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs`.
+3. Run `opendock run check --dock opendock/kotlin-spring-ultrawork`.
 4. Fix failures or document an explicit human-approved exception.
 5. Report what passed, what failed, and what was not tested.
 

@@ -10,5 +10,5 @@ Use Creative Generation Ultrawork for image, logo, favicon, video, audio, and as
 Before handoff, create run-scoped docs under `.opendock/runs/creative-gen/<run-id>/` from `.opendock/templates/creative-gen/`, update the run `brief.md` and `manifest.md`, and run:
 
 ```bash
-opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
+opendock run check --dock opendock/creative-gen-ultrawork
 ```

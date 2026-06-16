@@ -4,6 +4,6 @@
   "events": [
     "Stop"
   ],
-  "command": "opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs",
+  "command": "opendock run check --dock opendock/creative-gen-ultrawork",
   "manualFallback": "If hooks are not active, create run docs under .opendock/runs/creative-gen/ and run this command manually before final response."
 }

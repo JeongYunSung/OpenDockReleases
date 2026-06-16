@@ -13,4 +13,4 @@ Apply Docs Ultrawork before final handoff.
 - Old package names and stale versions must be removed.
 - Multilingual docs must stay structurally aligned.
 
-Run `opendock verify-hook opendock/docs-ultrawork .opendock/harness/opendock__docs-ultrawork/check.mjs` when possible.
+Run `opendock run check --dock opendock/docs-ultrawork` when possible.

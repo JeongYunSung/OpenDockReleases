@@ -4,6 +4,6 @@
   "events": [
     "Stop"
   ],
-  "command": "opendock verify-hook opendock/kotlin-spring-ultrawork .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs",
+  "command": "opendock run check --dock opendock/kotlin-spring-ultrawork",
   "manualFallback": "If hooks are not active, run this command manually before final response."
 }
