@@ -11,20 +11,9 @@ Mobile quality gate for Flutter, React Native, Swift, Android, permissions, acce
 - Release checklist must cover signing, versioning, and rollback.
 - Network and async failures need explicit handling.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/mobile-ultrawork .opendock/harness/opendock__mobile-ultrawork/check.mjs
-sh .opendock/harness/opendock__mobile-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__mobile-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

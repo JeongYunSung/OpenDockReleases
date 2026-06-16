@@ -11,10 +11,4 @@ QA quality gate for regression coverage, smoke tests, security checks, release c
 - Release handoff must include known risks and rollback notes.
 - Final responses should say what was tested and what was not tested.
 
-## Run
-
-```bash
-opendock verify-hook opendock/qa-ultrawork .opendock/harness/opendock__qa-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for QA, test, security, and release quality gates.

@@ -6,7 +6,7 @@ When handling image, logo, favicon, video, audio, or asset-analysis work:
 2. Follow the command at `.claude/commands/opendock-creative-gen-ultrawork/quality-gate.md`.
 3. Create run-scoped docs under `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from the templates in `.opendock/templates/creative-gen/`.
 4. Keep the run brief and manifest current.
-5. Run `opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs` before final handoff.
+2. Complete the `HARNESS.md` checklist before final handoff.
 
 Do not hand off generated assets without a manifest entry and a passing harness unless a human explicitly accepts the exception.
 

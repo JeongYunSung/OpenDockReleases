@@ -11,20 +11,9 @@ Documentation quality gate for markdown hygiene, links, headings, code fences, q
 - Old package names and stale versions must be removed.
 - Multilingual docs must stay structurally aligned.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/docs-ultrawork .opendock/harness/opendock__docs-ultrawork/check.mjs
-sh .opendock/harness/opendock__docs-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__docs-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

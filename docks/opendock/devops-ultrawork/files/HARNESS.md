@@ -11,20 +11,9 @@ DevOps quality gate for Terraform, Kubernetes, Helm, secrets, public exposure, i
 - Image tags must not use latest.
 - Rollback and runbook docs should exist for deployable changes.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/devops-ultrawork .opendock/harness/opendock__devops-ultrawork/check.mjs
-sh .opendock/harness/opendock__devops-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__devops-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

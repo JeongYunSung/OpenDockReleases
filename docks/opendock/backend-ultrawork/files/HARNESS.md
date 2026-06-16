@@ -11,20 +11,9 @@ Backend quality gate for API contracts, validation, authentication, migrations, 
 - Database migrations should be dry-runnable and rollback-aware.
 - OpenAPI or schema documentation should not drift from routes.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/backend-ultrawork .opendock/harness/opendock__backend-ultrawork/check.mjs
-sh .opendock/harness/opendock__backend-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__backend-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

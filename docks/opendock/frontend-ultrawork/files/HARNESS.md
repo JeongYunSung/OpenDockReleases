@@ -11,20 +11,9 @@ Frontend quality gate for React, TypeScript, accessibility, route smoke checks, 
 - Route or page smoke tests should exist for user-visible surfaces.
 - Bundle growth and unnecessary duplicate dependencies require review.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/frontend-ultrawork .opendock/harness/opendock__frontend-ultrawork/check.mjs
-sh .opendock/harness/opendock__frontend-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__frontend-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

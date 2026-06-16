@@ -11,10 +11,4 @@ Data quality gate for SQL safety, destructive queries, timezone clarity, metric 
 - PII columns must be masked or excluded.
 - Dashboard query cost and cardinality need review.
 
-## Run
-
-```bash
-opendock verify-hook opendock/data-ultrawork .opendock/harness/opendock__data-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for data and analytics quality gates.

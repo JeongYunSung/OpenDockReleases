@@ -4,8 +4,8 @@ This workspace uses Data Ultrawork as an OpenDock-managed quality gate.
 
 ## Before Handoff
 
-1. Apply the checklist in `HARNESS.md`.
-2. Run `opendock verify-hook opendock/data-ultrawork .opendock/harness/opendock__data-ultrawork/check.mjs` before final handoff.
+1. Review `HARNESS.md` before handoff.
+2. Complete the checklist before final handoff.
 3. Fix failures before claiming the work is done.
 4. If a failure is intentionally accepted, document the owner and reason.
 

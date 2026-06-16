@@ -11,10 +11,4 @@ Business quality gate for PRDs, user stories, GTM, ICP, pricing, marketing claim
 - Claims need evidence or source notes.
 - Release notes need breaking changes and migration notes when relevant.
 
-## Run
-
-```bash
-opendock verify-hook opendock/business-ultrawork .opendock/harness/opendock__business-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for PM, founder, and marketing quality gates.

@@ -11,20 +11,9 @@ Data quality gate for SQL safety, destructive queries, timezone clarity, metric 
 - PII columns must be masked or excluded.
 - Dashboard query cost and cardinality need review.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/data-ultrawork .opendock/harness/opendock__data-ultrawork/check.mjs
-sh .opendock/harness/opendock__data-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__data-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

@@ -14,20 +14,9 @@ Design and UI quality gate for visual polish, accessibility, responsive layout, 
 - Color contrast must target WCAG AA and typography scale must stay restrained unless the contract is stricter.
 - Brand-specific don'ts in `DESIGN.md` are blockers, not suggestions.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/design-ultrawork .opendock/harness/opendock__design-ultrawork/check.mjs
-sh .opendock/harness/opendock__design-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__design-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

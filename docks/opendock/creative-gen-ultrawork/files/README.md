@@ -23,11 +23,7 @@ This dock prepares a workspace for repeatable generation work:
    - `assets/generated/videos/`
    - `assets/generated/audio/`
 7. Update the run manifest.
-8. Run:
-
-```bash
-opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-```
+8. Complete the `HARNESS.md` checklist.
 
 ## Loop
 
@@ -35,6 +31,6 @@ opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock_
 brief -> generate -> record -> check -> revise -> handoff
 ```
 
-If the harness fails, fix the output or the manifest, then run it again.
+If the harness fails, fix the output or the manifest, then repeat the check.
 
 The templates are OpenDock-managed. The run docs are project work products and are safe to edit for each generated asset.

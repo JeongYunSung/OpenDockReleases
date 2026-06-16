@@ -6,7 +6,7 @@ Use this workspace as a loop for generated creative assets.
 2. Fill the run brief.
 3. Produce the requested artifact.
 4. Record the exact output paths and generation metadata in the run manifest.
-5. Run `opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+8. Complete the `HARNESS.md` checklist.
 6. Revise until the harness passes.
 
 Never leave generated assets undocumented.

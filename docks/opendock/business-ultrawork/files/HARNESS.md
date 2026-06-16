@@ -11,20 +11,9 @@ Business quality gate for PRDs, user stories, GTM, ICP, pricing, marketing claim
 - Claims need evidence or source notes.
 - Release notes need breaking changes and migration notes when relevant.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/business-ultrawork .opendock/harness/opendock__business-ultrawork/check.mjs
-sh .opendock/harness/opendock__business-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__business-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

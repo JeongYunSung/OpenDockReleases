@@ -5,10 +5,9 @@ This workspace uses Design Ultrawork as an OpenDock-managed quality gate.
 ## Before Handoff
 
 1. Read `DESIGN.md` and treat it as the design contract.
-2. Apply the checklist in `HARNESS.md`.
-3. Run `opendock verify-hook opendock/design-ultrawork .opendock/harness/opendock__design-ultrawork/check.mjs` before final handoff.
-4. Fix failures before claiming the work is done.
-5. If a failure is intentionally accepted, document the owner and reason.
+2. Complete the `HARNESS.md` checklist before final handoff.
+3. Fix failures before claiming the work is done.
+4. If a failure is intentionally accepted, document the owner and reason.
 
 ## Focus
 

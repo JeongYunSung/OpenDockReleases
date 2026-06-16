@@ -19,12 +19,6 @@ Skill, workflow, and harness loop for image, logo, favicon, video, audio, and as
 - `audio`
 - `asset-analysis`
 
-## Run
-
-```bash
-opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-```
-
 Use this dock when a workspace needs generated creative assets to be repeatable, documented, and ready for handoff instead of ad hoc files dropped into a folder.
 
 New generation tasks should create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from the installed templates. Root-level `GENERATION_BRIEF.md` and `OUTPUT_MANIFEST.md` are legacy-compatible only.

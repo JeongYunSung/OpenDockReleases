@@ -11,10 +11,4 @@ Backend quality gate for API contracts, validation, authentication, migrations, 
 - Database migrations should be dry-runnable and rollback-aware.
 - OpenAPI or schema documentation should not drift from routes.
 
-## Run
-
-```bash
-opendock verify-hook opendock/backend-ultrawork .opendock/harness/opendock__backend-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for backend API and service quality gates.

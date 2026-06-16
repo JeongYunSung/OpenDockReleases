@@ -11,10 +11,4 @@ Frontend quality gate for React, TypeScript, accessibility, route smoke checks, 
 - Route or page smoke tests should exist for user-visible surfaces.
 - Bundle growth and unnecessary duplicate dependencies require review.
 
-## Run
-
-```bash
-opendock verify-hook opendock/frontend-ultrawork .opendock/harness/opendock__frontend-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for frontend implementation quality gates.

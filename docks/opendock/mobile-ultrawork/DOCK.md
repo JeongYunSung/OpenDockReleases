@@ -11,10 +11,4 @@ Mobile quality gate for Flutter, React Native, Swift, Android, permissions, acce
 - Release checklist must cover signing, versioning, and rollback.
 - Network and async failures need explicit handling.
 
-## Run
-
-```bash
-opendock verify-hook opendock/mobile-ultrawork .opendock/harness/opendock__mobile-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for mobile app quality gates.

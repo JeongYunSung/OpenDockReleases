@@ -2,10 +2,6 @@
 
 Run:
 
-```bash
-opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-```
-
 ## What It Checks
 
 - Managed templates exist under `.opendock/templates/creative-gen/`.

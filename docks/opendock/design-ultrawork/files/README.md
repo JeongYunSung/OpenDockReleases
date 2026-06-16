@@ -12,10 +12,4 @@ Design and UI quality gate for visual polish, accessibility, responsive layout, 
 - Hover, focus, disabled, loading, empty, and error states must be represented.
 - Color contrast must target WCAG AA and typography scale must stay restrained unless `DESIGN.md` is stricter.
 
-## Run
-
-```bash
-opendock verify-hook opendock/design-ultrawork .opendock/harness/opendock__design-ultrawork/check.mjs
-```
-
 Use this dock when implementation files need to prove they follow the project's `DESIGN.md`.

@@ -11,7 +11,7 @@ This workspace uses Creative Generation Ultrawork for generated assets and asset
 5. Generate or analyze the asset.
 6. Save outputs under `assets/generated/` or the documented target path.
 7. Update the run manifest with prompt, tool, model, paths, rights, and review notes.
-8. Run `opendock verify-hook opendock/creative-gen-ultrawork .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+8. Complete the `HARNESS.md` checklist.
 9. Fix failures before claiming the work is done.
 
 ## Focus

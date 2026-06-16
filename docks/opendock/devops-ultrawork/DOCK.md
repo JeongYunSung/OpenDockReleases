@@ -11,10 +11,4 @@ DevOps quality gate for Terraform, Kubernetes, Helm, secrets, public exposure, i
 - Image tags must not use latest.
 - Rollback and runbook docs should exist for deployable changes.
 
-## Run
-
-```bash
-opendock verify-hook opendock/devops-ultrawork .opendock/harness/opendock__devops-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for DevOps and infrastructure quality gates.

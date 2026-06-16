@@ -11,20 +11,9 @@ Kotlin/Spring Boot quality gate for Gradle, ktlint, detekt, DTO validation, prof
 - Transaction boundaries must be explicit around write flows.
 - Readiness and health checks should be present.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/kotlin-spring-ultrawork .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
-sh .opendock/harness/opendock__kotlin-spring-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__kotlin-spring-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

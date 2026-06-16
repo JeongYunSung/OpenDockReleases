@@ -11,20 +11,9 @@ QA quality gate for regression coverage, smoke tests, security checks, release c
 - Release handoff must include known risks and rollback notes.
 - Final responses should say what was tested and what was not tested.
 
-## Commands
+## Handoff Gate
 
-```bash
-opendock verify-hook opendock/qa-ultrawork .opendock/harness/opendock__qa-ultrawork/check.mjs
-sh .opendock/harness/opendock__qa-ultrawork/check.sh
-```
-
-On Windows PowerShell:
-
-```powershell
-.opendock/harness/opendock__qa-ultrawork/check.ps1
-```
-
-Treat failures as blockers unless a human owner documents the exception.
+Treat checklist failures as blockers unless a human owner documents the exception.
 
 ## Safety Boundary
 

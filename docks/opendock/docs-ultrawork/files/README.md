@@ -11,10 +11,4 @@ Documentation quality gate for markdown hygiene, links, headings, code fences, q
 - Old package names and stale versions must be removed.
 - Multilingual docs must stay structurally aligned.
 
-## Run
-
-```bash
-opendock verify-hook opendock/docs-ultrawork .opendock/harness/opendock__docs-ultrawork/check.mjs
-```
-
 Use this dock when the workspace needs a focused quality gate for documentation quality gates.
