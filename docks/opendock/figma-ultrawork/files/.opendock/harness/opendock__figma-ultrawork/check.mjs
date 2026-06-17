@@ -26,6 +26,8 @@ const requiredHarnessPhrases = [
   "Frame bounds should be integer-aligned",
   "Auto Layout",
   "focus and disabled states",
+  "Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list",
+  "Keep Figma MCP read-only unless the user requests edits or approves the proposed change list",
 ];
 
 const requiredSkillPhrases = [
@@ -35,6 +37,8 @@ const requiredSkillPhrases = [
   "Figma text layers must not overflow",
   "Figma frames should be integer-aligned",
   "Component-like frames should use Auto Layout",
+  "Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list",
+  "Keep Figma MCP read-only unless the user requests edits or approves the proposed change list",
 ];
 
 function read(rel) {
@@ -57,6 +61,13 @@ function read(rel) {
 
 function exists(rel) {
   return fs.existsSync(path.join(root, rel));
+}
+
+function escapeTerminal(value) {
+  return String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, (char) => {
+    const code = char.charCodeAt(0).toString(16).padStart(2, "0");
+    return `\\x${code}`;
+  });
 }
 
 function hasManagedBlock(text) {
@@ -99,7 +110,7 @@ if (failures.length > 0) {
   console.error(`Focus: ${focus}`);
   console.error(`Files checked: ${requiredFiles.length}`);
   console.error(`Failures: ${failures.length}`);
-  for (const failure of failures) console.error(`- [${failure.rule}] ${failure.file}: ${failure.detail}`);
+  for (const failure of failures) console.error(`- [${escapeTerminal(failure.rule)}] ${escapeTerminal(failure.file)}: ${escapeTerminal(failure.detail)}`);
   process.exit(1);
 }
 

@@ -50,16 +50,16 @@ files:
     to: .agents/hooks/opendock-creative-gen-ultrawork/hook.json
 doctor:
   - id: generation-brief-template
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.opendock/templates/creative-gen/GENERATION_BRIEF.md') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.opendock/templates/creative-gen/GENERATION_BRIEF.md') ? 0 : 1)\""
   - id: output-manifest-template
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.opendock/templates/creative-gen/OUTPUT_MANIFEST.md') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.opendock/templates/creative-gen/OUTPUT_MANIFEST.md') ? 0 : 1)\""
   - id: harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath 'HARNESS.md') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('HARNESS.md') ? 0 : 1)\""
   - id: harness-script
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.opendock/harness/opendock__creative-gen-ultrawork/check.mjs') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.opendock/harness/opendock__creative-gen-ultrawork/check.mjs') ? 0 : 1)\""
   - id: skill
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/skills/opendock-creative-gen-ultrawork/SKILL.md') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/skills/opendock-creative-gen-ultrawork/SKILL.md') ? 0 : 1)\""
   - id: workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md') ? 0 : 1)\""
   - id: hook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath '.agents/hooks/opendock-creative-gen-ultrawork/hook.json') { exit 0 } else { exit 1 }"
+    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/hooks/opendock-creative-gen-ultrawork/hook.json') ? 0 : 1)\""

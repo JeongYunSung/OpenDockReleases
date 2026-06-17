@@ -5,5 +5,5 @@
     "Stop"
   ],
   "command": "opendock run check --dock opendock/figma-ultrawork",
-  "manualFallback": "If hooks are not active, run `opendock run check --dock opendock/figma-ultrawork` manually before final response. Full canvas review still requires a node-specific Figma URL through Figma MCP."
+  "manualFallback": "If hooks are not active, run `opendock run check --dock opendock/figma-ultrawork` manually before final response."
 }

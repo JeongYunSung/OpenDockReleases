@@ -19,7 +19,7 @@ This workspace uses Creative Generation Ultrawork for generated assets and asset
 - Generated files must be traceable to a prompt, tool, model, date, and rights note.
 - Root `GENERATION_BRIEF.md` and `OUTPUT_MANIFEST.md` are legacy-compatible only. New work uses run-scoped docs.
 - Image work needs alt text and explicit dimensions or aspect ratio.
-- Logo work prefers clean SVG with a `viewBox` and no embedded scripts.
+- Logo and vector work prefers clean SVG with a `viewBox` and no executable SVG content.
 - Favicon work needs browser-ready icon paths and a valid web manifest when used.
 - Video work needs script/storyboard and captions or a documented exception.
 - Audio work needs transcript, voice/source note, and usage rights.

@@ -5,5 +5,5 @@
     "Stop"
   ],
   "command": "opendock run check --dock opendock/business-ultrawork",
-  "manualFallback": "If hooks are not active, run this command manually before final response."
+  "manualFallback": "If hooks are not active, run `opendock run check --dock opendock/business-ultrawork` manually before final response."
 }

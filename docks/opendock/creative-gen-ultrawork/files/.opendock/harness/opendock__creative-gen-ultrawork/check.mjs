@@ -6,6 +6,9 @@ const root = process.cwd();
 const title = "Creative Generation Ultrawork";
 const runRoot = ".opendock/runs/creative-gen";
 const maxTextFileBytes = 1024 * 1024;
+const maxWalkEntries = 20000;
+const maxWalkDepth = 32;
+const traversalFailures = [];
 
 const ignoredSegments = new Set([
   ".git",
@@ -95,14 +98,31 @@ function normalize(file) {
   return path.relative(root, file).split(path.sep).join("/");
 }
 
-function walk(dir) {
+function recordTraversalFailure(rule, file, detail) {
+  if (traversalFailures.some((failure) => failure.rule === rule && failure.file === file)) return;
+  traversalFailures.push({ rule, file, detail });
+}
+
+function walk(dir, depth = 0, state = { entries: 0, stopped: false }) {
   const out = [];
-  if (!fs.existsSync(dir)) return out;
+  if (state.stopped || !fs.existsSync(dir)) return out;
+  if (depth > maxWalkDepth) {
+    recordTraversalFailure("walk-depth-budget", normalize(dir), `Directory traversal exceeded ${maxWalkDepth} levels.`);
+    state.stopped = true;
+    return out;
+  }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (ignoredSegments.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...walk(full));
+    state.entries += 1;
+    if (state.entries > maxWalkEntries) {
+      recordTraversalFailure("walk-entry-budget", normalize(full), `Directory traversal exceeded ${maxWalkEntries} entries.`);
+      state.stopped = true;
+      return out;
+    }
+    if (entry.isDirectory()) out.push(...walk(full, depth + 1, state));
     else if (entry.isFile()) out.push(full);
+    if (state.stopped) break;
   }
   return out;
 }
@@ -183,6 +203,13 @@ function includesAny(text, words) {
   return words.some((word) => lower.includes(word.toLowerCase()));
 }
 
+function escapeTerminal(value) {
+  return String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, (char) => {
+    const code = char.charCodeAt(0).toString(16).padStart(2, "0");
+    return `\\x${code}`;
+  });
+}
+
 function validateSvg(file, failures) {
   if (file.ext !== ".svg") return;
   if (fileSize(file) > maxTextFileBytes) {
@@ -191,8 +218,19 @@ function validateSvg(file, failures) {
   }
   const text = fs.readFileSync(file.full, "utf8");
   if (!/<svg\b/i.test(text)) failures.push({ rule: "invalid-svg", file: file.rel, detail: "SVG output must contain an <svg> root." });
-  if (!/\bviewBox=/i.test(text)) failures.push({ rule: "missing-viewbox", file: file.rel, detail: "Logo and vector SVG output needs a viewBox." });
-  if (/<script\b|<foreignObject\b|javascript:/i.test(text)) failures.push({ rule: "unsafe-svg", file: file.rel, detail: "SVG must not contain script, foreignObject, or javascript URLs." });
+  if (!/\bviewBox=/i.test(text)) failures.push({ rule: "missing-viewbox", file: file.rel, detail: "SVG output needs a viewBox." });
+
+  const unsafePatterns = [
+    { pattern: /<\s*(script|foreignObject|iframe|object|embed|canvas)\b/i, detail: "SVG must not contain executable or embeddable active-content elements." },
+    { pattern: /\bon[a-z][\w:-]*\s*=/i, detail: "SVG must not contain event-handler attributes." },
+    { pattern: /\b(?:href|xlink:href)\s*=\s*["']?\s*(?:javascript:|data:text\/html|data:image\/svg\+xml)/i, detail: "SVG must not contain executable href or xlink:href values." },
+    { pattern: /\bstyle\s*=\s*["'][^"']*(?:expression\s*\(|url\s*\(\s*['"]?\s*javascript:)/i, detail: "SVG inline styles must not contain executable CSS." },
+    { pattern: /<\s*style\b[\s\S]*?(?:expression\s*\(|url\s*\(\s*['"]?\s*javascript:)[\s\S]*?<\s*\/\s*style\s*>/i, detail: "SVG style blocks must not contain executable CSS." }
+  ];
+
+  for (const { pattern, detail } of unsafePatterns) {
+    if (pattern.test(text)) failures.push({ rule: "unsafe-svg", file: file.rel, detail });
+  }
 }
 
 function validateManifestJson(failures) {
@@ -286,6 +324,7 @@ function validateMode(mode, manifestText, allManifestText, failures, run) {
     if (hasTemporaryName(file.rel)) failures.push({ rule: "temporary-file", file: file.rel, detail: "Temporary files must not be in generated output." });
     if (bytes > sizeLimits[mode]) failures.push({ rule: "file-size", file: file.rel, detail: `${mode} output exceeds the size budget.` });
     if (!allManifestText.includes(file.rel)) failures.push({ rule: "manifest-path", file: file.rel, detail: "Every generated output path must be listed in a run manifest." });
+    validateSvg(file, failures);
   }
 
   if (mode === "image") {
@@ -298,7 +337,6 @@ function validateMode(mode, manifestText, allManifestText, failures, run) {
   }
 
   if (mode === "logo") {
-    for (const file of currentFiles) validateSvg(file, failures);
     if (!includesAny(manifestText, ["clearspace", "clear space", "minimum size", "usage"])) {
       failures.push({ rule: "missing-logo-usage", file: run.manifestRel, detail: "Logo output needs usage, clearspace, or minimum size notes." });
     }
@@ -343,7 +381,7 @@ function printFailures(failures, modes, outputCount, activeRunLabel) {
   console.error(`Generated files scanned: ${outputCount}`);
   console.error(`Failures: ${failures.length}`);
   for (const failure of failures.slice(0, 120)) {
-    console.error(`- [${failure.rule}] ${failure.file}: ${failure.detail}`);
+    console.error(`- [${escapeTerminal(failure.rule)}] ${escapeTerminal(failure.file)}: ${escapeTerminal(failure.detail)}`);
   }
   if (failures.length > 120) console.error(`... ${failures.length - 120} more failures omitted`);
 }
@@ -363,6 +401,7 @@ function run() {
   ];
   const hasGeneratedOutput = allOutputFiles.length > 0 || exists("ASSET_INVENTORY.md") || exists("ASSET_REPORT.md");
   const runDocs = findRunDocuments();
+  failures.push(...traversalFailures);
 
   if (runDocs.length === 0) {
     if (hasGeneratedOutput) {

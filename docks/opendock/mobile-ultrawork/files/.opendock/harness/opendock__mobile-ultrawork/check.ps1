@@ -1,2 +1,4 @@
 $ErrorActionPreference = "Stop"
-opendock run check --dock opendock/mobile-ultrawork
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+& node (Join-Path $ScriptDir "check.mjs")
+exit $LASTEXITCODE

@@ -5,6 +5,9 @@ import path from "node:path";
 const root = process.cwd();
 const maxTextFileBytes = 1024 * 1024;
 const readFailures = [];
+const traversalFailures = [];
+const maxWalkEntries = 20000;
+const maxWalkDepth = 32;
 const config = {
   "title": "Business Ultrawork",
   "focus": "PM, founder, and marketing quality gates",
@@ -96,14 +99,31 @@ const ignoredSegments = new Set([".git", "node_modules", ".opendock", ".agents",
 const ignoredRootFiles = new Set(["AGENTS.md", "CLAUDE.md", "GEMINI.md", "HARNESS.md", "README.md"]);
 const textExtensions = new Set([".md", ".mdx", ".txt", ".json", ".yml", ".yaml", ".toml", ".js", ".jsx", ".ts", ".tsx", ".css", ".scss", ".html", ".kt", ".kts", ".java", ".sql", ".sh", ".ps1", ".plist", ".xml", ".tf", ".tfvars", ".dart", ".properties", ".py", ".dbt", ""]);
 
-function walk(dir) {
+function recordTraversalFailure(rule, file, detail) {
+  if (traversalFailures.some((failure) => failure.rule === rule && failure.file === file)) return;
+  traversalFailures.push({ rule, file, detail });
+}
+
+function walk(dir, depth = 0, state = { entries: 0, stopped: false }) {
   const entries = [];
-  if (!fs.existsSync(dir)) return entries;
+  if (state.stopped || !fs.existsSync(dir)) return entries;
+  if (depth > maxWalkDepth) {
+    recordTraversalFailure("walk-depth-budget", normalize(dir), `Directory traversal exceeded ${maxWalkDepth} levels.`);
+    state.stopped = true;
+    return entries;
+  }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (ignoredSegments.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) entries.push(...walk(full));
+    state.entries += 1;
+    if (state.entries > maxWalkEntries) {
+      recordTraversalFailure("walk-entry-budget", normalize(full), `Directory traversal exceeded ${maxWalkEntries} entries.`);
+      state.stopped = true;
+      return entries;
+    }
+    if (entry.isDirectory()) entries.push(...walk(full, depth + 1, state));
     else if (entry.isFile() && !(dir === root && ignoredRootFiles.has(entry.name))) entries.push(full);
+    if (state.stopped) break;
   }
   return entries;
 }
@@ -197,10 +217,17 @@ function hasOpeningCodeFenceWithoutLanguage(text) {
   return false;
 }
 
+function escapeTerminal(value) {
+  return String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, (char) => {
+    const code = char.charCodeAt(0).toString(16).padStart(2, "0");
+    return `\\x${code}`;
+  });
+}
+
 function run() {
   const files = walk(root).map((full) => ({ full, rel: normalize(full), text: readText(full) })).filter((item) => item.text !== null);
   const failures = [];
-  failures.push(...readFailures);
+  failures.push(...readFailures, ...traversalFailures);
 
   for (const rule of config.patterns) {
     if (rule.id === "missing-code-fence-language") {
@@ -240,7 +267,7 @@ function run() {
     console.error(`Focus: ${config.focus}`);
     console.error(`Files scanned: ${files.length}`);
     console.error(`Failures: ${failures.length}`);
-    for (const failure of failures.slice(0, 120)) console.error(`- [${failure.rule}] ${failure.file}: ${failure.detail}`);
+    for (const failure of failures.slice(0, 120)) console.error(`- [${escapeTerminal(failure.rule)}] ${escapeTerminal(failure.file)}: ${escapeTerminal(failure.detail)}`);
     if (failures.length > 120) console.error(`... ${failures.length - 120} more failures omitted`);
     process.exit(1);
   }

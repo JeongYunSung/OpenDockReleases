@@ -5,6 +5,9 @@ import path from "node:path";
 const root = process.cwd();
 const maxTextFileBytes = 1024 * 1024;
 const readFailures = [];
+const traversalFailures = [];
+const maxWalkEntries = 20000;
+const maxWalkDepth = 32;
 const mode = "design";
 const title = mode === "figma" ? "Figma Ultrawork" : "Design Ultrawork";
 const focus =
@@ -53,14 +56,31 @@ const textExtensions = new Set([
   "",
 ]);
 
-function walk(dir) {
+function recordTraversalFailure(rule, file, detail) {
+  if (traversalFailures.some((failure) => failure.rule === rule && failure.file === file)) return;
+  traversalFailures.push({ rule, file, detail });
+}
+
+function walk(dir, depth = 0, state = { entries: 0, stopped: false }) {
   const entries = [];
-  if (!fs.existsSync(dir)) return entries;
+  if (state.stopped || !fs.existsSync(dir)) return entries;
+  if (depth > maxWalkDepth) {
+    recordTraversalFailure("walk-depth-budget", normalize(dir), `Directory traversal exceeded ${maxWalkDepth} levels.`);
+    state.stopped = true;
+    return entries;
+  }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (ignoredSegments.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) entries.push(...walk(full));
+    state.entries += 1;
+    if (state.entries > maxWalkEntries) {
+      recordTraversalFailure("walk-entry-budget", normalize(full), `Directory traversal exceeded ${maxWalkEntries} entries.`);
+      state.stopped = true;
+      return entries;
+    }
+    if (entry.isDirectory()) entries.push(...walk(full, depth + 1, state));
     else if (entry.isFile() && !(dir === root && ignoredRootFiles.has(entry.name))) entries.push(full);
+    if (state.stopped) break;
   }
   return entries;
 }
@@ -345,7 +365,7 @@ function runDesignChecks() {
     .map((full) => ({ full, rel: normalizePath(full), text: readText(full) }))
     .filter((item) => item.text !== null);
   const failures = [];
-  failures.push(...readFailures);
+  failures.push(...readFailures, ...traversalFailures);
 
   if (contract.tooLarge) {
     push(failures, "file-too-large", "DESIGN.md", `DESIGN.md exceeds ${maxTextFileBytes} bytes and was not scanned.`);
@@ -371,7 +391,7 @@ function printResult(result) {
     console.error(`Files scanned: ${result.filesScanned}`);
     console.error(`Failures: ${result.failures.length}`);
     for (const failure of result.failures.slice(0, 160)) {
-      console.error(`- [${failure.rule}] ${failure.file}: ${failure.detail}`);
+      console.error(`- [${escapeTerminal(failure.rule)}] ${escapeTerminal(failure.file)}: ${escapeTerminal(failure.detail)}`);
     }
     if (result.failures.length > 160) console.error(`... ${result.failures.length - 160} more failures omitted`);
     process.exit(1);
