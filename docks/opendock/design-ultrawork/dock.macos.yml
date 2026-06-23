@@ -9,11 +9,6 @@ tags:
   - ui
   - accessibility
   - harness
-commands:
-  check:
-    description: Run the design-ultrawork quality gate.
-    file: .opendock/harness/opendock__design-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

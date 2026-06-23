@@ -9,11 +9,6 @@ tags:
   - react
   - typescript
   - accessibility
-commands:
-  check:
-    description: Run the frontend-ultrawork quality gate.
-    file: .opendock/harness/opendock__frontend-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

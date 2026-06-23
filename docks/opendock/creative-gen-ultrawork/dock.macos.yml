@@ -12,11 +12,6 @@ tags:
   - video
   - audio
   - assets
-commands:
-  check:
-    description: Run the creative-gen-ultrawork quality gate.
-    file: .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

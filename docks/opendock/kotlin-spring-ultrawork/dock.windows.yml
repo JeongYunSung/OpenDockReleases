@@ -9,11 +9,6 @@ tags:
   - spring
   - gradle
   - backend
-commands:
-  check:
-    description: Run the kotlin-spring-ultrawork quality gate.
-    file: .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

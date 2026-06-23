@@ -9,11 +9,6 @@ tags:
   - analytics
   - sql
   - privacy
-commands:
-  check:
-    description: Run the data-ultrawork quality gate.
-    file: .opendock/harness/opendock__data-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

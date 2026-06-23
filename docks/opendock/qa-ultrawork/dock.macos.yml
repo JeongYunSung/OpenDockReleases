@@ -9,11 +9,6 @@ tags:
   - testing
   - security
   - release
-commands:
-  check:
-    description: Run the qa-ultrawork quality gate.
-    file: .opendock/harness/opendock__qa-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

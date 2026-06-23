@@ -9,11 +9,6 @@ tags:
   - api
   - security
   - harness
-commands:
-  check:
-    description: Run the backend-ultrawork quality gate.
-    file: .opendock/harness/opendock__backend-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

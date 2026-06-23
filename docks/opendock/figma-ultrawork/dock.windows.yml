@@ -10,11 +10,6 @@ tags:
   - design
   - ui
   - accessibility
-commands:
-  check:
-    description: Run the figma-ultrawork quality gate.
-    file: .opendock/harness/opendock__figma-ultrawork/check.mjs
-    runner: node
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
