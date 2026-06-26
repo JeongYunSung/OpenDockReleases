@@ -2,11 +2,24 @@
 
 Design and UI quality gate for visual polish, accessibility, responsive layout, interaction states, and `DESIGN.md` alignment.
 
+## StyleSeed Loop
+
+For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed alongside `DESIGN.md`.
+
+Reusable instruction:
+
+```text
+Read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's design rules to every UI in this project. First, in plan mode, lock my key color and motion style with me — then build to the rules and self-check coherence (one accent, one radius) after.
+```
+
+Before building, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
+
 ## What It Checks
 
 - Reads `DESIGN.md` as the source of truth for typography, colors, layout, components, imagery, and do/don't rules.
+- Adds StyleSeed coherence: one accent, one radius personality, one shadow language, one icon set, semantic tokens over hardcoded hex, visible focus rings, and touch targets at least 44px.
 - Allows fractional values and negative tracking only when the design contract documents them.
-- Blocks viewport-based font-size, unmanaged colors, arbitrary font weights, unsupported radius choices, and brand-specific don't violations.
+- Blocks viewport-based font-size, unmanaged colors, arbitrary font weights, unsupported radius choices, pure black, emoji-as-icons, Tailwind `text-[var(...)]` font-size patterns, and brand-specific don't violations.
 - Buttons, chips, tabs, and compact controls must not overflow text.
 - Mobile viewport must not create horizontal scroll.
 - Hover, focus, disabled, loading, empty, and error states must be represented.

@@ -6,12 +6,17 @@ alwaysApply: false
 
 Apply Design Ultrawork before final handoff. Read `DESIGN.md` first and treat it as the design contract.
 
+- For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's design rules.
+- Before building UI, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
+- Self-check coherence after implementation: one accent, one radius personality, one shadow language, one icon set.
 - Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
+- Use semantic tokens over hardcoded hex when possible.
 - Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
 - No viewport-based font-size.
+- No pure black, emoji-as-icons, random decorative colors, or Tailwind `text-[var(...)]` font-size patterns.
 - Buttons, chips, tabs, and compact controls must not overflow text.
 - Mobile viewport must not create horizontal scroll.
-- Hover, focus, disabled, loading, empty, and error states must be represented.
+- Hover, focus, disabled, loading, empty, and error states must be represented; focus rings and reduced-motion handling are required when relevant.
 - Color contrast must target WCAG AA and typography scale must stay restrained unless the contract is stricter.
 
 Run `opendock run check --dock opendock/design-ultrawork` when possible.

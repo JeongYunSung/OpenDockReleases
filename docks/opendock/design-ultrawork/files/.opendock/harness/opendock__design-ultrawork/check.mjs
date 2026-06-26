@@ -244,6 +244,12 @@ function push(failures, rule, file, detail) {
   failures.push({ rule, file, detail });
 }
 
+function escapeTerminal(value) {
+  return String(value)
+    .replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "")
+    .replace(/[\r\n\t]/g, " ");
+}
+
 function lengthAllowed(contract, raw) {
   if (!contract.exists) return false;
   return contract.lengths.has(compactLength(raw));
@@ -251,12 +257,22 @@ function lengthAllowed(contract, raw) {
 
 function checkCommonTextRules(files, failures) {
   for (const file of files) {
+    const isUiFile = /\.(css|scss|tsx|jsx|html|svg)$/.test(file.rel);
     if (/[ \t]+$/m.test(file.text)) push(failures, "trailing-whitespace", file.rel, "Remove trailing whitespace.");
     if (/\t+/m.test(file.text) && /\.(md|ts|tsx|js|jsx|css|scss|yml|yaml|json)$/.test(file.rel)) {
       push(failures, "tab-indentation", file.rel, "Use spaces for indentation unless the project explicitly requires tabs.");
     }
     if (/font-size\s*[:=][^;\n]*(vw|vh|vmin|vmax)/i.test(file.text)) {
       push(failures, "viewport-font-size", file.rel, "Viewport-based font-size is not allowed.");
+    }
+    if (isUiFile && /#(?:000|000000)\b/i.test(file.text)) {
+      push(failures, "pure-black", file.rel, "StyleSeed forbids pure black in UI surfaces.");
+    }
+    if (isUiFile && /text-\[\s*var\(/i.test(file.text)) {
+      push(failures, "tailwind-var-font-size", file.rel, "Do not use Tailwind text-[var(...)] for font-size.");
+    }
+    if (isUiFile && /\p{Extended_Pictographic}/u.test(file.text)) {
+      push(failures, "emoji-ui-icon", file.rel, "StyleSeed forbids emoji as UI icons; use one line-icon set in currentColor.");
     }
     if (/!important/.test(file.text)) push(failures, "important-style", file.rel, "Avoid !important.");
     if (/z-index\s*[:=]\s*["']?(9{3,}|\d{4,})/i.test(file.text)) {
