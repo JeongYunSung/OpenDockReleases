@@ -10,7 +10,6 @@
 docks/
   opendock/
         design-ultrawork/
-        figma-ultrawork/
         creative-gen-ultrawork/
         frontend-ultrawork/
         backend-ultrawork/
