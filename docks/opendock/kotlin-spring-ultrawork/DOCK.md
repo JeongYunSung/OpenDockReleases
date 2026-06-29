@@ -1,14 +1,14 @@
 # Kotlin Spring Ultrawork
 
-Kotlin/Spring Boot quality gate for Gradle, ktlint, detekt, DTO validation, profiles, transactions, and readiness.
+Gradle, ktlint, detekt, DTO validation, profile, transaction, readiness를 확인하는 Kotlin/Spring Boot 품질 게이트입니다.
 
-## What It Checks
+## 확인하는 것
 
-- Gradle wrapper must exist.
-- ktlintCheck, detekt, test, build, and bootJar must be available.
-- application.yml must not contain literal secrets.
-- Controller DTOs should use validation.
-- Transaction boundaries must be explicit around write flows.
-- Readiness and health checks should be present.
+- Gradle wrapper가 있어야 합니다.
+- `ktlintCheck`, `detekt`, `test`, `build`, `bootJar`를 실행할 수 있어야 합니다.
+- `application.yml`에 literal secret이 있으면 안 됩니다.
+- Controller DTO에는 validation을 적용해야 합니다.
+- write flow 주변의 transaction boundary가 명확해야 합니다.
+- readiness와 health check가 있어야 합니다.
 
-Use this dock when the workspace needs a focused quality gate for Kotlin and Spring Boot quality gates.
+Kotlin과 Spring Boot 품질을 집중적으로 점검해야 하는 workspace에 사용합니다.

@@ -1,14 +1,14 @@
 # DevOps Ultrawork
 
-DevOps quality gate for Terraform, Kubernetes, Helm, secrets, public exposure, image tags, resource limits, and runbooks.
+Terraform, Kubernetes, Helm, secret, public exposure, image tag, resource limit, runbook을 확인하는 DevOps 품질 게이트입니다.
 
-## What It Checks
+## 확인하는 것
 
-- Terraform must be fmt-checked and validated.
-- Helm and Kubernetes manifests need lint/schema validation.
-- Secret scan is mandatory before handoff.
-- Public buckets, public security groups, and privileged containers require review.
-- Image tags must not use latest.
-- Rollback and runbook docs should exist for deployable changes.
+- Terraform은 fmt check와 validate를 통과해야 합니다.
+- Helm과 Kubernetes manifest에는 lint/schema validation이 필요합니다.
+- handoff 전에 secret scan이 필수입니다.
+- public bucket, public security group, privileged container는 review가 필요합니다.
+- image tag에 `latest`를 쓰면 안 됩니다.
+- 배포 가능한 변경에는 rollback과 runbook 문서가 있어야 합니다.
 
-Use this dock when the workspace needs a focused quality gate for DevOps and infrastructure quality gates.
+DevOps와 infrastructure 품질을 집중적으로 점검해야 하는 workspace에 사용합니다.

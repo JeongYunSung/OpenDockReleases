@@ -1,16 +1,16 @@
 # Creative Generation Ultrawork
 
-Skill, workflow, and harness loop for image, logo, favicon, video, audio, and asset analysis work.
+이미지, 로고, 파비콘, 영상, 음성, asset 분석 작업을 반복 가능하게 만드는 skill, workflow, harness 루프입니다.
 
-## What It Provides
+## 제공하는 것
 
-- Managed templates that turn vague requests into reviewable output requirements.
-- Run-scoped brief and manifest workflow for each generated asset.
-- Agent instructions for Codex, Claude Code, Gemini, and Cursor.
-- A workflow that loops through create, document, check, and revise.
-- A Node-based harness that validates output files, metadata, rights notes, and review records.
+- 막연한 요청을 검토 가능한 output requirement로 바꾸는 managed template을 제공합니다.
+- 생성 asset마다 run-scoped brief와 manifest를 남기는 workflow를 제공합니다.
+- Codex, Claude Code, Gemini, Cursor용 agent 지침을 제공합니다.
+- create, document, check, revise를 반복하는 workflow를 제공합니다.
+- output file, metadata, rights note, review record를 검증하는 Node 기반 harness를 제공합니다.
 
-## Supported Modes
+## 지원 모드
 
 - `image`
 - `logo`
@@ -19,8 +19,8 @@ Skill, workflow, and harness loop for image, logo, favicon, video, audio, and as
 - `audio`
 - `asset-analysis`
 
-Use this dock when a workspace needs generated creative assets to be repeatable, documented, and ready for handoff instead of ad hoc files dropped into a folder.
+생성형 asset을 폴더에 대충 떨어뜨리는 방식이 아니라, 반복 가능하고 문서화되어 있으며 handoff 가능한 상태로 관리해야 할 때 사용합니다.
 
-New generation tasks should create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from the installed templates. Root-level `GENERATION_BRIEF.md` and `OUTPUT_MANIFEST.md` are legacy-compatible only.
+새 생성 작업은 설치된 template을 바탕으로 `.opendock/runs/creative-gen/<run-id>/brief.md`와 `manifest.md`를 만들어야 합니다. root의 `GENERATION_BRIEF.md`, `OUTPUT_MANIFEST.md`는 기존 프로젝트 호환용입니다.
 
-The harness validates only output paths listed in the active run manifest. Older generated assets are ignored unless the current run references them.
+harness는 active run manifest에 적힌 output path만 검사합니다. 이전에 생성된 asset은 현재 run이 참조하지 않는 한 무시됩니다.
