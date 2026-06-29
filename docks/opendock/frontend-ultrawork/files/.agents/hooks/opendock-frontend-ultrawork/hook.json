@@ -4,6 +4,6 @@
   "events": [
     "Stop"
   ],
-  "command": "opendock run check --dock opendock/frontend-ultrawork",
-  "manualFallback": "If hooks are not active, run `opendock run check --dock opendock/frontend-ultrawork` manually before final response."
+  "command": "node .opendock/harness/opendock__frontend-ultrawork/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__frontend-ultrawork/check.mjs` manually before final response."
 }

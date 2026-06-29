@@ -13,4 +13,4 @@ Apply DevOps Ultrawork before final handoff.
 - Image tags must not use latest.
 - Rollback and runbook docs should exist for deployable changes.
 
-Run `opendock run check --dock opendock/devops-ultrawork` when possible.
+Run `node .opendock/harness/opendock__devops-ultrawork/check.mjs` when possible.

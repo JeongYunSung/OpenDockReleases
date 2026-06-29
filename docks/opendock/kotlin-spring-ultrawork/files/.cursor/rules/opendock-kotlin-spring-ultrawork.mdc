@@ -13,4 +13,4 @@ Apply Kotlin Spring Ultrawork before final handoff.
 - Transaction boundaries must be explicit around write flows.
 - Readiness and health checks should be present.
 
-Run `opendock run check --dock opendock/kotlin-spring-ultrawork` when possible.
+Run `node .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs` when possible.

@@ -31,7 +31,7 @@ Read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's desig
 ## Command
 
 ```bash
-opendock run check --dock opendock/design-ultrawork
+node .opendock/harness/opendock__design-ultrawork/check.mjs
 ```
 
 ## Safety Boundary

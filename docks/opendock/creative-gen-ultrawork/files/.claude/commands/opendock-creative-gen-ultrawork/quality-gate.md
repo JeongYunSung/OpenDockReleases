@@ -1,6 +1,6 @@
 # Creative Generation Ultrawork Quality Gate
 
-Create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from `.opendock/templates/creative-gen/`, generate or analyze the asset, update the run manifest, run `opendock run check --dock opendock/creative-gen-ultrawork`, and revise until the harness passes.
+Create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from `.opendock/templates/creative-gen/`, generate or analyze the asset, update the run manifest, run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`, and revise until the harness passes.
 
 Report the final output paths and any accepted exceptions.
 

@@ -19,4 +19,4 @@ Apply Design Ultrawork before final handoff. Read `DESIGN.md` first and treat it
 - Hover, focus, disabled, loading, empty, and error states must be represented; focus rings and reduced-motion handling are required when relevant.
 - Color contrast must target WCAG AA and typography scale must stay restrained unless the contract is stricter.
 
-Run `opendock run check --dock opendock/design-ultrawork` when possible.
+Run `node .opendock/harness/opendock__design-ultrawork/check.mjs` when possible.

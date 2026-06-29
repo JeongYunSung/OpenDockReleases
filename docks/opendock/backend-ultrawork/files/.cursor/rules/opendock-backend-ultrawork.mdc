@@ -13,4 +13,4 @@ Apply Backend Ultrawork before final handoff.
 - Database migrations should be dry-runnable and rollback-aware.
 - OpenAPI or schema documentation should not drift from routes.
 
-Run `opendock run check --dock opendock/backend-ultrawork` when possible.
+Run `node .opendock/harness/opendock__backend-ultrawork/check.mjs` when possible.

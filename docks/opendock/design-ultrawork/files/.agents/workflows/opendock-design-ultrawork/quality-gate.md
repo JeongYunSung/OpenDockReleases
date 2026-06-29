@@ -4,7 +4,7 @@
 2. For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply the StyleSeed loop.
 3. Before building UI, confirm or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
 4. Review the changed files against the design contract, StyleSeed coherence, and hard quality checklist.
-5. Run `opendock run check --dock opendock/design-ultrawork`.
+5. Run `node .opendock/harness/opendock__design-ultrawork/check.mjs`.
 6. Fix failures or document an explicit human-approved exception.
 7. Report what passed, what failed, and what was not tested.
 

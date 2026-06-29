@@ -13,4 +13,4 @@ Apply Frontend Ultrawork before final handoff.
 - Route or page smoke tests should exist for user-visible surfaces.
 - Bundle growth and unnecessary duplicate dependencies require review.
 
-Run `opendock run check --dock opendock/frontend-ultrawork` when possible.
+Run `node .opendock/harness/opendock__frontend-ultrawork/check.mjs` when possible.

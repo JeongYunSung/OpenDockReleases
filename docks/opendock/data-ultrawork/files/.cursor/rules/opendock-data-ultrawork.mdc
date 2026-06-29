@@ -13,4 +13,4 @@ Apply Data Ultrawork before final handoff.
 - PII columns must be masked or excluded.
 - Dashboard query cost and cardinality need review.
 
-Run `opendock run check --dock opendock/data-ultrawork` when possible.
+Run `node .opendock/harness/opendock__data-ultrawork/check.mjs` when possible.

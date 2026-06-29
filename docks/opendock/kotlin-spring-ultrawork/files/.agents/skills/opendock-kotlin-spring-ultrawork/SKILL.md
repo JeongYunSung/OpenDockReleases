@@ -19,7 +19,7 @@ Run the OpenDock-managed harness and apply the checklist before final handoff.
 ## Command
 
 ```bash
-opendock run check --dock opendock/kotlin-spring-ultrawork
+node .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
 ```
 
 ## Safety Boundary
