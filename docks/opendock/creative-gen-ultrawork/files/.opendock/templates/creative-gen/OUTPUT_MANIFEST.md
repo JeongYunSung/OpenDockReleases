@@ -20,6 +20,16 @@ Record what was strengthened before generation: subject, style, composition, lig
 
 Record the final prompt sent to the generator.
 
+## Vector/SVG Notes
+
+If SVG/source vector output was explicitly requested, record:
+
+- Vector requested: yes/no
+- Structure: paths/groups/defs strategy and why it is not a placeholder
+- Accessibility: `<title>` or `aria-label`
+- Palette: one accent and controlled colors
+- Safety: no script, external href, base64 payload, event handler, raster embed, doctype/entity, or foreignObject
+
 ## Tool
 
 Record the generator, editor, analyzer, or model provider.

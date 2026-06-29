@@ -15,7 +15,7 @@
 13. Report passed checks, remaining exceptions, and exact output paths.
 
 사용자가 vector/source artwork를 명시적으로 요청하지 않았다면 image-like asset을 SVG/HTML/CSS placeholder로 직접 그리지 않습니다.
-If SVG/source vector output is explicitly requested, use `Mode: vector`, save under `assets/generated/vectors/`, and document vector request, structure, accessibility, palette, and safety notes in the manifest. Avoid primitive placeholders and unstructured shape-plaster SVG.
+SVG/source vector output이 명시적으로 요청된 경우 `Mode: vector`를 사용하고 `assets/generated/vectors/` 아래에 저장합니다. Manifest에는 vector request, structure, accessibility, palette, safety note를 기록합니다. 단순 primitive placeholder와 구조 없는 shape-plaster SVG는 피합니다.
 
 ## 안전 경계
 

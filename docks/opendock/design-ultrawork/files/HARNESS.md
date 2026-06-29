@@ -10,9 +10,7 @@
 - Harness는 argv 또는 active design run manifest에 명시된 target file만 검증합니다. 기본적으로 전체 project를 scan하지 않습니다.
 - UI 작업에서는 https://styleseed-demo.vercel.app/llms-full.txt 를 읽고 StyleSeed design rule을 추가 coherence layer로 적용합니다.
 - UI를 만들기 전에 사용자와 함께 `STYLESEED.md`를 확정하거나 업데이트합니다. 포함할 항목은 app type, key color/accent, radius personality, shadow language, motion style, type direction, density입니다.
-- 구현 후 StyleSeed coherence를 자체 점검합니다. one accent, one radius personality, one shadow language, one icon set, status/severity 전용 semantic status color, random decorative color 금지, pure black 금지, emoji-as-icon 금지를 확인합니다.
-- `DESIGN.md`가 더 엄격하지 않다면 card shadow는 하나의 shadow language 안에서 기본 8% opacity 이하로 유지합니다.
-- Handoff 전에 coherence, color meaning, hierarchy, layout, states, copy, polish를 점수화하고 80/100 미만은 수정합니다.
+- 구현 후 StyleSeed coherence를 자체 점검합니다. one accent, one radius personality, one shadow language, one icon set, random decorative color 금지, pure black 금지, emoji-as-icon 금지를 확인합니다.
 - Font size, line-height, spacing, radius, letter-spacing, font weight, color choice는 `DESIGN.md`와 맞아야 합니다.
 - Fractional value와 negative tracking은 `DESIGN.md`가 명시적으로 허용할 때만 사용할 수 있습니다.
 - Viewport 기반 font-size는 금지합니다.

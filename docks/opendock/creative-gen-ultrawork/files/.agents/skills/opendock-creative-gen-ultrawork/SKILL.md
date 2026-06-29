@@ -25,20 +25,20 @@ description: prompt-first 생성 루프로 이미지, 로고, 파비콘, 영상,
 
 ## 지원 모드
 
-- `image`: raster image output with alt text and output specs.
-- `vector`: explicitly requested SVG/source vector output under `assets/generated/vectors/`.
-- `logo`: brand mark, wordmark, or lockup, usually generated from a prompt; final vector/source artwork may use SVG with `viewBox`.
-- `favicon`: favicon.ico, PNG app icons, and web manifest metadata.
-- `video`: video file with script or storyboard and captions.
-- `audio`: voice, music, or sound output with transcript and rights note.
-- `asset-analysis`: inventory and report for existing resource files.
+- `image`: alt text와 output spec이 있는 raster image output.
+- `vector`: 사용자가 명시적으로 요청한 SVG/source vector output. 결과물은 `assets/generated/vectors/` 아래에 둡니다.
+- `logo`: brand mark, wordmark, lockup. 보통 prompt 기반으로 생성하며 최종 vector/source artwork는 `viewBox`가 있는 SVG를 사용할 수 있습니다.
+- `favicon`: favicon.ico, PNG app icon, web manifest metadata.
+- `video`: script 또는 storyboard와 caption이 있는 video file.
+- `audio`: transcript와 rights note가 있는 voice, music, sound output.
+- `asset-analysis`: 기존 resource file에 대한 inventory와 report.
 
 ## 산출물 규칙
 
 - Never leave generated assets undocumented.
-- Never hand-draw image-like assets as SVG, HTML, CSS, or basic geometric placeholders when the user asked for generated imagery. Build the prompt first and use an image generation/editing model.
-- Use `Mode: vector` only when the user explicitly requested SVG/source vector output.
-- Vector SVG에는 `viewBox`, title 또는 aria-label, 안전한 내부 reference만 있어야 하며 script/event handler/foreignObject/base64 payload, pure black은 금지합니다. palette를 제어하고 placeholder 또는 shape-plaster output을 피할 만큼 path/group/defs 구조를 갖춰야 합니다.
+- 사용자가 generated imagery를 요청했을 때 SVG, HTML, CSS 또는 기본 도형 placeholder로 직접 그리지 않습니다. 먼저 prompt를 만들고 image generation/editing model을 사용합니다.
+- 사용자가 SVG/source vector output을 명시적으로 요청한 경우에만 `Mode: vector`를 사용합니다.
+- Vector SVG에는 `viewBox`, title 또는 aria-label, 안전한 내부 reference만 있어야 하며 script/event handler/foreignObject/base64 payload/raster embed/doctype/entity, pure black은 금지합니다. palette를 제어하고 placeholder 또는 shape-plaster output을 피할 만큼 path/group/defs 구조를 갖춰야 합니다.
 - The harness validates only outputs listed in the active run manifest; old files in `assets/generated/**` are ignored unless the current manifest references them.
 - Never fabricate tool, model, rights, or source information.
 - Use lowercase, hyphenated, extension-bearing filenames.

@@ -24,7 +24,7 @@
 - Root의 `GENERATION_BRIEF.md`와 `OUTPUT_MANIFEST.md`는 legacy 호환용입니다. 새 작업은 run-scoped docs를 사용합니다.
 - Image 작업에는 alt text와 명확한 dimension 또는 aspect ratio가 필요합니다.
 - 명시적으로 요청된 vector/source artwork는 `Mode: vector`와 `assets/generated/vectors/`를 사용합니다.
-- Vector SVG에는 `viewBox`, title 또는 aria-label, 안전한 내부 reference만 있어야 하며 script/event handler/foreignObject/base64 payload, pure black은 금지합니다. palette를 제어하고 placeholder 또는 shape-plaster output을 피할 만큼 path/group/defs 구조를 갖춰야 합니다.
+- Vector SVG에는 `viewBox`, title 또는 aria-label, 안전한 내부 reference만 있어야 하며 script/event handler/foreignObject/base64 payload/raster embed/doctype/entity, pure black은 금지합니다. palette를 제어하고 placeholder 또는 shape-plaster output을 피할 만큼 path/group/defs 구조를 갖춰야 합니다.
 - Logo SVG output은 `viewBox`가 있고 executable SVG content가 없는 clean SVG를 사용할 수 있습니다.
 - Favicon 작업에는 browser-ready icon path와, 사용하는 경우 valid web manifest가 필요합니다.
 - Video 작업에는 script/storyboard와 caption, 또는 문서화된 예외가 필요합니다.

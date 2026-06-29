@@ -14,6 +14,7 @@
 ## 지원 모드
 
 - `image`
+- `vector`
 - `logo`
 - `favicon`
 - `video`
@@ -27,3 +28,5 @@
 harness는 active run manifest에 적힌 output path만 검사합니다. 이전에 생성된 asset은 현재 run이 참조하지 않는 한 무시됩니다.
 
 이미지 mode에서는 손으로 SVG/HTML/CSS 도형을 그린 placeholder를 결과물로 인정하지 않습니다. 먼저 최종 생성 프롬프트를 만든 뒤 image generation/editing model에 다시 요청하는 흐름을 기본값으로 사용합니다.
+
+사용자가 SVG/source vector를 명시적으로 요청한 경우에는 `vector` mode를 사용합니다. 결과물은 `assets/generated/vectors/`에 저장하고, SVG에는 `viewBox`, title 또는 aria-label, 안전한 내부 reference, 제어된 palette, 구조적인 path/group/defs 구성이 있어야 합니다. 단순 도형 placeholder나 의미 없이 많은 도형을 쌓은 SVG는 통과하지 않습니다.

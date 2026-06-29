@@ -14,7 +14,7 @@
 Never leave generated assets undocumented.
 Harness는 active run manifest에 적힌 output path만 검증합니다. 이번 run이 참조하지 않는 한 `assets/generated/**`의 오래된 파일은 무시합니다.
 사용자가 vector/source artwork를 명시적으로 요청하지 않았다면 image-like asset을 SVG/HTML/CSS placeholder로 직접 그리지 않습니다.
-SVG/source vector output이 명시적으로 요청된 경우 `Mode: vector`를 설정하고 `assets/generated/vectors/` 아래에 저장합니다. SVG는 `viewBox`, title 또는 aria-label을 갖추고 executable content, external href, embedded base64 payload, pure black을 포함하지 않아야 하며, controlled palette 하나와 placeholder/shape-plaster가 아닌 구조를 가져야 합니다.
+SVG/source vector output이 명시적으로 요청된 경우 `Mode: vector`를 설정하고 `assets/generated/vectors/` 아래에 저장합니다. SVG는 `viewBox`, title 또는 aria-label을 갖추고 executable content, external href, embedded base64 payload, raster embed, doctype/entity, pure black을 포함하지 않아야 하며, controlled palette 하나와 placeholder/shape-plaster가 아닌 구조를 가져야 합니다.
 
 ## 안전 경계
 

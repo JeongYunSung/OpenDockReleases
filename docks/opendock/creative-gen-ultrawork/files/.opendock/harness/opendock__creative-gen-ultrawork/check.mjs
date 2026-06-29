@@ -22,10 +22,11 @@ const ignoredSegments = new Set([
 
 const activeStatuses = new Set(["active", "review", "ready", "ready-for-review", "handoff"]);
 const inactiveStatuses = new Set(["draft", "none", "paused", "backlog"]);
-const supportedModes = new Set(["image", "logo", "favicon", "video", "audio", "asset-analysis"]);
+const supportedModes = new Set(["image", "vector", "logo", "favicon", "video", "audio", "asset-analysis"]);
 
 const sizeLimits = {
   image: 10 * 1024 * 1024,
+  vector: 5 * 1024 * 1024,
   logo: 5 * 1024 * 1024,
   favicon: 2 * 1024 * 1024,
   video: 250 * 1024 * 1024,
@@ -36,6 +37,10 @@ const modeSpecs = {
   image: {
     dirs: ["assets/generated/images"],
     exts: [".png", ".jpg", ".jpeg", ".webp", ".avif"]
+  },
+  vector: {
+    dirs: ["assets/generated/vectors"],
+    exts: [".svg"]
   },
   logo: {
     dirs: ["assets/generated/logos"],
@@ -159,6 +164,7 @@ function parseModes(briefText, outputFiles) {
 
   for (const file of outputFiles) {
     if (file.rel.includes("/images/")) explicit.add("image");
+    if (file.rel.includes("/vectors/")) explicit.add("vector");
     if (file.rel.includes("/logos/")) explicit.add("logo");
     if (file.rel.includes("/favicons/") || file.rel.endsWith("favicon.ico") || file.rel.endsWith("manifest.webmanifest")) explicit.add("favicon");
     if (file.rel.includes("/videos/")) explicit.add("video");
@@ -253,6 +259,114 @@ function validateSvg(file, failures) {
 
   for (const { pattern, detail } of unsafePatterns) {
     if (pattern.test(text)) failures.push({ rule: "unsafe-svg", file: file.rel, detail });
+  }
+}
+
+function countMatches(text, pattern) {
+  return [...text.matchAll(pattern)].length;
+}
+
+function svgColors(text) {
+  const colors = new Set();
+  for (const match of text.matchAll(/#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/g)) {
+    colors.add(match[0].toLowerCase());
+  }
+  for (const match of text.matchAll(/\b(?:rgb|rgba|hsl|hsla)\([^)]+\)/gi)) {
+    colors.add(match[0].toLowerCase().replace(/\s+/g, ""));
+  }
+  return colors;
+}
+
+function validateVectorSvg(file, manifestText, failures) {
+  if (file.ext !== ".svg") return;
+  if (fileSize(file) > maxTextFileBytes) return;
+
+  const text = fs.readFileSync(file.full, "utf8");
+  const lowerManifest = manifestText.toLowerCase();
+  const hasExplicitVectorRequest =
+    /(?:vector|svg|source vector)\s+requested\s*:\s*(?:yes|true|explicit|requested|예|네|명시)/i.test(manifestText) ||
+    includesAny(lowerManifest, ["user explicitly requested svg", "user explicitly requested vector", "사용자가 svg", "사용자가 벡터", "명시적으로 요청"]);
+  if (!hasExplicitVectorRequest) {
+    failures.push({
+      rule: "missing-vector-request",
+      file: file.rel,
+      detail: "Vector mode must document that SVG/source vector output was explicitly requested."
+    });
+  }
+
+  if (!/<title\b[^>]*>[\s\S]*?<\/title>/i.test(text) && !/\baria-label\s*=\s*["'][^"']+["']/i.test(text)) {
+    failures.push({
+      rule: "svg-accessibility",
+      file: file.rel,
+      detail: "Vector SVG needs a <title> or aria-label for accessibility."
+    });
+  }
+
+  for (const match of text.matchAll(/\b(?:href|xlink:href)\s*=\s*["']([^"']+)["']/gi)) {
+    if (!match[1].startsWith("#")) {
+      failures.push({
+        rule: "external-svg-reference",
+        file: file.rel,
+        detail: "Vector SVG must not reference external, data, file, or remote href values."
+      });
+    }
+  }
+
+  const vectorOnlyPatterns = [
+    { rule: "svg-raster-embed", pattern: /<\s*image\b/i, detail: "Vector SVG must not embed raster image payloads." },
+    { rule: "svg-doctype", pattern: /<!doctype|<!entity/i, detail: "Vector SVG must not contain doctype or entity declarations." },
+    { rule: "embedded-svg-data", pattern: /data:[^"')\s]+;base64/i, detail: "Vector SVG must not hide raster/base64 payloads inside the file." }
+  ];
+  for (const { rule, pattern, detail } of vectorOnlyPatterns) {
+    if (pattern.test(text)) failures.push({ rule, file: file.rel, detail });
+  }
+
+  if (/\p{Extended_Pictographic}/u.test(text)) {
+    failures.push({
+      rule: "svg-emoji",
+      file: file.rel,
+      detail: "Do not use emoji as SVG artwork; build explicit vector paths or request raster generation."
+    });
+  }
+
+  if (/#(?:000|000000)\b/i.test(text)) {
+    failures.push({
+      rule: "svg-pure-black",
+      file: file.rel,
+      detail: "Avoid pure black in generated SVG artwork; use an intentional near-black token instead."
+    });
+  }
+
+  const primitiveCount = countMatches(text, /<(?:rect|circle|ellipse|polygon|polyline|line)\b/gi);
+  const pathCount = countMatches(text, /<path\b/gi);
+  const groupCount = countMatches(text, /<g\b/gi);
+  const structureCount = countMatches(text, /<(?:defs|linearGradient|radialGradient|clipPath|mask|symbol)\b/gi);
+  const textCount = countMatches(text, /<text\b/gi);
+  const minimalIntent = includesAny(lowerManifest, ["minimal", "simple icon", "simple mark", "icon", "symbol", "의도적으로 단순", "미니멀"]);
+
+  if (!minimalIntent && primitiveCount > 0 && primitiveCount <= 4 && pathCount === 0 && groupCount < 2 && structureCount === 0 && textCount === 0) {
+    failures.push({
+      rule: "svg-placeholder",
+      file: file.rel,
+      detail: "Vector SVG looks like a basic geometric placeholder. Use richer source artwork or document intentional minimalism."
+    });
+  }
+
+  if (primitiveCount > 80 && pathCount < 2 && groupCount < 3) {
+    failures.push({
+      rule: "svg-shape-plaster",
+      file: file.rel,
+      detail: "Vector SVG contains many unstructured primitive shapes. Group and simplify the artwork instead of shape-plastering."
+    });
+  }
+
+  const colors = svgColors(text);
+  if (colors.size > 8) {
+    failures.push({
+      rule: "svg-color-sprawl",
+      file: file.rel,
+      detail: "Vector SVG uses too many direct colors. Keep one accent and a controlled palette."
+    });
   }
 }
 
@@ -351,6 +465,7 @@ function validateMode(mode, manifestText, outputPaths, failures, run) {
     if (hasTemporaryName(file.rel)) failures.push({ rule: "temporary-file", file: file.rel, detail: "Temporary files must not be in generated output." });
     if (bytes > sizeLimits[mode]) failures.push({ rule: "file-size", file: file.rel, detail: `${mode} output exceeds the size budget.` });
     validateSvg(file, failures);
+    if (mode === "vector") validateVectorSvg(file, manifestText, failures);
   }
 
   if (mode === "image") {
@@ -359,7 +474,7 @@ function validateMode(mode, manifestText, outputPaths, failures, run) {
       failures.push({
         rule: "image-svg-placeholder",
         file: rel,
-        detail: "Image mode requires raster generation output. Do not hand-draw images as SVG/HTML/CSS placeholders unless the user explicitly requested source vector artwork.",
+        detail: "Image mode requires raster generation output. Use Mode: vector and assets/generated/vectors/ only when the user explicitly requested SVG/source vector artwork.",
       });
     }
     if (!exists("ALT_TEXT.md") && !includesAny(manifestText, ["alt text", "alternative text"])) {
@@ -367,6 +482,16 @@ function validateMode(mode, manifestText, outputPaths, failures, run) {
     }
     if (!includesAny(manifestText, ["dimension", "aspect ratio", "width", "height"])) {
       failures.push({ rule: "missing-image-spec", file: run.manifestRel, detail: "Image output needs dimensions or aspect ratio." });
+    }
+  }
+
+  if (mode === "vector") {
+    if (!includesAny(manifestText, ["palette", "one accent", "controlled palette", "accessibility", "title", "aria-label", "구조", "접근성", "팔레트"])) {
+      failures.push({
+        rule: "missing-vector-notes",
+        file: run.manifestRel,
+        detail: "Vector output needs palette, structure, and accessibility notes in the active run manifest."
+      });
     }
   }
 
@@ -428,6 +553,7 @@ function run() {
 
   const allOutputFiles = [
     ...listFiles(modeSpecs.image.dirs, modeSpecs.image.exts),
+    ...listFiles(modeSpecs.vector.dirs, modeSpecs.vector.exts),
     ...listFiles(modeSpecs.logo.dirs, modeSpecs.logo.exts),
     ...listFiles(modeSpecs.favicon.dirs, modeSpecs.favicon.exts),
     ...listFiles(modeSpecs.video.dirs, [...modeSpecs.video.exts, ".vtt", ".srt"]),

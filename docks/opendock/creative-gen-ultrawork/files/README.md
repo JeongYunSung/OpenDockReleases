@@ -19,6 +19,7 @@
 6. 그 최종 프롬프트를 image/video/audio generation model에 다시 요청해 asset을 생성하거나 분석합니다.
 7. 결과물을 정해진 폴더에 넣습니다.
    - `assets/generated/images/`
+   - `assets/generated/vectors/`
    - `assets/generated/logos/`
    - `assets/generated/favicons/`
    - `assets/generated/videos/`
@@ -35,6 +36,8 @@ brief -> prompt draft -> prompt review -> final prompt -> generate -> record -> 
 ```
 
 이미지 mode에서는 손으로 SVG/HTML/CSS 도형을 그린 placeholder를 결과물로 인정하지 않습니다. 사용자가 명시적으로 vector/source artwork를 요청하지 않았다면 image generation/editing model을 사용합니다.
+
+사용자가 SVG/source vector를 요청한 경우에는 `Mode: vector`를 사용하고 결과물을 `assets/generated/vectors/`에 둡니다. SVG는 `viewBox`, title 또는 aria-label, 안전한 내부 reference, 제어된 palette, 구조적인 path/group/defs 구성을 가져야 하며, 단순 도형 placeholder나 의미 없는 도형 떡칠은 실패로 봅니다.
 
 harness가 실패하면 결과물이나 manifest를 고친 뒤 다시 검사합니다.
 

@@ -18,7 +18,7 @@ node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
 - Image output은 alt text가 있어야 하며 기본적으로 raster입니다.
 - Image mode는 직접 그린 SVG/HTML/CSS placeholder output을 인정하지 않습니다. 사용자가 vector/source artwork를 명시적으로 요청하지 않았다면 image generation/editing model을 사용합니다.
 - Vector mode는 사용자가 SVG/source vector output을 명시적으로 요청했고 manifest에 그 요청이 기록된 경우에만 SVG를 허용합니다.
-- Vector SVG output에는 `viewBox`, title 또는 aria-label이 필요하며 executable content, external href, embedded base64 payload, pure black은 금지합니다. 또한 controlled palette와 placeholder/shape-plaster output을 피할 충분한 구조가 필요합니다.
+- Vector SVG output에는 `viewBox`, title 또는 aria-label이 필요하며 executable content, external href, embedded base64 payload, raster embed, doctype/entity, pure black은 금지합니다. 또한 controlled palette와 placeholder/shape-plaster output을 피할 충분한 구조가 필요합니다.
 - Logo SVG output에는 `viewBox`가 있고 executable SVG content가 없어야 합니다.
 - Favicon output에는 favicon과 installable icon metadata가 포함되어야 합니다.
 - Video output에는 script/storyboard와 caption, 또는 문서화된 예외가 포함되어야 합니다.

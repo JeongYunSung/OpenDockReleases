@@ -25,9 +25,7 @@ UI를 만들기 전에 사용자와 함께 `STYLESEED.md`를 확정하거나 업
 ## 중점
 
 - Typography, color, layout, component, imagery, do/don't rule은 `DESIGN.md`를 따라야 합니다.
-- StyleSeed 가이드는 추가 기준입니다. One accent, one radius personality, one shadow language, one icon set을 유지하고, hardcoded hex보다 semantic token을 우선하며, status color는 severity/meaning 전용으로 쓰고, visible focus ring과 최소 44px touch target을 지킵니다.
-- `DESIGN.md`가 더 엄격하지 않다면 card shadow는 하나의 shadow language 안에서 8% opacity 이하로 유지합니다.
-- Handoff 전에 coherence, color meaning, hierarchy, layout, states, copy, polish를 점수화하고 80/100 미만은 수정합니다.
+- StyleSeed 가이드는 추가 기준입니다. One accent, one radius personality, one shadow language, one icon set을 유지하고, hardcoded hex보다 semantic token을 우선하며, visible focus ring과 최소 44px touch target을 지킵니다.
 - Fractional value와 negative tracking은 `DESIGN.md`가 명시적으로 허용할 때만 사용할 수 있습니다.
 - Viewport 기반 font-size는 금지합니다.
 - Pure black, emoji-as-icon, random decorative color, Tailwind `text-[var(...)]` font-size pattern은 금지합니다.
