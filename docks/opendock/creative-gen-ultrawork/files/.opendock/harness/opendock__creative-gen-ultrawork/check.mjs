@@ -203,6 +203,26 @@ function includesAny(text, words) {
   return words.some((word) => lower.includes(word.toLowerCase()));
 }
 
+function extractManifestPaths(text) {
+  const paths = new Set();
+  const add = (candidate) => {
+    const value = String(candidate).trim().replace(/^["'`]+|["'`.,)]+$/g, "");
+    if (!value || value.includes("://") || path.isAbsolute(value)) return;
+    const normalized = path.normalize(value).split(path.sep).join("/");
+    if (normalized.startsWith("../") || normalized === "..") return;
+    paths.add(normalized);
+  };
+
+  for (const match of text.matchAll(/`([^`]+)`/g)) add(match[1]);
+  for (const line of text.split(/\r?\n/)) {
+    if (!/^\s*[-*]\s+/.test(line) && !/\b(path|output|file|asset)s?\b/i.test(line)) continue;
+    for (const match of line.matchAll(/[A-Za-z0-9._@+/-]+\.(?:png|jpe?g|webp|avif|svg|ico|webmanifest|json|mp4|mov|webm|vtt|srt|mp3|wav|m4a|ogg|flac|md)\b/gi)) {
+      add(match[0]);
+    }
+  }
+  return paths;
+}
+
 function escapeTerminal(value) {
   return String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, (char) => {
     const code = char.charCodeAt(0).toString(16).padStart(2, "0");
@@ -233,9 +253,9 @@ function validateSvg(file, failures) {
   }
 }
 
-function validateManifestJson(failures) {
+function validateManifestJson(failures, outputPaths) {
   const candidates = ["public/manifest.webmanifest", "assets/generated/favicons/manifest.webmanifest"];
-  const found = candidates.find(exists);
+  const found = candidates.find((candidate) => outputPaths.has(candidate) && exists(candidate));
   if (!found) return false;
   try {
     const parsed = JSON.parse(readText(found));
@@ -302,10 +322,10 @@ function chooseActiveRun(runs, hasGeneratedOutput) {
   return runs[0];
 }
 
-function validateMode(mode, manifestText, allManifestText, failures, run) {
+function validateMode(mode, manifestText, outputPaths, failures, run) {
   if (mode === "asset-analysis") {
-    if (!exists("ASSET_INVENTORY.md")) failures.push({ rule: "missing-asset-inventory", file: "ASSET_INVENTORY.md", detail: "Asset analysis needs an inventory file." });
-    if (!exists("ASSET_REPORT.md")) failures.push({ rule: "missing-asset-report", file: "ASSET_REPORT.md", detail: "Asset analysis needs a report file." });
+    if (!outputPaths.has("ASSET_INVENTORY.md") || !exists("ASSET_INVENTORY.md")) failures.push({ rule: "missing-asset-inventory", file: "ASSET_INVENTORY.md", detail: "Asset analysis needs an inventory file listed in the active run manifest." });
+    if (!outputPaths.has("ASSET_REPORT.md") || !exists("ASSET_REPORT.md")) failures.push({ rule: "missing-asset-report", file: "ASSET_REPORT.md", detail: "Asset analysis needs a report file listed in the active run manifest." });
     const inventory = readText("ASSET_INVENTORY.md");
     for (const word of ["license", "owner", "usage", "risk"]) {
       if (!includesAny(inventory, [word])) failures.push({ rule: "asset-inventory-field", file: "ASSET_INVENTORY.md", detail: `Inventory should include ${word}.` });
@@ -315,15 +335,14 @@ function validateMode(mode, manifestText, allManifestText, failures, run) {
 
   const spec = modeSpecs[mode];
   const files = listFiles(spec.dirs, spec.exts);
-  const currentFiles = files.filter((file) => manifestText.includes(file.rel));
+  const currentFiles = files.filter((file) => outputPaths.has(file.rel));
   failIfMissingOutput(mode, currentFiles, failures, run.manifestRel);
 
-  for (const file of files) {
+  for (const file of currentFiles) {
     const bytes = fileSize(file);
     if (!hasSafeName(file.rel)) failures.push({ rule: "unsafe-file-name", file: file.rel, detail: "Use lowercase safe file names with no spaces." });
     if (hasTemporaryName(file.rel)) failures.push({ rule: "temporary-file", file: file.rel, detail: "Temporary files must not be in generated output." });
     if (bytes > sizeLimits[mode]) failures.push({ rule: "file-size", file: file.rel, detail: `${mode} output exceeds the size budget.` });
-    if (!allManifestText.includes(file.rel)) failures.push({ rule: "manifest-path", file: file.rel, detail: "Every generated output path must be listed in a run manifest." });
     validateSvg(file, failures);
   }
 
@@ -343,10 +362,10 @@ function validateMode(mode, manifestText, allManifestText, failures, run) {
   }
 
   if (mode === "favicon") {
-    const hasFavicon = exists("public/favicon.ico") || exists("assets/generated/favicons/favicon.ico");
+    const hasFavicon = (outputPaths.has("public/favicon.ico") && exists("public/favicon.ico")) || (outputPaths.has("assets/generated/favicons/favicon.ico") && exists("assets/generated/favicons/favicon.ico"));
     if (!hasFavicon) failures.push({ rule: "missing-favicon", file: "public/favicon.ico", detail: "Favicon mode needs favicon.ico." });
-    const hasManifest = validateManifestJson(failures);
-    const hasAppIcons = files.some((file) => /(^|\/)(icon-192|icon-512|apple-touch-icon)\.png$/i.test(file.rel));
+    const hasManifest = validateManifestJson(failures, outputPaths);
+    const hasAppIcons = currentFiles.some((file) => /(^|\/)(icon-192|icon-512|apple-touch-icon)\.png$/i.test(file.rel));
     if (!hasManifest && !hasAppIcons) {
       failures.push({ rule: "missing-install-icons", file: "assets/generated/favicons", detail: "Favicon mode needs app icon PNGs or a valid web manifest." });
     }
@@ -356,7 +375,7 @@ function validateMode(mode, manifestText, allManifestText, failures, run) {
     if (!exists("VIDEO_SCRIPT.md") && !exists("STORYBOARD.md") && !includesAny(manifestText, ["script", "storyboard"])) {
       failures.push({ rule: "missing-video-script", file: "VIDEO_SCRIPT.md", detail: "Video output needs a script or storyboard." });
     }
-    const hasCaptionFile = listFiles(["assets/generated/videos"], [".vtt", ".srt"]).length > 0;
+    const hasCaptionFile = currentFiles.some((file) => [".vtt", ".srt"].includes(file.ext));
     if (!hasCaptionFile && !includesAny(manifestText, ["caption", "subtitle", "captions not required"])) {
       failures.push({ rule: "missing-captions", file: run.manifestRel, detail: "Video output needs captions or a documented exception." });
     }
@@ -399,19 +418,10 @@ function run() {
     ...listFiles(modeSpecs.video.dirs, [...modeSpecs.video.exts, ".vtt", ".srt"]),
     ...listFiles(modeSpecs.audio.dirs, modeSpecs.audio.exts)
   ];
-  const hasGeneratedOutput = allOutputFiles.length > 0 || exists("ASSET_INVENTORY.md") || exists("ASSET_REPORT.md");
   const runDocs = findRunDocuments();
   failures.push(...traversalFailures);
 
   if (runDocs.length === 0) {
-    if (hasGeneratedOutput) {
-      failures.push({
-        rule: "missing-run-docs",
-        file: runRoot,
-        detail: "Generated output exists, so create a run directory with brief.md and manifest.md copied from .opendock/templates/creative-gen/."
-      });
-    }
-
     if (failures.length > 0) {
       printFailures(failures, [], allOutputFiles.length, "none");
       process.exit(1);
@@ -425,11 +435,17 @@ function run() {
     return;
   }
 
-  const activeRun = chooseActiveRun(runDocs, hasGeneratedOutput);
   const allManifestText = runDocs.map((run) => run.manifestText).join("\n");
+  const documentedOutputFiles = allOutputFiles.filter((file) => allManifestText.includes(file.rel));
+  const hasGeneratedOutput = documentedOutputFiles.length > 0 || allManifestText.includes("ASSET_INVENTORY.md") || allManifestText.includes("ASSET_REPORT.md");
+  const activeRun = chooseActiveRun(runDocs, hasGeneratedOutput);
   const status = parseField(activeRun.briefText, "Status").toLowerCase();
-  const isActive = activeStatuses.has(status) || (!inactiveStatuses.has(status) && hasGeneratedOutput);
-  const modes = parseModes(activeRun.briefText, allOutputFiles);
+  const outputPaths = extractManifestPaths(activeRun.manifestText);
+  const activeOutputFiles = allOutputFiles.filter((file) => outputPaths.has(file.rel));
+  const activeHasGeneratedOutput =
+    activeOutputFiles.length > 0 || outputPaths.has("ASSET_INVENTORY.md") || outputPaths.has("ASSET_REPORT.md");
+  const isActive = activeStatuses.has(status) || (!inactiveStatuses.has(status) && activeHasGeneratedOutput);
+  const modes = parseModes(activeRun.briefText, activeOutputFiles);
 
   for (const section of ["Purpose", "Audience", "Output Requirements", "Constraints", "Review Criteria"]) {
     if (!hasHeading(activeRun.briefText, section)) failures.push({ rule: "brief-section", file: activeRun.briefRel, detail: `Missing brief section: ${section}` });
@@ -439,7 +455,7 @@ function run() {
     if (!hasHeading(activeRun.manifestText, section)) failures.push({ rule: "manifest-section", file: activeRun.manifestRel, detail: `Missing manifest section: ${section}` });
   }
 
-  if (!isActive && !hasGeneratedOutput) {
+  if (!isActive && !activeHasGeneratedOutput) {
     if (failures.length === 0) {
       console.log(`OpenDock harness: ${title}`);
       console.log(`Active run: ${activeRun.label}`);
@@ -454,22 +470,22 @@ function run() {
     failures.push({ rule: "missing-mode", file: activeRun.briefRel, detail: "Active generation work must set Mode to a supported value." });
   }
 
-  if (isActive || hasGeneratedOutput) {
+  if (isActive || activeHasGeneratedOutput) {
     for (const field of ["prompt", "tool", "model", "date", "rights", "review"]) {
       if (!includesAny(activeRun.manifestText, [field])) failures.push({ rule: "manifest-field", file: activeRun.manifestRel, detail: `Manifest must mention ${field}.` });
     }
-    for (const mode of modes) validateMode(mode, activeRun.manifestText, allManifestText, failures, activeRun);
+    for (const mode of modes) validateMode(mode, activeRun.manifestText, outputPaths, failures, activeRun);
   }
 
   if (failures.length > 0) {
-    printFailures(failures, modes, allOutputFiles.length, activeRun.label);
+    printFailures(failures, modes, activeOutputFiles.length, activeRun.label);
     process.exit(1);
   }
 
   console.log(`OpenDock harness: ${title}`);
   console.log(`Active run: ${activeRun.label}`);
   console.log(`Modes: ${modes.length ? modes.join(", ") : "none"}`);
-  console.log(`Generated files scanned: ${allOutputFiles.length}`);
+  console.log(`Generated files scanned: ${activeOutputFiles.length}`);
   console.log("Ultrawork passed.");
 }
 

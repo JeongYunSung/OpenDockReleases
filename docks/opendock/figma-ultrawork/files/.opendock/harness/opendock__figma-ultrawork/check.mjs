@@ -5,6 +5,7 @@ import path from "node:path";
 const root = process.cwd();
 const title = "Figma Ultrawork";
 const focus = "Figma MCP procedural gate presence, DESIGN.md alignment, and canvas review readiness";
+const runRoot = ".opendock/runs/figma";
 const maxTextFileBytes = 1024 * 1024;
 const failures = [];
 
@@ -63,6 +64,43 @@ function exists(rel) {
   return fs.existsSync(path.join(root, rel));
 }
 
+function parseField(text, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = text.match(new RegExp(`^${escaped}\\s*:\\s*(.+)$`, "im"));
+  return match ? match[1].trim() : "";
+}
+
+function fileMtime(rel) {
+  try {
+    return fs.statSync(path.join(root, rel)).mtimeMs;
+  } catch {
+    return 0;
+  }
+}
+
+function findRunDocuments() {
+  const docs = [];
+  const fullRunRoot = path.join(root, runRoot);
+  if (!fs.existsSync(fullRunRoot)) return docs;
+
+  for (const entry of fs.readdirSync(fullRunRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const runRel = `${runRoot}/${entry.name}`;
+    const manifestRel = `${runRel}/manifest.md`;
+    if (!exists(manifestRel)) continue;
+    const text = read(manifestRel);
+    docs.push({
+      label: runRel,
+      manifestRel,
+      manifestText: text,
+      status: parseField(text, "Status").toLowerCase(),
+      mtime: fileMtime(manifestRel),
+    });
+  }
+
+  return docs.sort((a, b) => b.mtime - a.mtime || b.label.localeCompare(a.label));
+}
+
 function escapeTerminal(value) {
   return String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, (char) => {
     const code = char.charCodeAt(0).toString(16).padStart(2, "0");
@@ -105,9 +143,35 @@ if (!lock.includes("id: opendock/figma-ultrawork")) {
   failures.push({ rule: "lock-entry", file: ".opendock/dock.lock.yml", detail: "dock.lock.yml should include opendock/figma-ultrawork." });
 }
 
+const activeStatuses = new Set(["active", "review", "ready", "ready-for-review", "handoff"]);
+const inactiveStatuses = new Set(["draft", "none", "paused", "backlog"]);
+const runs = findRunDocuments();
+const activeRun = runs.find((run) => activeStatuses.has(run.status)) ?? runs[0];
+
+if (activeRun) {
+  const isActive = activeStatuses.has(activeRun.status) || !inactiveStatuses.has(activeRun.status);
+  const text = activeRun.manifestText;
+  const url = parseField(text, "Figma URL") || parseField(text, "URL");
+  const node = parseField(text, "Node ID") || parseField(text, "Node");
+  if (isActive) {
+    if (!/figma\.com\/design\//i.test(url)) {
+      failures.push({ rule: "figma-url", file: activeRun.manifestRel, detail: "Active Figma run must include a node-specific Figma design URL." });
+    }
+    if (!/(node-id=|node id:|Node ID:)/i.test(text) && !node) {
+      failures.push({ rule: "figma-node-id", file: activeRun.manifestRel, detail: "Active Figma run must include a node id." });
+    }
+    for (const section of ["DESIGN.md Alignment", "MCP Evidence", "Findings", "Review"]) {
+      if (!new RegExp(`^#{1,6}\\s+${section.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "im").test(text)) {
+        failures.push({ rule: "figma-run-section", file: activeRun.manifestRel, detail: `Missing run manifest section: ${section}` });
+      }
+    }
+  }
+}
+
 if (failures.length > 0) {
   console.error(`OpenDock harness: ${title}`);
   console.error(`Focus: ${focus}`);
+  console.error(`Scope: ${activeRun ? activeRun.label : "none"}`);
   console.error(`Files checked: ${requiredFiles.length}`);
   console.error(`Failures: ${failures.length}`);
   for (const failure of failures) console.error(`- [${escapeTerminal(failure.rule)}] ${escapeTerminal(failure.file)}: ${escapeTerminal(failure.detail)}`);
@@ -116,6 +180,8 @@ if (failures.length > 0) {
 
 console.log(`OpenDock harness: ${title}`);
 console.log(`Focus: ${focus}`);
+console.log(`Scope: ${activeRun ? activeRun.label : "none"}`);
 console.log(`Files checked: ${requiredFiles.length}`);
+if (!activeRun) console.log("No active Figma run detected.");
 console.log("Figma MCP canvas inspection still requires a node-specific Figma URL.");
 console.log("Ultrawork passed.");

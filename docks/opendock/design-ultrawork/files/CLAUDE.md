@@ -6,9 +6,11 @@ This workspace uses Design Ultrawork as an OpenDock-managed quality gate.
 
 1. Read `DESIGN.md` and treat it as the design contract.
 2. For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's coherence rules alongside `DESIGN.md`.
-3. Complete the `HARNESS.md` checklist before final handoff.
-4. Fix failures before claiming the work is done.
-5. If a failure is intentionally accepted, document the owner and reason.
+3. Create `.opendock/runs/design/<run-id>/manifest.md` from `.opendock/templates/design/DESIGN_RUN.md`.
+4. List only current-task target files in that manifest.
+5. Complete the `HARNESS.md` checklist before final handoff.
+6. Fix failures before claiming the work is done.
+7. If a failure is intentionally accepted, document the owner and reason.
 
 ## StyleSeed UI Loop
 

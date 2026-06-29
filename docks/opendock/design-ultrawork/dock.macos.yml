@@ -26,6 +26,8 @@ files:
     to: .opendock/harness/opendock__design-ultrawork/check.sh
   - from: files/.opendock/harness/opendock__design-ultrawork/check.ps1
     to: .opendock/harness/opendock__design-ultrawork/check.ps1
+  - from: files/.opendock/templates/design/DESIGN_RUN.md
+    to: .opendock/templates/design/DESIGN_RUN.md
   - from: files/.agents/skills/opendock-design-ultrawork/SKILL.md
     to: .agents/skills/opendock-design-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-design-ultrawork.mdc
@@ -41,6 +43,8 @@ doctor:
     check: test -f HARNESS.md
   - id: harness-script
     check: test -f .opendock/harness/opendock__design-ultrawork/check.mjs
+  - id: design-run-template
+    check: test -f .opendock/templates/design/DESIGN_RUN.md
   - id: skill
     check: test -f .agents/skills/opendock-design-ultrawork/SKILL.md
   - id: workflow

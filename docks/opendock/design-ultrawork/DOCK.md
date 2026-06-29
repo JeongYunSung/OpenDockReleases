@@ -14,6 +14,10 @@ Read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's desig
 
 Before building, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
 
+## Run Scope
+
+Create `.opendock/runs/design/<run-id>/manifest.md` from `.opendock/templates/design/DESIGN_RUN.md` and list only the files created or changed for the current task. The harness validates those target files only. It does not scan the whole project by default.
+
 ## What It Checks
 
 - Reads `DESIGN.md` as the source of truth for typography, colors, layout, components, imagery, and do/don't rules.

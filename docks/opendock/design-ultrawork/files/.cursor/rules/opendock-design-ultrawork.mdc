@@ -6,6 +6,8 @@ alwaysApply: false
 
 Apply Design Ultrawork before final handoff. Read `DESIGN.md` first and treat it as the design contract.
 
+- Create `.opendock/runs/design/<run-id>/manifest.md` from `.opendock/templates/design/DESIGN_RUN.md` and list only files created or changed for this task under `Target Files`.
+- The harness validates only explicit target files from argv or the active design run manifest; do not use it as a whole-project scanner.
 - For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's design rules.
 - Before building UI, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
 - Self-check coherence after implementation: one accent, one radius personality, one shadow language, one icon set.

@@ -10,6 +10,8 @@ Read `DESIGN.md`, inspect the Figma node through the official Figma MCP, and app
 ## Checklist
 
 - Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
+- Create `.opendock/runs/figma/<run-id>/manifest.md` from `.opendock/templates/figma/FIGMA_RUN.md`.
+- Record only the current node-specific Figma URL, node id, MCP evidence, findings, and review notes in the run manifest.
 - Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
 - Use the official Figma MCP to inspect the node-specific Figma URL provided by the user.
 - Do not ask the user for separate Figma credentials or offline design exports.
@@ -21,12 +23,13 @@ Read `DESIGN.md`, inspect the Figma node through the official Figma MCP, and app
 ## Flow
 
 1. Read `DESIGN.md`.
-2. Use the official Figma MCP to inspect the provided node URL.
-3. Propose fixes with exact node names, failing properties, expected values, and recommended changes.
-4. Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list.
-5. If Figma MCP is not connected or the URL lacks `node-id`, ask the user to connect Figma MCP and provide a node-specific Figma URL.
-6. If Figma MCP reports that the file cannot be accessed, ask the user to share the file with the authenticated Figma account or switch Figma MCP authentication.
-7. If edit access is not available, report exact node names, failing properties, expected values, and recommended fixes.
+2. Create or update the current `.opendock/runs/figma/<run-id>/manifest.md`.
+3. Use the official Figma MCP to inspect only the provided node URL for that run.
+4. Propose fixes with exact node names, failing properties, expected values, and recommended changes.
+5. Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list.
+6. If Figma MCP is not connected or the URL lacks `node-id`, ask the user to connect Figma MCP and provide a node-specific Figma URL.
+7. If Figma MCP reports that the file cannot be accessed, ask the user to share the file with the authenticated Figma account or switch Figma MCP authentication.
+8. If edit access is not available, report exact node names, failing properties, expected values, and recommended fixes.
 
 ## Safety Boundary
 
@@ -38,7 +41,7 @@ Read `DESIGN.md`, inspect the Figma node through the official Figma MCP, and app
 
 ## Command
 
-This local command verifies that the procedural Figma MCP gate is installed and documented. It does not replace node-specific canvas inspection.
+This local command verifies that the procedural Figma MCP gate and the active run manifest are documented. It does not replace node-specific canvas inspection.
 
 ```bash
 node .opendock/harness/opendock__figma-ultrawork/check.mjs

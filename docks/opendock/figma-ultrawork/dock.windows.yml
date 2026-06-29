@@ -37,6 +37,8 @@ files:
     to: .opendock/harness/opendock__figma-ultrawork/check.sh
   - from: files/.opendock/harness/opendock__figma-ultrawork/check.ps1
     to: .opendock/harness/opendock__figma-ultrawork/check.ps1
+  - from: files/.opendock/templates/figma/FIGMA_RUN.md
+    to: .opendock/templates/figma/FIGMA_RUN.md
 doctor:
   - id: harness-doc
     check: test -f HARNESS.md
@@ -46,5 +48,7 @@ doctor:
     check: test -f .agents/workflows/opendock-figma-ultrawork/quality-gate.md
   - id: harness-script
     check: test -f .opendock/harness/opendock__figma-ultrawork/check.mjs
+  - id: figma-run-template
+    check: test -f .opendock/templates/figma/FIGMA_RUN.md
   - id: hook
     check: test -f .agents/hooks/opendock-figma-ultrawork/hook.json

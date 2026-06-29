@@ -32,6 +32,7 @@ Use this skill when the user asks for generated creative output or resource anal
 ## Output Rules
 
 - Never leave generated assets undocumented.
+- The harness validates only outputs listed in the active run manifest; old files in `assets/generated/**` are ignored unless the current manifest references them.
 - Never fabricate tool, model, rights, or source information.
 - Use lowercase, hyphenated, extension-bearing filenames.
 - Keep temporary files out of handoff folders.

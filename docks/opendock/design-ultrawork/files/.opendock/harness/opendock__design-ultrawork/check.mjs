@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const runRoot = ".opendock/runs/design";
 const maxTextFileBytes = 1024 * 1024;
 const readFailures = [];
 const traversalFailures = [];
@@ -55,6 +56,28 @@ const textExtensions = new Set([
   ".svg",
   "",
 ]);
+const activeStatuses = new Set(["active", "review", "ready", "ready-for-review", "handoff"]);
+const inactiveStatuses = new Set(["draft", "none", "paused", "backlog"]);
+const targetExtensions = new Set([
+  ".css",
+  ".scss",
+  ".html",
+  ".js",
+  ".jsx",
+  ".ts",
+  ".tsx",
+  ".svg",
+  ".md",
+  ".mdx",
+  ".json",
+  ".yml",
+  ".yaml",
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".webp",
+  ".avif",
+]);
 
 function recordTraversalFailure(rule, file, detail) {
   if (traversalFailures.some((failure) => failure.rule === rule && failure.file === file)) return;
@@ -87,6 +110,107 @@ function walk(dir, depth = 0, state = { entries: 0, stopped: false }) {
 
 function normalizePath(file) {
   return path.relative(root, file).split(path.sep).join("/");
+}
+
+function resolve(rel) {
+  return path.join(root, rel);
+}
+
+function exists(rel) {
+  return fs.existsSync(resolve(rel));
+}
+
+function safeRelativePath(value) {
+  const trimmed = String(value).trim().replace(/^["'`]+|["'`.,)]+$/g, "");
+  if (!trimmed || trimmed.includes("://") || path.isAbsolute(trimmed)) return null;
+  const normalized = path.normalize(trimmed).split(path.sep).join("/");
+  if (normalized.startsWith("../") || normalized === "..") return null;
+  if (normalized.split("/").some((segment) => ignoredSegments.has(segment))) return null;
+  return normalized;
+}
+
+function isTargetLike(rel) {
+  return targetExtensions.has(path.extname(rel).toLowerCase());
+}
+
+function parseField(text, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = text.match(new RegExp(`^${escaped}\\s*:\\s*(.+)$`, "im"));
+  return match ? match[1].trim() : "";
+}
+
+function extractTargetPaths(text) {
+  const targets = new Set();
+  const addCandidate = (candidate) => {
+    const rel = safeRelativePath(candidate);
+    if (rel && isTargetLike(rel)) targets.add(rel);
+  };
+
+  for (const match of text.matchAll(/`([^`]+)`/g)) addCandidate(match[1]);
+  for (const line of text.split(/\r?\n/)) {
+    if (!/^\s*[-*]\s+/.test(line) && !/\b(Target|Output|Changed|File|Path)s?\b/i.test(line)) continue;
+    for (const match of line.matchAll(/[A-Za-z0-9._@+/-]+\.(?:css|scss|html|js|jsx|ts|tsx|svg|md|mdx|json|ya?ml|png|jpe?g|webp|avif)\b/gi)) {
+      addCandidate(match[0]);
+    }
+  }
+
+  return [...targets];
+}
+
+function fileMtime(rel) {
+  try {
+    return fs.statSync(resolve(rel)).mtimeMs;
+  } catch {
+    return 0;
+  }
+}
+
+function findRunDocuments() {
+  const docs = [];
+  const fullRunRoot = resolve(runRoot);
+  if (!fs.existsSync(fullRunRoot)) return docs;
+
+  for (const entry of fs.readdirSync(fullRunRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const runRel = `${runRoot}/${entry.name}`;
+    const manifestRel = `${runRel}/manifest.md`;
+    if (!exists(manifestRel)) continue;
+    const text = fs.readFileSync(resolve(manifestRel), "utf8");
+    docs.push({
+      label: runRel,
+      manifestRel,
+      manifestText: text,
+      status: parseField(text, "Status").toLowerCase(),
+      targets: extractTargetPaths(text),
+      mtime: fileMtime(manifestRel),
+    });
+  }
+
+  return docs.sort((a, b) => b.mtime - a.mtime || b.label.localeCompare(a.label));
+}
+
+function resolveTargetScope(failures) {
+  const argvTargets = process.argv.slice(2).map(safeRelativePath).filter(Boolean).filter(isTargetLike);
+  if (argvTargets.length > 0) {
+    return { label: "argv", active: true, targets: [...new Set(argvTargets)] };
+  }
+
+  const runs = findRunDocuments();
+  if (runs.length === 0) return { label: "none", active: false, targets: [] };
+
+  const activeRun = runs.find((run) => activeStatuses.has(run.status)) ?? runs.find((run) => run.targets.length > 0) ?? runs[0];
+  const active = activeStatuses.has(activeRun.status) || (!inactiveStatuses.has(activeRun.status) && activeRun.targets.length > 0);
+  if (!active && activeRun.targets.length === 0) {
+    return { label: activeRun.label, active: false, targets: [] };
+  }
+  if (activeRun.targets.length === 0) {
+    failures.push({
+      rule: "missing-target-files",
+      file: activeRun.manifestRel,
+      detail: "Active design run must list target files to validate.",
+    });
+  }
+  return { label: activeRun.label, active: true, targets: activeRun.targets };
 }
 
 function readText(file) {
@@ -377,11 +501,24 @@ function checkBrandSpecificRules(files, contract, failures) {
 
 function runDesignChecks() {
   const contract = readDesignContract();
-  const files = walk(root)
-    .map((full) => ({ full, rel: normalizePath(full), text: readText(full) }))
-    .filter((item) => item.text !== null);
   const failures = [];
+  const scope = resolveTargetScope(failures);
+  const files = scope.targets
+    .map((rel) => {
+      const full = resolve(rel);
+      if (!fs.existsSync(full)) {
+        failures.push({ rule: "missing-target-file", file: rel, detail: "Target file listed in the design run does not exist." });
+        return null;
+      }
+      return { full, rel, text: readText(full) };
+    })
+    .filter((item) => item !== null)
+    .filter((item) => item.text !== null);
   failures.push(...readFailures, ...traversalFailures);
+
+  if (!scope.active && scope.targets.length === 0) {
+    return { filesScanned: 0, failures, contract, scope };
+  }
 
   if (contract.tooLarge) {
     push(failures, "file-too-large", "DESIGN.md", `DESIGN.md exceeds ${maxTextFileBytes} bytes and was not scanned.`);
@@ -396,13 +533,14 @@ function runDesignChecks() {
   checkColorsAgainstContract(files, contract, failures);
   checkBrandSpecificRules(files, contract, failures);
 
-  return { filesScanned: files.length, failures, contract };
+  return { filesScanned: files.length, failures, contract, scope };
 }
 
 function printResult(result) {
   if (result.failures.length > 0) {
     console.error(`OpenDock harness: ${title}`);
     console.error(`Focus: ${focus}`);
+    console.error(`Scope: ${result.scope.label}`);
     console.error(`DESIGN.md: ${result.contract.exists ? "loaded" : "missing"}`);
     console.error(`Files scanned: ${result.filesScanned}`);
     console.error(`Failures: ${result.failures.length}`);
@@ -414,8 +552,10 @@ function printResult(result) {
   }
   console.log(`OpenDock harness: ${title}`);
   console.log(`Focus: ${focus}`);
+  console.log(`Scope: ${result.scope.label}`);
   console.log(`DESIGN.md: ${result.contract.exists ? "loaded" : "missing"}`);
   console.log(`Files scanned: ${result.filesScanned}`);
+  if (!result.scope.active && result.scope.targets.length === 0) console.log("No active design run detected.");
   console.log("Ultrawork passed.");
 }
 

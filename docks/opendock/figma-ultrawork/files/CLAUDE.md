@@ -6,12 +6,14 @@ This workspace uses Figma Ultrawork as an OpenDock-managed quality gate.
 
 1. Read `DESIGN.md` and treat it as the design contract.
 2. Use the official Figma MCP to inspect the node-specific Figma URL provided by the user.
-3. Apply the checklist in `HARNESS.md`.
-4. Do not ask the user for separate Figma credentials or offline design exports.
-5. Propose Figma fixes with exact node names, failing properties, expected values, and recommended changes.
-6. Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list.
-7. If edit access is not available, report exact node names, failing properties, expected values, and recommended fixes.
-8. If a failure is intentionally accepted, document the owner and reason.
+3. Create `.opendock/runs/figma/<run-id>/manifest.md` from `.opendock/templates/figma/FIGMA_RUN.md`.
+4. Record node URL, node id, MCP evidence, findings, and review notes in the run manifest.
+5. Apply the checklist in `HARNESS.md`.
+6. Do not ask the user for separate Figma credentials or offline design exports.
+7. Propose Figma fixes with exact node names, failing properties, expected values, and recommended changes.
+8. Apply fixes through Figma MCP only when the user explicitly asks for edits or approves the proposed change list.
+9. If edit access is not available, report exact node names, failing properties, expected values, and recommended fixes.
+10. If a failure is intentionally accepted, document the owner and reason.
 
 ## Focus
 

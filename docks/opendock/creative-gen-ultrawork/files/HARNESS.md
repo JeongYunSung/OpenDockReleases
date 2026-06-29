@@ -8,6 +8,7 @@ Run:
 - Current work has run docs under `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md`.
 - Active generation work declares at least one mode.
 - The active run manifest records output paths, prompt, tool, model, date, rights, review, and revision history.
+- The harness validates only outputs listed in the active run manifest. Old files in `assets/generated/**` are ignored unless this run references them.
 - Generated files use safe names, are not temporary files, and stay under size limits.
 - Image output has alt text.
 - Logo SVG output has `viewBox` and no executable SVG content.

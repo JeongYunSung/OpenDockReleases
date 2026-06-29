@@ -2,6 +2,10 @@
 
 Figma MCP quality gate for Figma nodes, accessibility, interaction states, Auto Layout, and `DESIGN.md` alignment.
 
+## Run Scope
+
+Create `.opendock/runs/figma/<run-id>/manifest.md` from `.opendock/templates/figma/FIGMA_RUN.md`. The run manifest records the current node-specific Figma URL, node id, MCP evidence, findings, and review notes. The local harness checks that run record; actual canvas inspection still happens through official Figma MCP.
+
 ## What It Checks
 
 - Reads `DESIGN.md` as the source of truth for typography, colors, layout, components, imagery, and do/don't rules.

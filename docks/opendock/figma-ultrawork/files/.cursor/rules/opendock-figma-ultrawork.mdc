@@ -6,6 +6,8 @@ alwaysApply: false
 
 Apply Figma Ultrawork before final handoff. Read `DESIGN.md` first and treat it as the design contract.
 
+- Create `.opendock/runs/figma/<run-id>/manifest.md` from `.opendock/templates/figma/FIGMA_RUN.md`.
+- Record only the current node-specific Figma URL, node id, MCP evidence, findings, and review notes in the run manifest.
 - Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
 - Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
 - Use the official Figma MCP to inspect the node-specific Figma URL provided by the user.

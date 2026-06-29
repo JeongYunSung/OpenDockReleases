@@ -9,6 +9,7 @@ When handling image, logo, favicon, video, audio, or asset-analysis work:
 2. Complete the `HARNESS.md` checklist before final handoff.
 
 Do not hand off generated assets without a manifest entry and a passing harness unless a human explicitly accepts the exception.
+The harness validates only output paths listed in the active run manifest. Old files in `assets/generated/**` are ignored unless this run references them.
 
 ## Safety Boundary
 

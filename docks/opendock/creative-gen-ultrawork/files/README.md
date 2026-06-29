@@ -25,6 +25,8 @@ This dock prepares a workspace for repeatable generation work:
 7. Update the run manifest.
 8. Complete the `HARNESS.md` checklist.
 
+Only output paths listed in the active run manifest are checked. Older generated assets can remain in `assets/generated/**` without affecting the current run.
+
 ## Loop
 
 ```text

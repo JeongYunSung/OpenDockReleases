@@ -17,6 +17,7 @@ This workspace uses Creative Generation Ultrawork for generated assets and asset
 ## Focus
 
 - Generated files must be traceable to a prompt, tool, model, date, and rights note.
+- The harness validates only output paths listed in the active run manifest. Old files in `assets/generated/**` are ignored unless this run references them.
 - Root `GENERATION_BRIEF.md` and `OUTPUT_MANIFEST.md` are legacy-compatible only. New work uses run-scoped docs.
 - Image work needs alt text and explicit dimensions or aspect ratio.
 - Logo and vector work prefers clean SVG with a `viewBox` and no executable SVG content.

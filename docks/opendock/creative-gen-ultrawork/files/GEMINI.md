@@ -10,6 +10,7 @@ Use this workspace as a loop for generated creative assets.
 6. Revise until the harness passes.
 
 Never leave generated assets undocumented.
+The harness validates only output paths listed in the active run manifest. Old files in `assets/generated/**` are ignored unless this run references them.
 
 ## Safety Boundary
 

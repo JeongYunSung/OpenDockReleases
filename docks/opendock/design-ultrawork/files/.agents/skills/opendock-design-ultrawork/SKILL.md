@@ -18,6 +18,8 @@ Read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's desig
 ## Checklist
 
 - Typography, colors, layout, components, imagery, and do/don't rules must follow `DESIGN.md`.
+- Create `.opendock/runs/design/<run-id>/manifest.md` from `.opendock/templates/design/DESIGN_RUN.md` and list only the current task's target files.
+- The harness validates only explicit target files from argv or the active design run manifest; it must not scan the whole project by default.
 - Before building UI, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
 - StyleSeed coherence must hold after implementation: one accent, one radius personality, one shadow language, one icon set, semantic tokens over hardcoded hex, visible focus rings, and touch targets at least 44px.
 - Fractional values and negative tracking are allowed only when `DESIGN.md` explicitly documents them.
@@ -32,6 +34,12 @@ Read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's desig
 
 ```bash
 node .opendock/harness/opendock__design-ultrawork/check.mjs
+```
+
+You may also pass target files directly:
+
+```bash
+node .opendock/harness/opendock__design-ultrawork/check.mjs src/App.tsx src/styles/app.css
 ```
 
 ## Safety Boundary

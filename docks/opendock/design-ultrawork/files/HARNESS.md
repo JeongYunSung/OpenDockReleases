@@ -5,6 +5,9 @@ Design and UI quality gate for visual polish, accessibility, responsive layout, 
 ## Required Review
 
 - Read `DESIGN.md` first. Treat it as the design contract for typography, color, layout, components, imagery, and do/don't rules.
+- Create `.opendock/runs/design/<run-id>/manifest.md` from `.opendock/templates/design/DESIGN_RUN.md`.
+- List only the files created or changed for the current design task under `Target Files`.
+- The harness validates only explicit target files from argv or the active design run manifest. It does not scan the whole project by default.
 - For UI work, read https://styleseed-demo.vercel.app/llms-full.txt and apply StyleSeed's design rules as an additive coherence layer.
 - Before building UI, lock or update `STYLESEED.md` with the user: app type, key color/accent, radius personality, shadow language, motion style, type direction, and density.
 - Self-check StyleSeed coherence after implementation: one accent, one radius personality, one shadow language, one icon set, no random decorative colors, no pure black, and no emoji-as-icons.
