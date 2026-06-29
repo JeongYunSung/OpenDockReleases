@@ -1,38 +1,38 @@
 # Creative Generation Ultrawork
 
-This dock prepares a workspace for repeatable generation work:
+이 dock은 반복 가능한 생성 작업을 위한 workspace를 준비합니다.
 
-- image generation
-- logo generation
-- favicon generation
-- video generation
-- audio generation
-- asset and resource analysis
+- 이미지 생성
+- 로고 생성
+- 파비콘 생성
+- 영상 생성
+- 음성 생성
+- asset 및 resource 분석
 
-## Quick Start
+## 빠른 시작
 
-1. Create a run folder: `.opendock/runs/creative-gen/<run-id>/`.
-2. Copy `.opendock/templates/creative-gen/GENERATION_BRIEF.md` to `brief.md`.
-3. Copy `.opendock/templates/creative-gen/OUTPUT_MANIFEST.md` to `manifest.md`.
-4. Set `Status` to `active` and choose one or more modes in the run brief.
-5. Generate or analyze the asset.
-6. Put outputs in the expected folder:
+1. run 폴더를 만듭니다: `.opendock/runs/creative-gen/<run-id>/`.
+2. `.opendock/templates/creative-gen/GENERATION_BRIEF.md`를 `brief.md`로 복사합니다.
+3. `.opendock/templates/creative-gen/OUTPUT_MANIFEST.md`를 `manifest.md`로 복사합니다.
+4. run brief의 `Status`를 `active`로 바꾸고 하나 이상의 mode를 선택합니다.
+5. asset을 생성하거나 분석합니다.
+6. 결과물을 정해진 폴더에 넣습니다.
    - `assets/generated/images/`
    - `assets/generated/logos/`
    - `assets/generated/favicons/`
    - `assets/generated/videos/`
    - `assets/generated/audio/`
-7. Update the run manifest.
-8. Complete the `HARNESS.md` checklist.
+7. run manifest를 업데이트합니다.
+8. `HARNESS.md` 체크리스트를 완료합니다.
 
-Only output paths listed in the active run manifest are checked. Older generated assets can remain in `assets/generated/**` without affecting the current run.
+active run manifest에 적힌 output path만 검사합니다. 예전에 만든 asset이 `assets/generated/**`에 남아 있어도 현재 run에는 영향을 주지 않습니다.
 
-## Loop
+## 작업 루프
 
 ```text
 brief -> generate -> record -> check -> revise -> handoff
 ```
 
-If the harness fails, fix the output or the manifest, then repeat the check.
+harness가 실패하면 결과물이나 manifest를 고친 뒤 다시 검사합니다.
 
-The templates are OpenDock-managed. The run docs are project work products and are safe to edit for each generated asset.
+template은 OpenDock이 관리합니다. run 문서는 프로젝트 작업 산출물이므로 생성 작업마다 자유롭게 수정해도 됩니다.
