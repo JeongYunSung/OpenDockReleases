@@ -1,16 +1,16 @@
 ---
-description: Docs Ultrawork quality gate
+description: Docs Ultrawork 품질 게이트
 globs: **/*
 alwaysApply: false
 ---
 
 Apply Docs Ultrawork before final handoff.
 
-- Markdown code fences should declare a language.
-- OpenDock install examples must include @version.
-- Registry URLs must point to registry.opendock.app for API/registry work.
-- README quick starts should be followable in under five minutes.
-- Old package names and stale versions must be removed.
-- Multilingual docs must stay structurally aligned.
+- Markdown code fence에는 language를 명시해야 합니다.
+- OpenDock install 예시에는 `@version`이 포함되어야 합니다.
+- API/registry 작업의 registry URL은 `registry.opendock.app`을 가리켜야 합니다.
+- README quick start는 5분 안에 따라 할 수 있어야 합니다.
+- 오래된 package name과 stale version 문구는 제거해야 합니다.
+- 다국어 문서는 구조가 서로 맞아야 합니다.
 
 Run `node .opendock/harness/opendock__docs-ultrawork/check.mjs` when possible.

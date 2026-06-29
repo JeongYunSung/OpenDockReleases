@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/data-ultrawork
-summary: Data quality gate for SQL safety, destructive queries, timezone clarity, metric definitions, PII masking, and dashboard cost.
+summary: SQL 안전성, 파괴적 쿼리, timezone 명시, metric 정의, PII masking, dashboard 비용을 점검하는 데이터 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

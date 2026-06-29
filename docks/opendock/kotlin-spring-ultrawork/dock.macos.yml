@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/kotlin-spring-ultrawork
-summary: Kotlin/Spring Boot quality gate for Gradle, ktlint, detekt, DTO validation, profiles, transactions, and readiness.
+summary: Gradle, ktlint, detekt, DTO validation, profile, transaction, readiness를 점검하는 Kotlin/Spring Boot 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

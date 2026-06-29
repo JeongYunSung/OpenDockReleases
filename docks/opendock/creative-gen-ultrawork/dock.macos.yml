@@ -1,12 +1,14 @@
 opendock: 1
 id: opendock/creative-gen-ultrawork
-summary: Creative generation loop for image, logo, favicon, video, audio, and asset analysis deliverables.
+summary: 이미지, 벡터, 로고, 파비콘, 영상, 음성, asset 분석 산출물을 관리하는 생성 품질 루프.
 readme: DOCK.md
 logo: logo.png
 tags:
   - ultrawork
   - generation
   - image
+  - vector
+  - svg
   - logo
   - favicon
   - video

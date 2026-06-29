@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/docs-ultrawork
-summary: Documentation quality gate for markdown hygiene, links, headings, code fences, quick starts, CLI drift, and multilingual sync.
+summary: Markdown hygiene, link, heading, code fence, quick start, CLI drift, 다국어 sync를 점검하는 문서 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

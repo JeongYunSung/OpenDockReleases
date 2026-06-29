@@ -1,5 +1,5 @@
 ---
-description: Creative generation quality gate
+description: Creative Generation 품질 게이트
 globs:
   - "**/*"
 alwaysApply: false
@@ -13,4 +13,6 @@ Before handoff, create run-scoped docs under `.opendock/runs/creative-gen/<run-i
 node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
 ```
 
-Draft and review the final generation prompt before creating assets. Do not hand-draw image-like assets as SVG/HTML/CSS placeholders unless the user explicitly asks for vector/source artwork.
+Draft and review the final generation prompt before creating assets. 사용자가 vector/source artwork를 명시적으로 요청하지 않았다면 image-like asset을 SVG/HTML/CSS placeholder로 직접 그리지 않습니다.
+
+If SVG/source vector output is explicitly requested, use `Mode: vector`, save under `assets/generated/vectors/`, and document vector request, structure, accessibility, palette, and safety notes in the manifest. Avoid primitive placeholders and unstructured shape-plaster SVG.

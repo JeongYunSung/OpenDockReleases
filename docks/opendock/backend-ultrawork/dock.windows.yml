@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/backend-ultrawork
-summary: Backend quality gate for API contracts, validation, authentication, migrations, logging, and service safety.
+summary: API 계약, 검증, 인증, 마이그레이션, 로깅, 서비스 안전성을 점검하는 백엔드 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

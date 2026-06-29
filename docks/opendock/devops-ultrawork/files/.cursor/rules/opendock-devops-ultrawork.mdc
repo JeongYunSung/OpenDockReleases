@@ -1,16 +1,16 @@
 ---
-description: DevOps Ultrawork quality gate
+description: DevOps Ultrawork 품질 게이트
 globs: **/*
 alwaysApply: false
 ---
 
 Apply DevOps Ultrawork before final handoff.
 
-- Terraform must be fmt-checked and validated.
-- Helm and Kubernetes manifests need lint/schema validation.
-- Secret scan is mandatory before handoff.
-- Public buckets, public security groups, and privileged containers require review.
-- Image tags must not use latest.
-- Rollback and runbook docs should exist for deployable changes.
+- Terraform은 fmt check와 validate를 거쳐야 합니다.
+- Helm과 Kubernetes manifest에는 lint/schema validation이 필요합니다.
+- Handoff 전 secret scan은 필수입니다.
+- Public bucket, public security group, privileged container는 review가 필요합니다.
+- Image tag에는 `latest`를 사용하면 안 됩니다.
+- 배포 가능한 변경에는 rollback과 runbook 문서가 있어야 합니다.
 
 Run `node .opendock/harness/opendock__devops-ultrawork/check.mjs` when possible.

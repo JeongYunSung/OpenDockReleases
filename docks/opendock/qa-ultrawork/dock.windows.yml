@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/qa-ultrawork
-summary: QA quality gate for regression coverage, smoke tests, security checks, release confidence, and final handoff discipline.
+summary: 회귀 범위, smoke test, security check, release confidence, 최종 handoff discipline을 점검하는 QA 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

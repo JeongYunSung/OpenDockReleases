@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/devops-ultrawork
-summary: DevOps quality gate for Terraform, Kubernetes, Helm, secrets, public exposure, image tags, resource limits, and runbooks.
+summary: Terraform, Kubernetes, Helm, secret, public exposure, image tag, resource limit, runbook을 점검하는 DevOps 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/business-ultrawork
-summary: Business quality gate for PRDs, user stories, GTM, ICP, pricing, marketing claims, evidence, and release notes.
+summary: PRD, 사용자 스토리, GTM, ICP, 가격, 마케팅 주장, 근거, 릴리스 노트를 점검하는 비즈니스 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

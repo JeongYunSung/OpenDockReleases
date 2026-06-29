@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/frontend-ultrawork
-summary: Frontend quality gate for React, TypeScript, accessibility, route smoke checks, and build readiness.
+summary: React, TypeScript, 접근성, route smoke check, build readiness를 점검하는 프론트엔드 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/design-ultrawork
-summary: Design implementation quality gate aligned to DESIGN.md plus hard UI checks.
+summary: DESIGN.md 기준과 강한 UI 체크에 맞춰 디자인 구현 품질을 점검하는 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,6 +1,6 @@
 opendock: 1
 id: opendock/mobile-ultrawork
-summary: Mobile quality gate for Flutter, React Native, Swift, Android, permissions, accessibility, release readiness, and runtime safety.
+summary: Flutter, React Native, Swift, Android, 권한, 접근성, release readiness, runtime safety를 점검하는 모바일 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:

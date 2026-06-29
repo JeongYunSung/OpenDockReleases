@@ -1,16 +1,16 @@
 ---
-description: Frontend Ultrawork quality gate
+description: Frontend Ultrawork 품질 게이트
 globs: **/*
 alwaysApply: false
 ---
 
 Apply Frontend Ultrawork before final handoff.
 
-- Formatter, lint, typecheck, test, and build scripts must exist when package.json exists.
-- No console.log, debugger, broad any usage, or href="#" placeholders.
-- Images need alt text, form controls need labels, and buttons need explicit type.
-- API flows need loading and error states.
-- Route or page smoke tests should exist for user-visible surfaces.
-- Bundle growth and unnecessary duplicate dependencies require review.
+- `package.json`이 있으면 formatter, lint, typecheck, test, build script가 있어야 합니다.
+- `console.log`, `debugger`, broad `any`, `href="#"` placeholder를 남기면 안 됩니다.
+- Image에는 alt text, form control에는 label, button에는 explicit type이 필요합니다.
+- API flow에는 loading/error state가 필요합니다.
+- 사용자가 보는 route 또는 page에는 smoke test가 있어야 합니다.
+- Bundle 증가와 불필요한 duplicate dependency는 review가 필요합니다.
 
 Run `node .opendock/harness/opendock__frontend-ultrawork/check.mjs` when possible.
