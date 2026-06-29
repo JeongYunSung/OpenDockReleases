@@ -1,6 +1,8 @@
 # Creative Generation Ultrawork Quality Gate
 
-Create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from `.opendock/templates/creative-gen/`, generate or analyze the asset, update the run manifest, run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`, and revise until the harness passes.
+Create `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md` from `.opendock/templates/creative-gen/`, draft and review the generation prompt first, generate or analyze the asset with the final prompt, update the run manifest, run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`, and revise until the harness passes.
+
+Do not hand-draw image-like assets as SVG/HTML/CSS placeholders unless the user explicitly asks for vector/source artwork.
 
 Report the final output paths and any accepted exceptions.
 

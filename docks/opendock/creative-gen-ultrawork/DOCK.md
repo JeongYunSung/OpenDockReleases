@@ -1,10 +1,11 @@
 # Creative Generation Ultrawork
 
-이미지, 로고, 파비콘, 영상, 음성, asset 분석 작업을 반복 가능하게 만드는 skill, workflow, harness 루프입니다.
+이미지, 로고, 파비콘, 영상, 음성, asset 분석 작업을 반복 가능하게 만드는 prompt-first skill, workflow, harness 루프입니다.
 
 ## 제공하는 것
 
 - 막연한 요청을 검토 가능한 output requirement로 바꾸는 managed template을 제공합니다.
+- 바로 만들지 않고, 먼저 고품질 생성 프롬프트를 설계하고 검토한 뒤 그 프롬프트로 생성하도록 유도합니다.
 - 생성 asset마다 run-scoped brief와 manifest를 남기는 workflow를 제공합니다.
 - Codex, Claude Code, Gemini, Cursor용 agent 지침을 제공합니다.
 - create, document, check, revise를 반복하는 workflow를 제공합니다.
@@ -24,3 +25,5 @@
 새 생성 작업은 설치된 template을 바탕으로 `.opendock/runs/creative-gen/<run-id>/brief.md`와 `manifest.md`를 만들어야 합니다. root의 `GENERATION_BRIEF.md`, `OUTPUT_MANIFEST.md`는 기존 프로젝트 호환용입니다.
 
 harness는 active run manifest에 적힌 output path만 검사합니다. 이전에 생성된 asset은 현재 run이 참조하지 않는 한 무시됩니다.
+
+이미지 mode에서는 손으로 SVG/HTML/CSS 도형을 그린 placeholder를 결과물로 인정하지 않습니다. 먼저 최종 생성 프롬프트를 만든 뒤 image generation/editing model에 다시 요청하는 흐름을 기본값으로 사용합니다.

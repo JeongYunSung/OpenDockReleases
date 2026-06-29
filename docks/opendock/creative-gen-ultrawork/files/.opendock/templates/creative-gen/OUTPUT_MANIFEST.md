@@ -6,7 +6,19 @@ List every output path created for this task.
 
 ## Prompt
 
-Record the exact prompt or source instruction used to create the asset.
+Record the exact source request.
+
+## Prompt Draft
+
+Record the first usable prompt draft before generation.
+
+## Prompt Review
+
+Record what was strengthened before generation: subject, style, composition, lighting, camera/framing, constraints, negative prompt, and quality criteria.
+
+## Final Prompt
+
+Record the final prompt sent to the generator.
 
 ## Tool
 

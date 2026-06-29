@@ -2,15 +2,21 @@
 
 Run:
 
+```bash
+node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
+```
+
 ## What It Checks
 
 - Managed templates exist under `.opendock/templates/creative-gen/`.
 - Current work has run docs under `.opendock/runs/creative-gen/<run-id>/brief.md` and `manifest.md`.
 - Active generation work declares at least one mode.
-- The active run manifest records output paths, prompt, tool, model, date, rights, review, and revision history.
+- The active run brief includes a `Prompt Plan`.
+- The active run manifest records output paths, prompt draft, prompt review, final prompt, tool, model, date, rights, review, and revision history.
 - The harness validates only outputs listed in the active run manifest. Old files in `assets/generated/**` are ignored unless this run references them.
 - Generated files use safe names, are not temporary files, and stay under size limits.
-- Image output has alt text.
+- Image output has alt text and is raster by default.
+- Image mode does not accept hand-drawn SVG/HTML/CSS placeholder output. Use an image generation/editing model unless the user explicitly asks for vector/source artwork.
 - Logo SVG output has `viewBox` and no executable SVG content.
 - Favicon output includes a favicon and installable icon metadata.
 - Video output includes script/storyboard and captions or a documented exception.
@@ -26,6 +32,12 @@ The harness passes when the current work is either:
 - active and fully documented with valid outputs.
 
 Root `GENERATION_BRIEF.md` and `OUTPUT_MANIFEST.md` are accepted only for legacy projects. New work should use run-scoped docs so OpenDock updates do not overwrite task state.
+
+The intended creative loop is:
+
+```text
+brief -> prompt draft -> prompt review -> final prompt -> generate -> record -> check -> revise -> handoff
+```
 
 ## Safety Boundary
 

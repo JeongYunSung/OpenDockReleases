@@ -4,12 +4,17 @@
 2. Copy `.opendock/templates/creative-gen/GENERATION_BRIEF.md` to `brief.md`.
 3. Copy `.opendock/templates/creative-gen/OUTPUT_MANIFEST.md` to `manifest.md`.
 4. Set `Status` and `Mode` for the current task in the run brief.
-5. Generate or analyze the requested asset.
-6. Save outputs in a stable path under `assets/generated/` unless the brief requires another path.
-7. Update the run manifest with output paths, prompt, tool, model, date, rights, review, and revision history.
-8. Run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
-9. If the harness fails, revise the asset or manifest and run it again.
-10. Report passed checks, remaining exceptions, and exact output paths.
+5. Fill `Prompt Plan` in the run brief.
+6. Draft the generation prompt before creating the asset.
+7. Review and strengthen the prompt for subject clarity, style, composition, constraints, negative prompt, and quality criteria.
+8. Send the final prompt to the appropriate generation/editing model.
+9. Save outputs in a stable path under `assets/generated/` unless the brief requires another path.
+10. Update the run manifest with output paths, prompt draft, prompt review, final prompt, tool, model, date, rights, review, and revision history.
+11. Run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+12. If the harness fails, revise the asset or manifest and run it again.
+13. Report passed checks, remaining exceptions, and exact output paths.
+
+Do not hand-draw image-like assets as SVG/HTML/CSS placeholders unless the user explicitly asks for vector/source artwork.
 
 ## Safety Boundary
 

@@ -1,6 +1,6 @@
 ---
 name: opendock-creative-gen-ultrawork
-description: Use when generating or analyzing images, logos, favicons, videos, audio, or reusable asset files.
+description: Use when generating or analyzing images, logos, favicons, videos, audio, or reusable asset files with a prompt-first generation loop.
 ---
 
 # Creative Generation Ultrawork
@@ -14,16 +14,19 @@ Use this skill when the user asks for generated creative output or resource anal
 3. Copy `.opendock/templates/creative-gen/OUTPUT_MANIFEST.md` to `manifest.md`.
 4. If the request is vague, infer the smallest useful scope and record it in the run brief.
 5. Set `Status: active` and set `Mode` to one or more supported modes.
-6. Generate or analyze the asset.
-7. Save outputs in the expected folder.
-8. Update the run manifest.
-9. Run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
-10. Fix failures and rerun until the harness passes.
+6. Write a prompt draft before generating any asset.
+7. Review and strengthen the prompt: subject, style, composition, lighting/camera/framing when visual, constraints, negative prompt, output format, and quality bar.
+8. Record the final prompt in `manifest.md`.
+9. Send the final prompt to the appropriate generation/editing model.
+10. Save outputs in the expected folder.
+11. Update the run manifest.
+12. Run `node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs`.
+13. Fix failures and rerun until the harness passes.
 
 ## Supported Modes
 
-- `image`: raster or SVG image output, with alt text and output specs.
-- `logo`: brand mark, wordmark, or lockup, preferably SVG with `viewBox`.
+- `image`: raster image output with alt text and output specs.
+- `logo`: brand mark, wordmark, or lockup, usually generated from a prompt; final vector/source artwork may use SVG with `viewBox`.
 - `favicon`: favicon.ico, PNG app icons, and web manifest metadata.
 - `video`: video file with script or storyboard and captions.
 - `audio`: voice, music, or sound output with transcript and rights note.
@@ -32,6 +35,7 @@ Use this skill when the user asks for generated creative output or resource anal
 ## Output Rules
 
 - Never leave generated assets undocumented.
+- Never hand-draw image-like assets as SVG, HTML, CSS, or basic geometric placeholders when the user asked for generated imagery. Build the prompt first and use an image generation/editing model.
 - The harness validates only outputs listed in the active run manifest; old files in `assets/generated/**` are ignored unless the current manifest references them.
 - Never fabricate tool, model, rights, or source information.
 - Use lowercase, hyphenated, extension-bearing filenames.

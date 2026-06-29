@@ -5,10 +5,12 @@ globs:
 alwaysApply: false
 ---
 
-Use Creative Generation Ultrawork for image, logo, favicon, video, audio, and asset-analysis work.
+Use Creative Generation Ultrawork for prompt-first image, logo, favicon, video, audio, and asset-analysis work.
 
 Before handoff, create run-scoped docs under `.opendock/runs/creative-gen/<run-id>/` from `.opendock/templates/creative-gen/`, update the run `brief.md` and `manifest.md`, and run:
 
 ```bash
 node .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
 ```
+
+Draft and review the final generation prompt before creating assets. Do not hand-draw image-like assets as SVG/HTML/CSS placeholders unless the user explicitly asks for vector/source artwork.

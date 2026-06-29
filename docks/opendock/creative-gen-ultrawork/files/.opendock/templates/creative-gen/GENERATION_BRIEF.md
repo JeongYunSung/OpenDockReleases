@@ -24,6 +24,15 @@ Allowed values: image, logo, favicon, video, audio, asset-analysis.
 - Must include:
 - Must avoid:
 
+## Prompt Plan
+
+- Prompt objective:
+- Final generation prompt:
+- Negative prompt or avoid list:
+- Quality bar:
+- Planned generator or model:
+- If the output is visual, use an image generation/editing model. Do not hand-draw a placeholder with SVG, HTML, CSS, or basic shapes unless the user explicitly asks for vector/source artwork.
+
 ## Output Requirements
 
 - Target path:

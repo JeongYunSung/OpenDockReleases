@@ -35,7 +35,7 @@ const sizeLimits = {
 const modeSpecs = {
   image: {
     dirs: ["assets/generated/images"],
-    exts: [".png", ".jpg", ".jpeg", ".webp", ".avif", ".svg"]
+    exts: [".png", ".jpg", ".jpeg", ".webp", ".avif"]
   },
   logo: {
     dirs: ["assets/generated/logos"],
@@ -64,6 +64,9 @@ const requiredManagedDocs = [
 const manifestSections = [
   "Generated Outputs",
   "Prompt",
+  "Prompt Draft",
+  "Prompt Review",
+  "Final Prompt",
   "Tool",
   "Model",
   "Date",
@@ -274,6 +277,10 @@ function failIfMissingOutput(mode, files, failures, manifestRel) {
   }
 }
 
+function outputPathsMatching(outputPaths, pattern) {
+  return [...outputPaths].filter((value) => pattern.test(value));
+}
+
 function findRunDocuments() {
   const docs = [];
 
@@ -347,6 +354,14 @@ function validateMode(mode, manifestText, outputPaths, failures, run) {
   }
 
   if (mode === "image") {
+    const svgImageOutputs = outputPathsMatching(outputPaths, /^assets\/generated\/images\/.+\.svg$/i);
+    for (const rel of svgImageOutputs) {
+      failures.push({
+        rule: "image-svg-placeholder",
+        file: rel,
+        detail: "Image mode requires raster generation output. Do not hand-draw images as SVG/HTML/CSS placeholders unless the user explicitly requested source vector artwork.",
+      });
+    }
     if (!exists("ALT_TEXT.md") && !includesAny(manifestText, ["alt text", "alternative text"])) {
       failures.push({ rule: "missing-alt-text", file: run.manifestRel, detail: "Image output needs alt text in ALT_TEXT.md or the active run manifest." });
     }
@@ -451,6 +466,10 @@ function run() {
     if (!hasHeading(activeRun.briefText, section)) failures.push({ rule: "brief-section", file: activeRun.briefRel, detail: `Missing brief section: ${section}` });
   }
 
+  if (!hasHeading(activeRun.briefText, "Prompt Plan")) {
+    failures.push({ rule: "brief-section", file: activeRun.briefRel, detail: "Missing brief section: Prompt Plan" });
+  }
+
   for (const section of manifestSections) {
     if (!hasHeading(activeRun.manifestText, section)) failures.push({ rule: "manifest-section", file: activeRun.manifestRel, detail: `Missing manifest section: ${section}` });
   }
@@ -471,7 +490,7 @@ function run() {
   }
 
   if (isActive || activeHasGeneratedOutput) {
-    for (const field of ["prompt", "tool", "model", "date", "rights", "review"]) {
+    for (const field of ["prompt", "prompt draft", "prompt review", "final prompt", "tool", "model", "date", "rights", "review"]) {
       if (!includesAny(activeRun.manifestText, [field])) failures.push({ rule: "manifest-field", file: activeRun.manifestRel, detail: `Manifest must mention ${field}.` });
     }
     for (const mode of modes) validateMode(mode, activeRun.manifestText, outputPaths, failures, activeRun);
