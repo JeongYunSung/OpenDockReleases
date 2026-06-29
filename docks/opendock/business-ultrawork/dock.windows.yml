@@ -38,12 +38,12 @@ files:
     to: .agents/hooks/opendock-business-ultrawork/hook.json
 doctor:
   - id: harness-doc
-    check: "node -e \"process.exit(require('node:fs').existsSync('HARNESS.md') ? 0 : 1)\""
+    check: test -f HARNESS.md
   - id: harness-script
-    check: "node -e \"process.exit(require('node:fs').existsSync('.opendock/harness/opendock__business-ultrawork/check.mjs') ? 0 : 1)\""
+    check: test -f .opendock/harness/opendock__business-ultrawork/check.mjs
   - id: skill
-    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/skills/opendock-business-ultrawork/SKILL.md') ? 0 : 1)\""
+    check: test -f .agents/skills/opendock-business-ultrawork/SKILL.md
   - id: workflow
-    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/workflows/opendock-business-ultrawork/quality-gate.md') ? 0 : 1)\""
+    check: test -f .agents/workflows/opendock-business-ultrawork/quality-gate.md
   - id: hook
-    check: "node -e \"process.exit(require('node:fs').existsSync('.agents/hooks/opendock-business-ultrawork/hook.json') ? 0 : 1)\""
+    check: test -f .agents/hooks/opendock-business-ultrawork/hook.json
