@@ -146,8 +146,16 @@ function extractTargetPaths(text) {
     if (rel && isTargetLike(rel)) targets.add(rel);
   };
 
-  for (const match of text.matchAll(/`([^`]+)`/g)) addCandidate(match[1]);
-  for (const line of text.split(/\r?\n/)) {
+  const lines = text.split(/\r?\n/);
+  let inTargetFiles = false;
+  for (const line of lines) {
+    if (/^#{1,6}\s+Target Files\s*$/i.test(line.trim())) {
+      inTargetFiles = true;
+      continue;
+    }
+    if (inTargetFiles && /^#{1,6}\s+/.test(line.trim())) break;
+    if (!inTargetFiles) continue;
+    for (const match of line.matchAll(/`([^`]+)`/g)) addCandidate(match[1]);
     if (!/^\s*[-*]\s+/.test(line) && !/\b(Target|Output|Changed|File|Path)s?\b/i.test(line)) continue;
     for (const match of line.matchAll(/[A-Za-z0-9._@+/-]+\.(?:css|scss|html|js|jsx|ts|tsx|svg|md|mdx|json|ya?ml|png|jpe?g|webp|avif)\b/gi)) {
       addCandidate(match[0]);
