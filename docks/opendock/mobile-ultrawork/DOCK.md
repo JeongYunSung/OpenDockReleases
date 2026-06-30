@@ -8,6 +8,8 @@ Flutter, React Native, Swift, Android, permission, 접근성, release readiness,
 - Dart `print`와 debug-only code가 남아 있으면 안 됩니다.
 - 화면에는 loading, empty, error, offline state가 필요합니다.
 - tap target과 accessibility label을 검토해야 합니다.
+- VoiceOver/TalkBack에서 읽히는 순서와 이름을 확인하고, icon-only action에는 label/tooltip/semanticLabel을 둡니다.
+- 사용자 font scaling, dynamic type, reduced motion을 임의로 끄지 않습니다.
 - release checklist에는 signing, versioning, rollback이 포함되어야 합니다.
 - network와 async failure는 명시적으로 처리해야 합니다.
 

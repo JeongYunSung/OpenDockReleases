@@ -408,6 +408,48 @@ function checkCommonTextRules(files, failures) {
   }
 }
 
+function checkAccessibilityRules(files, failures) {
+  for (const file of files) {
+    if (!/\.(css|scss|tsx|jsx|html|svg)$/.test(file.rel)) continue;
+    const text = file.text;
+
+    if (/<img\b(?![^>]*\balt=)/i.test(text)) {
+      push(failures, "image-without-alt", file.rel, "Images need alt text or an explicit empty alt for decorative images.");
+    }
+    if (/<(?:input|select|textarea)\b(?![^>]*(aria-label|aria-labelledby|id=|name=))/i.test(text)) {
+      push(failures, "form-control-without-name", file.rel, "Form controls need a label or accessible name.");
+    }
+    if (/<button\b(?![^>]*(aria-label|aria-labelledby|title=))[^>]*>\s*(?:<svg\b|<img\b|<Icon\b)[\s\S]{0,240}?<\/button>/i.test(text)) {
+      push(failures, "icon-button-without-name", file.rel, "Icon-only buttons need an accessible name.");
+    }
+    if (/<button\b[\s\S]{0,500}<a\b/i.test(text) || /<a\b[\s\S]{0,500}<button\b/i.test(text)) {
+      push(failures, "nested-interactive-control", file.rel, "Do not nest links and buttons inside each other.");
+    }
+    if (/<(?:div|span)\b(?=[^>]*\bonClick=)(?![^>]*(role=|tabIndex=|tabindex=|onKeyDown=|onKeyUp=|onKeyPress=))/i.test(text)) {
+      push(failures, "nonsemantic-click-target", file.rel, "Clickable div/span needs semantic element or keyboard and role support.");
+    }
+    if (/\btabIndex=\{?[1-9]\d*\}?|\btabindex=["']?[1-9]\d*/i.test(text)) {
+      push(failures, "positive-tabindex", file.rel, "Positive tab index creates unpredictable keyboard order.");
+    }
+    const hasHover = /:hover\b|\bhover:/i.test(text);
+    const hasFocus = /:focus\b|focus-visible|focus:|\bfocus-visible:/i.test(text);
+    if (hasHover && !hasFocus) {
+      push(failures, "hover-without-focus", file.rel, "Hover styles need matching focus/focus-visible treatment.");
+    }
+    const hasInteractive =
+      /<button\b|<a\b|<input\b|<select\b|<textarea\b|onClick=|\brole=["'](?:button|link|tab|switch|checkbox)["']/i.test(text);
+    if (hasInteractive && !hasFocus) {
+      push(failures, "interactive-without-focus-state", file.rel, "Interactive UI needs a visible focus state.");
+    }
+    if (/prefers-reduced-motion/.test(text) === false && /\b(animate-|animation:|transition:|motion\.|framer-motion)\b/i.test(text)) {
+      push(failures, "motion-without-reduced-motion", file.rel, "Motion-heavy UI should include a reduced-motion path.");
+    }
+    if (/\b(error|invalid|required)\b/i.test(text) && !/(aria-invalid|aria-describedby|role=["']alert["']|aria-live)/i.test(text)) {
+      push(failures, "error-state-without-a11y", file.rel, "Error states need aria-invalid, aria-describedby, role=alert, or aria-live support.");
+    }
+  }
+}
+
 function checkLengthsAgainstContract(files, contract, failures) {
   const propertyGroups = [
     { rule: "font-size-contract", property: "font-size", message: "Font-size must be declared in DESIGN.md." },
@@ -529,6 +571,7 @@ function runDesignChecks() {
   }
 
   checkCommonTextRules(files, failures);
+  checkAccessibilityRules(files, failures);
   checkLengthsAgainstContract(files, contract, failures);
   checkColorsAgainstContract(files, contract, failures);
   checkBrandSpecificRules(files, contract, failures);

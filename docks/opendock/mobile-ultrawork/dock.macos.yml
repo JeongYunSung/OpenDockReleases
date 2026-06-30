@@ -9,6 +9,7 @@ tags:
   - flutter
   - ios
   - android
+  - accessibility
 files:
   - from: files/AGENTS.md
     to: AGENTS.md

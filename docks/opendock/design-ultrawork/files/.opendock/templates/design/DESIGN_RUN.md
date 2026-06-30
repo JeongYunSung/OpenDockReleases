@@ -24,7 +24,7 @@ List only the files created or changed for this design task.
 - Radius:
 - Interaction states:
 - Responsive behavior:
-- Accessibility:
+- Accessibility: contrast, focus, touch target, labels/alt, reduced motion
 
 ## Exceptions
 

@@ -1,7 +1,7 @@
 # Frontend Ultrawork Quality Gate
 
 1. Read `HARNESS.md`.
-2. Review the changed files against the checklist.
+2. Review the changed files against the checklist, including semantic HTML, accessible names, keyboard path, and role/name test coverage.
 3. Run `node .opendock/harness/opendock__frontend-ultrawork/check.mjs`.
 4. Fix failures or document an explicit human-approved exception.
 5. Report what passed, what failed, and what was not tested.

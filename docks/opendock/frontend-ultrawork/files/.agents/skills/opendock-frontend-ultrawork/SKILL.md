@@ -12,6 +12,9 @@ OpenDock이 관리하는 harness를 실행하고 최종 handoff 전에 checklist
 - `package.json`이 있으면 formatter, lint, typecheck, test, build script가 있어야 합니다.
 - `console.log`, `debugger`, broad `any`, `href="#"` placeholder를 남기면 안 됩니다.
 - Image에는 alt text, form control에는 label, button에는 explicit type이 필요합니다.
+- Button/link 중첩, clickable div/span, positive tabIndex, focusable aria-hidden element는 blocker입니다.
+- Icon-only action, select, textarea에는 accessible name이 필요합니다.
+- 사용자 플로우 테스트는 가능하면 `getByRole` 또는 role/name 기준으로 작성합니다.
 - API flow에는 loading/error state가 필요합니다.
 - 사용자가 보는 route 또는 page에는 smoke test가 있어야 합니다.
 - Bundle 증가와 불필요한 duplicate dependency는 review가 필요합니다.

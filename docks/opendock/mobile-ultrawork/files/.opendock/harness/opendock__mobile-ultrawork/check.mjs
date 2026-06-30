@@ -88,6 +88,58 @@ const config = {
       "message": "Mobile screens need loading, empty, error, and offline states."
     },
     {
+      "id": "rn-touchable-without-accessible-name",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx"
+      ],
+      "pattern": "<(Pressable|TouchableOpacity|TouchableHighlight|TouchableWithoutFeedback)\\b(?![^>]*(accessibilityLabel|aria-label|accessibilityRole|accessible=))",
+      "message": "React Native touch targets need an accessible name or role."
+    },
+    {
+      "id": "rn-image-without-accessible-name",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx"
+      ],
+      "pattern": "<Image\\b(?![^>]*(accessibilityLabel|alt=|aria-label|accessible=\\{false\\}|accessibilityIgnoresInvertColors))",
+      "message": "React Native images need accessibilityLabel/alt or an explicit decorative exception."
+    },
+    {
+      "id": "flutter-iconbutton-without-tooltip",
+      "globs": [
+        "**/*.dart"
+      ],
+      "pattern": "IconButton\\((?![\\s\\S]{0,260}(tooltip:|semanticLabel:))",
+      "message": "Flutter IconButton needs tooltip or semanticLabel."
+    },
+    {
+      "id": "flutter-image-without-semantics",
+      "globs": [
+        "**/*.dart"
+      ],
+      "pattern": "Image\\.(asset|network|file|memory)\\((?![\\s\\S]{0,260}(semanticLabel:|excludeFromSemantics:\\s*true))",
+      "message": "Flutter images need semanticLabel or explicit decorative exclusion."
+    },
+    {
+      "id": "swiftui-image-without-label",
+      "globs": [
+        "**/*.swift"
+      ],
+      "pattern": "Image\\([^\\n]+\\)(?![\\s\\S]{0,220}\\.accessibilityLabel)",
+      "message": "SwiftUI images need accessibilityLabel unless decorative."
+    },
+    {
+      "id": "font-scaling-disabled",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.dart"
+      ],
+      "pattern": "(allowFontScaling=\\{false\\}|textScaleFactor:\\s*1(?:\\.0)?|TextScaler\\.noScaling)",
+      "message": "Do not disable user font scaling without an approved accessibility exception."
+    },
+    {
       "id": "async-without-catch-mobile",
       "globs": [
         "**/*.dart",

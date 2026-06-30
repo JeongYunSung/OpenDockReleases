@@ -72,6 +72,28 @@ const config = {
       "message": "Bug reports need steps, expected, actual, and environment."
     },
     {
+      "id": "a11y-signoff-without-evidence",
+      "globs": [
+        "**/*.md"
+      ],
+      "pattern": "(?i)\\b(a11y|accessibility|접근성)\\b[\\s\\S]{0,160}\\b(done|ready|pass|passed|complete|완료|통과|확인)\\b(?![\\s\\S]{0,700}(keyboard|screen reader|스크린리더|focus|contrast|axe|lighthouse|byRole|role/name|VoiceOver|TalkBack|NVDA|WCAG))",
+      "message": "Accessibility signoff needs evidence such as keyboard, screen reader, focus, contrast, axe/Lighthouse, or role/name checks."
+    },
+    {
+      "id": "disabled-a11y-test",
+      "globs": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.kt",
+        "**/*.java",
+        "**/*.py"
+      ],
+      "pattern": "(?i)(describe|it|test)\\.(skip|only)\\([^\\n]*(a11y|accessibility|접근성)",
+      "message": "Accessibility tests must not be skipped, focused, or disabled."
+    },
+    {
       "id": "security-change-without-review",
       "globs": [
         "**/*.md",

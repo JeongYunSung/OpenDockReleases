@@ -102,6 +102,26 @@ const config = {
       "message": "Buttons should declare type."
     },
     {
+      "id": "nested-interactive-control",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "(<button\\b[\\s\\S]{0,500}<a\\b|<a\\b[\\s\\S]{0,500}<button\\b)",
+      "message": "Do not nest links and buttons inside each other."
+    },
+    {
+      "id": "icon-button-without-name",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "<button\\b(?![^>]*(aria-label|aria-labelledby|title=))[^>]*>\\s*(<svg\\b|<img\\b|<Icon\\b)",
+      "message": "Icon-only buttons need an accessible name."
+    },
+    {
       "id": "input-without-label",
       "globs": [
         "**/*.tsx",
@@ -110,6 +130,46 @@ const config = {
       ],
       "pattern": "<input(?![^>]*(aria-label|aria-labelledby|id=))",
       "message": "Inputs need labels or accessible names."
+    },
+    {
+      "id": "select-textarea-without-label",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "<(select|textarea)\\b(?![^>]*(aria-label|aria-labelledby|id=))",
+      "message": "Select and textarea controls need labels or accessible names."
+    },
+    {
+      "id": "nonsemantic-click-target",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "<(div|span)\\b(?=[^>]*\\bonClick=)(?![^>]*(role=|tabIndex=|tabindex=|onKeyDown=|onKeyUp=|onKeyPress=))",
+      "message": "Clickable div/span needs semantic element or keyboard and role support."
+    },
+    {
+      "id": "positive-tabindex",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "\\b(tabIndex=\\{?[1-9]\\d*\\}?|tabindex=[\"']?[1-9]\\d*)",
+      "message": "Positive tab index creates unpredictable keyboard order."
+    },
+    {
+      "id": "aria-hidden-focusable",
+      "globs": [
+        "**/*.tsx",
+        "**/*.jsx",
+        "**/*.html"
+      ],
+      "pattern": "aria-hidden=[\"']true[\"'][^>]*(href=|onClick=|tabIndex=|tabindex=)",
+      "message": "aria-hidden elements must not be focusable or interactive."
     },
     {
       "id": "missing-loading-state",
