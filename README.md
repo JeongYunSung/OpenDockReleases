@@ -17,6 +17,7 @@ docks/
         data-ultrawork/
         devops-ultrawork/
         docs-ultrawork/
+        ux-writing-ultrawork/
         business-ultrawork/
         mobile-ultrawork/
         qa-ultrawork/
