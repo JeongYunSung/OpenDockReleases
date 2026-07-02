@@ -1,0 +1,9 @@
+{
+  "name": "opendock-prompt-eval-quality-gate",
+  "description": "Run the Prompt Eval harness before final handoff when this dock is used.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__prompt-eval/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__prompt-eval/check.mjs` manually before final response."
+}

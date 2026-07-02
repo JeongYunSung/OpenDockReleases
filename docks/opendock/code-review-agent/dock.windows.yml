@@ -1,0 +1,65 @@
+opendock: 1
+summary: PR-Agent 기반 코드 리뷰 기준, evidence, severity, 수정 확인 루프를 workspace-local로 준비하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - code-review
+  - pr-agent
+  - review
+  - quality
+  - security
+  - pull-request
+requires:
+  runtimes:
+    python: ">=3.11.0 <3.14.0"
+tools:
+  pr-agent:
+    manager: pip
+    package: pr-agent
+    version: "0.38.0"
+    commands:
+      - pr-agent
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/CODE_REVIEW.md
+    to: CODE_REVIEW.md
+  - from: files/.opendock/templates/code-review-agent/CODE_REVIEW_RUN.md
+    to: .opendock/templates/code-review-agent/CODE_REVIEW_RUN.md
+  - from: files/.opendock/harness/opendock__code-review-agent/check.mjs
+    to: .opendock/harness/opendock__code-review-agent/check.mjs
+  - from: files/.opendock/harness/opendock__code-review-agent/check.sh
+    to: .opendock/harness/opendock__code-review-agent/check.sh
+  - from: files/.opendock/harness/opendock__code-review-agent/check.ps1
+    to: .opendock/harness/opendock__code-review-agent/check.ps1
+  - from: files/.agents/skills/opendock-code-review-agent/SKILL.md
+    to: .agents/skills/opendock-code-review-agent/SKILL.md
+  - from: files/.agents/workflows/opendock-code-review-agent/quality-gate.md
+    to: .agents/workflows/opendock-code-review-agent/quality-gate.md
+  - from: files/.claude/commands/opendock-code-review-agent/quality-gate.md
+    to: .claude/commands/opendock-code-review-agent/quality-gate.md
+  - from: files/.cursor/rules/opendock-code-review-agent.mdc
+    to: .cursor/rules/opendock-code-review-agent.mdc
+  - from: files/.agents/hooks/opendock-code-review-agent/hook.json
+    to: .agents/hooks/opendock-code-review-agent/hook.json
+doctor:
+  - id: code-review
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CODE_REVIEW.md) { exit 0 } else { exit 1 }"
+  - id: harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__code-review-agent/check.mjs) { exit 0 } else { exit 1 }"
+  - id: run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/code-review-agent/CODE_REVIEW_RUN.md) { exit 0 } else { exit 1 }"
+  - id: skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-code-review-agent/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-code-review-agent/quality-gate.md) { exit 0 } else { exit 1 }"

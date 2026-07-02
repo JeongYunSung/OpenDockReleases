@@ -1,0 +1,67 @@
+opendock: 1
+summary: promptfoo 기반으로 prompt, agent, RAG 응답 품질을 workspace-local로 평가하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - prompt-eval
+  - promptfoo
+  - evaluation
+  - red-team
+  - ai-quality
+  - testing
+requires:
+  runtimes:
+    node: ">=22.22.0 <25.0.0"
+tools:
+  promptfoo:
+    manager: npm
+    package: promptfoo
+    version: "0.121.17"
+    commands:
+      - promptfoo
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PROMPT_EVAL.md
+    to: PROMPT_EVAL.md
+  - from: files/.opendock/templates/prompt-eval/PROMPT_EVAL_RUN.md
+    to: .opendock/templates/prompt-eval/PROMPT_EVAL_RUN.md
+  - from: files/.opendock/harness/opendock__prompt-eval/check.mjs
+    to: .opendock/harness/opendock__prompt-eval/check.mjs
+  - from: files/.opendock/harness/opendock__prompt-eval/check.sh
+    to: .opendock/harness/opendock__prompt-eval/check.sh
+  - from: files/.opendock/harness/opendock__prompt-eval/check.ps1
+    to: .opendock/harness/opendock__prompt-eval/check.ps1
+  - from: files/.agents/skills/opendock-prompt-eval/SKILL.md
+    to: .agents/skills/opendock-prompt-eval/SKILL.md
+  - from: files/.agents/workflows/opendock-prompt-eval/quality-gate.md
+    to: .agents/workflows/opendock-prompt-eval/quality-gate.md
+  - from: files/.claude/commands/opendock-prompt-eval/quality-gate.md
+    to: .claude/commands/opendock-prompt-eval/quality-gate.md
+  - from: files/.cursor/rules/opendock-prompt-eval.mdc
+    to: .cursor/rules/opendock-prompt-eval.mdc
+  - from: files/.agents/hooks/opendock-prompt-eval/hook.json
+    to: .agents/hooks/opendock-prompt-eval/hook.json
+doctor:
+  - id: prompt-eval
+    check: test -f PROMPT_EVAL.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__prompt-eval/check.mjs
+  - id: run-template
+    check: test -f .opendock/templates/prompt-eval/PROMPT_EVAL_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-prompt-eval/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-prompt-eval/quality-gate.md
+  - id: promptfoo-cli
+    run: promptfoo --version

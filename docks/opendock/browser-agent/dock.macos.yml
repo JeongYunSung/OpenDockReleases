@@ -1,0 +1,65 @@
+opendock: 1
+summary: agent-browser 기반 browser automation 작업을 허용 도메인, 안전 경계, run 기록과 함께 관리하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - browser-agent
+  - browser-automation
+  - agent-browser
+  - qa
+  - web-testing
+  - research
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+tools:
+  agent-browser:
+    manager: npm
+    package: agent-browser
+    version: "0.31.1"
+    commands:
+      - agent-browser
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/BROWSER_AGENT.md
+    to: BROWSER_AGENT.md
+  - from: files/.opendock/templates/browser-agent/BROWSER_AGENT_RUN.md
+    to: .opendock/templates/browser-agent/BROWSER_AGENT_RUN.md
+  - from: files/.opendock/harness/opendock__browser-agent/check.mjs
+    to: .opendock/harness/opendock__browser-agent/check.mjs
+  - from: files/.opendock/harness/opendock__browser-agent/check.sh
+    to: .opendock/harness/opendock__browser-agent/check.sh
+  - from: files/.opendock/harness/opendock__browser-agent/check.ps1
+    to: .opendock/harness/opendock__browser-agent/check.ps1
+  - from: files/.agents/skills/opendock-browser-agent/SKILL.md
+    to: .agents/skills/opendock-browser-agent/SKILL.md
+  - from: files/.agents/workflows/opendock-browser-agent/quality-gate.md
+    to: .agents/workflows/opendock-browser-agent/quality-gate.md
+  - from: files/.claude/commands/opendock-browser-agent/quality-gate.md
+    to: .claude/commands/opendock-browser-agent/quality-gate.md
+  - from: files/.cursor/rules/opendock-browser-agent.mdc
+    to: .cursor/rules/opendock-browser-agent.mdc
+  - from: files/.agents/hooks/opendock-browser-agent/hook.json
+    to: .agents/hooks/opendock-browser-agent/hook.json
+doctor:
+  - id: browser-agent
+    check: test -f BROWSER_AGENT.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__browser-agent/check.mjs
+  - id: run-template
+    check: test -f .opendock/templates/browser-agent/BROWSER_AGENT_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-browser-agent/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-browser-agent/quality-gate.md

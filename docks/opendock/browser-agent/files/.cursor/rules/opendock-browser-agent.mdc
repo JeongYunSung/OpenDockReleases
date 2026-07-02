@@ -1,0 +1,9 @@
+---
+description: Browser Agent rules
+globs:
+  - "**/*.md"
+  - ".opendock/runs/browser-agent/**/*"
+alwaysApply: false
+---
+
+Use `BROWSER_AGENT.md` as the dock contract. Keep run notes under `.opendock/runs/browser-agent/` and run `node .opendock/harness/opendock__browser-agent/check.mjs` before handoff.

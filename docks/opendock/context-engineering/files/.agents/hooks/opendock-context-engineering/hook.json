@@ -1,0 +1,9 @@
+{
+  "name": "opendock-context-engineering-quality-gate",
+  "description": "Run the Context Engineering harness before final handoff when this dock is used.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__context-engineering/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__context-engineering/check.mjs` manually before final response."
+}

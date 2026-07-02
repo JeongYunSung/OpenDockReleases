@@ -1,0 +1,71 @@
+opendock: 1
+summary: code-review-graph와 codectx로 agent가 필요한 코드/문서 맥락만 읽게 만드는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - context-engineering
+  - code-graph
+  - code-review-graph
+  - codectx
+  - agent-context
+  - repository-map
+requires:
+  runtimes:
+    python: ">=3.11.0 <3.14.0"
+tools:
+  code-review-graph:
+    manager: pip
+    package: code-review-graph
+    version: "2.3.6"
+    commands:
+      - code-review-graph
+  codectx:
+    manager: pip
+    package: codectx
+    version: "0.3.0"
+    commands:
+      - codectx
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/CONTEXT_ENGINEERING.md
+    to: CONTEXT_ENGINEERING.md
+  - from: files/.opendock/templates/context-engineering/CONTEXT_PACK.md
+    to: .opendock/templates/context-engineering/CONTEXT_PACK.md
+  - from: files/.opendock/harness/opendock__context-engineering/check.mjs
+    to: .opendock/harness/opendock__context-engineering/check.mjs
+  - from: files/.opendock/harness/opendock__context-engineering/check.sh
+    to: .opendock/harness/opendock__context-engineering/check.sh
+  - from: files/.opendock/harness/opendock__context-engineering/check.ps1
+    to: .opendock/harness/opendock__context-engineering/check.ps1
+  - from: files/.agents/skills/opendock-context-engineering/SKILL.md
+    to: .agents/skills/opendock-context-engineering/SKILL.md
+  - from: files/.agents/workflows/opendock-context-engineering/quality-gate.md
+    to: .agents/workflows/opendock-context-engineering/quality-gate.md
+  - from: files/.claude/commands/opendock-context-engineering/quality-gate.md
+    to: .claude/commands/opendock-context-engineering/quality-gate.md
+  - from: files/.cursor/rules/opendock-context-engineering.mdc
+    to: .cursor/rules/opendock-context-engineering.mdc
+  - from: files/.agents/hooks/opendock-context-engineering/hook.json
+    to: .agents/hooks/opendock-context-engineering/hook.json
+doctor:
+  - id: context-engineering
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CONTEXT_ENGINEERING.md) { exit 0 } else { exit 1 }"
+  - id: harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__context-engineering/check.mjs) { exit 0 } else { exit 1 }"
+  - id: run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/context-engineering/CONTEXT_PACK.md) { exit 0 } else { exit 1 }"
+  - id: skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-context-engineering/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-context-engineering/quality-gate.md) { exit 0 } else { exit 1 }"

@@ -1,0 +1,65 @@
+opendock: 1
+summary: PR-Agent 기반 코드 리뷰 기준, evidence, severity, 수정 확인 루프를 workspace-local로 준비하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - code-review
+  - pr-agent
+  - review
+  - quality
+  - security
+  - pull-request
+requires:
+  runtimes:
+    python: ">=3.11.0 <3.14.0"
+tools:
+  pr-agent:
+    manager: pip
+    package: pr-agent
+    version: "0.38.0"
+    commands:
+      - pr-agent
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/CODE_REVIEW.md
+    to: CODE_REVIEW.md
+  - from: files/.opendock/templates/code-review-agent/CODE_REVIEW_RUN.md
+    to: .opendock/templates/code-review-agent/CODE_REVIEW_RUN.md
+  - from: files/.opendock/harness/opendock__code-review-agent/check.mjs
+    to: .opendock/harness/opendock__code-review-agent/check.mjs
+  - from: files/.opendock/harness/opendock__code-review-agent/check.sh
+    to: .opendock/harness/opendock__code-review-agent/check.sh
+  - from: files/.opendock/harness/opendock__code-review-agent/check.ps1
+    to: .opendock/harness/opendock__code-review-agent/check.ps1
+  - from: files/.agents/skills/opendock-code-review-agent/SKILL.md
+    to: .agents/skills/opendock-code-review-agent/SKILL.md
+  - from: files/.agents/workflows/opendock-code-review-agent/quality-gate.md
+    to: .agents/workflows/opendock-code-review-agent/quality-gate.md
+  - from: files/.claude/commands/opendock-code-review-agent/quality-gate.md
+    to: .claude/commands/opendock-code-review-agent/quality-gate.md
+  - from: files/.cursor/rules/opendock-code-review-agent.mdc
+    to: .cursor/rules/opendock-code-review-agent.mdc
+  - from: files/.agents/hooks/opendock-code-review-agent/hook.json
+    to: .agents/hooks/opendock-code-review-agent/hook.json
+doctor:
+  - id: code-review
+    check: test -f CODE_REVIEW.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__code-review-agent/check.mjs
+  - id: run-template
+    check: test -f .opendock/templates/code-review-agent/CODE_REVIEW_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-code-review-agent/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-code-review-agent/quality-gate.md

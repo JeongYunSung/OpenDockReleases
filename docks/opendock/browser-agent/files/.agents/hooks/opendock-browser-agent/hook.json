@@ -1,0 +1,9 @@
+{
+  "name": "opendock-browser-agent-quality-gate",
+  "description": "Run the Browser Agent harness before final handoff when this dock is used.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__browser-agent/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__browser-agent/check.mjs` manually before final response."
+}
