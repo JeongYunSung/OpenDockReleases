@@ -1,0 +1,61 @@
+opendock: 1
+id: opendock/agent-planning
+summary: 긴 AI 작업의 계획, 발견 사항, 진행률을 workspace-local 파일로 유지하는 capability dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - agent
+  - planning
+  - progress
+  - handoff
+  - workspace
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PLANNING.md
+    to: PLANNING.md
+  - from: files/.opendock/templates/agent-planning/TASK_PLAN.md
+    to: .opendock/templates/agent-planning/TASK_PLAN.md
+  - from: files/.opendock/templates/agent-planning/FINDINGS.md
+    to: .opendock/templates/agent-planning/FINDINGS.md
+  - from: files/.opendock/templates/agent-planning/PROGRESS.md
+    to: .opendock/templates/agent-planning/PROGRESS.md
+  - from: files/.opendock/harness/opendock__agent-planning/check.mjs
+    to: .opendock/harness/opendock__agent-planning/check.mjs
+  - from: files/.opendock/harness/opendock__agent-planning/check.sh
+    to: .opendock/harness/opendock__agent-planning/check.sh
+  - from: files/.opendock/harness/opendock__agent-planning/check.ps1
+    to: .opendock/harness/opendock__agent-planning/check.ps1
+  - from: files/.agents/skills/opendock-agent-planning/SKILL.md
+    to: .agents/skills/opendock-agent-planning/SKILL.md
+  - from: files/.agents/workflows/opendock-agent-planning/quality-gate.md
+    to: .agents/workflows/opendock-agent-planning/quality-gate.md
+  - from: files/.claude/commands/opendock-agent-planning/quality-gate.md
+    to: .claude/commands/opendock-agent-planning/quality-gate.md
+  - from: files/.cursor/rules/opendock-agent-planning.mdc
+    to: .cursor/rules/opendock-agent-planning.mdc
+  - from: files/.agents/hooks/opendock-agent-planning/hook.json
+    to: .agents/hooks/opendock-agent-planning/hook.json
+doctor:
+  - id: planning-contract
+    check: test -f PLANNING.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__agent-planning/check.mjs
+  - id: templates
+    check: test -f .opendock/templates/agent-planning/TASK_PLAN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-agent-planning/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-agent-planning/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-agent-planning/hook.json

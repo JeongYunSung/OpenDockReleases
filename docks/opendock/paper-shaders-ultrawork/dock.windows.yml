@@ -1,0 +1,63 @@
+opendock: 1
+id: opendock/paper-shaders-ultrawork
+summary: Paper Shaders의 29개 image filter, logo animation, effect를 정확한 props catalog와 하네스로 쓰게 하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - paper-shaders
+  - shader
+  - react
+  - design
+  - animation
+  - visual-effects
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PAPER_SHADERS.md
+    to: PAPER_SHADERS.md
+  - from: files/.opendock/data/paper-shaders/catalog.json
+    to: .opendock/data/paper-shaders/catalog.json
+  - from: files/.opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
+    to: .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
+  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
+    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
+  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.sh
+    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.sh
+  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.ps1
+    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.ps1
+  - from: files/.agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
+    to: .agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
+  - from: files/.agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-paper-shaders-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-paper-shaders-ultrawork/quality-gate.md
+  - from: files/.cursor/rules/opendock-paper-shaders-ultrawork.mdc
+    to: .cursor/rules/opendock-paper-shaders-ultrawork.mdc
+  - from: files/.agents/hooks/opendock-paper-shaders-ultrawork/hook.json
+    to: .agents/hooks/opendock-paper-shaders-ultrawork/hook.json
+doctor:
+  - id: paper-shaders-doc
+    check: test -f PAPER_SHADERS.md
+  - id: catalog-json
+    check: test -f .opendock/data/paper-shaders/catalog.json
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
+  - id: run-template
+    check: test -f .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-paper-shaders-ultrawork/hook.json

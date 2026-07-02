@@ -1,0 +1,57 @@
+opendock: 1
+id: opendock/agent-security
+summary: agent 작업의 secret, auth, permission, 보안 리뷰 근거를 workspace-local로 점검하는 capability dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - agent
+  - security
+  - threat-model
+  - secrets
+  - review
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/SECURITY.md
+    to: SECURITY.md
+  - from: files/.opendock/templates/agent-security/SECURITY_REVIEW.md
+    to: .opendock/templates/agent-security/SECURITY_REVIEW.md
+  - from: files/.opendock/harness/opendock__agent-security/check.mjs
+    to: .opendock/harness/opendock__agent-security/check.mjs
+  - from: files/.opendock/harness/opendock__agent-security/check.sh
+    to: .opendock/harness/opendock__agent-security/check.sh
+  - from: files/.opendock/harness/opendock__agent-security/check.ps1
+    to: .opendock/harness/opendock__agent-security/check.ps1
+  - from: files/.agents/skills/opendock-agent-security/SKILL.md
+    to: .agents/skills/opendock-agent-security/SKILL.md
+  - from: files/.agents/workflows/opendock-agent-security/quality-gate.md
+    to: .agents/workflows/opendock-agent-security/quality-gate.md
+  - from: files/.claude/commands/opendock-agent-security/quality-gate.md
+    to: .claude/commands/opendock-agent-security/quality-gate.md
+  - from: files/.cursor/rules/opendock-agent-security.mdc
+    to: .cursor/rules/opendock-agent-security.mdc
+  - from: files/.agents/hooks/opendock-agent-security/hook.json
+    to: .agents/hooks/opendock-agent-security/hook.json
+doctor:
+  - id: security-contract
+    check: test -f SECURITY.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__agent-security/check.mjs
+  - id: review-template
+    check: test -f .opendock/templates/agent-security/SECURITY_REVIEW.md
+  - id: skill
+    check: test -f .agents/skills/opendock-agent-security/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-agent-security/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-agent-security/hook.json

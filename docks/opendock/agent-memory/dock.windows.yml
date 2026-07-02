@@ -1,0 +1,57 @@
+opendock: 1
+id: opendock/agent-memory
+summary: 프로젝트 구조와 의사결정을 workspace-local memory로 남기는 agent capability dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - agent
+  - memory
+  - context
+  - knowledge-graph
+  - workspace
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/MEMORY.md
+    to: MEMORY.md
+  - from: files/.opendock/templates/agent-memory/MEMORY_RUN.md
+    to: .opendock/templates/agent-memory/MEMORY_RUN.md
+  - from: files/.opendock/harness/opendock__agent-memory/check.mjs
+    to: .opendock/harness/opendock__agent-memory/check.mjs
+  - from: files/.opendock/harness/opendock__agent-memory/check.sh
+    to: .opendock/harness/opendock__agent-memory/check.sh
+  - from: files/.opendock/harness/opendock__agent-memory/check.ps1
+    to: .opendock/harness/opendock__agent-memory/check.ps1
+  - from: files/.agents/skills/opendock-agent-memory/SKILL.md
+    to: .agents/skills/opendock-agent-memory/SKILL.md
+  - from: files/.agents/workflows/opendock-agent-memory/quality-gate.md
+    to: .agents/workflows/opendock-agent-memory/quality-gate.md
+  - from: files/.claude/commands/opendock-agent-memory/quality-gate.md
+    to: .claude/commands/opendock-agent-memory/quality-gate.md
+  - from: files/.cursor/rules/opendock-agent-memory.mdc
+    to: .cursor/rules/opendock-agent-memory.mdc
+  - from: files/.agents/hooks/opendock-agent-memory/hook.json
+    to: .agents/hooks/opendock-agent-memory/hook.json
+doctor:
+  - id: memory-contract
+    check: test -f MEMORY.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__agent-memory/check.mjs
+  - id: memory-template
+    check: test -f .opendock/templates/agent-memory/MEMORY_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-agent-memory/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-agent-memory/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-agent-memory/hook.json

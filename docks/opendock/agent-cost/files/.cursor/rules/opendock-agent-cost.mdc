@@ -1,0 +1,12 @@
+---
+description: Agent Cost usage and budget tracking rules
+globs: **/*
+alwaysApply: false
+---
+
+Use Agent Cost when AI usage or model cost matters.
+
+- Record provider, model, task, owner, date, and reason.
+- Mark estimated values clearly.
+- Do not store API keys, invoice originals, or payment details.
+- Run `node .opendock/harness/opendock__agent-cost/check.mjs` before handoff when possible.

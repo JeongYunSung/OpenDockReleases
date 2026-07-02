@@ -1,0 +1,9 @@
+{
+  "name": "opendock-agent-planning-quality-gate",
+  "description": "Run the Agent Planning harness before final handoff when plan files were touched.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__agent-planning/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__agent-planning/check.mjs` manually before final response."
+}

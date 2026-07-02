@@ -1,0 +1,12 @@
+---
+description: Agent Planning file-based workflow rules
+globs: **/*
+alwaysApply: false
+---
+
+Use Agent Planning for multi-step work.
+
+- Keep task plan, findings, and progress separate.
+- Do not mark work done without evidence.
+- Keep temporary plan state under `.opendock/plans/`.
+- Run `node .opendock/harness/opendock__agent-planning/check.mjs` before handoff when possible.
