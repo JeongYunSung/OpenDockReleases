@@ -1,0 +1,69 @@
+opendock: 1
+summary: OpenDock dock 제작, 보안 검토, harness, install/update/uninstall 테스트를 workspace-local로 표준화하는 builder dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - dock
+  - builder
+  - registry
+  - harness
+  - security
+  - release
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/DOCK_BUILDER.md
+    to: DOCK_BUILDER.md
+  - from: files/.opendock/templates/dock-builder/DOCK_REVIEW.md
+    to: .opendock/templates/dock-builder/DOCK_REVIEW.md
+  - from: files/.opendock/templates/dock-builder/RELEASE_EVIDENCE.md
+    to: .opendock/templates/dock-builder/RELEASE_EVIDENCE.md
+  - from: files/.opendock/harness/opendock__dock-builder/check.mjs
+    to: .opendock/harness/opendock__dock-builder/check.mjs
+  - from: files/.opendock/harness/opendock__dock-builder/check.sh
+    to: .opendock/harness/opendock__dock-builder/check.sh
+  - from: files/.opendock/harness/opendock__dock-builder/check.ps1
+    to: .opendock/harness/opendock__dock-builder/check.ps1
+  - from: files/.agents/skills/opendock-dock-builder/SKILL.md
+    to: .agents/skills/opendock-dock-builder/SKILL.md
+  - from: files/.agents/skills/opendock-dock-builder/references/dock-quality-gates.md
+    to: .agents/skills/opendock-dock-builder/references/dock-quality-gates.md
+  - from: files/.agents/skills/opendock-dock-builder/references/security-review.md
+    to: .agents/skills/opendock-dock-builder/references/security-review.md
+  - from: files/.agents/skills/opendock-dock-builder/references/test-matrix.md
+    to: .agents/skills/opendock-dock-builder/references/test-matrix.md
+  - from: files/.agents/skills/opendock-dock-builder/references/release-checklist.md
+    to: .agents/skills/opendock-dock-builder/references/release-checklist.md
+  - from: files/.agents/skills/opendock-dock-builder/scripts/check_dock_package.py
+    to: .agents/skills/opendock-dock-builder/scripts/check_dock_package.py
+  - from: files/.agents/workflows/opendock-dock-builder/quality-gate.md
+    to: .agents/workflows/opendock-dock-builder/quality-gate.md
+  - from: files/.claude/commands/opendock-dock-builder/quality-gate.md
+    to: .claude/commands/opendock-dock-builder/quality-gate.md
+  - from: files/.cursor/rules/opendock-dock-builder.mdc
+    to: .cursor/rules/opendock-dock-builder.mdc
+  - from: files/.agents/hooks/opendock-dock-builder/hook.json
+    to: .agents/hooks/opendock-dock-builder/hook.json
+doctor:
+  - id: builder-contract
+    check: test -f DOCK_BUILDER.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__dock-builder/check.mjs
+  - id: package-checker
+    check: test -f .agents/skills/opendock-dock-builder/scripts/check_dock_package.py
+  - id: skill
+    check: test -f .agents/skills/opendock-dock-builder/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-dock-builder/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-dock-builder/hook.json

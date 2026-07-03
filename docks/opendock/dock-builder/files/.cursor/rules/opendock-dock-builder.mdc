@@ -1,0 +1,8 @@
+---
+description: OpenDock dock package authoring and release checks
+globs:
+  - "docks/opendock/**"
+alwaysApply: false
+---
+
+When editing OpenDock docks, follow `DOCK_BUILDER.md` and run the dock-builder harness before handoff.

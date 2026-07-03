@@ -1,0 +1,6 @@
+{
+  "name": "opendock-dock-builder",
+  "description": "Reminds agents to run dock-builder checks when editing OpenDock dock packages.",
+  "events": ["Stop"],
+  "run": "node .opendock/harness/opendock__dock-builder/check.mjs"
+}
