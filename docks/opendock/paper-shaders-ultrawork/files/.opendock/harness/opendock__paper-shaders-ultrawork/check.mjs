@@ -9,8 +9,10 @@ const maxWalkEntries = 20000;
 
 const required = [
   "PAPER_SHADERS.md",
+  "SHADER_PLAYBOOK.md",
   "HARNESS.md",
   ".opendock/data/paper-shaders/catalog.json",
+  ".opendock/templates/paper-shaders/SHADER_REQUEST.md",
   ".opendock/harness/opendock__paper-shaders-ultrawork/check.mjs",
   ".agents/skills/opendock-paper-shaders-ultrawork/SKILL.md",
   ".agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md"

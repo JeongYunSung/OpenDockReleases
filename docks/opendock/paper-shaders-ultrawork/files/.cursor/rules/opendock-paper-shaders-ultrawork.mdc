@@ -3,4 +3,4 @@ description: Paper Shaders component and prop quality gate
 alwaysApply: false
 ---
 
-Use PAPER_SHADERS.md before implementing @paper-design/shaders-react. Do not invent shader components or props. Keep numeric values inside documented ranges and run node .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs before handoff.
+Use SHADER_PLAYBOOK.md and PAPER_SHADERS.md before implementing @paper-design/shaders-react. For image, logo animation, background, or visual effect requests, propose 2-3 shader candidates first and wait for the user to choose a number before applying. Do not invent shader components or props. Keep numeric values inside documented ranges and run node .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs before handoff.

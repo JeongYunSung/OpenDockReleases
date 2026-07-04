@@ -6,6 +6,8 @@ Status: draft
 
 - Target surface:
 - Effect role: image filter / logo animation / background effect / accent / hero scene
+- Candidate options shown:
+- User selected option:
 - Selected shader:
 
 ## Design Constraints
@@ -25,6 +27,8 @@ Record the chosen component and props from PAPER_SHADERS.md.
 
 ## Checks
 
+- Candidate set was shown before implementation.
+- User selected one option, or explicitly allowed auto-pick.
 - Component exists in catalog.
 - Props exist in catalog.
 - Literal values are within documented ranges.

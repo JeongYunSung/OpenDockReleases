@@ -7,6 +7,10 @@ This catalog is generated from the official Paper Shaders pages. Use it as the s
 
 Machine-readable source: `.opendock/data/paper-shaders/catalog.json`
 
+OpenDock install/update는 Paper Shaders catalog, harness와 `.codex/opendock/paper-shaders-ultrawork` reference runtime을 설치합니다. 각 shader의 `Install` 줄은 공식 페이지 출처를 보존한 참고 정보입니다. 실제 앱 코드가 `@paper-design/shaders-react`를 import해야 한다면 해당 앱의 package manifest에도 dependency가 있는지 확인합니다.
+
+이미지나 프롬프트 기반 요청은 `SHADER_PLAYBOOK.md`를 먼저 읽고 후보 2-3개를 제안한 뒤, 사용자가 선택한 shader만 적용합니다.
+
 ## Image Filters
 
 ### paper texture `PaperTexture`

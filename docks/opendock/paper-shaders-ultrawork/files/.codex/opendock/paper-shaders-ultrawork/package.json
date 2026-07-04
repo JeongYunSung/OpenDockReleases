@@ -1,0 +1,11 @@
+{
+  "name": "opendock-paper-shaders-ultrawork-runtime",
+  "private": true,
+  "type": "module",
+  "description": "OpenDock-managed Paper Shaders reference runtime for Paper Shaders Ultrawork.",
+  "dependencies": {
+    "@paper-design/shaders-react": "0.0.77",
+    "@types/react": "19.2.17",
+    "react": "19.2.7"
+  }
+}

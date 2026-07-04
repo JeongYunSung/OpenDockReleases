@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/paper-shaders-ultrawork
 summary: Paper Shaders의 29개 image filter, logo animation, effect를 정확한 props catalog와 하네스로 쓰게 하는 dock.
 readme: DOCK.md
 logo: logo.png
@@ -11,6 +10,16 @@ tags:
   - design
   - animation
   - visual-effects
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    npm: ">=10.0.0"
+dependencies:
+  paper-shaders-react:
+    manager: npm
+    path: .codex/opendock/paper-shaders-ultrawork
+    mode: install
+    timeout_ms: 600000
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
@@ -24,10 +33,16 @@ files:
     to: HARNESS.md
   - from: files/PAPER_SHADERS.md
     to: PAPER_SHADERS.md
+  - from: files/SHADER_PLAYBOOK.md
+    to: SHADER_PLAYBOOK.md
+  - from: files/.codex/opendock/paper-shaders-ultrawork
+    to: .codex/opendock/paper-shaders-ultrawork
   - from: files/.opendock/data/paper-shaders/catalog.json
     to: .opendock/data/paper-shaders/catalog.json
   - from: files/.opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
     to: .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
+  - from: files/.opendock/templates/paper-shaders/SHADER_REQUEST.md
+    to: .opendock/templates/paper-shaders/SHADER_REQUEST.md
   - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
     to: .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
   - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.sh
@@ -49,12 +64,20 @@ doctor:
     check: test -f PAPER_SHADERS.md
   - id: catalog-json
     check: test -f .opendock/data/paper-shaders/catalog.json
+  - id: shader-playbook
+    check: test -f SHADER_PLAYBOOK.md
+  - id: runtime-package-json
+    check: test -f .codex/opendock/paper-shaders-ultrawork/package.json
+  - id: runtime-package-installed
+    check: test -d .codex/opendock/paper-shaders-ultrawork/node_modules/@paper-design/shaders-react
   - id: harness-doc
     check: test -f HARNESS.md
   - id: harness-script
     check: test -f .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
   - id: run-template
     check: test -f .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
+  - id: request-template
+    check: test -f .opendock/templates/paper-shaders/SHADER_REQUEST.md
   - id: skill
     check: test -f .agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
   - id: workflow
