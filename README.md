@@ -18,6 +18,9 @@ docks/
         agent-planning/
         agent-security/
         agent-cost/
+        korea-real-estate-research/
+        korea-equity-research/
+        korea-macro-research/
         design-ultrawork/
         paper-shaders-ultrawork/
         creative-gen-ultrawork/
@@ -53,6 +56,16 @@ docks/
 | Dock | 목적 | 기준 |
 |------|------|------|
 | `opendock/paper-shaders-ultrawork` | Paper Shaders의 image filter, logo animation, effect 29개를 정확한 React component/prop/range로 쓰게 합니다. | `shaders.paper.design` 상세 페이지와 `@paper-design/shaders-react` 예시 |
+
+## Research dock
+
+리서치 dock은 외부 데이터를 직접 투자 판단으로 바꾸지 않습니다. 공식 출처, 기준일, 범위, 한계, 반대 시나리오를 강제해서 AI가 리서치 초안을 안전하게 만들도록 돕습니다.
+
+| Dock | 목적 | 기준 |
+|------|------|------|
+| `opendock/korea-real-estate-research` | 한국 부동산 리서치에서 지역, 기간, 거래유형, 실거래가/전월세/지수 출처와 비추천 고지를 점검합니다. | 국토교통부 실거래가, 한국부동산원 R-ONE, ECOS, KOSIS |
+| `opendock/korea-equity-research` | 한국 주식 리서치에서 종목, 기준일, KRX 데이터, OpenDART 공시, 리스크와 비추천 고지를 점검합니다. | KRX, OpenDART, KIND, 금융위원회 공공데이터, ECOS |
+| `opendock/korea-macro-research` | 금리, 환율, 물가, 인구, 고용 같은 거시 지표를 기준일과 지표 정의 중심으로 점검합니다. | 한국은행 ECOS, KOSIS |
 
 ## 배포
 

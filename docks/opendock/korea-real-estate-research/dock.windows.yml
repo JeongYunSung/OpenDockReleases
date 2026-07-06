@@ -1,0 +1,44 @@
+opendock: 1
+name: Korea Real Estate Research
+summary: 한국 부동산 리서치를 공식 출처, 기준일, 지역, 거래유형, 한계, 비추천 고지 기준으로 점검하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - korea
+  - real-estate
+  - research
+  - public-data
+  - risk-check
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/KOREA_REAL_ESTATE_RESEARCH.md
+    to: KOREA_REAL_ESTATE_RESEARCH.md
+  - from: files/.opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
+    to: .opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
+  - from: files/.opendock/harness/opendock__korea-real-estate-research/check.mjs
+    to: .opendock/harness/opendock__korea-real-estate-research/check.mjs
+  - from: files/.agents/skills/opendock-korea-real-estate-research/SKILL.md
+    to: .agents/skills/opendock-korea-real-estate-research/SKILL.md
+doctor:
+  - id: guide
+    check: test -f KOREA_REAL_ESTATE_RESEARCH.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__korea-real-estate-research/check.mjs
+  - id: run-template
+    check: test -f .opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
+  - id: skill
+    check: test -f .agents/skills/opendock-korea-real-estate-research/SKILL.md
