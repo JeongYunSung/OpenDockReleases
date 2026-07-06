@@ -1,0 +1,9 @@
+{
+  "name": "opendock-seo-growth-quality-gate",
+  "description": "Run the SEO Growth harness before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__seo-growth/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__seo-growth/check.mjs` manually before final response."
+}

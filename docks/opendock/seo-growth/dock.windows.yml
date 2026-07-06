@@ -1,0 +1,58 @@
+opendock: 1
+summary: 검색 의도, 메타데이터, 콘텐츠 구조, 내부 링크, technical SEO, 측정 계획을 점검하는 성장 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - seo
+  - growth
+  - metadata
+  - content
+  - search
+  - analytics
+  - sitemap
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/SEO_GROWTH.md
+    to: SEO_GROWTH.md
+  - from: files/.opendock/templates/seo-growth/SEO_RUN.md
+    to: .opendock/templates/seo-growth/SEO_RUN.md
+  - from: files/.opendock/harness/opendock__seo-growth/check.mjs
+    to: .opendock/harness/opendock__seo-growth/check.mjs
+  - from: files/.opendock/harness/opendock__seo-growth/check.sh
+    to: .opendock/harness/opendock__seo-growth/check.sh
+  - from: files/.opendock/harness/opendock__seo-growth/check.ps1
+    to: .opendock/harness/opendock__seo-growth/check.ps1
+  - from: files/.agents/skills/opendock-seo-growth/SKILL.md
+    to: .agents/skills/opendock-seo-growth/SKILL.md
+  - from: files/.agents/workflows/opendock-seo-growth/quality-gate.md
+    to: .agents/workflows/opendock-seo-growth/quality-gate.md
+  - from: files/.claude/commands/opendock-seo-growth/quality-gate.md
+    to: .claude/commands/opendock-seo-growth/quality-gate.md
+  - from: files/.cursor/rules/opendock-seo-growth.mdc
+    to: .cursor/rules/opendock-seo-growth.mdc
+  - from: files/.agents/hooks/opendock-seo-growth/hook.json
+    to: .agents/hooks/opendock-seo-growth/hook.json
+doctor:
+  - id: domain-guide
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath SEO_GROWTH.md) { exit 0 } else { exit 1 }"
+  - id: harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/seo-growth/SEO_RUN.md) { exit 0 } else { exit 1 }"
+  - id: harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__seo-growth/check.mjs) { exit 0 } else { exit 1 }"
+  - id: skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-seo-growth/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-seo-growth/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: hook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-seo-growth/hook.json) { exit 0 } else { exit 1 }"

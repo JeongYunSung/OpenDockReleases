@@ -1,0 +1,59 @@
+opendock: 1
+summary: 서비스 오픈 직전 랜딩, 가격, 약관, SEO, 온보딩, 결제, 분석, 에러 상태를 점검하는 출시 품질 게이트.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - launch
+  - startup
+  - pricing
+  - onboarding
+  - seo
+  - analytics
+  - checkout
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/LAUNCH.md
+    to: LAUNCH.md
+  - from: files/.opendock/templates/launch/LAUNCH_RUN.md
+    to: .opendock/templates/launch/LAUNCH_RUN.md
+  - from: files/.opendock/harness/opendock__launch-ultrawork/check.mjs
+    to: .opendock/harness/opendock__launch-ultrawork/check.mjs
+  - from: files/.opendock/harness/opendock__launch-ultrawork/check.sh
+    to: .opendock/harness/opendock__launch-ultrawork/check.sh
+  - from: files/.opendock/harness/opendock__launch-ultrawork/check.ps1
+    to: .opendock/harness/opendock__launch-ultrawork/check.ps1
+  - from: files/.agents/skills/opendock-launch-ultrawork/SKILL.md
+    to: .agents/skills/opendock-launch-ultrawork/SKILL.md
+  - from: files/.agents/workflows/opendock-launch-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-launch-ultrawork/quality-gate.md
+  - from: files/.claude/commands/opendock-launch-ultrawork/quality-gate.md
+    to: .claude/commands/opendock-launch-ultrawork/quality-gate.md
+  - from: files/.cursor/rules/opendock-launch-ultrawork.mdc
+    to: .cursor/rules/opendock-launch-ultrawork.mdc
+  - from: files/.agents/hooks/opendock-launch-ultrawork/hook.json
+    to: .agents/hooks/opendock-launch-ultrawork/hook.json
+doctor:
+  - id: domain-guide
+    check: test -f LAUNCH.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: run-template
+    check: test -f .opendock/templates/launch/LAUNCH_RUN.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__launch-ultrawork/check.mjs
+  - id: skill
+    check: test -f .agents/skills/opendock-launch-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-launch-ultrawork/quality-gate.md
+  - id: hook
+    check: test -f .agents/hooks/opendock-launch-ultrawork/hook.json

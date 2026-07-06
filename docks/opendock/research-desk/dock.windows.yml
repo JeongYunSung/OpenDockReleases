@@ -1,0 +1,58 @@
+opendock: 1
+summary: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 신뢰도 판단, 리서치 노트를 만드는 조사 workspace.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - research
+  - source
+  - evidence
+  - citation
+  - briefing
+  - analysis
+  - desk
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/GEMINI.md
+    to: GEMINI.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/RESEARCH_DESK.md
+    to: RESEARCH_DESK.md
+  - from: files/.opendock/templates/research-desk/RESEARCH_RUN.md
+    to: .opendock/templates/research-desk/RESEARCH_RUN.md
+  - from: files/.opendock/harness/opendock__research-desk/check.mjs
+    to: .opendock/harness/opendock__research-desk/check.mjs
+  - from: files/.opendock/harness/opendock__research-desk/check.sh
+    to: .opendock/harness/opendock__research-desk/check.sh
+  - from: files/.opendock/harness/opendock__research-desk/check.ps1
+    to: .opendock/harness/opendock__research-desk/check.ps1
+  - from: files/.agents/skills/opendock-research-desk/SKILL.md
+    to: .agents/skills/opendock-research-desk/SKILL.md
+  - from: files/.agents/workflows/opendock-research-desk/quality-gate.md
+    to: .agents/workflows/opendock-research-desk/quality-gate.md
+  - from: files/.claude/commands/opendock-research-desk/quality-gate.md
+    to: .claude/commands/opendock-research-desk/quality-gate.md
+  - from: files/.cursor/rules/opendock-research-desk.mdc
+    to: .cursor/rules/opendock-research-desk.mdc
+  - from: files/.agents/hooks/opendock-research-desk/hook.json
+    to: .agents/hooks/opendock-research-desk/hook.json
+doctor:
+  - id: domain-guide
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath RESEARCH_DESK.md) { exit 0 } else { exit 1 }"
+  - id: harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/research-desk/RESEARCH_RUN.md) { exit 0 } else { exit 1 }"
+  - id: harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__research-desk/check.mjs) { exit 0 } else { exit 1 }"
+  - id: skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-research-desk/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-research-desk/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: hook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-research-desk/hook.json) { exit 0 } else { exit 1 }"

@@ -1,0 +1,9 @@
+{
+  "name": "opendock-research-desk-quality-gate",
+  "description": "Run the Research Desk harness before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__research-desk/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__research-desk/check.mjs` manually before final response."
+}

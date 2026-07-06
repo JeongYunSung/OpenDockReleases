@@ -1,0 +1,16 @@
+---
+description: Security Privacy Ultrawork 품질 게이트
+globs: **/*
+alwaysApply: false
+---
+
+Apply Security Privacy Ultrawork when working on this domain.
+
+- 수집/저장/전송/삭제되는 데이터와 PII 여부를 inventory로 작성합니다.
+- 인증이 필요한 endpoint, admin action, 데이터 export에는 guard가 있어야 합니다.
+- secret, token, private key, `.env` 값은 산출물에 포함하지 않습니다.
+- prompt injection, embedded instruction, tool abuse, data exfiltration 경로를 따로 봅니다.
+- dependency와 외부 provider 사용에는 목적, 데이터 범위, 보존 기간, 대체 경로를 기록합니다.
+- 발견 사항은 severity, impact, evidence, fix owner, due date로 정리합니다.
+
+Before handoff, run `node .opendock/harness/opendock__security-privacy-ultrawork/check.mjs` when possible.

@@ -1,0 +1,9 @@
+{
+  "name": "opendock-content-creator-quality-gate",
+  "description": "Run the Content Creator harness before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__content-creator/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__content-creator/check.mjs` manually before final response."
+}

@@ -1,0 +1,9 @@
+{
+  "name": "opendock-customer-support-ai-quality-gate",
+  "description": "Run the Customer Support AI harness before final handoff.",
+  "events": [
+    "Stop"
+  ],
+  "command": "node .opendock/harness/opendock__customer-support-ai/check.mjs",
+  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__customer-support-ai/check.mjs` manually before final response."
+}

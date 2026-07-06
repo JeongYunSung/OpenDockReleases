@@ -1,0 +1,16 @@
+---
+description: Content Creator 품질 게이트
+globs: **/*
+alwaysApply: false
+---
+
+Apply Content Creator when working on this domain.
+
+- 콘텐츠는 audience, promise, angle, evidence, CTA를 먼저 정의합니다.
+- 블로그/뉴스레터/영상/숏폼은 채널별 hook, structure, length, reuse plan이 달라야 합니다.
+- 썸네일/제목은 과장보다 구체적인 기대효과와 시각적 대비를 우선합니다.
+- 출처 없는 claim, 과장된 수치, 타인 저작물 무단 사용을 금지합니다.
+- 업로드 전 title, description, tags, captions, asset rights, schedule, repurpose plan을 점검합니다.
+- 브랜드 톤과 금지어는 프로젝트의 WRITING.md 또는 README 정책을 우선합니다.
+
+Before handoff, run `node .opendock/harness/opendock__content-creator/check.mjs` when possible.
