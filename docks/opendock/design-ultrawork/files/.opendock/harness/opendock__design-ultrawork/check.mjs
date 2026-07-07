@@ -139,6 +139,13 @@ function parseField(text, name) {
   return match ? match[1].trim() : "";
 }
 
+function hasMeaningfulField(text, name) {
+  const value = parseField(text, name)
+    .replace(/^[-_*`"']+|[-_*`"'.]+$/g, "")
+    .trim();
+  return value.length > 0 && !/^(todo|tbd|n\/a|none|미정|없음)$/i.test(value);
+}
+
 function extractTargetPaths(text) {
   const targets = new Set();
   const addCandidate = (candidate) => {
@@ -209,7 +216,7 @@ function resolveTargetScope(failures) {
   const activeRun = runs.find((run) => activeStatuses.has(run.status)) ?? runs.find((run) => run.targets.length > 0) ?? runs[0];
   const active = activeStatuses.has(activeRun.status) || (!inactiveStatuses.has(activeRun.status) && activeRun.targets.length > 0);
   if (!active && activeRun.targets.length === 0) {
-    return { label: activeRun.label, active: false, targets: [] };
+    return { label: activeRun.label, active: false, targets: [], manifestRel: activeRun.manifestRel, manifestText: activeRun.manifestText };
   }
   if (activeRun.targets.length === 0) {
     failures.push({
@@ -218,7 +225,13 @@ function resolveTargetScope(failures) {
       detail: "Active design run must list target files to validate.",
     });
   }
-  return { label: activeRun.label, active: true, targets: activeRun.targets };
+  return {
+    label: activeRun.label,
+    active: true,
+    targets: activeRun.targets,
+    manifestRel: activeRun.manifestRel,
+    manifestText: activeRun.manifestText,
+  };
 }
 
 function readText(file) {
@@ -376,6 +389,227 @@ function push(failures, rule, file, detail) {
   failures.push({ rule, file, detail });
 }
 
+function checkLayoutPlanning(scope, failures) {
+  if (!scope.active || !scope.manifestText || scope.label === "argv") return;
+  const requiredFields = [
+    ["Layout Type", "Record the screen type before building: ecommerce, blog, portfolio, landing, saas, dashboard, mobile, brand, or component."],
+    ["First Gaze", "Record where the user's first attention should go."],
+    ["Primary Action", "Record the primary user action or CTA."],
+    ["Section Architecture", "Record the planned section order or layout structure."],
+    ["Reference Categories", "Record the reference categories reviewed for this task."],
+    ["Reference Notes", "Record what pattern was extracted without copying source assets."],
+  ];
+  for (const [field, detail] of requiredFields) {
+    if (!hasMeaningfulField(scope.manifestText, field)) {
+      push(failures, "missing-layout-planning", scope.manifestRel ?? "design run manifest", `${field}: ${detail}`);
+    }
+  }
+  const notes = parseField(scope.manifestText, "Reference Notes").toLowerCase();
+  if (/\b(copy|clone|screenshot|exact|rip|scrape)\b/.test(notes)) {
+    push(
+      failures,
+      "unsafe-reference-use",
+      scope.manifestRel ?? "design run manifest",
+      "Reference notes must describe extracted intent/patterns, not copying, cloning, screenshots, or scraping.",
+    );
+  }
+}
+
+function checkPalettePlanning(scope, failures) {
+  if (!scope.active || !scope.manifestText || scope.label === "argv") return;
+  const requiredFields = [
+    ["Palette Source", "Record whether the palette comes from Coolors, Color Hunt, Adobe Color, existing brand, image extraction, or custom exploration."],
+    ["Palette Mood", "Record the intended color mood and what mood should be avoided."],
+    ["Palette Role Map", "Map colors to canvas, surface, text, border, primary, secondary, focus, and semantic roles."],
+    ["Contrast Plan", "Record how text, CTA, disabled state, and focus ring contrast will be checked."],
+    ["Color Risks", "Record palette risks such as muddy warmth, extra accents, low contrast, or semantic color confusion."],
+  ];
+  for (const [field, detail] of requiredFields) {
+    if (!hasMeaningfulField(scope.manifestText, field)) {
+      push(failures, "missing-palette-planning", scope.manifestRel ?? "design run manifest", `${field}: ${detail}`);
+    }
+  }
+
+  const source = parseField(scope.manifestText, "Palette Source").toLowerCase();
+  if (source) {
+    const knownSource = /\b(coolors?|color\s*hunt|adobe|brand|image|photo|custom|existing|design\.md)\b/.test(source);
+    if (!knownSource) {
+      push(
+        failures,
+        "unclear-palette-source",
+        scope.manifestRel ?? "design run manifest",
+        "Palette Source should name a concrete basis such as Coolors, Color Hunt, Adobe Color, existing brand, image extraction, custom exploration, or DESIGN.md.",
+      );
+    }
+  }
+
+  const roleMap = parseField(scope.manifestText, "Palette Role Map").toLowerCase();
+  if (roleMap) {
+    const roleGroups = [
+      /\b(canvas|background|bg)\b/,
+      /\b(surface|card|panel|menu)\b/,
+      /\b(text|ink|foreground)\b/,
+      /\b(border|line|divider)\b/,
+      /\b(primary|accent|cta|action)\b/,
+      /\b(focus|ring)\b/,
+      /\b(success|warning|error|danger|semantic)\b/,
+    ];
+    const covered = roleGroups.filter((group) => group.test(roleMap)).length;
+    if (covered < 5) {
+      push(
+        failures,
+        "incomplete-palette-role-map",
+        scope.manifestRel ?? "design run manifest",
+        "Palette Role Map should cover at least five roles among canvas/background, surface, text, border, primary/accent, focus, and semantic colors.",
+      );
+    }
+  }
+
+  const contrastPlan = parseField(scope.manifestText, "Contrast Plan").toLowerCase();
+  if (contrastPlan) {
+    const contrastTargets = [/\b(text|body|copy)\b/, /\b(cta|button|action)\b/, /\b(focus|ring)\b/, /\b(disabled|muted)\b/, /\b(aa|contrast)\b/];
+    const covered = contrastTargets.filter((target) => target.test(contrastPlan)).length;
+    if (covered < 3) {
+      push(
+        failures,
+        "incomplete-contrast-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Contrast Plan should mention at least three targets among body text, CTA/button, focus ring, disabled/muted state, and AA/contrast.",
+      );
+    }
+  }
+
+  const risks = parseField(scope.manifestText, "Color Risks").toLowerCase();
+  if (risks) {
+    const riskTargets = [
+      /\b(beige|cream|tan|brown|orange|warm|muddy)\b/,
+      /\b(extra|multiple|competing|random).*\b(accent|color|colour)\b|\b(accent|color|colour).*\b(extra|multiple|competing|random)\b/,
+      /\b(low|weak|poor).*\b(contrast|readability)\b|\b(contrast|readability).*\b(low|weak|poor)\b/,
+      /\b(semantic|success|warning|error|danger)\b/,
+    ];
+    const covered = riskTargets.filter((target) => target.test(risks)).length;
+    if (covered < 2) {
+      push(
+        failures,
+        "incomplete-color-risk-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Color Risks should mention at least two concrete risks such as muddy warm palettes, extra/competing accents, low contrast, or semantic color confusion.",
+      );
+    }
+  }
+}
+
+function checkCreateUiPlanning(scope, failures) {
+  if (!scope.active || !scope.manifestText || scope.label === "argv") return;
+  const requiredFields = [
+    ["Component Inventory", "Record the chosen UI primitives before building, such as Button, Field, Input, Toast, Inline Alert, Modal, Select, Tabs, Badge, or Chip."],
+    ["Typography Token Plan", "Record the intended type roles: display, heading, body, paragraph, ui, numeric, or code."],
+    ["Spacing Token Plan", "Record which spacing scale is used for layout, section, and component rhythm."],
+    ["Radius Token Plan", "Record the radius personality for cards, fields, buttons, chips, overlays, and any pill usage."],
+    ["Shadow Token Plan", "Record the elevation/state/text-shadow language or explicitly say no shadow."],
+    ["State Coverage", "Record the relevant default, hover, focus, disabled, loading, empty, error, responsive, and reduced-motion states."],
+  ];
+
+  for (const [field, detail] of requiredFields) {
+    if (!hasMeaningfulField(scope.manifestText, field)) {
+      push(failures, "missing-create-ui-planning", scope.manifestRel ?? "design run manifest", `${field}: ${detail}`);
+    }
+  }
+
+  const inventory = parseField(scope.manifestText, "Component Inventory").toLowerCase();
+  if (inventory) {
+    const knownComponent = /\b(button|field|label|input|textarea|select|combobox|checkbox|radio|switch|slider|tabs?|tab menu|segmented|navbar|sidebar|breadcrumb|pagination|toast|inline alert|alert|modal|popover|dropdown|tooltip|badge|chip|status|progress|spinner|stepper|avatar|accordion|separator)\b/.test(
+      inventory,
+    );
+    if (!knownComponent) {
+      push(
+        failures,
+        "unclear-component-inventory",
+        scope.manifestRel ?? "design run manifest",
+        "Component Inventory should name concrete primitives and not only describe visual style.",
+      );
+    }
+  }
+
+  const typography = parseField(scope.manifestText, "Typography Token Plan").toLowerCase();
+  if (typography) {
+    const typeRoles = [/\bdisplay\b/, /\bheading\b/, /\bbody\b/, /\bparagraph\b/, /\bui\b/, /\bnumeric\b/, /\bcode\b/];
+    const covered = typeRoles.filter((role) => role.test(typography)).length;
+    if (covered < 2) {
+      push(
+        failures,
+        "incomplete-typography-token-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Typography Token Plan should mention at least two roles such as heading, paragraph, body, ui, numeric, or code.",
+      );
+    }
+  }
+
+  const spacing = parseField(scope.manifestText, "Spacing Token Plan").toLowerCase();
+  if (spacing) {
+    const spacingRoles = [/\blayout\b/, /\bsection\b/, /\bcomponent\b/];
+    const covered = spacingRoles.filter((role) => role.test(spacing)).length;
+    if (covered < 2) {
+      push(
+        failures,
+        "incomplete-spacing-token-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Spacing Token Plan should distinguish at least two scales among layout, section, and component.",
+      );
+    }
+  }
+
+  const radius = parseField(scope.manifestText, "Radius Token Plan").toLowerCase();
+  if (radius) {
+    const hasRadiusTarget = /\b(card|surface|field|input|button|chip|tab|modal|popover|menu|overlay|component|pill|full)\b/.test(radius);
+    if (!hasRadiusTarget) {
+      push(
+        failures,
+        "unclear-radius-token-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Radius Token Plan should explain how radius applies to surfaces and controls.",
+      );
+    }
+  }
+
+  const shadow = parseField(scope.manifestText, "Shadow Token Plan").toLowerCase();
+  if (shadow) {
+    const hasShadowIntent = /\b(elevation|surface|card|popover|modal|dropdown|focus|state|component|text|none|no shadow)\b/.test(shadow);
+    if (!hasShadowIntent) {
+      push(
+        failures,
+        "unclear-shadow-token-plan",
+        scope.manifestRel ?? "design run manifest",
+        "Shadow Token Plan should describe elevation, component state, text legibility, or explicitly say no shadow.",
+      );
+    }
+  }
+
+  const stateCoverage = parseField(scope.manifestText, "State Coverage").toLowerCase();
+  if (stateCoverage) {
+    const stateRoles = [
+      /\bdefault\b/,
+      /\bhover\b/,
+      /\bfocus|focus-visible\b/,
+      /\bdisabled\b/,
+      /\bloading|pending\b/,
+      /\bempty\b/,
+      /\berror|invalid\b/,
+      /\bresponsive|mobile\b/,
+      /\breduced[- ]motion\b/,
+    ];
+    const covered = stateRoles.filter((role) => role.test(stateCoverage)).length;
+    if (covered < 4) {
+      push(
+        failures,
+        "incomplete-state-coverage",
+        scope.manifestRel ?? "design run manifest",
+        "State Coverage should cover at least four relevant states such as default, hover, focus, disabled, loading, empty, error, responsive, or reduced motion.",
+      );
+    }
+  }
+}
+
 function escapeTerminal(value) {
   return String(value)
     .replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "")
@@ -402,6 +636,18 @@ function checkCommonTextRules(files, failures) {
     }
     if (isUiFile && /text-\[\s*var\(/i.test(file.text)) {
       push(failures, "tailwind-var-font-size", file.rel, "Do not use Tailwind text-[var(...)] for font-size.");
+    }
+    if (isUiFile && /\btext-\[\s*(?:\d+(?:\.\d+)?(?:px|rem|em|vw|vh)|var\()/i.test(file.text)) {
+      push(failures, "arbitrary-type-size", file.rel, "Prefer semantic type tokens over arbitrary Tailwind text-[...] sizes.");
+    }
+    if (isUiFile && /\b(?:leading|tracking|font)-\[[^\]]+\]/i.test(file.text)) {
+      push(failures, "hand-tuned-type-metrics", file.rel, "Avoid hand-tuned leading/tracking/font arbitrary classes unless documented in the design run.");
+    }
+    if (isUiFile && /\b(?:rounded|p|px|py|pt|pr|pb|pl|m|mx|my|mt|mr|mb|ml|gap)-\[\s*\d+(?:\.\d+)?(?:px|rem|em)\s*\]/i.test(file.text)) {
+      push(failures, "arbitrary-spacing-radius", file.rel, "Prefer layout/section/component spacing and radius tokens over arbitrary Tailwind values.");
+    }
+    if (isUiFile && /\bshadow-\[[^\]]+\]/i.test(file.text)) {
+      push(failures, "raw-shadow-stack", file.rel, "Prefer semantic elevation/state shadow tokens over raw arbitrary shadow stacks.");
     }
     if (isUiFile && /\p{Extended_Pictographic}/u.test(file.text)) {
       push(failures, "emoji-ui-icon", file.rel, "StyleSeed forbids emoji as UI icons; use one line-icon set in currentColor.");
@@ -580,6 +826,9 @@ function runDesignChecks() {
 
   checkCommonTextRules(files, failures);
   checkAccessibilityRules(files, failures);
+  checkLayoutPlanning(scope, failures);
+  checkPalettePlanning(scope, failures);
+  checkCreateUiPlanning(scope, failures);
   checkLengthsAgainstContract(files, contract, failures);
   checkColorsAgainstContract(files, contract, failures);
   checkBrandSpecificRules(files, contract, failures);

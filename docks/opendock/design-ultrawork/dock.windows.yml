@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/design-ultrawork
 summary: DESIGN.md 기준과 강한 UI 체크에 맞춰 디자인 구현 품질을 점검하는 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -18,6 +17,16 @@ files:
     to: GEMINI.md
   - from: files/README.md
     to: README.md
+  - from: files/REFERENCE_RESEARCH.md
+    to: REFERENCE_RESEARCH.md
+  - from: files/LAYOUT_PLAYBOOK.md
+    to: LAYOUT_PLAYBOOK.md
+  - from: files/COLOR_PLAYBOOK.md
+    to: COLOR_PLAYBOOK.md
+  - from: files/PATTERN_GUIDE.md
+    to: PATTERN_GUIDE.md
+  - from: files/CREATE_UI_PLAYBOOK.md
+    to: CREATE_UI_PLAYBOOK.md
   - from: files/HARNESS.md
     to: HARNESS.md
   - from: files/.opendock/harness/opendock__design-ultrawork/check.mjs
@@ -40,14 +49,24 @@ files:
     to: .agents/hooks/opendock-design-ultrawork/hook.json
 doctor:
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: reference-research
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath REFERENCE_RESEARCH.md) { exit 0 } else { exit 1 }"
+  - id: layout-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath LAYOUT_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: color-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath COLOR_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: pattern-guide
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath PATTERN_GUIDE.md) { exit 0 } else { exit 1 }"
+  - id: create-ui-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CREATE_UI_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: test -f .opendock/harness/opendock__design-ultrawork/check.mjs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__design-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: design-run-template
-    check: test -f .opendock/templates/design/DESIGN_RUN.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/design/DESIGN_RUN.md) { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-design-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-design-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-design-ultrawork/quality-gate.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-design-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"
   - id: hook
-    check: test -f .agents/hooks/opendock-design-ultrawork/hook.json
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-design-ultrawork/hook.json) { exit 0 } else { exit 1 }"

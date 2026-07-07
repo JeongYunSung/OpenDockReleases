@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/design-ultrawork
 summary: DESIGN.md 기준과 강한 UI 체크에 맞춰 디자인 구현 품질을 점검하는 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -18,6 +17,16 @@ files:
     to: GEMINI.md
   - from: files/README.md
     to: README.md
+  - from: files/REFERENCE_RESEARCH.md
+    to: REFERENCE_RESEARCH.md
+  - from: files/LAYOUT_PLAYBOOK.md
+    to: LAYOUT_PLAYBOOK.md
+  - from: files/COLOR_PLAYBOOK.md
+    to: COLOR_PLAYBOOK.md
+  - from: files/PATTERN_GUIDE.md
+    to: PATTERN_GUIDE.md
+  - from: files/CREATE_UI_PLAYBOOK.md
+    to: CREATE_UI_PLAYBOOK.md
   - from: files/HARNESS.md
     to: HARNESS.md
   - from: files/.opendock/harness/opendock__design-ultrawork/check.mjs
@@ -41,6 +50,16 @@ files:
 doctor:
   - id: harness-doc
     check: test -f HARNESS.md
+  - id: reference-research
+    check: test -f REFERENCE_RESEARCH.md
+  - id: layout-playbook
+    check: test -f LAYOUT_PLAYBOOK.md
+  - id: color-playbook
+    check: test -f COLOR_PLAYBOOK.md
+  - id: pattern-guide
+    check: test -f PATTERN_GUIDE.md
+  - id: create-ui-playbook
+    check: test -f CREATE_UI_PLAYBOOK.md
   - id: harness-script
     check: test -f .opendock/harness/opendock__design-ultrawork/check.mjs
   - id: design-run-template
