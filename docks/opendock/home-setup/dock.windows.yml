@@ -1,0 +1,49 @@
+opendock: 1
+summary: 집의 실측, 보유 물품, 기능 구역, 예산을 근거로 구매·배치·설치 순서를 검증하는 품질 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - home-setup
+  - household
+  - space-planning
+  - inventory
+  - budget
+  - safety
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/HOME_SETUP_PLAYBOOK.md
+    to: HOME_SETUP_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-home-setup/SKILL.md
+    to: .agents/skills/opendock-home-setup/SKILL.md
+  - from: files/.agents/workflows/opendock-home-setup/quality-gate.md
+    to: .agents/workflows/opendock-home-setup/quality-gate.md
+  - from: files/.opendock/templates/home-setup/RUN.md
+    to: .opendock/templates/home-setup/RUN.md
+  - from: files/.opendock/harness/opendock__home-setup/check.mjs
+    to: .opendock/harness/opendock__home-setup/check.mjs
+doctor:
+  - id: home-setup-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-harness-guide
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HOME_SETUP_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-home-setup/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-home-setup/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/home-setup/RUN.md) { exit 0 } else { exit 1 }"
+  - id: home-setup-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__home-setup/check.mjs) { exit 0 } else { exit 1 }"
+

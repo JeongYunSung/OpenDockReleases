@@ -1,0 +1,48 @@
+opendock: 1
+summary: 여행 조건을 현실적인 동선, 예산, 예약 점검, 우천 대안과 안전 계획으로 바꾸는 품질 게이트.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - travel
+  - trip-planning
+  - itinerary
+  - budget
+  - safety
+  - research
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/TRIP_PLANNING_PLAYBOOK.md
+    to: TRIP_PLANNING_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-trip-planner/SKILL.md
+    to: .agents/skills/opendock-trip-planner/SKILL.md
+  - from: files/.agents/workflows/opendock-trip-planner/quality-gate.md
+    to: .agents/workflows/opendock-trip-planner/quality-gate.md
+  - from: files/.opendock/templates/trip-planner
+    to: .opendock/templates/trip-planner
+  - from: files/.opendock/harness/opendock__trip-planner
+    to: .opendock/harness/opendock__trip-planner
+doctor:
+  - id: trip-planner-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath TRIP_PLANNING_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-trip-planner/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-trip-planner/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/trip-planner/RUN.md) { exit 0 } else { exit 1 }"
+  - id: trip-planner-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__trip-planner/check.mjs) { exit 0 } else { exit 1 }"

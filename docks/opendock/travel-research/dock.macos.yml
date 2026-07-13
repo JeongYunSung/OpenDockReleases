@@ -1,0 +1,48 @@
+opendock: 1
+summary: 목적지의 지역, 교통, 계절, 안전, 규칙, 결제와 비용을 최신 출처로 비교하는 여행 조사 품질 게이트.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - travel
+  - research
+  - destination
+  - sources
+  - safety
+  - recommendations
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/TRAVEL_RESEARCH_PLAYBOOK.md
+    to: TRAVEL_RESEARCH_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-travel-research/SKILL.md
+    to: .agents/skills/opendock-travel-research/SKILL.md
+  - from: files/.agents/workflows/opendock-travel-research/quality-gate.md
+    to: .agents/workflows/opendock-travel-research/quality-gate.md
+  - from: files/.opendock/templates/travel-research
+    to: .opendock/templates/travel-research
+  - from: files/.opendock/harness/opendock__travel-research
+    to: .opendock/harness/opendock__travel-research
+doctor:
+  - id: travel-research-readme
+    check: test -f README.md
+  - id: travel-research-agents
+    check: test -f AGENTS.md
+  - id: travel-research-harness-doc
+    check: test -f HARNESS.md
+  - id: travel-research-playbook
+    check: test -f TRAVEL_RESEARCH_PLAYBOOK.md
+  - id: travel-research-skill
+    check: test -f .agents/skills/opendock-travel-research/SKILL.md
+  - id: travel-research-workflow
+    check: test -f .agents/workflows/opendock-travel-research/quality-gate.md
+  - id: travel-research-template
+    check: test -f .opendock/templates/travel-research/RUN.md
+  - id: travel-research-harness
+    check: test -f .opendock/harness/opendock__travel-research/check.mjs

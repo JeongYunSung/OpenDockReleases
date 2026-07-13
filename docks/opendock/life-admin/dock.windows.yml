@@ -1,0 +1,50 @@
+opendock: 1
+summary: 구독, 갱신, 문서 메타데이터, 보증, 반복 업무를 개인정보 최소화 원칙으로 관리하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - life-admin
+  - subscriptions
+  - renewals
+  - documents
+  - warranty
+  - reminders
+  - privacy
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/LIFE_ADMIN_PLAYBOOK.md
+    to: LIFE_ADMIN_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-life-admin/SKILL.md
+    to: .agents/skills/opendock-life-admin/SKILL.md
+  - from: files/.agents/workflows/opendock-life-admin/quality-gate.md
+    to: .agents/workflows/opendock-life-admin/quality-gate.md
+  - from: files/.opendock/templates/life-admin
+    to: .opendock/templates/life-admin
+  - from: files/.opendock/harness/opendock__life-admin
+    to: .opendock/harness/opendock__life-admin
+doctor:
+  - id: life-admin-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath LIFE_ADMIN_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-life-admin/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-life-admin/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/life-admin/RUN.md) { exit 0 } else { exit 1 }"
+  - id: life-admin-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__life-admin/check.mjs) { exit 0 } else { exit 1 }"
+

@@ -1,0 +1,48 @@
+opendock: 1
+summary: 사진·메모를 시간선, 캡션, 회고와 여러 이야기 변형으로 정리하면서 동의·불확실성·개인정보 가림을 지키는 여행 기록 품질 게이트.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - travel
+  - journal
+  - storytelling
+  - photos
+  - privacy
+  - writing
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/TRAVEL_JOURNAL_PLAYBOOK.md
+    to: TRAVEL_JOURNAL_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-travel-journal/SKILL.md
+    to: .agents/skills/opendock-travel-journal/SKILL.md
+  - from: files/.agents/workflows/opendock-travel-journal/quality-gate.md
+    to: .agents/workflows/opendock-travel-journal/quality-gate.md
+  - from: files/.opendock/templates/travel-journal
+    to: .opendock/templates/travel-journal
+  - from: files/.opendock/harness/opendock__travel-journal
+    to: .opendock/harness/opendock__travel-journal
+doctor:
+  - id: travel-journal-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath TRAVEL_JOURNAL_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-travel-journal/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-travel-journal/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/travel-journal/RUN.md) { exit 0 } else { exit 1 }"
+  - id: travel-journal-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__travel-journal/check.mjs) { exit 0 } else { exit 1 }"

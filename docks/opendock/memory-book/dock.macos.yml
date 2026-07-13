@@ -1,0 +1,50 @@
+opendock: 1
+summary: 사진·메모·인터뷰를 출처, 동의, 위치 가림과 연결해 검증 가능한 기억책 서사로 정리하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - memories
+  - storytelling
+  - photos
+  - timeline
+  - captions
+  - consent
+  - privacy
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/MEMORY_BOOK_PLAYBOOK.md
+    to: MEMORY_BOOK_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-memory-book/SKILL.md
+    to: .agents/skills/opendock-memory-book/SKILL.md
+  - from: files/.agents/workflows/opendock-memory-book/quality-gate.md
+    to: .agents/workflows/opendock-memory-book/quality-gate.md
+  - from: files/.opendock/templates/memory-book
+    to: .opendock/templates/memory-book
+  - from: files/.opendock/harness/opendock__memory-book
+    to: .opendock/harness/opendock__memory-book
+doctor:
+  - id: memory-book-readme
+    check: test -f README.md
+  - id: memory-book-agents
+    check: test -f AGENTS.md
+  - id: memory-book-harness-doc
+    check: test -f HARNESS.md
+  - id: memory-book-playbook
+    check: test -f MEMORY_BOOK_PLAYBOOK.md
+  - id: memory-book-skill
+    check: test -f .agents/skills/opendock-memory-book/SKILL.md
+  - id: memory-book-workflow
+    check: test -f .agents/workflows/opendock-memory-book/quality-gate.md
+  - id: memory-book-run-template
+    check: test -f .opendock/templates/memory-book/RUN.md
+  - id: memory-book-harness
+    check: test -f .opendock/harness/opendock__memory-book/check.mjs
+

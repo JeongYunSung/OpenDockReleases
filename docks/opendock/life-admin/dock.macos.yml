@@ -1,0 +1,50 @@
+opendock: 1
+summary: 구독, 갱신, 문서 메타데이터, 보증, 반복 업무를 개인정보 최소화 원칙으로 관리하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - life-admin
+  - subscriptions
+  - renewals
+  - documents
+  - warranty
+  - reminders
+  - privacy
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/LIFE_ADMIN_PLAYBOOK.md
+    to: LIFE_ADMIN_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-life-admin/SKILL.md
+    to: .agents/skills/opendock-life-admin/SKILL.md
+  - from: files/.agents/workflows/opendock-life-admin/quality-gate.md
+    to: .agents/workflows/opendock-life-admin/quality-gate.md
+  - from: files/.opendock/templates/life-admin
+    to: .opendock/templates/life-admin
+  - from: files/.opendock/harness/opendock__life-admin
+    to: .opendock/harness/opendock__life-admin
+doctor:
+  - id: life-admin-readme
+    check: test -f README.md
+  - id: life-admin-agents
+    check: test -f AGENTS.md
+  - id: life-admin-harness-doc
+    check: test -f HARNESS.md
+  - id: life-admin-playbook
+    check: test -f LIFE_ADMIN_PLAYBOOK.md
+  - id: life-admin-skill
+    check: test -f .agents/skills/opendock-life-admin/SKILL.md
+  - id: life-admin-workflow
+    check: test -f .agents/workflows/opendock-life-admin/quality-gate.md
+  - id: life-admin-run-template
+    check: test -f .opendock/templates/life-admin/RUN.md
+  - id: life-admin-harness
+    check: test -f .opendock/harness/opendock__life-admin/check.mjs
+

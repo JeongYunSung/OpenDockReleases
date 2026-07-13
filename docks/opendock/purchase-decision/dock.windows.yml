@@ -1,0 +1,50 @@
+opendock: 1
+summary: 사용 사례, 가중 기준, 근거, 총소유비용을 연결해 검증 가능한 구매 결정을 만드는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - purchase
+  - decision
+  - comparison
+  - research
+  - budget
+  - evidence
+  - recommendation
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PURCHASE_DECISION_PLAYBOOK.md
+    to: PURCHASE_DECISION_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-purchase-decision/SKILL.md
+    to: .agents/skills/opendock-purchase-decision/SKILL.md
+  - from: files/.agents/workflows/opendock-purchase-decision/quality-gate.md
+    to: .agents/workflows/opendock-purchase-decision/quality-gate.md
+  - from: files/.opendock/templates/purchase-decision
+    to: .opendock/templates/purchase-decision
+  - from: files/.opendock/harness/opendock__purchase-decision
+    to: .opendock/harness/opendock__purchase-decision
+doctor:
+  - id: purchase-decision-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath PURCHASE_DECISION_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-purchase-decision/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-purchase-decision/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/purchase-decision/RUN.md) { exit 0 } else { exit 1 }"
+  - id: purchase-decision-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__purchase-decision/check.mjs) { exit 0 } else { exit 1 }"
+
