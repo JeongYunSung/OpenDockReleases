@@ -1,0 +1,65 @@
+opendock: 1
+summary: 로컬 영상의 검사, 트림, 변환, 자막 삽입, 썸네일 생성, Lanczos 업스케일을 안전하게 수행하고 검증하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - video
+  - ffmpeg
+  - media-metadata
+  - subtitle
+  - thumbnail
+  - upscale
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    npm: ">=10.0.0"
+dependencies:
+  video-helper:
+    manager: npm
+    path: .codex/opendock/video-ultrawork
+    mode: locked
+    timeout_ms: 600000
+    integrity:
+      - path: node_modules/node-av/binary/ffmpeg
+        sha256:
+          - 21e892603ea18c7607a34ce0b96c5f0b7299f8703ccb7b7a84baf38542ad78b2
+          - 81fde53658014fef0a9676edce18d9da4846182a34b81119b551d51d77d53f0d
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/README.md
+    to: README.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/VIDEO_PLAYBOOK.md
+    to: VIDEO_PLAYBOOK.md
+  - from: files/.codex/opendock/video-ultrawork
+    to: .codex/opendock/video-ultrawork
+  - from: files/.opendock/templates/video/VIDEO_RUN.md
+    to: .opendock/templates/video/VIDEO_RUN.md
+  - from: files/.opendock/harness/opendock__video-ultrawork
+    to: .opendock/harness/opendock__video-ultrawork
+  - from: files/.agents/skills/opendock-video-ultrawork/SKILL.md
+    to: .agents/skills/opendock-video-ultrawork/SKILL.md
+  - from: files/.agents/workflows/opendock-video-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-video-ultrawork/quality-gate.md
+doctor:
+  - id: video-playbook
+    check: test -f VIDEO_PLAYBOOK.md
+  - id: video-helper
+    check: test -f .codex/opendock/video-ultrawork/video-helper.mjs
+  - id: ffmpeg-dependency
+    check: test -f .codex/opendock/video-ultrawork/node_modules/node-av/binary/ffmpeg
+  - id: ffmpeg-integrity
+    check: test -f .codex/opendock/video-ultrawork/node_modules/node-av/binary/.opendock-verified.json
+  - id: mediainfo-dependency
+    check: test -d .codex/opendock/video-ultrawork/node_modules/mediainfo.js
+  - id: video-harness
+    check: test -f .opendock/harness/opendock__video-ultrawork/check.mjs
+  - id: video-run-template
+    check: test -f .opendock/templates/video/VIDEO_RUN.md
+  - id: video-skill
+    check: test -f .agents/skills/opendock-video-ultrawork/SKILL.md
+  - id: video-workflow
+    check: test -f .agents/workflows/opendock-video-ultrawork/quality-gate.md

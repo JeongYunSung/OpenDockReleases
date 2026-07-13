@@ -1,0 +1,25 @@
+{
+  "name": "@opendock/video-ultrawork-helper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.0.0 <25.0.0"
+  },
+  "scripts": {
+    "postinstall": "node verify-install.mjs"
+  },
+  "dependencies": {
+    "mediainfo.js": "0.3.7",
+    "node-av": "6.1.1"
+  },
+  "overrides": {
+    "werift": {
+      "ip": "npm:neoip@2.1.0"
+    },
+    "werift-ice": {
+      "ip": "npm:neoip@2.1.0"
+    }
+  }
+}
