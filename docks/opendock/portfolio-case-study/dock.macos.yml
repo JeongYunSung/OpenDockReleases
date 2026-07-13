@@ -1,0 +1,48 @@
+opendock: 1
+summary: 실제 근거, 의사결정, 결과와 회고를 과장 없이 연결하고 개인정보를 안전하게 비식별화하는 포트폴리오 사례 연구 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - portfolio
+  - case-study
+  - storytelling
+  - evidence
+  - privacy
+  - writing
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+    to: PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-portfolio-case-study/SKILL.md
+    to: .agents/skills/opendock-portfolio-case-study/SKILL.md
+  - from: files/.agents/workflows/opendock-portfolio-case-study/quality-gate.md
+    to: .agents/workflows/opendock-portfolio-case-study/quality-gate.md
+  - from: files/.opendock/templates/portfolio-case-study/RUN.md
+    to: .opendock/templates/portfolio-case-study/RUN.md
+  - from: files/.opendock/harness/opendock__portfolio-case-study/check.mjs
+    to: .opendock/harness/opendock__portfolio-case-study/check.mjs
+doctor:
+  - id: portfolio-case-study-readme
+    check: test -f README.md
+  - id: portfolio-case-study-agents
+    check: test -f AGENTS.md
+  - id: portfolio-case-study-harness-doc
+    check: test -f HARNESS.md
+  - id: portfolio-case-study-playbook
+    check: test -f PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+  - id: portfolio-case-study-skill
+    check: test -f .agents/skills/opendock-portfolio-case-study/SKILL.md
+  - id: portfolio-case-study-workflow
+    check: test -f .agents/workflows/opendock-portfolio-case-study/quality-gate.md
+  - id: portfolio-case-study-run-template
+    check: test -f .opendock/templates/portfolio-case-study/RUN.md
+  - id: portfolio-case-study-harness-script
+    check: test -f .opendock/harness/opendock__portfolio-case-study/check.mjs

@@ -1,0 +1,49 @@
+opendock: 1
+summary: 프로젝트 근거로 README의 독자, 명령, 예제, 문제 해결, 호환성과 제안 변경을 검증합니다.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - readme
+  - documentation
+  - audit
+  - quick-start
+  - maintenance
+  - harness
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/README_DOCTOR_PLAYBOOK.md
+    to: README_DOCTOR_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-readme-doctor/SKILL.md
+    to: .agents/skills/opendock-readme-doctor/SKILL.md
+  - from: files/.agents/workflows/opendock-readme-doctor/quality-gate.md
+    to: .agents/workflows/opendock-readme-doctor/quality-gate.md
+  - from: files/.opendock/templates/readme-doctor/RUN.md
+    to: .opendock/templates/readme-doctor/RUN.md
+  - from: files/.opendock/harness/opendock__readme-doctor/check.mjs
+    to: .opendock/harness/opendock__readme-doctor/check.mjs
+doctor:
+  - id: readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README_DOCTOR_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-readme-doctor/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-readme-doctor/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/readme-doctor/RUN.md) { exit 0 } else { exit 1 }"
+  - id: harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__readme-doctor/check.mjs) { exit 0 } else { exit 1 }"
+

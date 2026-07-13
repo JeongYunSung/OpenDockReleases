@@ -1,0 +1,48 @@
+opendock: 1
+summary: 원칙, semantic token, component state, 접근성, 거버넌스와 도입 계획을 연결해 운영 가능한 디자인 시스템을 설계하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - design-system
+  - tokens
+  - components
+  - accessibility
+  - governance
+  - adoption
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/DESIGN_SYSTEM_PLAYBOOK.md
+    to: DESIGN_SYSTEM_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-design-system/SKILL.md
+    to: .agents/skills/opendock-design-system/SKILL.md
+  - from: files/.agents/workflows/opendock-design-system/quality-gate.md
+    to: .agents/workflows/opendock-design-system/quality-gate.md
+  - from: files/.opendock/templates/design-system/RUN.md
+    to: .opendock/templates/design-system/RUN.md
+  - from: files/.opendock/harness/opendock__design-system/check.mjs
+    to: .opendock/harness/opendock__design-system/check.mjs
+doctor:
+  - id: design-system-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: design-system-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: design-system-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: design-system-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath DESIGN_SYSTEM_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: design-system-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-design-system/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: design-system-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-design-system/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: design-system-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/design-system/RUN.md) { exit 0 } else { exit 1 }"
+  - id: design-system-harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__design-system/check.mjs) { exit 0 } else { exit 1 }"

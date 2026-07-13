@@ -1,0 +1,48 @@
+opendock: 1
+summary: 제품 경험을 근거 중심으로 직설적으로 리뷰하고 개선 우선순위를 검증하는 품질 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - product
+  - roast
+  - review
+  - ux
+  - conversion
+  - quality-gate
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/PRODUCT_ROAST_PLAYBOOK.md
+    to: PRODUCT_ROAST_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-product-roast/SKILL.md
+    to: .agents/skills/opendock-product-roast/SKILL.md
+  - from: files/.agents/workflows/opendock-product-roast/quality-gate.md
+    to: .agents/workflows/opendock-product-roast/quality-gate.md
+  - from: files/.opendock/templates/product-roast/RUN.md
+    to: .opendock/templates/product-roast/RUN.md
+  - from: files/.opendock/harness/opendock__product-roast/check.mjs
+    to: .opendock/harness/opendock__product-roast/check.mjs
+doctor:
+  - id: product-roast-readme
+    check: test -f README.md
+  - id: product-roast-agents
+    check: test -f AGENTS.md
+  - id: product-roast-harness-doc
+    check: test -f HARNESS.md
+  - id: product-roast-playbook
+    check: test -f PRODUCT_ROAST_PLAYBOOK.md
+  - id: product-roast-skill
+    check: test -f .agents/skills/opendock-product-roast/SKILL.md
+  - id: product-roast-workflow
+    check: test -f .agents/workflows/opendock-product-roast/quality-gate.md
+  - id: product-roast-run-template
+    check: test -f .opendock/templates/product-roast/RUN.md
+  - id: product-roast-harness
+    check: test -f .opendock/harness/opendock__product-roast/check.mjs

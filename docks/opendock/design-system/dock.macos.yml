@@ -1,0 +1,48 @@
+opendock: 1
+summary: 원칙, semantic token, component state, 접근성, 거버넌스와 도입 계획을 연결해 운영 가능한 디자인 시스템을 설계하는 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - design-system
+  - tokens
+  - components
+  - accessibility
+  - governance
+  - adoption
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/DESIGN_SYSTEM_PLAYBOOK.md
+    to: DESIGN_SYSTEM_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-design-system/SKILL.md
+    to: .agents/skills/opendock-design-system/SKILL.md
+  - from: files/.agents/workflows/opendock-design-system/quality-gate.md
+    to: .agents/workflows/opendock-design-system/quality-gate.md
+  - from: files/.opendock/templates/design-system/RUN.md
+    to: .opendock/templates/design-system/RUN.md
+  - from: files/.opendock/harness/opendock__design-system/check.mjs
+    to: .opendock/harness/opendock__design-system/check.mjs
+doctor:
+  - id: design-system-readme
+    check: test -f README.md
+  - id: design-system-agents
+    check: test -f AGENTS.md
+  - id: design-system-harness-doc
+    check: test -f HARNESS.md
+  - id: design-system-playbook
+    check: test -f DESIGN_SYSTEM_PLAYBOOK.md
+  - id: design-system-skill
+    check: test -f .agents/skills/opendock-design-system/SKILL.md
+  - id: design-system-workflow
+    check: test -f .agents/workflows/opendock-design-system/quality-gate.md
+  - id: design-system-run-template
+    check: test -f .opendock/templates/design-system/RUN.md
+  - id: design-system-harness-script
+    check: test -f .opendock/harness/opendock__design-system/check.mjs

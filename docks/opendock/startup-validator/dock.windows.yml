@@ -1,0 +1,48 @@
+opendock: 1
+summary: 창업 가설을 출처, 인터뷰, pass/fail 기준, MVP와 다음 결정으로 연결하는 validation dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - startup
+  - validation
+  - customer-discovery
+  - mvp
+  - pricing
+  - research
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/STARTUP_VALIDATION_PLAYBOOK.md
+    to: STARTUP_VALIDATION_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-startup-validator/SKILL.md
+    to: .agents/skills/opendock-startup-validator/SKILL.md
+  - from: files/.agents/workflows/opendock-startup-validator/quality-gate.md
+    to: .agents/workflows/opendock-startup-validator/quality-gate.md
+  - from: files/.opendock/templates/startup-validator/RUN.md
+    to: .opendock/templates/startup-validator/RUN.md
+  - from: files/.opendock/harness/opendock__startup-validator/check.mjs
+    to: .opendock/harness/opendock__startup-validator/check.mjs
+doctor:
+  - id: startup-validator-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath STARTUP_VALIDATION_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-startup-validator/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-startup-validator/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/startup-validator/RUN.md) { exit 0 } else { exit 1 }"
+  - id: startup-validator-harness
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__startup-validator/check.mjs) { exit 0 } else { exit 1 }"

@@ -1,0 +1,48 @@
+opendock: 1
+summary: 사용자 경험 문제를 근거와 심각도로 분류하고 접근성, 반응형, 카피까지 실행 가능한 개선안으로 정리하는 UX 감사 dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ux
+  - audit
+  - accessibility
+  - responsive
+  - usability
+  - evidence
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/UX_AUDIT_PLAYBOOK.md
+    to: UX_AUDIT_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-ux-audit/SKILL.md
+    to: .agents/skills/opendock-ux-audit/SKILL.md
+  - from: files/.agents/workflows/opendock-ux-audit/quality-gate.md
+    to: .agents/workflows/opendock-ux-audit/quality-gate.md
+  - from: files/.opendock/templates/ux-audit/RUN.md
+    to: .opendock/templates/ux-audit/RUN.md
+  - from: files/.opendock/harness/opendock__ux-audit/check.mjs
+    to: .opendock/harness/opendock__ux-audit/check.mjs
+doctor:
+  - id: ux-audit-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-harness-doc
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-playbook
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath UX_AUDIT_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-ux-audit/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-ux-audit/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-run-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/ux-audit/RUN.md) { exit 0 } else { exit 1 }"
+  - id: ux-audit-harness-script
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__ux-audit/check.mjs) { exit 0 } else { exit 1 }"

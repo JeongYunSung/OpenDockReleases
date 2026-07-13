@@ -1,0 +1,48 @@
+opendock: 1
+summary: 창업 가설을 출처, 인터뷰, pass/fail 기준, MVP와 다음 결정으로 연결하는 validation dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - startup
+  - validation
+  - customer-discovery
+  - mvp
+  - pricing
+  - research
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/STARTUP_VALIDATION_PLAYBOOK.md
+    to: STARTUP_VALIDATION_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-startup-validator/SKILL.md
+    to: .agents/skills/opendock-startup-validator/SKILL.md
+  - from: files/.agents/workflows/opendock-startup-validator/quality-gate.md
+    to: .agents/workflows/opendock-startup-validator/quality-gate.md
+  - from: files/.opendock/templates/startup-validator/RUN.md
+    to: .opendock/templates/startup-validator/RUN.md
+  - from: files/.opendock/harness/opendock__startup-validator/check.mjs
+    to: .opendock/harness/opendock__startup-validator/check.mjs
+doctor:
+  - id: startup-validator-readme
+    check: test -f README.md
+  - id: startup-validator-agents
+    check: test -f AGENTS.md
+  - id: startup-validator-harness-doc
+    check: test -f HARNESS.md
+  - id: startup-validator-playbook
+    check: test -f STARTUP_VALIDATION_PLAYBOOK.md
+  - id: startup-validator-skill
+    check: test -f .agents/skills/opendock-startup-validator/SKILL.md
+  - id: startup-validator-workflow
+    check: test -f .agents/workflows/opendock-startup-validator/quality-gate.md
+  - id: startup-validator-run-template
+    check: test -f .opendock/templates/startup-validator/RUN.md
+  - id: startup-validator-harness
+    check: test -f .opendock/harness/opendock__startup-validator/check.mjs
