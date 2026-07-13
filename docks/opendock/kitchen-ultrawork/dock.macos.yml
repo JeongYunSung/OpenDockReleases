@@ -1,0 +1,45 @@
+opendock: 1
+summary: 보유 식자재를 안전한 레시피, 식단, 남은 재료 계획, 장보기 목록으로 연결하는 주방 품질 gate.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - kitchen
+  - cooking
+  - recipe
+  - pantry
+  - meal-planning
+  - food-safety
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/KITCHEN_PLAYBOOK.md
+    to: KITCHEN_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-kitchen-ultrawork/SKILL.md
+    to: .agents/skills/opendock-kitchen-ultrawork/SKILL.md
+  - from: files/.agents/workflows/opendock-kitchen-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-kitchen-ultrawork/quality-gate.md
+  - from: files/.opendock/templates/kitchen
+    to: .opendock/templates/kitchen
+  - from: files/.opendock/harness/opendock__kitchen-ultrawork
+    to: .opendock/harness/opendock__kitchen-ultrawork
+doctor:
+  - id: kitchen-playbook
+    check: test -f KITCHEN_PLAYBOOK.md
+  - id: kitchen-skill
+    check: test -f .agents/skills/opendock-kitchen-ultrawork/SKILL.md
+  - id: kitchen-workflow
+    check: test -f .agents/workflows/opendock-kitchen-ultrawork/quality-gate.md
+  - id: kitchen-run-template
+    check: test -f .opendock/templates/kitchen/KITCHEN_RUN.md
+  - id: recipe-template
+    check: test -f .opendock/templates/kitchen/RECIPE.md
+  - id: kitchen-harness
+    check: test -f .opendock/harness/opendock__kitchen-ultrawork/check.mjs
