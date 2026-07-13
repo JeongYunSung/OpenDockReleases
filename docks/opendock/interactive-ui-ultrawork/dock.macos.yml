@@ -1,0 +1,52 @@
+opendock: 1
+summary: 화면 인터랙션의 입력 parity, 상태, 모션, cleanup, 반응형 위험을 현재 target 범위에서 검증하는 품질 게이트.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ultrawork
+  - interactive-ui
+  - interaction
+  - accessibility
+  - motion
+  - harness
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+files:
+  - from: files/README.md
+    to: README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/HARNESS.md
+    to: HARNESS.md
+  - from: files/INTERACTION_PLAYBOOK.md
+    to: INTERACTION_PLAYBOOK.md
+  - from: files/.agents/skills/opendock-interactive-ui-ultrawork/SKILL.md
+    to: .agents/skills/opendock-interactive-ui-ultrawork/SKILL.md
+  - from: files/.agents/workflows/opendock-interactive-ui-ultrawork/quality-gate.md
+    to: .agents/workflows/opendock-interactive-ui-ultrawork/quality-gate.md
+  - from: files/.opendock/templates/interactive-ui/INTERACTION_RUN.md
+    to: .opendock/templates/interactive-ui/INTERACTION_RUN.md
+  - from: files/.opendock/harness/opendock__interactive-ui-ultrawork
+    to: .opendock/harness/opendock__interactive-ui-ultrawork
+doctor:
+  - id: readme
+    check: test -f README.md
+  - id: agents
+    check: test -f AGENTS.md
+  - id: harness-doc
+    check: test -f HARNESS.md
+  - id: interaction-playbook
+    check: test -f INTERACTION_PLAYBOOK.md
+  - id: skill
+    check: test -f .agents/skills/opendock-interactive-ui-ultrawork/SKILL.md
+  - id: workflow
+    check: test -f .agents/workflows/opendock-interactive-ui-ultrawork/quality-gate.md
+  - id: run-template
+    check: test -f .opendock/templates/interactive-ui/INTERACTION_RUN.md
+  - id: harness-script
+    check: test -f .opendock/harness/opendock__interactive-ui-ultrawork/check.mjs
+  - id: shell-wrapper
+    check: test -f .opendock/harness/opendock__interactive-ui-ultrawork/check.sh
+  - id: powershell-wrapper
+    check: test -f .opendock/harness/opendock__interactive-ui-ultrawork/check.ps1
