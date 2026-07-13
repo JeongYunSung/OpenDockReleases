@@ -18,7 +18,7 @@ dependencies:
   video-helper:
     manager: npm
     path: .codex/opendock/video-ultrawork
-    mode: locked
+    mode: install
     timeout_ms: 600000
 files:
   - from: files/AGENTS.md
