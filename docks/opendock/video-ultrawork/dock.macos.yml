@@ -20,11 +20,6 @@ dependencies:
     path: .codex/opendock/video-ultrawork
     mode: locked
     timeout_ms: 600000
-    integrity:
-      - path: node_modules/node-av/binary/ffmpeg
-        sha256:
-          - 21e892603ea18c7607a34ce0b96c5f0b7299f8703ccb7b7a84baf38542ad78b2
-          - 81fde53658014fef0a9676edce18d9da4846182a34b81119b551d51d77d53f0d
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
