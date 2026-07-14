@@ -1,16 +1,6 @@
-# Portfolio Case Study Run
+# Portfolio Case Study 선택 템플릿
 
-Run ID: 작성하세요
-Date: 작성하세요
-Owner: 작성하세요
-Status: draft
-Language: ko
-
-## Target Files
-
-- `portfolio/작성하세요.md`
-
-첫 target은 아래 section을 모두 포함하는 기준 Markdown 사례 연구여야 합니다.
+독자와 공개 목적에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요. 핵심 주장에는 출처와 본인 기여가 드러나야 합니다.
 
 ## Background
 

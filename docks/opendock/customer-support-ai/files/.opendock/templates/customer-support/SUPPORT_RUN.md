@@ -1,44 +1,40 @@
-# Customer Support AI Run
+# Customer Support AI 작업 메모 (선택 템플릿)
 
-Run ID:
-Date:
-Owner:
-Status: draft
+현재 작업에 필요한 section만 남겨 사용하세요.
 
 ## 지원 목표
 
-- TBD
+-
+
+## 문의와 확인된 사실
+
+-
+
+## 적용 정책
+
+-
+
+## 답변 또는 매크로
+
+-
+
+## 이관 조건
+
+-
 
 ## 톤 원칙
 
-- TBD
-
-## 정책 기준
-
-- TBD
-
-## 매크로
-
-- TBD
-
-## 에스컬레이션
-
-- TBD
+-
 
 ## VOC 인사이트
 
-- TBD
+-
 
 ## 다음 행동
 
-- TBD
+-
 
-## Evidence Notes
+## 근거
 
 - Source:
-- Date checked:
-- Confidence:
-
-## Approved Exception
-
-- None
+- 확인일:

@@ -1,5 +1,5 @@
 opendock: 1
-summary: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 신뢰도 판단, 리서치 노트를 만드는 조사 workspace.
+summary: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 신뢰도 판단, 리서치 노트를 만드는 조사 작업 공간.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -17,42 +17,18 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/RESEARCH_DESK.md
-    to: RESEARCH_DESK.md
+  - from: files/.opendock/docks/research-desk/README.md
+    to: .opendock/docks/research-desk/README.md
+  - from: files/.opendock/docks/research-desk/RESEARCH_DESK.md
+    to: .opendock/docks/research-desk/RESEARCH_DESK.md
   - from: files/.opendock/templates/research-desk/RESEARCH_RUN.md
     to: .opendock/templates/research-desk/RESEARCH_RUN.md
-  - from: files/.opendock/harness/opendock__research-desk/check.mjs
-    to: .opendock/harness/opendock__research-desk/check.mjs
-  - from: files/.opendock/harness/opendock__research-desk/check.sh
-    to: .opendock/harness/opendock__research-desk/check.sh
-  - from: files/.opendock/harness/opendock__research-desk/check.ps1
-    to: .opendock/harness/opendock__research-desk/check.ps1
   - from: files/.agents/skills/opendock-research-desk/SKILL.md
     to: .agents/skills/opendock-research-desk/SKILL.md
-  - from: files/.agents/workflows/opendock-research-desk/quality-gate.md
-    to: .agents/workflows/opendock-research-desk/quality-gate.md
-  - from: files/.claude/commands/opendock-research-desk/quality-gate.md
-    to: .claude/commands/opendock-research-desk/quality-gate.md
-  - from: files/.cursor/rules/opendock-research-desk.mdc
-    to: .cursor/rules/opendock-research-desk.mdc
-  - from: files/.agents/hooks/opendock-research-desk/hook.json
-    to: .agents/hooks/opendock-research-desk/hook.json
 doctor:
   - id: domain-guide
-    check: test -f RESEARCH_DESK.md
-  - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/research-desk/RESEARCH_DESK.md
   - id: run-template
     check: test -f .opendock/templates/research-desk/RESEARCH_RUN.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__research-desk/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-research-desk/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-research-desk/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-research-desk/hook.json

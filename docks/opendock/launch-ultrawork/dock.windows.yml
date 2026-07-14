@@ -18,20 +18,20 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/LAUNCH.md
-    to: LAUNCH.md
+  - from: files/.opendock/docks/launch-ultrawork/README.md
+    to: .opendock/docks/launch-ultrawork/README.md
+  - from: files/.opendock/docks/launch-ultrawork/HARNESS.md
+    to: .opendock/docks/launch-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/launch-ultrawork/LAUNCH.md
+    to: .opendock/docks/launch-ultrawork/LAUNCH.md
   - from: files/.opendock/templates/launch/LAUNCH_RUN.md
     to: .opendock/templates/launch/LAUNCH_RUN.md
-  - from: files/.opendock/harness/opendock__launch-ultrawork/check.mjs
-    to: .opendock/harness/opendock__launch-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__launch-ultrawork/check.sh
-    to: .opendock/harness/opendock__launch-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__launch-ultrawork/check.ps1
-    to: .opendock/harness/opendock__launch-ultrawork/check.ps1
+  - from: files/.opendock/harness/launch-ultrawork/check.mjs
+    to: .opendock/harness/launch-ultrawork/check.mjs
+  - from: files/.opendock/harness/launch-ultrawork/check.sh
+    to: .opendock/harness/launch-ultrawork/check.sh
+  - from: files/.opendock/harness/launch-ultrawork/check.ps1
+    to: .opendock/harness/launch-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-launch-ultrawork/SKILL.md
     to: .agents/skills/opendock-launch-ultrawork/SKILL.md
   - from: files/.agents/workflows/opendock-launch-ultrawork/quality-gate.md
@@ -40,20 +40,18 @@ files:
     to: .claude/commands/opendock-launch-ultrawork/quality-gate.md
   - from: files/.cursor/rules/opendock-launch-ultrawork.mdc
     to: .cursor/rules/opendock-launch-ultrawork.mdc
-  - from: files/.agents/hooks/opendock-launch-ultrawork/hook.json
-    to: .agents/hooks/opendock-launch-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/launch-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: domain-guide
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath LAUNCH.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/launch-ultrawork/LAUNCH.md) { exit 0 } else { exit 1 }"
   - id: harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/launch-ultrawork/HARNESS.md) { exit 0 } else { exit 1 }"
   - id: run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/launch/LAUNCH_RUN.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__launch-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/launch-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-launch-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-launch-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"
-  - id: hook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-launch-ultrawork/hook.json) { exit 0 } else { exit 1 }"

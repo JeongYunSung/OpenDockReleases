@@ -17,42 +17,18 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/SEO_GROWTH.md
-    to: SEO_GROWTH.md
+  - from: files/.opendock/docks/seo-growth/README.md
+    to: .opendock/docks/seo-growth/README.md
+  - from: files/.opendock/docks/seo-growth/SEO_GROWTH.md
+    to: .opendock/docks/seo-growth/SEO_GROWTH.md
   - from: files/.opendock/templates/seo-growth/SEO_RUN.md
     to: .opendock/templates/seo-growth/SEO_RUN.md
-  - from: files/.opendock/harness/opendock__seo-growth/check.mjs
-    to: .opendock/harness/opendock__seo-growth/check.mjs
-  - from: files/.opendock/harness/opendock__seo-growth/check.sh
-    to: .opendock/harness/opendock__seo-growth/check.sh
-  - from: files/.opendock/harness/opendock__seo-growth/check.ps1
-    to: .opendock/harness/opendock__seo-growth/check.ps1
   - from: files/.agents/skills/opendock-seo-growth/SKILL.md
     to: .agents/skills/opendock-seo-growth/SKILL.md
-  - from: files/.agents/workflows/opendock-seo-growth/quality-gate.md
-    to: .agents/workflows/opendock-seo-growth/quality-gate.md
-  - from: files/.claude/commands/opendock-seo-growth/quality-gate.md
-    to: .claude/commands/opendock-seo-growth/quality-gate.md
-  - from: files/.cursor/rules/opendock-seo-growth.mdc
-    to: .cursor/rules/opendock-seo-growth.mdc
-  - from: files/.agents/hooks/opendock-seo-growth/hook.json
-    to: .agents/hooks/opendock-seo-growth/hook.json
 doctor:
   - id: domain-guide
-    check: test -f SEO_GROWTH.md
-  - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/seo-growth/SEO_GROWTH.md
   - id: run-template
     check: test -f .opendock/templates/seo-growth/SEO_RUN.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__seo-growth/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-seo-growth/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-seo-growth/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-seo-growth/hook.json

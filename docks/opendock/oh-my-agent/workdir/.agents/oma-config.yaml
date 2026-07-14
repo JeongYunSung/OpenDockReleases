@@ -1,0 +1,20 @@
+# OpenDock-managed oh-my-agent config seed.
+# This file is copied into the dock workdir before `oma -y install`.
+
+language: ko
+timezone: Asia/Seoul
+translation_voice: balanced
+auto_update_cli: true
+telemetry: false
+
+# `mixed` keeps OMA's cross-vendor routing available while non-interactive
+# install picks project-scoped vendor defaults and skips HOME-only exports.
+model_preset: mixed
+
+docs:
+  auto_verify: false
+  check_urls: true
+
+serena:
+  mode: stdio
+  auto_update: true

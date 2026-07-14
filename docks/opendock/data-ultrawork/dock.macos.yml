@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/data-ultrawork
 summary: SQL 안전성, 파괴적 쿼리, timezone 명시, metric 정의, PII masking, dashboard 비용을 점검하는 데이터 품질 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -16,16 +15,16 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__data-ultrawork/check.mjs
-    to: .opendock/harness/opendock__data-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__data-ultrawork/check.sh
-    to: .opendock/harness/opendock__data-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__data-ultrawork/check.ps1
-    to: .opendock/harness/opendock__data-ultrawork/check.ps1
+  - from: files/.opendock/docks/data-ultrawork/README.md
+    to: .opendock/docks/data-ultrawork/README.md
+  - from: files/.opendock/docks/data-ultrawork/HARNESS.md
+    to: .opendock/docks/data-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/data-ultrawork/check.mjs
+    to: .opendock/harness/data-ultrawork/check.mjs
+  - from: files/.opendock/harness/data-ultrawork/check.sh
+    to: .opendock/harness/data-ultrawork/check.sh
+  - from: files/.opendock/harness/data-ultrawork/check.ps1
+    to: .opendock/harness/data-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-data-ultrawork/SKILL.md
     to: .agents/skills/opendock-data-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-data-ultrawork.mdc
@@ -34,16 +33,14 @@ files:
     to: .agents/workflows/opendock-data-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-data-ultrawork/quality-gate.md
     to: .claude/commands/opendock-data-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-data-ultrawork/hook.json
-    to: .agents/hooks/opendock-data-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/data-ultrawork/README.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/data-ultrawork/HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__data-ultrawork/check.mjs
+    check: test -f .opendock/harness/data-ultrawork/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-data-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-data-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-data-ultrawork/hook.json

@@ -1,25 +1,22 @@
 ---
 name: opendock-agent-memory
-description: 프로젝트 구조, 의사결정, 탐색 결과를 workspace-local memory로 남겨야 할 때 사용합니다.
+description: 프로젝트 구조, 결정, 탐색 근거와 미해결 맥락을 안전한 프로젝트 memory로 남기거나 검토할 때 사용합니다.
 ---
 
 # Agent Memory
 
 ## 언제 사용하나
 
-- 새 프로젝트를 처음 파악할 때
-- 큰 기능/리팩터링 전후에 구조와 결정 이유를 남길 때
-- 다른 agent가 이어받을 수 있게 context를 줄여야 할 때
+- 새 프로젝트의 핵심 구조를 다음 작업에 남길 때
+- 큰 기능이나 리팩터링의 결정 이유를 보존할 때
+- 다른 AI가 이어받을 수 있도록 맥락을 줄일 때
 
 ## 절차
 
-1. `MEMORY.md`를 읽습니다.
-2. 필요한 범위만 탐색합니다.
-3. 사실, 추측, 근거, 다음 확인을 분리합니다.
-4. run 기록이 필요하면 `.opendock/templates/agent-memory/MEMORY_RUN.md`를 사용합니다.
-5. 최종 handoff 전에 `node .opendock/harness/opendock__agent-memory/check.mjs`를 실행합니다.
+1. `.opendock/docks/agent-memory/MEMORY.md`를 읽고 요청한 작업을 바로 수행합니다.
+2. 현재 요청에 필요한 범위만 탐색합니다.
+3. 사실, 추측, 근거와 다음 확인을 분리합니다.
+4. 정형화된 메모가 필요할 때만 `MEMORY_RUN.md`를 사용하고 필요한 섹션만 남깁니다.
+5. 사용자가 검토를 요청하면 현재 결과물만 도메인 가이드 기준으로 직접 검토합니다.
 
-## 주의
-
-- secret과 private prompt는 절대 기록하지 않습니다.
-- 오래된 정보를 확정 사실처럼 말하지 않습니다.
+Secret, private prompt, 불필요한 원문과 확인되지 않은 주장을 장기 기억으로 남기지 않습니다.

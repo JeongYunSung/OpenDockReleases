@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/mobile-ultrawork
 summary: Flutter, React Native, Swift, Android, 권한, 접근성, release readiness, runtime safety를 점검하는 모바일 품질 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -17,16 +16,16 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__mobile-ultrawork/check.mjs
-    to: .opendock/harness/opendock__mobile-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__mobile-ultrawork/check.sh
-    to: .opendock/harness/opendock__mobile-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__mobile-ultrawork/check.ps1
-    to: .opendock/harness/opendock__mobile-ultrawork/check.ps1
+  - from: files/.opendock/docks/mobile-ultrawork/README.md
+    to: .opendock/docks/mobile-ultrawork/README.md
+  - from: files/.opendock/docks/mobile-ultrawork/HARNESS.md
+    to: .opendock/docks/mobile-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/mobile-ultrawork/check.mjs
+    to: .opendock/harness/mobile-ultrawork/check.mjs
+  - from: files/.opendock/harness/mobile-ultrawork/check.sh
+    to: .opendock/harness/mobile-ultrawork/check.sh
+  - from: files/.opendock/harness/mobile-ultrawork/check.ps1
+    to: .opendock/harness/mobile-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-mobile-ultrawork/SKILL.md
     to: .agents/skills/opendock-mobile-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-mobile-ultrawork.mdc
@@ -35,16 +34,14 @@ files:
     to: .agents/workflows/opendock-mobile-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-mobile-ultrawork/quality-gate.md
     to: .claude/commands/opendock-mobile-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-mobile-ultrawork/hook.json
-    to: .agents/hooks/opendock-mobile-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/mobile-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/mobile-ultrawork/HARNESS.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: test -f .opendock/harness/opendock__mobile-ultrawork/check.mjs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/mobile-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-mobile-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-mobile-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-mobile-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-mobile-ultrawork/hook.json
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-mobile-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"

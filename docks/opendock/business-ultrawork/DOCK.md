@@ -1,14 +1,15 @@
 # Business Ultrawork
 
-PRD, user story, GTM, ICP, pricing, marketing claim, 근거 자료, release note를 확인하는 비즈니스 품질 게이트입니다.
+## 무엇을 도와주나요
 
-## 확인하는 것
+PRD, 사용자 스토리, 출시 전략, 가격, 마케팅 주장과 릴리스 문서의 빠진 근거를 찾습니다.
 
-- PRD에는 문제, 목표, 제외 범위, 성공 지표, 리스크, 요구사항이 있어야 합니다.
-- user story에는 acceptance criteria가 있어야 합니다.
-- GTM 문서에는 ICP, 채널, 가격, 포지셔닝이 있어야 합니다.
-- 마케팅 문구에는 명확한 CTA가 있어야 합니다.
-- 주장에는 근거 또는 출처 메모가 필요합니다.
-- release note에는 필요할 때 breaking change와 migration note가 포함되어야 합니다.
+## 평소 사용
 
-PM, founder, marketing 산출물의 품질을 집중적으로 점검해야 하는 workspace에 사용합니다.
+평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
+
+설치 후 안내와 기준 문서는 `.opendock/docks/business-ultrawork/README.md`, `.opendock/docks/business-ultrawork/HARNESS.md`에서 확인합니다.
+
+## 출시 전 검수
+
+사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.

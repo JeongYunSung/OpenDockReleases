@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/qa-ultrawork
 summary: 회귀 범위, smoke test, security check, release confidence, 최종 handoff discipline을 점검하는 QA 품질 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -17,16 +16,16 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__qa-ultrawork/check.mjs
-    to: .opendock/harness/opendock__qa-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__qa-ultrawork/check.sh
-    to: .opendock/harness/opendock__qa-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__qa-ultrawork/check.ps1
-    to: .opendock/harness/opendock__qa-ultrawork/check.ps1
+  - from: files/.opendock/docks/qa-ultrawork/README.md
+    to: .opendock/docks/qa-ultrawork/README.md
+  - from: files/.opendock/docks/qa-ultrawork/HARNESS.md
+    to: .opendock/docks/qa-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/qa-ultrawork/check.mjs
+    to: .opendock/harness/qa-ultrawork/check.mjs
+  - from: files/.opendock/harness/qa-ultrawork/check.sh
+    to: .opendock/harness/qa-ultrawork/check.sh
+  - from: files/.opendock/harness/qa-ultrawork/check.ps1
+    to: .opendock/harness/qa-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-qa-ultrawork/SKILL.md
     to: .agents/skills/opendock-qa-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-qa-ultrawork.mdc
@@ -35,16 +34,14 @@ files:
     to: .agents/workflows/opendock-qa-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-qa-ultrawork/quality-gate.md
     to: .claude/commands/opendock-qa-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-qa-ultrawork/hook.json
-    to: .agents/hooks/opendock-qa-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/qa-ultrawork/README.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/qa-ultrawork/HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__qa-ultrawork/check.mjs
+    check: test -f .opendock/harness/qa-ultrawork/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-qa-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-qa-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-qa-ultrawork/hook.json

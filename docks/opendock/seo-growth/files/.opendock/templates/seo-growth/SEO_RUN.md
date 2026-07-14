@@ -1,9 +1,8 @@
-# SEO Growth Run
+# SEO Growth 작업 메모
 
-Run ID:
+필요한 섹션만 선택해 사용하고, 요청과 무관한 섹션은 삭제합니다.
+
 Date:
-Owner:
-Status: draft
 
 ## 대상 독자
 
@@ -39,6 +38,6 @@ Status: draft
 - Date checked:
 - Confidence:
 
-## Approved Exception
+## 예외와 한계
 
-- None
+- 필요한 경우에만 작성

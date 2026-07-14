@@ -1,15 +1,15 @@
 # QA Ultrawork
 
-회귀 범위, smoke test, 보안 점검, release confidence, 최종 handoff 기준을 확인하는 QA 품질 게이트입니다.
+## 무엇을 도와주나요
 
-## 확인하는 것
+회귀 범위, smoke test, 보안, 접근성, 출시 신뢰도와 최종 인계 근거를 점검합니다.
 
-- regression, smoke, acceptance coverage가 명확해야 합니다.
-- skipped test나 focused test가 남아 있으면 안 됩니다.
-- 보안에 민감한 변경에는 scan 또는 review evidence가 필요합니다.
-- 접근성 완료 표시에는 keyboard-only, screen reader, focus visible, contrast, axe/Lighthouse 또는 role/name 테스트 중 관련 증거가 필요합니다.
-- bug report에는 재현 절차, 기대 결과, 실제 결과, 환경 정보가 필요합니다.
-- release handoff에는 알려진 risk와 rollback note가 포함되어야 합니다.
-- 최종 응답에는 테스트한 것과 테스트하지 못한 것을 명확히 적어야 합니다.
+## 평소 사용
 
-QA, test, security, release 품질을 집중적으로 점검해야 하는 workspace에 사용합니다.
+평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
+
+설치 후 안내와 기준 문서는 `.opendock/docks/qa-ultrawork/README.md`, `.opendock/docks/qa-ultrawork/HARNESS.md`에서 확인합니다.
+
+## 출시 전 검수
+
+사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.

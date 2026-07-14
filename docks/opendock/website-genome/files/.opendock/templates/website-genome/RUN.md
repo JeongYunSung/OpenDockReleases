@@ -1,16 +1,15 @@
-# Website Genome Run
+# Website Genome 작업 메모
 
-Run ID: 작성하세요
+필요한 섹션만 선택해 사용하고, 요청과 무관한 섹션은 삭제합니다.
+
 Date: 작성하세요
-Owner: 작성하세요
-Status: draft
 Language: ko
 
-## Target Files
+## Result Files
 
 - `analysis/website-genome/작성하세요.md`
 
-첫 target은 아래 section을 모두 포함하는 기준 Markdown 보고서여야 합니다.
+결과 파일이 필요할 때만 경로를 적고, 아래 section 중 분석 범위에 관련된 것만 사용합니다.
 
 ## URL / Scope
 

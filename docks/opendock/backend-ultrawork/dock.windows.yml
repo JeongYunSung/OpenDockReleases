@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/backend-ultrawork
 summary: API 계약, 검증, 인증, 마이그레이션, 로깅, 서비스 안전성을 점검하는 백엔드 품질 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -16,16 +15,16 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__backend-ultrawork/check.mjs
-    to: .opendock/harness/opendock__backend-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__backend-ultrawork/check.sh
-    to: .opendock/harness/opendock__backend-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__backend-ultrawork/check.ps1
-    to: .opendock/harness/opendock__backend-ultrawork/check.ps1
+  - from: files/.opendock/docks/backend-ultrawork/README.md
+    to: .opendock/docks/backend-ultrawork/README.md
+  - from: files/.opendock/docks/backend-ultrawork/HARNESS.md
+    to: .opendock/docks/backend-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/backend-ultrawork/check.mjs
+    to: .opendock/harness/backend-ultrawork/check.mjs
+  - from: files/.opendock/harness/backend-ultrawork/check.sh
+    to: .opendock/harness/backend-ultrawork/check.sh
+  - from: files/.opendock/harness/backend-ultrawork/check.ps1
+    to: .opendock/harness/backend-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-backend-ultrawork/SKILL.md
     to: .agents/skills/opendock-backend-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-backend-ultrawork.mdc
@@ -34,16 +33,14 @@ files:
     to: .agents/workflows/opendock-backend-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-backend-ultrawork/quality-gate.md
     to: .claude/commands/opendock-backend-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-backend-ultrawork/hook.json
-    to: .agents/hooks/opendock-backend-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/backend-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/backend-ultrawork/HARNESS.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: test -f .opendock/harness/opendock__backend-ultrawork/check.mjs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/backend-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-backend-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-backend-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-backend-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-backend-ultrawork/hook.json
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-backend-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"

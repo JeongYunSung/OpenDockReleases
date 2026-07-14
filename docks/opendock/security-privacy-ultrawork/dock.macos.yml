@@ -1,5 +1,5 @@
 opendock: 1
-summary: secret, PII, 권한, 인증 guard, dependency risk, prompt injection, 데이터 처리 흐름을 점검하는 보안/프라이버시 품질 게이트.
+summary: secret, PII, 권한, 인증 guard, dependency risk, 프롬프트 injection, 데이터 처리 흐름을 점검하는 보안/프라이버시 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -18,20 +18,20 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/SECURITY_PRIVACY.md
-    to: SECURITY_PRIVACY.md
+  - from: files/.opendock/docks/security-privacy-ultrawork/README.md
+    to: .opendock/docks/security-privacy-ultrawork/README.md
+  - from: files/.opendock/docks/security-privacy-ultrawork/HARNESS.md
+    to: .opendock/docks/security-privacy-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/security-privacy-ultrawork/SECURITY_PRIVACY.md
+    to: .opendock/docks/security-privacy-ultrawork/SECURITY_PRIVACY.md
   - from: files/.opendock/templates/security-privacy/SECURITY_PRIVACY_RUN.md
     to: .opendock/templates/security-privacy/SECURITY_PRIVACY_RUN.md
-  - from: files/.opendock/harness/opendock__security-privacy-ultrawork/check.mjs
-    to: .opendock/harness/opendock__security-privacy-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__security-privacy-ultrawork/check.sh
-    to: .opendock/harness/opendock__security-privacy-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__security-privacy-ultrawork/check.ps1
-    to: .opendock/harness/opendock__security-privacy-ultrawork/check.ps1
+  - from: files/.opendock/harness/security-privacy-ultrawork/check.mjs
+    to: .opendock/harness/security-privacy-ultrawork/check.mjs
+  - from: files/.opendock/harness/security-privacy-ultrawork/check.sh
+    to: .opendock/harness/security-privacy-ultrawork/check.sh
+  - from: files/.opendock/harness/security-privacy-ultrawork/check.ps1
+    to: .opendock/harness/security-privacy-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-security-privacy-ultrawork/SKILL.md
     to: .agents/skills/opendock-security-privacy-ultrawork/SKILL.md
   - from: files/.agents/workflows/opendock-security-privacy-ultrawork/quality-gate.md
@@ -40,20 +40,18 @@ files:
     to: .claude/commands/opendock-security-privacy-ultrawork/quality-gate.md
   - from: files/.cursor/rules/opendock-security-privacy-ultrawork.mdc
     to: .cursor/rules/opendock-security-privacy-ultrawork.mdc
-  - from: files/.agents/hooks/opendock-security-privacy-ultrawork/hook.json
-    to: .agents/hooks/opendock-security-privacy-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/security-privacy-ultrawork/README.md
   - id: domain-guide
-    check: test -f SECURITY_PRIVACY.md
+    check: test -f .opendock/docks/security-privacy-ultrawork/SECURITY_PRIVACY.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/security-privacy-ultrawork/HARNESS.md
   - id: run-template
     check: test -f .opendock/templates/security-privacy/SECURITY_PRIVACY_RUN.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__security-privacy-ultrawork/check.mjs
+    check: test -f .opendock/harness/security-privacy-ultrawork/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-security-privacy-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-security-privacy-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-security-privacy-ultrawork/hook.json

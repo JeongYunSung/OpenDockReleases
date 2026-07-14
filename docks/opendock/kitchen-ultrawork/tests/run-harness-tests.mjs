@@ -93,13 +93,10 @@ pending
 `);
   const invalidResult = runHarness(invalid);
   for (const rule of [
-    "run-evidence-placeholder",
     "recipe-core",
     "medical-claim",
     "allergen-guarantee",
     "raw-protein-temperature",
-    "unit-conversion",
-    "substitution-detail",
   ]) {
     assertFailed(invalidResult, rule);
   }

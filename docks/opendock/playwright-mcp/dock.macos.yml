@@ -1,0 +1,40 @@
+opendock: 1
+summary: Playwright MCP CLI를 프로젝트 전용로 설치해 AI 도구 브라우저 자동화를 준비하는 도구 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - playwright
+  - mcp
+  - browser
+  - automation
+  - qa
+  - testing
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    npm: ">=10.0.0"
+tools:
+  playwright-mcp:
+    manager: npm
+    package: "@playwright/mcp"
+    version: "0.0.77"
+    commands:
+      - playwright-mcp
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/.opendock/docks/playwright-mcp/README.md
+    to: .opendock/docks/playwright-mcp/README.md
+  - from: files/.opendock/docks/playwright-mcp/PLAYWRIGHT_MCP.md
+    to: .opendock/docks/playwright-mcp/PLAYWRIGHT_MCP.md
+  - from: files/.opendock/docks/playwright-mcp/PLAYWRIGHT_MCP_RUN.md
+    to: .opendock/docks/playwright-mcp/PLAYWRIGHT_MCP_RUN.md
+doctor:
+  - id: playwright-mcp-cli
+    run: playwright-mcp --version
+  - id: playwright-mcp-docs
+    check: test -f .opendock/docks/playwright-mcp/README.md

@@ -41,7 +41,7 @@ Status: candidate-selection
 
 ## Verification
 
-- `PAPER_SHADERS.md` checked:
+- `.opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md` checked:
 - Catalog range checked:
 - App dependency checked:
 - Harness passed:

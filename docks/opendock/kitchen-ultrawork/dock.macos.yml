@@ -1,5 +1,5 @@
 opendock: 1
-summary: 보유 식자재를 안전한 레시피, 식단, 남은 재료 계획, 장보기 목록으로 연결하는 주방 품질 gate.
+summary: 보유 식자재를 안전한 레시피, 식단, 남은 재료 계획, 장보기 목록으로 연결하는 주방 품질 검사.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -14,25 +14,35 @@ requires:
   runtimes:
     node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/kitchen-ultrawork/README.md
+    to: .opendock/docks/kitchen-ultrawork/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/KITCHEN_PLAYBOOK.md
-    to: KITCHEN_PLAYBOOK.md
+  - from: files/.opendock/docks/kitchen-ultrawork/HARNESS.md
+    to: .opendock/docks/kitchen-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/kitchen-ultrawork/KITCHEN_PLAYBOOK.md
+    to: .opendock/docks/kitchen-ultrawork/KITCHEN_PLAYBOOK.md
   - from: files/.agents/skills/opendock-kitchen-ultrawork/SKILL.md
     to: .agents/skills/opendock-kitchen-ultrawork/SKILL.md
   - from: files/.agents/workflows/opendock-kitchen-ultrawork/quality-gate.md
     to: .agents/workflows/opendock-kitchen-ultrawork/quality-gate.md
   - from: files/.opendock/templates/kitchen
     to: .opendock/templates/kitchen
-  - from: files/.opendock/harness/opendock__kitchen-ultrawork
-    to: .opendock/harness/opendock__kitchen-ultrawork
+  - from: files/.opendock/harness/kitchen-ultrawork/check.mjs
+    to: .opendock/harness/kitchen-ultrawork/check.mjs
+  - from: files/.opendock/harness/kitchen-ultrawork/check.ps1
+    to: .opendock/harness/kitchen-ultrawork/check.ps1
+  - from: files/.opendock/harness/kitchen-ultrawork/check.sh
+    to: .opendock/harness/kitchen-ultrawork/check.sh
+  - from: files/.opendock/harness/kitchen-ultrawork/food-safety.mjs
+    to: .opendock/harness/kitchen-ultrawork/food-safety.mjs
+  - from: files/.opendock/harness/kitchen-ultrawork/path-safety.mjs
+    to: .opendock/harness/kitchen-ultrawork/path-safety.mjs
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/kitchen-ultrawork/README.md
   - id: kitchen-playbook
-    check: test -f KITCHEN_PLAYBOOK.md
+    check: test -f .opendock/docks/kitchen-ultrawork/KITCHEN_PLAYBOOK.md
   - id: kitchen-skill
     check: test -f .agents/skills/opendock-kitchen-ultrawork/SKILL.md
   - id: kitchen-workflow
@@ -42,4 +52,4 @@ doctor:
   - id: recipe-template
     check: test -f .opendock/templates/kitchen/RECIPE.md
   - id: kitchen-harness
-    check: test -f .opendock/harness/opendock__kitchen-ultrawork/check.mjs
+    check: test -f .opendock/harness/kitchen-ultrawork/check.mjs

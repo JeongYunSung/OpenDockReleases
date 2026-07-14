@@ -9,9 +9,6 @@ tags:
   - research
   - public-data
   - risk-check
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
@@ -19,26 +16,18 @@ files:
     to: CLAUDE.md
   - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/KOREA_REAL_ESTATE_RESEARCH.md
-    to: KOREA_REAL_ESTATE_RESEARCH.md
+  - from: files/.opendock/docks/korea-real-estate-research/README.md
+    to: .opendock/docks/korea-real-estate-research/README.md
+  - from: files/.opendock/docks/korea-real-estate-research/KOREA_REAL_ESTATE_RESEARCH.md
+    to: .opendock/docks/korea-real-estate-research/KOREA_REAL_ESTATE_RESEARCH.md
   - from: files/.opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
     to: .opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
-  - from: files/.opendock/harness/opendock__korea-real-estate-research/check.mjs
-    to: .opendock/harness/opendock__korea-real-estate-research/check.mjs
   - from: files/.agents/skills/opendock-korea-real-estate-research/SKILL.md
     to: .agents/skills/opendock-korea-real-estate-research/SKILL.md
 doctor:
   - id: guide
-    check: test -f KOREA_REAL_ESTATE_RESEARCH.md
-  - id: harness-doc
-    check: test -f HARNESS.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__korea-real-estate-research/check.mjs
+    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/korea-real-estate-research/KOREA_REAL_ESTATE_RESEARCH.md) { exit 0 } else { exit 1 }"'
   - id: run-template
-    check: test -f .opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md
+    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/korea-real-estate-research/REAL_ESTATE_RESEARCH_RUN.md) { exit 0 } else { exit 1 }"'
   - id: skill
-    check: test -f .agents/skills/opendock-korea-real-estate-research/SKILL.md
+    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-korea-real-estate-research/SKILL.md) { exit 0 } else { exit 1 }"'

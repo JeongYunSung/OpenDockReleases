@@ -8,42 +8,25 @@ tags:
   - audit
   - quick-start
   - maintenance
-  - harness
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/readme-doctor/README.md
+    to: .opendock/docks/readme-doctor/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/README_DOCTOR_PLAYBOOK.md
-    to: README_DOCTOR_PLAYBOOK.md
+  - from: files/.opendock/docks/readme-doctor/README_DOCTOR_PLAYBOOK.md
+    to: .opendock/docks/readme-doctor/README_DOCTOR_PLAYBOOK.md
   - from: files/.agents/skills/opendock-readme-doctor/SKILL.md
     to: .agents/skills/opendock-readme-doctor/SKILL.md
-  - from: files/.agents/workflows/opendock-readme-doctor/quality-gate.md
-    to: .agents/workflows/opendock-readme-doctor/quality-gate.md
   - from: files/.opendock/templates/readme-doctor/RUN.md
     to: .opendock/templates/readme-doctor/RUN.md
-  - from: files/.opendock/harness/opendock__readme-doctor/check.mjs
-    to: .opendock/harness/opendock__readme-doctor/check.mjs
 doctor:
   - id: readme
-    check: test -f README.md
+    check: test -f .opendock/docks/readme-doctor/README.md
   - id: agents
     check: test -f AGENTS.md
-  - id: harness-doc
-    check: test -f HARNESS.md
   - id: playbook
-    check: test -f README_DOCTOR_PLAYBOOK.md
+    check: test -f .opendock/docks/readme-doctor/README_DOCTOR_PLAYBOOK.md
   - id: skill
     check: test -f .agents/skills/opendock-readme-doctor/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-readme-doctor/quality-gate.md
   - id: run-template
     check: test -f .opendock/templates/readme-doctor/RUN.md
-  - id: harness
-    check: test -f .opendock/harness/opendock__readme-doctor/check.mjs
-

@@ -1,44 +1,37 @@
-# Content Creator Run
+# Content Creator 작업 메모 (선택 템플릿)
 
-Run ID:
-Date:
-Owner:
-Status: draft
+현재 작업에 필요한 section만 남겨 사용하세요.
 
 ## 대상 독자
 
-- TBD
+-
 
 ## 콘텐츠 브리프
 
-- TBD
+-
 
 ## 채널 구조
 
-- TBD
+-
 
 ## 제작 초안
 
-- TBD
+-
 
-## 업로드 체크리스트
+## 제목·썸네일·CTA
 
-- TBD
+-
+
+## 업로드 정보
+
+-
 
 ## 근거와 권리
 
-- TBD
+- Source:
+- 확인일:
+- Rights:
 
 ## 재활용 계획
 
-- TBD
-
-## Evidence Notes
-
-- Source:
-- Date checked:
-- Confidence:
-
-## Approved Exception
-
-- None
+-

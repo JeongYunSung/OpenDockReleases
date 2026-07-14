@@ -1,0 +1,40 @@
+opendock: 1
+summary: Context7 MCP CLI를 프로젝트 전용로 설치해 최신 library 문서를 조회할 수 있게 하는 도구 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - context7
+  - mcp
+  - documentation
+  - agent-tools
+  - research
+  - rag
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    npm: ">=10.0.0"
+tools:
+  context7-mcp:
+    manager: npm
+    package: "@upstash/context7-mcp"
+    version: "3.2.2"
+    commands:
+      - context7-mcp
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/.opendock/docks/context7-mcp/README.md
+    to: .opendock/docks/context7-mcp/README.md
+  - from: files/.opendock/docks/context7-mcp/CONTEXT7_MCP.md
+    to: .opendock/docks/context7-mcp/CONTEXT7_MCP.md
+  - from: files/.opendock/docks/context7-mcp/CONTEXT7_MCP_RUN.md
+    to: .opendock/docks/context7-mcp/CONTEXT7_MCP_RUN.md
+doctor:
+  - id: context7-cli
+    run: context7-mcp --version
+  - id: context7-docs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/context7-mcp/README.md) { exit 0 } else { exit 1 }"

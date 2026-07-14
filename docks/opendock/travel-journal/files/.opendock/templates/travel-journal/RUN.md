@@ -1,7 +1,7 @@
-# Travel Journal 실행 기록
+# Travel Journal 작업 메모
 
-Status: draft
-Mode: narrative-journal
+필요한 섹션만 선택해 사용하고, 요청과 무관한 섹션은 삭제합니다.
+
 Created: YYYY-MM-DD
 Language: ko
 
@@ -42,6 +42,6 @@ Language: ko
 
 - `travel-journal/example.md`
 
-## 검증 결과 (Validation)
+## 검토 메모 (Review Notes)
 
-하네스 실행 결과와 수정 내용을 작성하세요.
+사용자가 검토를 요청한 경우에만 확인한 항목, 수정 내용과 남은 한계를 작성하세요.

@@ -1,25 +1,23 @@
 # Agent Security
 
-AI agent가 변경한 내용에 대해 secret, credential, auth, permission, threat model, rollback risk를 놓치지 않도록 workspace-local 보안 기준을 설치합니다.
+현재 변경 범위의 보안 위험, 영향, 근거와 완화책을 검토합니다.
 
-## 설치되는 것
+## 설치 후 생기는 것
 
-- `SECURITY.md`: agent 작업용 보안 기준
-- `HARNESS.md`: 보안 리뷰 체크리스트
-- `.opendock/templates/agent-security/SECURITY_REVIEW.md`: 보안 리뷰 템플릿
-- `.agents/skills/opendock-agent-security/SKILL.md`: 보안 리뷰 skill
-- `.opendock/harness/opendock__agent-security/check.mjs`: 보안 harness
+- `.opendock/docks/agent-security/README.md`: 사용 안내
+- `.opendock/docks/agent-security/SECURITY.md`: 보안 검토 기준
+- `.opendock/templates/agent-security/SECURITY_REVIEW.md`: 선택형 보안 리뷰 템플릿
+- `.agents/skills/opendock-agent-security/SKILL.md`: AI 작업 절차
+- 루트 `AGENTS.md`: 짧은 요청 라우팅과 안전 규칙
 
-## 사용 시점
+## 사용 방법
 
-- auth, permission, token, secret, admin 기능을 수정할 때
-- 외부 API, webhook, MCP, registry, deploy 경로를 건드릴 때
-- agent가 만든 코드에 민감한 데이터 흐름이 포함될 때
-- 릴리스 전에 보안 공백을 간단히 점검할 때
+평소에는 `SECURITY.md` 기준으로 요청을 바로 처리합니다. 템플릿은 선택 사항이며 현재 변경과 관련된 섹션만 골라 사용합니다.
 
-## 원칙
+> 이번 인증 변경의 위협, 영향, 완화책을 검토해줘.
 
-- 보안 skill pack은 검수된 소수 기준만 가져옵니다.
-- secret 값 자체를 문서에 남기지 않습니다.
-- 보안상 민감한 변경에는 evidence, owner, rollback 또는 mitigation이 필요합니다.
-- 이 dock은 보안 도구를 글로벌 설치하지 않습니다. 필요한 scanner는 프로젝트별 정책에 맞춰 별도로 연결합니다.
+사용자가 검토를 요청하면 AI가 현재 결과물만 `SECURITY.md` 기준으로 직접 검토하고 민감 영역, 공격 가능성, 영향, 근거, 완화책과 잔여 위험을 설명합니다.
+
+## 안전
+
+실제 secret을 노출하거나 위험 발견을 실제 공격 실행으로 확대하지 않습니다. 승인 없이 배포, 권한 변경, 이전, 관련 없는 파일 변경 또는 파괴적 명령을 실행하지 않습니다.

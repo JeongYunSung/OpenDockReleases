@@ -1,9 +1,0 @@
-{
-  "name": "opendock-agent-cost-quality-gate",
-  "description": "Run the Agent Cost harness before final handoff when cost files were touched.",
-  "events": [
-    "Stop"
-  ],
-  "command": "node .opendock/harness/opendock__agent-cost/check.mjs",
-  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__agent-cost/check.mjs` manually before final response."
-}

@@ -23,25 +23,31 @@ dependencies:
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/VIDEO_PLAYBOOK.md
-    to: VIDEO_PLAYBOOK.md
+  - from: files/.opendock/docks/video-ultrawork/README.md
+    to: .opendock/docks/video-ultrawork/README.md
+  - from: files/.opendock/docks/video-ultrawork/HARNESS.md
+    to: .opendock/docks/video-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/video-ultrawork/VIDEO_PLAYBOOK.md
+    to: .opendock/docks/video-ultrawork/VIDEO_PLAYBOOK.md
   - from: files/.codex/opendock/video-ultrawork
     to: .codex/opendock/video-ultrawork
   - from: files/.opendock/templates/video/VIDEO_RUN.md
     to: .opendock/templates/video/VIDEO_RUN.md
-  - from: files/.opendock/harness/opendock__video-ultrawork
-    to: .opendock/harness/opendock__video-ultrawork
+  - from: files/.opendock/harness/video-ultrawork/check.mjs
+    to: .opendock/harness/video-ultrawork/check.mjs
+  - from: files/.opendock/harness/video-ultrawork/check.ps1
+    to: .opendock/harness/video-ultrawork/check.ps1
+  - from: files/.opendock/harness/video-ultrawork/check.sh
+    to: .opendock/harness/video-ultrawork/check.sh
   - from: files/.agents/skills/opendock-video-ultrawork/SKILL.md
     to: .agents/skills/opendock-video-ultrawork/SKILL.md
   - from: files/.agents/workflows/opendock-video-ultrawork/quality-gate.md
     to: .agents/workflows/opendock-video-ultrawork/quality-gate.md
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/video-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: video-playbook
-    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath VIDEO_PLAYBOOK.md) { exit 0 } else { exit 1 }"'
+    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/video-ultrawork/VIDEO_PLAYBOOK.md) { exit 0 } else { exit 1 }"'
   - id: video-helper
     check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .codex/opendock/video-ultrawork/video-helper.mjs) { exit 0 } else { exit 1 }"'
   - id: ffmpeg-dependency
@@ -51,7 +57,7 @@ doctor:
   - id: mediainfo-dependency
     check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .codex/opendock/video-ultrawork/node_modules/mediainfo.js) { exit 0 } else { exit 1 }"'
   - id: video-harness
-    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__video-ultrawork/check.mjs) { exit 0 } else { exit 1 }"'
+    check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/video-ultrawork/check.mjs) { exit 0 } else { exit 1 }"'
   - id: video-run-template
     check: 'powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/video/VIDEO_RUN.md) { exit 0 } else { exit 1 }"'
   - id: video-skill

@@ -15,26 +15,26 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/REFERENCE_RESEARCH.md
-    to: REFERENCE_RESEARCH.md
-  - from: files/LAYOUT_PLAYBOOK.md
-    to: LAYOUT_PLAYBOOK.md
-  - from: files/COLOR_PLAYBOOK.md
-    to: COLOR_PLAYBOOK.md
-  - from: files/PATTERN_GUIDE.md
-    to: PATTERN_GUIDE.md
-  - from: files/CREATE_UI_PLAYBOOK.md
-    to: CREATE_UI_PLAYBOOK.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.mjs
-    to: .opendock/harness/opendock__design-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.sh
-    to: .opendock/harness/opendock__design-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.ps1
-    to: .opendock/harness/opendock__design-ultrawork/check.ps1
+  - from: files/.opendock/docks/design-ultrawork/README.md
+    to: .opendock/docks/design-ultrawork/README.md
+  - from: files/.opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md
+    to: .opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md
+  - from: files/.opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/PATTERN_GUIDE.md
+    to: .opendock/docks/design-ultrawork/PATTERN_GUIDE.md
+  - from: files/.opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/HARNESS.md
+    to: .opendock/docks/design-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/design-ultrawork/check.mjs
+    to: .opendock/harness/design-ultrawork/check.mjs
+  - from: files/.opendock/harness/design-ultrawork/check.sh
+    to: .opendock/harness/design-ultrawork/check.sh
+  - from: files/.opendock/harness/design-ultrawork/check.ps1
+    to: .opendock/harness/design-ultrawork/check.ps1
   - from: files/.opendock/templates/design/DESIGN_RUN.md
     to: .opendock/templates/design/DESIGN_RUN.md
   - from: files/.agents/skills/opendock-design-ultrawork/SKILL.md
@@ -45,28 +45,26 @@ files:
     to: .agents/workflows/opendock-design-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-design-ultrawork/quality-gate.md
     to: .claude/commands/opendock-design-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-design-ultrawork/hook.json
-    to: .agents/hooks/opendock-design-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/HARNESS.md) { exit 0 } else { exit 1 }"
   - id: reference-research
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath REFERENCE_RESEARCH.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md) { exit 0 } else { exit 1 }"
   - id: layout-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath LAYOUT_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: color-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath COLOR_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: pattern-guide
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath PATTERN_GUIDE.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/PATTERN_GUIDE.md) { exit 0 } else { exit 1 }"
   - id: create-ui-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CREATE_UI_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__design-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/design-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: design-run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/design/DESIGN_RUN.md) { exit 0 } else { exit 1 }"
   - id: skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-design-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-design-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"
-  - id: hook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-design-ultrawork/hook.json) { exit 0 } else { exit 1 }"

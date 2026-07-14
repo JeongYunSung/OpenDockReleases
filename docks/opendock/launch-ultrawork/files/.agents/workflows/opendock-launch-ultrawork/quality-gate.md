@@ -1,21 +1,15 @@
 # Launch Ultrawork Quality Gate
 
-1. `LAUNCH.md`를 읽습니다.
-2. `.opendock/runs/launch/` 아래 이번 작업 run 문서를 확인하거나 새로 만듭니다.
-3. 아래 기준으로 산출물을 검토합니다.
+## 실행 조건
+- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 이 workflow를 실행합니다.
+- 평소 요청에서는 이 workflow를 실행하지 않고 현재 작업의 target만 빠르게 확인합니다.
 
-- 랜딩 페이지에는 대상 고객, 핵심 문제, 가치 제안, CTA, 신뢰 근거가 있어야 합니다.
-- 가격/플랜은 포함 범위, 제한, 과금 주기, 환불/해지 경로가 명확해야 합니다.
-- 약관/개인정보/쿠키/동의 문구는 법률 자문이 아니라 누락 체크와 검토 필요 표시로 다룹니다.
-- 온보딩은 첫 성공 행동까지 5분 안에 도달할 수 있어야 합니다.
-- 결제/회원가입/비밀번호/에러/빈 상태/로딩 상태를 실제 사용자 흐름으로 점검합니다.
-- SEO metadata, OG image, sitemap, robots, analytics event, conversion funnel을 확인합니다.
-- 출시 blocker는 owner, severity, fix path, release decision으로 기록합니다.
-
-4. `node .opendock/harness/opendock__launch-ultrawork/check.mjs`를 실행합니다.
-5. 실패 항목을 수정하거나 `Approved Exception:`으로 승인된 예외를 남깁니다.
-6. 최종 응답에는 통과/실패/미검증 항목을 구분해서 보고합니다.
+## 검수 절차
+1. launch guide와 current run 문서를 읽고 가치 제안, CTA, 가격, onboarding, 핵심 흐름, SEO·분석과 blocker를 검토합니다.
+2. 검수와 ultrawork에서는 current run 문서에 `node .opendock/harness/launch-ultrawork/check.mjs --target <run-document>`를 실행합니다. 사용자가 release 전체 검사를 명시한 경우에만 `--release`를 사용합니다.
+3. 승인된 예외만 기록하고 통과, 실패, 미검증 항목과 남은 위험을 구분해 보고합니다.
 
 ## 안전 경계
-
-법률/세무/결제 규정의 최종 판단은 담당 전문가 검토 대상으로 표시합니다.
+- 이번 출시 산출물의 가치 제안, CTA, 신뢰 근거, 핵심 흐름, blocker와 rollback을 확인합니다.
+- secret, credential, 환경 변수 유출, destructive command, deploy와 migration을 실행하지 않습니다.
+- 검토된 scope만 수정하며 관련 없는 파일을 삭제·reset·재생성하지 않습니다.

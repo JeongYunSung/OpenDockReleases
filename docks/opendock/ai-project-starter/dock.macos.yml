@@ -1,5 +1,5 @@
 opendock: 1
-summary: 프로젝트의 AI 협업 context, 규칙, workflow, 품질 gate, 보안과 onboarding을 .ai/ 범위에서 검증합니다.
+summary: 프로젝트의 AI 협업 맥락, 규칙, 작업 절차, 품질 기준, 보안과 onboarding을 .ai/ 범위에 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -8,42 +8,25 @@ tags:
   - onboarding
   - workflow
   - governance
-  - harness
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/ai-project-starter/README.md
+    to: .opendock/docks/ai-project-starter/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/AI_PROJECT_STARTER_PLAYBOOK.md
-    to: AI_PROJECT_STARTER_PLAYBOOK.md
+  - from: files/.opendock/docks/ai-project-starter/AI_PROJECT_STARTER_PLAYBOOK.md
+    to: .opendock/docks/ai-project-starter/AI_PROJECT_STARTER_PLAYBOOK.md
   - from: files/.agents/skills/opendock-ai-project-starter/SKILL.md
     to: .agents/skills/opendock-ai-project-starter/SKILL.md
-  - from: files/.agents/workflows/opendock-ai-project-starter/quality-gate.md
-    to: .agents/workflows/opendock-ai-project-starter/quality-gate.md
   - from: files/.opendock/templates/ai-project-starter/RUN.md
     to: .opendock/templates/ai-project-starter/RUN.md
-  - from: files/.opendock/harness/opendock__ai-project-starter/check.mjs
-    to: .opendock/harness/opendock__ai-project-starter/check.mjs
 doctor:
   - id: readme
-    check: test -f README.md
+    check: test -f .opendock/docks/ai-project-starter/README.md
   - id: agents
     check: test -f AGENTS.md
-  - id: harness-doc
-    check: test -f HARNESS.md
   - id: playbook
-    check: test -f AI_PROJECT_STARTER_PLAYBOOK.md
+    check: test -f .opendock/docks/ai-project-starter/AI_PROJECT_STARTER_PLAYBOOK.md
   - id: skill
     check: test -f .agents/skills/opendock-ai-project-starter/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-ai-project-starter/quality-gate.md
   - id: run-template
     check: test -f .opendock/templates/ai-project-starter/RUN.md
-  - id: harness
-    check: test -f .opendock/harness/opendock__ai-project-starter/check.mjs
-

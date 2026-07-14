@@ -1,70 +1,72 @@
-# Dock Test Matrix
+# Dock 테스트 범위
 
-Use fresh temporary directories. Never test destructive or unreviewed commands in a real project.
+검증되지 않은 명령은 실제 프로젝트에서 실행하지 않습니다. 정밀 검수는 새 임시 workspace에서 수행합니다.
 
-## Static
+## 일반 요청
 
-- Manifest parses or is structurally readable.
-- Manifest has `opendock: 1` and does not include top-level `id`, `version`, `schema`, `kind`, `lifecycle`, `needs`, `supports`, or `uninstall`.
-- Runtime requirements use `requires.runtimes`; removed `requires.packages` and `requires.tools` are absent.
-- Project-local CLIs use top-level `tools` with `commands`, not `bin`.
-- Copied-folder package installs use top-level `dependencies`, not task commands.
-- Dependency declarations use a supported manager/mode pair and a safe project-relative path.
-- Dependency paths should point to folders installed by `files`; protected paths such as `.opendock`, `.git`, `.ssh`, and `.env*` are invalid.
-- Task `run`, `check`, and `permissions` contain no shell operators or package-manager mutation commands.
-- `files.from` exists.
-- `files.to` is project-relative and safe.
-- No symlink payloads.
-- No oversized unexpected files.
-- No stale terms: `verify-hook`, `opendock run`, `lifecycle`, removed manifest fields, or top-level `commands`.
-- Logo exists and renders.
-- `DOCK.md`, installed `README.md`, `AGENTS.md`, and `HARNESS.md` agree.
+- 현재 요청에서 바꾼 Dock만 정적 checker로 확인합니다.
+- manifest 최신 규격과 source/target path를 확인합니다.
+- root 문서 금지와 namespaced README를 확인합니다.
+- root `AGENTS.md` 규칙이 20개 이하인지 확인합니다.
+- Tool, 일반, Ultrawork/Dock Builder의 custom harness 정책을 확인합니다.
+- macOS와 Windows 설치 계약이 같은지 확인합니다.
 
-## Install
+여기까지 통과하면 일반 수정의 빠른 확인은 끝납니다. 저장소 전체 harness나 실제 설치 시나리오는 자동으로 확장하지 않습니다.
 
-- Install into an empty directory.
-- Install into an existing project with unrelated files.
-- Install multiple docks together when namespacing can collide.
-- Confirm expected files are created or managed.
-- If `dependencies` are declared, confirm dependency outputs are created inside the copied folder only.
-- Confirm dependency install failure does not save a successful dock lock record.
-- Confirm user files outside dock ownership are not touched.
+## 검수·ultrawork·release
 
-## Update
+### 공통
 
-- Update with no user changes.
-- Update after user modifies an OpenDock-managed file; expected result should be block unless force is intended.
-- Update to a version that removes a file; old managed file should be removed if unchanged.
-- Update to a version that adds a file.
-- Update when the user added a file inside a managed directory; user file should be preserved.
-- If `dependencies` are declared, stale dependency outputs should be removed before reinstall and lock records should be replaced.
+- 빈 workspace install
+- 기존 프로젝트 install과 관련 없는 사용자 파일 보존
+- update no-change
+- managed file 사용자 수정 충돌
+- 새 버전에서 제거된 managed file 정리
+- doctor 성공과 실패 메시지
+- uninstall 뒤 managed file 정리와 사용자 파일 보존
+- macOS와 Windows manifest 선택 및 file mapping parity
+- 여러 Dock이 함께 설치될 때 path collision
 
-## Uninstall
+### Tool Dock
 
-- Uninstall one dock while other docks remain installed.
-- Uninstall all installed docks.
-- Managed files should be removed when unchanged.
-- Empty managed directories should be cleaned up.
-- Directories containing user-created files should remain.
-- If `dependencies` are declared, generated dependency outputs such as `node_modules`, `.venv`, or `.opendock/python` should be removed without deleting user-owned source files.
+- tool package와 project-local shim 생성
+- update 뒤 오래된 tool 상태 정리
+- doctor에서 tool과 command 확인
+- 선언한 대표 command의 실제 실행과 종료 코드
+- tool manager에 필요한 runtime과 project-local shim 확인
+- uninstall 뒤 Dock 소유 tool과 shim 정리
 
-## Harness
+Tool Dock에는 custom harness 성공·실패 사례를 요구하지 않습니다.
 
-- Run harness with no target output when the dock should pass as ready.
-- Run harness against a valid sample output.
-- Run harness against intentional invalid output and verify non-zero exit.
-- Confirm failures are scoped to the dock's domain and not unrelated project files.
+### 일반 Dock
 
-## Platform
+- custom harness, HARNESS, quality-gate workflow가 없음
+- root AGENTS가 20개 이하의 routing/safety 규칙만 포함
+- skill과 domain guide가 바로 작업 가능한 지침을 제공
+- 대표 요청에서 AI가 현재 산출물만 보고 결과를 생성하거나 검토
+- template을 사용하지 않아도 정상 작업 가능
 
-- Test macOS manifest on macOS.
-- Test Windows manifest path and PowerShell wrapper shape even if Windows execution is unavailable.
-- Verify `--platform` selects the intended manifest.
+### Ultrawork와 Dock Builder
 
-## Registry/Deploy
+- `.opendock/docks/<dock-name>/HARNESS.md` 설치
+- `.opendock/harness/<dock-name>/check.mjs` 설치
+- 올바른 사례 성공
+- 의도적으로 잘못된 사례 non-zero 실패
+- 현재 요청 산출물 밖의 unrelated file을 검사하지 않음
+- 일반 실행은 빠르게 대기하고, 검수는 지정 작업만, release는 명시적 전체 모드에서만 넓게 검사
+- 의미·문체·창의성을 regex로 점수화하지 않고 객관적 조건만 자동 판정
 
-- Use exact version in `opendock deploy owner/name@version`.
-- Use exact version in `opendock install owner/name@version`.
-- Deploy platform-specific artifacts with `--platform macos|windows|linux` and the matching `--file`.
-- Verify readme/logo metadata when Registry exposes them separately from archive content.
-- Do not assume `latest` unless the current product explicitly supports it.
+### Dependencies
+
+- 지원 manager와 mode
+- 설치 대상이 복사된 안전한 project-relative folder인지 확인
+- install 뒤 dependency output 생성
+- update에서 stale output 정리와 재설치
+- uninstall에서 generated output만 정리하고 source와 사용자 파일 보존
+
+## Registry
+
+- 정확한 `owner/name@version` reference 사용
+- platform별 artifact와 `--file` 일치
+- Registry의 `DOCK.md`, logo, tag 표시 확인
+- 검증하지 못한 platform과 남은 위험 기록

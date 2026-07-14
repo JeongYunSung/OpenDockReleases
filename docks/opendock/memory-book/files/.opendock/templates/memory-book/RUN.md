@@ -1,12 +1,6 @@
-# Memory Book Run
+# Memory Book 선택 템플릿
 
-Status: draft
-Language: ko
-Run ID: replace-me
-
-## 대상 파일
-
-- `memories/example.md`
+이야기의 목적과 공개 범위에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
 ## 기간과 테마
 
@@ -52,7 +46,7 @@ Run ID: replace-me
 
 확인된 사실, 미확인·충돌 자료, 추정 제외, source 누락과 최종 확인 담당자를 기록합니다.
 
-## 검증
+## 확인 메모
 
-- Harness 결과와 수정 이력
-- 사람 또는 Codex 사실성·동의 검토 상태
+- 사실성 또는 동의 확인이 필요한 항목
+- 공개 전 추가로 가리거나 제외할 항목

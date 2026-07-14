@@ -1,6 +1,5 @@
 opendock: 1
-id: opendock/kotlin-spring-ultrawork
-summary: Gradle, ktlint, detekt, DTO validation, profile, transaction, readiness를 점검하는 Kotlin/Spring Boot 품질 게이트.
+summary: Gradle, ktlint, detekt, DTO 검증, profile, transaction, readiness를 점검하는 Kotlin/Spring Boot 품질 게이트.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -16,16 +15,16 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
-    to: .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__kotlin-spring-ultrawork/check.sh
-    to: .opendock/harness/opendock__kotlin-spring-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__kotlin-spring-ultrawork/check.ps1
-    to: .opendock/harness/opendock__kotlin-spring-ultrawork/check.ps1
+  - from: files/.opendock/docks/kotlin-spring-ultrawork/README.md
+    to: .opendock/docks/kotlin-spring-ultrawork/README.md
+  - from: files/.opendock/docks/kotlin-spring-ultrawork/HARNESS.md
+    to: .opendock/docks/kotlin-spring-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/kotlin-spring-ultrawork/check.mjs
+    to: .opendock/harness/kotlin-spring-ultrawork/check.mjs
+  - from: files/.opendock/harness/kotlin-spring-ultrawork/check.sh
+    to: .opendock/harness/kotlin-spring-ultrawork/check.sh
+  - from: files/.opendock/harness/kotlin-spring-ultrawork/check.ps1
+    to: .opendock/harness/kotlin-spring-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-kotlin-spring-ultrawork/SKILL.md
     to: .agents/skills/opendock-kotlin-spring-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-kotlin-spring-ultrawork.mdc
@@ -34,16 +33,14 @@ files:
     to: .agents/workflows/opendock-kotlin-spring-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-kotlin-spring-ultrawork/quality-gate.md
     to: .claude/commands/opendock-kotlin-spring-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-kotlin-spring-ultrawork/hook.json
-    to: .agents/hooks/opendock-kotlin-spring-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/kotlin-spring-ultrawork/README.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/kotlin-spring-ultrawork/HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__kotlin-spring-ultrawork/check.mjs
+    check: test -f .opendock/harness/kotlin-spring-ultrawork/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-kotlin-spring-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-kotlin-spring-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-kotlin-spring-ultrawork/hook.json

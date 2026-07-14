@@ -27,14 +27,14 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PAPER_SHADERS.md
-    to: PAPER_SHADERS.md
-  - from: files/SHADER_PLAYBOOK.md
-    to: SHADER_PLAYBOOK.md
+  - from: files/.opendock/docks/paper-shaders-ultrawork/README.md
+    to: .opendock/docks/paper-shaders-ultrawork/README.md
+  - from: files/.opendock/docks/paper-shaders-ultrawork/HARNESS.md
+    to: .opendock/docks/paper-shaders-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md
+    to: .opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md
+  - from: files/.opendock/docks/paper-shaders-ultrawork/SHADER_PLAYBOOK.md
+    to: .opendock/docks/paper-shaders-ultrawork/SHADER_PLAYBOOK.md
   - from: files/.codex/opendock/paper-shaders-ultrawork
     to: .codex/opendock/paper-shaders-ultrawork
   - from: files/.opendock/data/paper-shaders/catalog.json
@@ -43,12 +43,12 @@ files:
     to: .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
   - from: files/.opendock/templates/paper-shaders/SHADER_REQUEST.md
     to: .opendock/templates/paper-shaders/SHADER_REQUEST.md
-  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
-    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.sh
-    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__paper-shaders-ultrawork/check.ps1
-    to: .opendock/harness/opendock__paper-shaders-ultrawork/check.ps1
+  - from: files/.opendock/harness/paper-shaders-ultrawork/check.mjs
+    to: .opendock/harness/paper-shaders-ultrawork/check.mjs
+  - from: files/.opendock/harness/paper-shaders-ultrawork/check.sh
+    to: .opendock/harness/paper-shaders-ultrawork/check.sh
+  - from: files/.opendock/harness/paper-shaders-ultrawork/check.ps1
+    to: .opendock/harness/paper-shaders-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
     to: .agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
   - from: files/.agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md
@@ -57,23 +57,23 @@ files:
     to: .claude/commands/opendock-paper-shaders-ultrawork/quality-gate.md
   - from: files/.cursor/rules/opendock-paper-shaders-ultrawork.mdc
     to: .cursor/rules/opendock-paper-shaders-ultrawork.mdc
-  - from: files/.agents/hooks/opendock-paper-shaders-ultrawork/hook.json
-    to: .agents/hooks/opendock-paper-shaders-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/paper-shaders-ultrawork/README.md
   - id: paper-shaders-doc
-    check: test -f PAPER_SHADERS.md
+    check: test -f .opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md
   - id: catalog-json
     check: test -f .opendock/data/paper-shaders/catalog.json
   - id: shader-playbook
-    check: test -f SHADER_PLAYBOOK.md
+    check: test -f .opendock/docks/paper-shaders-ultrawork/SHADER_PLAYBOOK.md
   - id: runtime-package-json
     check: test -f .codex/opendock/paper-shaders-ultrawork/package.json
   - id: runtime-package-installed
     check: test -d .codex/opendock/paper-shaders-ultrawork/node_modules/@paper-design/shaders-react
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/paper-shaders-ultrawork/HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs
+    check: test -f .opendock/harness/paper-shaders-ultrawork/check.mjs
   - id: run-template
     check: test -f .opendock/templates/paper-shaders/PAPER_SHADER_RUN.md
   - id: request-template
@@ -82,5 +82,3 @@ doctor:
     check: test -f .agents/skills/opendock-paper-shaders-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-paper-shaders-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-paper-shaders-ultrawork/hook.json

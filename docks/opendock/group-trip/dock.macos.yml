@@ -1,5 +1,5 @@
 opendock: 1
-summary: 구성원별 선호·제약·예산을 투명한 tradeoff, 공정한 결정과 비용 배분으로 연결하는 공동 여행 품질 게이트.
+summary: 구성원별 선호·제약·예산을 투명한 tradeoff, 공정한 결정과 비용 배분으로 연결하는 공동 여행 계획 Dock.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -9,40 +9,25 @@ tags:
   - budgeting
   - accessibility
   - planning
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/group-trip/README.md
+    to: .opendock/docks/group-trip/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/GROUP_TRIP_PLAYBOOK.md
-    to: GROUP_TRIP_PLAYBOOK.md
+  - from: files/.opendock/docks/group-trip/GROUP_TRIP_PLAYBOOK.md
+    to: .opendock/docks/group-trip/GROUP_TRIP_PLAYBOOK.md
   - from: files/.agents/skills/opendock-group-trip/SKILL.md
     to: .agents/skills/opendock-group-trip/SKILL.md
-  - from: files/.agents/workflows/opendock-group-trip/quality-gate.md
-    to: .agents/workflows/opendock-group-trip/quality-gate.md
   - from: files/.opendock/templates/group-trip
     to: .opendock/templates/group-trip
-  - from: files/.opendock/harness/opendock__group-trip
-    to: .opendock/harness/opendock__group-trip
 doctor:
   - id: group-trip-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/group-trip/README.md
   - id: group-trip-agents
     check: test -f AGENTS.md
-  - id: group-trip-harness-doc
-    check: test -f HARNESS.md
   - id: group-trip-playbook
-    check: test -f GROUP_TRIP_PLAYBOOK.md
+    check: test -f .opendock/docks/group-trip/GROUP_TRIP_PLAYBOOK.md
   - id: group-trip-skill
     check: test -f .agents/skills/opendock-group-trip/SKILL.md
-  - id: group-trip-workflow
-    check: test -f .agents/workflows/opendock-group-trip/quality-gate.md
   - id: group-trip-template
     check: test -f .opendock/templates/group-trip/RUN.md
-  - id: group-trip-harness
-    check: test -f .opendock/harness/opendock__group-trip/check.mjs

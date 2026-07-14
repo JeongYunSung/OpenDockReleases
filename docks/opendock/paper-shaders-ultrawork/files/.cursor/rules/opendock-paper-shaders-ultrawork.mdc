@@ -1,6 +1,22 @@
 ---
-description: Paper Shaders component and prop quality gate
+description: Paper Shaders Ultrawork 명시적 품질 검수
+globs: **/*
 alwaysApply: false
 ---
 
-Use SHADER_PLAYBOOK.md and PAPER_SHADERS.md before implementing @paper-design/shaders-react. For image, logo animation, background, or visual effect requests, propose 2-3 shader candidates first and wait for the user to choose a number before applying. Do not invent shader components or props. Keep numeric values inside documented ranges and run node .opendock/harness/opendock__paper-shaders-ultrawork/check.mjs before handoff.
+# Paper Shaders Ultrawork
+
+## 기본 동작
+- 평소 요청에서는 현재 사용자가 이번 작업에서 만든 파일과 수정한 파일만 확인합니다.
+- 명시된 target을 우선하고, 없으면 활성 run manifest의 target만 확인합니다.
+- 관련 없는 프로젝트 전체를 재귀 검사하지 않습니다.
+- 선택된 shader, 실제 dependency, documented prop, 값 범위, contrast와 motion 부담을 확인합니다.
+
+## 정밀 검수
+- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- 기준 문서는 `.opendock/docks/paper-shaders-ultrawork/README.md`, `.opendock/docks/paper-shaders-ultrawork/HARNESS.md`, `.opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md`, `.opendock/docks/paper-shaders-ultrawork/SHADER_PLAYBOOK.md`입니다.
+- 실패, 미검증 항목과 승인된 예외를 구분해 보고합니다.
+
+## 안전 경계
+- secret, credential, 환경 변수 유출, destructive command, deploy와 migration을 실행하지 않습니다.
+- 검토된 scope만 수정하고 관련 없는 파일을 삭제·reset·재생성하지 않습니다.

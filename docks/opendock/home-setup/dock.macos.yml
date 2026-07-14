@@ -9,41 +9,25 @@ tags:
   - inventory
   - budget
   - safety
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/home-setup/README.md
+    to: .opendock/docks/home-setup/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/HOME_SETUP_PLAYBOOK.md
-    to: HOME_SETUP_PLAYBOOK.md
+  - from: files/.opendock/docks/home-setup/HOME_SETUP_PLAYBOOK.md
+    to: .opendock/docks/home-setup/HOME_SETUP_PLAYBOOK.md
   - from: files/.agents/skills/opendock-home-setup/SKILL.md
     to: .agents/skills/opendock-home-setup/SKILL.md
-  - from: files/.agents/workflows/opendock-home-setup/quality-gate.md
-    to: .agents/workflows/opendock-home-setup/quality-gate.md
   - from: files/.opendock/templates/home-setup/RUN.md
     to: .opendock/templates/home-setup/RUN.md
-  - from: files/.opendock/harness/opendock__home-setup/check.mjs
-    to: .opendock/harness/opendock__home-setup/check.mjs
 doctor:
   - id: home-setup-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/home-setup/README.md
   - id: home-setup-agents
     check: test -f AGENTS.md
-  - id: home-setup-harness-guide
-    check: test -f HARNESS.md
   - id: home-setup-playbook
-    check: test -f HOME_SETUP_PLAYBOOK.md
+    check: test -f .opendock/docks/home-setup/HOME_SETUP_PLAYBOOK.md
   - id: home-setup-skill
     check: test -f .agents/skills/opendock-home-setup/SKILL.md
-  - id: home-setup-workflow
-    check: test -f .agents/workflows/opendock-home-setup/quality-gate.md
   - id: home-setup-run-template
     check: test -f .opendock/templates/home-setup/RUN.md
-  - id: home-setup-harness
-    check: test -f .opendock/harness/opendock__home-setup/check.mjs
-

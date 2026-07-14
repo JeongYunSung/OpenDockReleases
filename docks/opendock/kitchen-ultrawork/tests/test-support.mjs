@@ -10,7 +10,7 @@ const sourceHarness = path.join(
   "files",
   ".opendock",
   "harness",
-  "opendock__kitchen-ultrawork",
+  "kitchen-ultrawork",
   "check.mjs",
 );
 

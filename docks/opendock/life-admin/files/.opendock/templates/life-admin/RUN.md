@@ -1,12 +1,6 @@
-# Life Admin Run
+# Life Admin 선택 템플릿
 
-Status: draft
-Language: ko
-Run ID: replace-me
-
-## 대상 파일
-
-- `life-admin/example.md`
+현재 관리 목적에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
 ## 범위와 기간
 
@@ -62,7 +56,7 @@ Run ID: replace-me
 
 제외·마스킹한 값, 역할 기반 이름, 주거·여행 위치의 안전한 granularity를 기록합니다.
 
-## 검증
+## 확인 메모
 
-- Harness 결과와 수정 이력
-- 사람 또는 Codex 운영 검토 상태
+- 아직 확인하지 못한 날짜·상태·다음 행동
+- 사용자 또는 담당자 확인이 필요한 항목

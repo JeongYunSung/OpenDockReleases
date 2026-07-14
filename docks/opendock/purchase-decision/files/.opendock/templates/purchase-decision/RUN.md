@@ -1,12 +1,6 @@
-# Purchase Decision Run
+# Purchase Decision 선택 템플릿
 
-Status: draft
-Language: ko
-Run ID: replace-me
-
-## 대상 파일
-
-- `purchases/example.md`
+구매 규모와 비교 목적에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
 ## 범위와 사용 사례
 
@@ -65,7 +59,7 @@ Run ID: replace-me
 
 제휴·협찬·판매 수익 관계를 공개하고 없으면 없다고 기록합니다.
 
-## 검증
+## 확인 메모
 
-- Harness 결과와 실패 수정 이력
-- 사람 또는 Codex 정성 수용 검토 상태
+- 결제 전 다시 확인할 가격·재고·정책·호환성
+- 사용자 확인이 필요한 취향·착용감·현장 조건

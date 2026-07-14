@@ -1,9 +1,0 @@
-{
-  "name": "opendock-agent-memory-quality-gate",
-  "description": "Run the Agent Memory harness before final handoff when memory files were touched.",
-  "events": [
-    "Stop"
-  ],
-  "command": "node .opendock/harness/opendock__agent-memory/check.mjs",
-  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__agent-memory/check.mjs` manually before final response."
-}

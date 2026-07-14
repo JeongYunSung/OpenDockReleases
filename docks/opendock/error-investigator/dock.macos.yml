@@ -8,42 +8,25 @@ tags:
   - root-cause
   - regression-test
   - safety
-  - harness
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/error-investigator/README.md
+    to: .opendock/docks/error-investigator/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/ERROR_INVESTIGATION_PLAYBOOK.md
-    to: ERROR_INVESTIGATION_PLAYBOOK.md
+  - from: files/.opendock/docks/error-investigator/ERROR_INVESTIGATION_PLAYBOOK.md
+    to: .opendock/docks/error-investigator/ERROR_INVESTIGATION_PLAYBOOK.md
   - from: files/.agents/skills/opendock-error-investigator/SKILL.md
     to: .agents/skills/opendock-error-investigator/SKILL.md
-  - from: files/.agents/workflows/opendock-error-investigator/quality-gate.md
-    to: .agents/workflows/opendock-error-investigator/quality-gate.md
   - from: files/.opendock/templates/error-investigator/RUN.md
     to: .opendock/templates/error-investigator/RUN.md
-  - from: files/.opendock/harness/opendock__error-investigator/check.mjs
-    to: .opendock/harness/opendock__error-investigator/check.mjs
 doctor:
   - id: readme
-    check: test -f README.md
+    check: test -f .opendock/docks/error-investigator/README.md
   - id: agents
     check: test -f AGENTS.md
-  - id: harness-doc
-    check: test -f HARNESS.md
   - id: playbook
-    check: test -f ERROR_INVESTIGATION_PLAYBOOK.md
+    check: test -f .opendock/docks/error-investigator/ERROR_INVESTIGATION_PLAYBOOK.md
   - id: skill
     check: test -f .agents/skills/opendock-error-investigator/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-error-investigator/quality-gate.md
   - id: run-template
     check: test -f .opendock/templates/error-investigator/RUN.md
-  - id: harness
-    check: test -f .opendock/harness/opendock__error-investigator/check.mjs
-

@@ -1,0 +1,103 @@
+opendock: 1
+summary: oh-my-AI 도구(oma)를 프로젝트 전용로 설치하고 OMA 설정의 install, update, doctor를 제공하는 도구 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - oh-my-agent
+  - oma
+  - agents
+  - skills
+  - workflows
+  - codex
+  - claude
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    bun: ">=1.3.0"
+tools:
+  oh-my-agent:
+    manager: bun
+    package: oh-my-agent
+    version: "10.10.0"
+    commands:
+      - oma
+      - oh-my-agent
+permissions:
+  - oma -y install
+  - oma update --ci --all
+workdir:
+  files:
+    - from: workdir/.agents/oma-config.yaml
+      to: .agents/oma-config.yaml
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/.opendock/docks/oh-my-agent/README.md
+    to: .opendock/docks/oh-my-agent/README.md
+  - from: files/.opendock/docks/oh-my-agent/OH_MY_AGENT.md
+    to: .opendock/docks/oh-my-agent/OH_MY_AGENT.md
+  - from: files/.opendock/docks/oh-my-agent/OMA_RUN.md
+    to: .opendock/docks/oh-my-agent/OMA_RUN.md
+install:
+  - id: apply-oma-config
+    run: oma -y install
+    workdir: dock
+    timeout_ms: 600000
+    export:
+      include:
+        - AGENTS.md
+        - CLAUDE.md
+        - GEMINI.md
+        - QWEN.md
+        - .agents/**
+        - .claude/**
+        - .codex/**
+        - .cursor/**
+        - .github/**
+        - .grok/**
+        - .kiro/**
+        - .opencode/**
+        - .qwen/**
+        - .zcode/**
+      exclude:
+        - "**/*.log"
+        - "**/cache/**"
+        - "**/.DS_Store"
+        - ".agents/.backup*/**"
+update:
+  - id: update-oma-config
+    run: oma update --ci --all
+    workdir: dock
+    timeout_ms: 600000
+    export:
+      include:
+        - AGENTS.md
+        - CLAUDE.md
+        - GEMINI.md
+        - QWEN.md
+        - .agents/**
+        - .claude/**
+        - .codex/**
+        - .cursor/**
+        - .github/**
+        - .grok/**
+        - .kiro/**
+        - .opencode/**
+        - .qwen/**
+        - .zcode/**
+      exclude:
+        - "**/*.log"
+        - "**/cache/**"
+        - "**/.DS_Store"
+        - ".agents/.backup*/**"
+doctor:
+  - id: oma-version
+    run: oma --version
+  - id: oma-config
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/oma-config.yaml) { exit 0 } else { exit 1 }"
+  - id: oh-my-agent-docs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/oh-my-agent/README.md) { exit 0 } else { exit 1 }"

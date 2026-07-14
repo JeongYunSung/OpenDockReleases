@@ -1,38 +1,15 @@
 # UX Writing Ultrawork
 
-한국어와 영어 제품 문구를 `WRITING.md` 기준에 맞춰 점검하는 UX writing 품질 게이트입니다.
+## 무엇을 도와주나요
 
-서비스를 만들고 나면 화면 안에 개발자스러운 말이 남기 쉽습니다. 이 dock은 버튼, 에러, 빈 상태, 로딩, 성공 메시지, 메뉴명, 기능명, 플랜명처럼 사용자가 직접 보는 텍스트를 프로젝트 컨셉에 맞게 고치도록 돕습니다.
+한국어·영어 사용자 문구, 제품 용어, 이름, 오류 복구와 CTA를 일관된 기준으로 다듬습니다.
 
-## 기준
+## 평소 사용
 
-`WRITING.md`가 최우선입니다. Toss식 해요체, Material/Apple식 plain language, GOV.UK식 쉬운 말 같은 일반 원칙은 fallback입니다. 프로젝트가 `WRITING.md`에서 더 전문적이거나 더 캐주얼한 톤을 요구하면 그 기준을 따릅니다.
+평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
 
-## 제공하는 것
+설치 후 안내와 기준 문서는 `.opendock/docks/ux-writing-ultrawork/README.md`, `.opendock/docks/ux-writing-ultrawork/HARNESS.md`, `.opendock/docks/ux-writing-ultrawork/WRITING.md`, `.opendock/docks/ux-writing-ultrawork/TERMS.md`에서 확인합니다.
 
-- 한국어/영어 voice, tone, UI copy rule을 담는 `WRITING.md`
-- 공개 용어와 피해야 할 내부 용어를 관리하는 `TERMS.md`
-- 현재 작업 target만 검사하는 run manifest
-- Codex, Claude Code, Gemini, Cursor용 지침
-- 개발자스러운 용어, 해결 행동 없는 에러, 문체 혼용, placeholder copy를 잡는 harness
+## 출시 전 검수
 
-## 작업 흐름
-
-```text
-WRITING.md 확인 -> TERMS.md 확인 -> target file 지정 -> copy audit -> rewrite -> harness -> handoff
-```
-
-작업마다 `.opendock/runs/ux-writing/<run-id>/manifest.md`를 만들고 현재 작업에서 검토할 target file만 적습니다. harness는 그 파일만 검사합니다.
-
-## 검사하는 것
-
-- `WRITING.md`가 있는지
-- `TERMS.md`의 피해야 할 표현이 target에 남아 있는지
-- payload, endpoint, schema, token, null, undefined 같은 내부 구현어가 사용자 문구에 노출되는지
-- 한국어 문체가 해요체/합니다체 안에서 섞이지 않는지
-- 영어 문구가 짧고 직접적이며 sentence case를 지키는지
-- 에러 문구에 사용자가 다음에 할 행동이 있는지
-- 버튼/CTA가 명사보다 행동 중심인지
-- TODO, Lorem ipsum, 임시 작명 같은 placeholder가 남아 있는지
-
-코드나 문서 전체를 임의로 훑는 도구가 아니라, 사용자가 보는 문구를 명시적으로 골라 품질을 올리는 게이트입니다.
+사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.

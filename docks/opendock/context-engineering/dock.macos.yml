@@ -1,5 +1,5 @@
 opendock: 1
-summary: code-review-graph와 codectx로 agent가 필요한 코드/문서 맥락만 읽게 만드는 dock.
+summary: code-review-graph와 codectx CLI를 프로젝트 전용로 설치해 필요한 코드 맥락을 찾는 도구 Dock.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -25,6 +25,9 @@ tools:
     version: "0.3.0"
     commands:
       - codectx
+permissions:
+  - code-review-graph --help
+  - codectx --help
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
@@ -32,40 +35,16 @@ files:
     to: CLAUDE.md
   - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/CONTEXT_ENGINEERING.md
-    to: CONTEXT_ENGINEERING.md
-  - from: files/.opendock/templates/context-engineering/CONTEXT_PACK.md
-    to: .opendock/templates/context-engineering/CONTEXT_PACK.md
-  - from: files/.opendock/harness/opendock__context-engineering/check.mjs
-    to: .opendock/harness/opendock__context-engineering/check.mjs
-  - from: files/.opendock/harness/opendock__context-engineering/check.sh
-    to: .opendock/harness/opendock__context-engineering/check.sh
-  - from: files/.opendock/harness/opendock__context-engineering/check.ps1
-    to: .opendock/harness/opendock__context-engineering/check.ps1
-  - from: files/.agents/skills/opendock-context-engineering/SKILL.md
-    to: .agents/skills/opendock-context-engineering/SKILL.md
-  - from: files/.agents/workflows/opendock-context-engineering/quality-gate.md
-    to: .agents/workflows/opendock-context-engineering/quality-gate.md
-  - from: files/.claude/commands/opendock-context-engineering/quality-gate.md
-    to: .claude/commands/opendock-context-engineering/quality-gate.md
-  - from: files/.cursor/rules/opendock-context-engineering.mdc
-    to: .cursor/rules/opendock-context-engineering.mdc
-  - from: files/.agents/hooks/opendock-context-engineering/hook.json
-    to: .agents/hooks/opendock-context-engineering/hook.json
+  - from: files/.opendock/docks/context-engineering/README.md
+    to: .opendock/docks/context-engineering/README.md
+  - from: files/.opendock/docks/context-engineering/CONTEXT_ENGINEERING.md
+    to: .opendock/docks/context-engineering/CONTEXT_ENGINEERING.md
+  - from: files/.opendock/docks/context-engineering/CONTEXT_PACK.md
+    to: .opendock/docks/context-engineering/CONTEXT_PACK.md
 doctor:
-  - id: context-engineering
-    check: test -f CONTEXT_ENGINEERING.md
-  - id: harness-doc
-    check: test -f HARNESS.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__context-engineering/check.mjs
-  - id: run-template
-    check: test -f .opendock/templates/context-engineering/CONTEXT_PACK.md
-  - id: skill
-    check: test -f .agents/skills/opendock-context-engineering/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-context-engineering/quality-gate.md
+  - id: code-review-graph-cli
+    run: code-review-graph --help
+  - id: codectx-cli
+    run: codectx --help
+  - id: context-engineering-docs
+    check: test -f .opendock/docks/context-engineering/README.md

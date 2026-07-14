@@ -46,7 +46,7 @@
 ## 실행
 
 ```bash
-node .opendock/harness/opendock__video-ultrawork/check.mjs --manifest .opendock/runs/video/<run-id>/manifest.json
+node .opendock/harness/video-ultrawork/check.mjs --manifest .opendock/runs/video/<run-id>/manifest.json
 ```
 
 Harness는 지정한 manifest와 그 manifest가 열거한 output/report만 검사합니다.

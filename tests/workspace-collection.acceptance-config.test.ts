@@ -1,9 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
-	assertAcceptanceManifestMetadata,
 	parseAcceptanceConcurrency,
 	sanitizedChildEnvironment,
-	sanitizedHarnessEnvironment,
 	selectAcceptanceCases,
 } from "./workspace-collection.acceptance-config.ts";
 
@@ -21,19 +19,6 @@ describe("Codex acceptance configuration", () => {
 		expect(() =>
 			parseAcceptanceConcurrency("999999999999999999999999"),
 		).toThrow("safe integer range");
-	});
-
-	test("하네스 환경은 HOME과 Codex 인증 위치를 전달하지 않는다", () => {
-		expect(
-			sanitizedHarnessEnvironment({
-				PATH: "/usr/bin",
-				LANG: "ko_KR.UTF-8",
-				HOME: "/private/home",
-				CODEX_HOME: "/private/codex",
-				XDG_CONFIG_HOME: "/private/config",
-				OPENAI_API_KEY: "secret",
-			}),
-		).toEqual({ PATH: "/usr/bin", LANG: "ko_KR.UTF-8" });
 	});
 
 	test("Dock 필터는 순서를 보존하고 unknown/duplicate를 거부한다", () => {
@@ -75,23 +60,4 @@ describe("Codex acceptance configuration", () => {
 		});
 	});
 
-	test("acceptance manifest metadata는 top-level exact contract를 따른다", () => {
-		expect(() =>
-			assertAcceptanceManifestMetadata(
-				"# Run\n\nStatus: active\nLanguage: ko\n\n## Scope\n본문\n",
-			),
-		).not.toThrow();
-
-		for (const invalid of [
-			"# Run\nLanguage: ko\n\n## Scope\n본문\n",
-			"# Run\nStatus: ready\nLanguage: ko\n\n## Scope\n본문\n",
-			"# Run\nStatus: active\nStatus: active\nLanguage: ko\n\n## Scope\n본문\n",
-			"# Run\nStatus: active\nLanguage: en\n\n## Scope\n본문\n",
-			"# Run\n```text\nStatus: active\nLanguage: ko\n```\n\n## Scope\n본문\n",
-			"# Run\n- ```text\n  Status: active\n  Language: ko\n  ```\n\n## Scope\n본문\n",
-			"# Run\n<!--\nStatus: active\nLanguage: ko\n-->\n\n## Scope\n본문\n",
-		]) {
-			expect(() => assertAcceptanceManifestMetadata(invalid)).toThrow();
-		}
-	});
 });

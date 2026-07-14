@@ -9,41 +9,25 @@ tags:
   - planning
   - checklist
   - budget
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/moving/README.md
+    to: .opendock/docks/moving/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/MOVING_PLAYBOOK.md
-    to: MOVING_PLAYBOOK.md
+  - from: files/.opendock/docks/moving/MOVING_PLAYBOOK.md
+    to: .opendock/docks/moving/MOVING_PLAYBOOK.md
   - from: files/.agents/skills/opendock-moving/SKILL.md
     to: .agents/skills/opendock-moving/SKILL.md
-  - from: files/.agents/workflows/opendock-moving/quality-gate.md
-    to: .agents/workflows/opendock-moving/quality-gate.md
   - from: files/.opendock/templates/moving/RUN.md
     to: .opendock/templates/moving/RUN.md
-  - from: files/.opendock/harness/opendock__moving/check.mjs
-    to: .opendock/harness/opendock__moving/check.mjs
 doctor:
   - id: moving-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/moving/README.md
   - id: moving-agents
     check: test -f AGENTS.md
-  - id: moving-harness-guide
-    check: test -f HARNESS.md
   - id: moving-playbook
-    check: test -f MOVING_PLAYBOOK.md
+    check: test -f .opendock/docks/moving/MOVING_PLAYBOOK.md
   - id: moving-skill
     check: test -f .agents/skills/opendock-moving/SKILL.md
-  - id: moving-workflow
-    check: test -f .agents/workflows/opendock-moving/quality-gate.md
   - id: moving-run-template
     check: test -f .opendock/templates/moving/RUN.md
-  - id: moving-harness
-    check: test -f .opendock/harness/opendock__moving/check.mjs
-

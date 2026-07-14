@@ -1,14 +1,10 @@
-# PM Workspace Run Manifest
+# PM Workspace 선택 템플릿
 
-Status: draft
-Language: ko
-Product: [[제품 또는 기능]]
-Scope: [[포함 범위와 제외 범위]]
-Decision Date: [[YYYY-MM-DD]]
+문서 목적과 독자에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
-## Target Files
-
-- `product/[[run-id]].md`
+- 제품 또는 기능:
+- 포함 범위와 제외 범위:
+- 결정 날짜가 필요한 경우:
 
 ## Source Separation Evidence
 
@@ -28,10 +24,10 @@ Metric Review: [[baseline, target, 측정 방법과 기간 검토]]
 
 Decision Log Review: [[날짜, 결정, rationale, release 영향 검토]]
 
-## Validation Evidence
+## 확인 계획
 
-Validation Method: [[문서·stakeholder·prototype 검증 방법]]
-Validation Result: [[통과 결과와 남은 open question]]
+확인 방법: [[문서·stakeholder·prototype 확인 방법]]
+확인 결과: [[확인한 내용과 남은 open question]]
 
 ## Safety / Limitations
 

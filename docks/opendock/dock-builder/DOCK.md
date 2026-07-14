@@ -1,41 +1,39 @@
 # Dock Builder
 
-OpenDock dock을 만들고, 검토하고, 출시 가능한 수준까지 테스트하는 작업 기준을 설치합니다.
+OpenDock Dock을 만들고 다듬을 때 필요한 제작 기준과 검사 도구를 설치합니다.
 
-이 dock은 `opendock-dock-builder` skill과 정적 패키지 검증 스크립트를 workspace 안에 제공합니다. 새 dock을 만들 때 최신 OpenDock manifest, files, dependencies, harness, command policy, 보안 검토, install/update/uninstall 테스트, registry 제출 전 증거 정리를 빠뜨리지 않게 돕습니다.
+Dock Builder의 원칙은 단순합니다. 평소에는 지금 바꾼 Dock만 빠르게 확인하고, 검수나 출시를 준비할 때는 설치부터 제거까지 실제 흐름을 꼼꼼하게 확인합니다. 작은 수정 때문에 저장소 전체 검사가 매번 실행되지 않으면서도, Registry에 올리기 전에는 필요한 증거를 빠뜨리지 않게 합니다.
 
-## 설치되는 것
+## 제공 기능
 
-- `DOCK_BUILDER.md`: dock 제작과 출시 전 점검 기준
-- `HARNESS.md`: dock-builder harness 사용법
-- `.agents/skills/opendock-dock-builder/SKILL.md`: dock 제작 전용 skill
-- `.agents/skills/opendock-dock-builder/references/`: 품질, 보안, 테스트, 릴리스 체크리스트
-- `.agents/skills/opendock-dock-builder/scripts/check_dock_package.py`: dock 패키지 정적 검증 스크립트
-- `.opendock/harness/opendock__dock-builder/check.mjs`: 현재 workspace의 dock 구조 점검 harness
-- `.opendock/templates/dock-builder/`: 리뷰와 릴리스 증거 템플릿
+- 최신 OpenDock manifest와 안전한 설치 경로를 확인하는 정적 checker
+- macOS와 Windows manifest가 같은 설치 계약을 유지하는지 확인하는 검사
+- 도구, 일반 작업공간, Ultrawork에 맞는 문서·검수 구조 안내
+- install, update, doctor, uninstall과 보안 검토를 위한 release 자료
+- Dock별 사용자 안내와 필요한 경우에만 쓰는 namespaced template
 
-## 사용 시점
+## 사용 방식
 
-- 새 OpenDock dock을 만들 때
-- 기존 dock의 manifest, README, harness, skill, workflow를 정리할 때
-- registry deploy 전에 보안과 테스트 증거를 정리할 때
-- install/update/uninstall, dependency cleanup, managed file, path collision, platform split을 검증할 때
-- `id`, `version`, `lifecycle`, `requires.packages`, task package install command처럼 구버전 spec 잔재를 제거할 때
-
-## 확인
+일반 제작과 수정에서는 대상 Dock 하나만 확인합니다.
 
 ```bash
-node .opendock/harness/opendock__dock-builder/check.mjs
 python3 .agents/skills/opendock-dock-builder/scripts/check_dock_package.py docks/opendock/<dock-name>
 ```
 
-## 원칙
+사용자가 `검수`, `ultrawork`, `release`를 명시한 경우에만 정밀 검사 도구를 실행하고, 임시 workspace에서 실제 설치·업데이트·제거 흐름을 확인합니다.
 
-- dock은 단순 스크립트 묶음이 아니라 versioned workspace capability입니다.
-- `dock.yml`은 `opendock: 1`, catalog metadata, `requires.runtimes`, top-level `tools`, top-level `dependencies`, `files`, `install`, `update`, `doctor`를 기준으로 작성합니다.
-- `tools`는 command shim을 노출하는 project-local CLI용이고, `dependencies`는 `files`로 복사한 folder 내부 package dependency 설치용입니다.
-- dock identity와 release version은 `opendock deploy owner/name@version` reference가 기준입니다.
-- 글로벌 설치보다 workspace-local 추적, update, uninstall 가능한 구조를 우선합니다.
-- uninstall은 `dock.yml` task가 아니라 OpenDock이 lock과 managed file 기록을 기반으로 처리하는 제거 흐름입니다.
-- 검증되지 않은 task command는 실제 프로젝트에서 실행하지 않습니다.
-- 보안, 실행 여부, 테스트 여부, 품질관리 증거가 있어야 출시 준비가 끝난 것으로 봅니다.
+```bash
+node .opendock/harness/dock-builder/check.mjs --release docks/opendock/<dock-name>
+```
+
+설치 후 자세한 안내는 `.opendock/docks/dock-builder/README.md`에서 확인할 수 있습니다.
+
+## 기본 정책
+
+- `DOCK.md`는 Registry에서 읽는 한국어 카탈로그 설명입니다.
+- root에는 간결한 `AGENTS.md`만 두며, 사용자 문서는 `.opendock/docks/<dock-name>/`에 설치합니다.
+- 도구 Dock은 custom harness를 덧붙이지 않고 실제 도구가 설치되고 실행되는지 확인합니다.
+- AI 기능과 준비된 작업 공간 Dock은 짧은 지침, 도메인 가이드와 선택적 템플릿만 제공합니다.
+- `*-ultrawork`와 `dock-builder`만 Dock별 HARNESS 문서와 `check.mjs`를 같은 이름으로 묶습니다.
+- custom checker는 의미 품질을 점수화하지 않고 지정 산출물의 존재, 범위, 형식과 안전 조건만 판정합니다.
+- 검증되지 않은 명령은 실제 사용자 프로젝트에서 실행하지 않습니다.

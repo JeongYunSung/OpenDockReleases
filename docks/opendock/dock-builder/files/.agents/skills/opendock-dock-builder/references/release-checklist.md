@@ -1,54 +1,64 @@
-# Release Checklist
+# 출시 전 체크리스트
 
-Before saying a dock is release-ready, collect evidence.
+이 체크리스트는 사용자가 `검수`, `ultrawork`, `release`를 명시했을 때 사용합니다. 일반 요청에서는 대상 Dock의 정적 checker까지만 실행합니다.
 
-## Required Evidence
+## 공통 증거
 
-- Dock deploy reference (`owner/name@version`), platform manifests, and target Registry.
-- Static package check result.
-- Manifest `files.from` and `files.to` safety result.
-- Manifest spec check: no embedded `id`/`version`, no `lifecycle`, no manifest `uninstall`, no removed `requires.packages`/`requires.tools`, and no package-manager mutation task.
-- Dependency spec check when present: safe `dependencies.<name>.path`, supported manager/mode, expected package manifest or requirements file, and install/update/uninstall cleanup evidence.
-- Security review result with blockers/warnings.
-- Harness direct run result.
-- Positive and negative harness case result when the dock has a harness.
-- Install simulation result.
-- Update simulation result when updating existing dock behavior.
-- Uninstall simulation result when uninstall is relevant.
-- Dependency install/update/uninstall result when `dependencies` is present.
-- Multi-dock collision test when paths overlap or shared concepts exist.
-- Documentation sync result across `DOCK.md`, installed `README.md`, `AGENTS.md`, `HARNESS.md`, skill/workflow files, and repo catalog.
+- deploy reference와 대상 Registry
+- macOS와 Windows manifest 목록
+- 정적 package checker 결과
+- root 문서 금지와 namespaced README 확인
+- 두 platform의 file mapping, tool/dependency, doctor parity 확인
+- 보안 blocker와 warning
+- 임시 workspace install, update, doctor, uninstall 결과
+- path collision과 managed file 보존 결과
+- 남은 위험과 검증하지 못한 항목
 
-## Handoff Format
+## 유형별 증거
 
-Use this shape:
+Tool Dock:
+
+- tool 설치 경로와 shim
+- doctor 결과
+- 설치된 실제 command 실행 결과
+- tool manager와 필요한 runtime이 clean workspace에서 함께 준비되는지 확인
+- update와 uninstall 뒤 tool 정리 결과
+
+일반 Dock:
+
+- custom harness, HARNESS, quality-gate가 없다는 확인
+- AGENTS가 20개 이하의 핵심 규칙만 담는다는 확인
+- domain guide를 사용한 대표 AI 요청과 결과
+- template이 필수가 아니라 선택 사항이라는 안내
+
+Ultrawork와 Dock Builder:
+
+- namespaced HARNESS와 `check.mjs` 경로
+- valid case 성공
+- invalid case non-zero 실패
+- 현재 산출물로 제한된 검사 범위
+- 기계적으로 판정 가능한 조건과 AI가 판단할 의미 품질의 분리
+
+## Handoff 형식
 
 ```text
 Dock: opendock/name
 Version: x.y.z
 Platforms: macos, windows
 Decision: ready | hold | blocked
-Changed: short summary
-Tests:
-- static: pass
-- harness valid case: pass
-- harness invalid case: pass
-- install: pass
-- update: pass/not applicable
-- uninstall: pass/not applicable
+Changed: 변경 요약
+Checks:
+- static:
+- install:
+- update:
+- doctor:
+- uninstall:
+- real tool 또는 custom harness:
 Security:
-- blockers: none
-- warnings: ...
+- blockers:
+- warnings:
 Residual risk:
 - ...
 ```
 
-## Do Not Claim Ready If
-
-- Any install source is missing.
-- The manifest uses removed OpenDock fields or task command shapes rejected by the current CLI.
-- The harness exits zero on known bad input.
-- Security review has unresolved blockers.
-- A managed path collision appears between docks.
-- Docs describe commands/spec fields the current implementation does not support.
-- Only happy-path install was tested while update/uninstall behavior changed.
+설치 source가 없거나, 최신 manifest를 위반하거나, platform 계약이 다르거나, 보안 blocker가 남아 있으면 출시 준비가 끝났다고 말하지 않습니다. Tool Dock의 실제 명령, 일반 Dock의 대표 AI 작업, Ultrawork checker의 실패 사례 중 해당 증거를 확인하지 못했을 때도 그 사실을 남깁니다.

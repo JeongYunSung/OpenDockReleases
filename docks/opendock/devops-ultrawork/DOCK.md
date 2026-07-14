@@ -1,14 +1,15 @@
 # DevOps Ultrawork
 
-Terraform, Kubernetes, Helm, secret, public exposure, image tag, resource limit, runbook을 확인하는 DevOps 품질 게이트입니다.
+## 무엇을 도와주나요
 
-## 확인하는 것
+Terraform, Kubernetes, Helm, secret, 외부 노출, image tag, resource limit과 runbook 위험을 점검합니다.
 
-- Terraform은 fmt check와 validate를 통과해야 합니다.
-- Helm과 Kubernetes manifest에는 lint/schema validation이 필요합니다.
-- handoff 전에 secret scan이 필수입니다.
-- public bucket, public security group, privileged container는 review가 필요합니다.
-- image tag에 `latest`를 쓰면 안 됩니다.
-- 배포 가능한 변경에는 rollback과 runbook 문서가 있어야 합니다.
+## 평소 사용
 
-DevOps와 infrastructure 품질을 집중적으로 점검해야 하는 workspace에 사용합니다.
+평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
+
+설치 후 안내와 기준 문서는 `.opendock/docks/devops-ultrawork/README.md`, `.opendock/docks/devops-ultrawork/HARNESS.md`에서 확인합니다.
+
+## 출시 전 검수
+
+사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.

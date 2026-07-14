@@ -5,15 +5,18 @@
 - Deploy reference:
 - Platforms:
 - Registry:
+- Dock type:
 
 ## Checks
 
 - Static package check:
-- Harness valid case:
-- Harness invalid case:
+- Namespaced docs:
+- Platform parity:
 - Install:
 - Update:
+- Doctor:
 - Uninstall:
+- Real tool command or custom harness cases:
 - Multi-dock collision:
 
 ## Security

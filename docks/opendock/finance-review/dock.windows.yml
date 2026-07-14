@@ -10,41 +10,25 @@ tags:
   - recurring
   - privacy
   - review
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/finance-review/README.md
+    to: .opendock/docks/finance-review/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/FINANCE_REVIEW_PLAYBOOK.md
-    to: FINANCE_REVIEW_PLAYBOOK.md
+  - from: files/.opendock/docks/finance-review/FINANCE_REVIEW_PLAYBOOK.md
+    to: .opendock/docks/finance-review/FINANCE_REVIEW_PLAYBOOK.md
   - from: files/.agents/skills/opendock-finance-review/SKILL.md
     to: .agents/skills/opendock-finance-review/SKILL.md
-  - from: files/.agents/workflows/opendock-finance-review/quality-gate.md
-    to: .agents/workflows/opendock-finance-review/quality-gate.md
   - from: files/.opendock/templates/finance-review
     to: .opendock/templates/finance-review
-  - from: files/.opendock/harness/opendock__finance-review
-    to: .opendock/harness/opendock__finance-review
 doctor:
   - id: finance-review-readme
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/finance-review/README.md) { exit 0 } else { exit 1 }"
   - id: finance-review-agents
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
-  - id: finance-review-harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
   - id: finance-review-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath FINANCE_REVIEW_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/finance-review/FINANCE_REVIEW_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: finance-review-skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-finance-review/SKILL.md) { exit 0 } else { exit 1 }"
-  - id: finance-review-workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-finance-review/quality-gate.md) { exit 0 } else { exit 1 }"
   - id: finance-review-run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/finance-review/RUN.md) { exit 0 } else { exit 1 }"
-  - id: finance-review-harness
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__finance-review/check.mjs) { exit 0 } else { exit 1 }"
-

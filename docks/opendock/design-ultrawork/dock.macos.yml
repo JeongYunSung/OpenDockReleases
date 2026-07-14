@@ -15,26 +15,26 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/REFERENCE_RESEARCH.md
-    to: REFERENCE_RESEARCH.md
-  - from: files/LAYOUT_PLAYBOOK.md
-    to: LAYOUT_PLAYBOOK.md
-  - from: files/COLOR_PLAYBOOK.md
-    to: COLOR_PLAYBOOK.md
-  - from: files/PATTERN_GUIDE.md
-    to: PATTERN_GUIDE.md
-  - from: files/CREATE_UI_PLAYBOOK.md
-    to: CREATE_UI_PLAYBOOK.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.mjs
-    to: .opendock/harness/opendock__design-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.sh
-    to: .opendock/harness/opendock__design-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__design-ultrawork/check.ps1
-    to: .opendock/harness/opendock__design-ultrawork/check.ps1
+  - from: files/.opendock/docks/design-ultrawork/README.md
+    to: .opendock/docks/design-ultrawork/README.md
+  - from: files/.opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md
+    to: .opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md
+  - from: files/.opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/PATTERN_GUIDE.md
+    to: .opendock/docks/design-ultrawork/PATTERN_GUIDE.md
+  - from: files/.opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md
+    to: .opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md
+  - from: files/.opendock/docks/design-ultrawork/HARNESS.md
+    to: .opendock/docks/design-ultrawork/HARNESS.md
+  - from: files/.opendock/harness/design-ultrawork/check.mjs
+    to: .opendock/harness/design-ultrawork/check.mjs
+  - from: files/.opendock/harness/design-ultrawork/check.sh
+    to: .opendock/harness/design-ultrawork/check.sh
+  - from: files/.opendock/harness/design-ultrawork/check.ps1
+    to: .opendock/harness/design-ultrawork/check.ps1
   - from: files/.opendock/templates/design/DESIGN_RUN.md
     to: .opendock/templates/design/DESIGN_RUN.md
   - from: files/.agents/skills/opendock-design-ultrawork/SKILL.md
@@ -45,28 +45,26 @@ files:
     to: .agents/workflows/opendock-design-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-design-ultrawork/quality-gate.md
     to: .claude/commands/opendock-design-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-design-ultrawork/hook.json
-    to: .agents/hooks/opendock-design-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/design-ultrawork/README.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/design-ultrawork/HARNESS.md
   - id: reference-research
-    check: test -f REFERENCE_RESEARCH.md
+    check: test -f .opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md
   - id: layout-playbook
-    check: test -f LAYOUT_PLAYBOOK.md
+    check: test -f .opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md
   - id: color-playbook
-    check: test -f COLOR_PLAYBOOK.md
+    check: test -f .opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md
   - id: pattern-guide
-    check: test -f PATTERN_GUIDE.md
+    check: test -f .opendock/docks/design-ultrawork/PATTERN_GUIDE.md
   - id: create-ui-playbook
-    check: test -f CREATE_UI_PLAYBOOK.md
+    check: test -f .opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__design-ultrawork/check.mjs
+    check: test -f .opendock/harness/design-ultrawork/check.mjs
   - id: design-run-template
     check: test -f .opendock/templates/design/DESIGN_RUN.md
   - id: skill
     check: test -f .agents/skills/opendock-design-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-design-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-design-ultrawork/hook.json

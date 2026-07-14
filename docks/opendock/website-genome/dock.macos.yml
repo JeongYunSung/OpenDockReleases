@@ -9,40 +9,25 @@ tags:
   - tokens
   - responsive
   - accessibility
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/website-genome/README.md
+    to: .opendock/docks/website-genome/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/WEBSITE_GENOME_PLAYBOOK.md
-    to: WEBSITE_GENOME_PLAYBOOK.md
+  - from: files/.opendock/docks/website-genome/WEBSITE_GENOME_PLAYBOOK.md
+    to: .opendock/docks/website-genome/WEBSITE_GENOME_PLAYBOOK.md
   - from: files/.agents/skills/opendock-website-genome/SKILL.md
     to: .agents/skills/opendock-website-genome/SKILL.md
-  - from: files/.agents/workflows/opendock-website-genome/quality-gate.md
-    to: .agents/workflows/opendock-website-genome/quality-gate.md
   - from: files/.opendock/templates/website-genome/RUN.md
     to: .opendock/templates/website-genome/RUN.md
-  - from: files/.opendock/harness/opendock__website-genome/check.mjs
-    to: .opendock/harness/opendock__website-genome/check.mjs
 doctor:
   - id: website-genome-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/website-genome/README.md
   - id: website-genome-agents
     check: test -f AGENTS.md
-  - id: website-genome-harness-doc
-    check: test -f HARNESS.md
   - id: website-genome-playbook
-    check: test -f WEBSITE_GENOME_PLAYBOOK.md
+    check: test -f .opendock/docks/website-genome/WEBSITE_GENOME_PLAYBOOK.md
   - id: website-genome-skill
     check: test -f .agents/skills/opendock-website-genome/SKILL.md
-  - id: website-genome-workflow
-    check: test -f .agents/workflows/opendock-website-genome/quality-gate.md
   - id: website-genome-run-template
     check: test -f .opendock/templates/website-genome/RUN.md
-  - id: website-genome-harness-script
-    check: test -f .opendock/harness/opendock__website-genome/check.mjs

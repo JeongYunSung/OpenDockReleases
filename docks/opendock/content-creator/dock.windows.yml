@@ -14,46 +14,24 @@ tags:
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/CLAUDE.md
+  - from: files/AGENTS.md
     to: CLAUDE.md
-  - from: files/GEMINI.md
+  - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/CONTENT_CREATOR.md
-    to: CONTENT_CREATOR.md
+  - from: files/.opendock/docks/content-creator/README.md
+    to: .opendock/docks/content-creator/README.md
+  - from: files/.opendock/docks/content-creator/CONTENT_CREATOR.md
+    to: .opendock/docks/content-creator/CONTENT_CREATOR.md
   - from: files/.opendock/templates/content-creator/CONTENT_RUN.md
     to: .opendock/templates/content-creator/CONTENT_RUN.md
-  - from: files/.opendock/harness/opendock__content-creator/check.mjs
-    to: .opendock/harness/opendock__content-creator/check.mjs
-  - from: files/.opendock/harness/opendock__content-creator/check.sh
-    to: .opendock/harness/opendock__content-creator/check.sh
-  - from: files/.opendock/harness/opendock__content-creator/check.ps1
-    to: .opendock/harness/opendock__content-creator/check.ps1
   - from: files/.agents/skills/opendock-content-creator/SKILL.md
     to: .agents/skills/opendock-content-creator/SKILL.md
-  - from: files/.agents/workflows/opendock-content-creator/quality-gate.md
-    to: .agents/workflows/opendock-content-creator/quality-gate.md
-  - from: files/.claude/commands/opendock-content-creator/quality-gate.md
-    to: .claude/commands/opendock-content-creator/quality-gate.md
-  - from: files/.cursor/rules/opendock-content-creator.mdc
-    to: .cursor/rules/opendock-content-creator.mdc
-  - from: files/.agents/hooks/opendock-content-creator/hook.json
-    to: .agents/hooks/opendock-content-creator/hook.json
 doctor:
+  - id: readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/content-creator/README.md) { exit 0 } else { exit 1 }"
   - id: domain-guide
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CONTENT_CREATOR.md) { exit 0 } else { exit 1 }"
-  - id: harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/content-creator/CONTENT_CREATOR.md) { exit 0 } else { exit 1 }"
   - id: run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/content-creator/CONTENT_RUN.md) { exit 0 } else { exit 1 }"
-  - id: harness-script
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__content-creator/check.mjs) { exit 0 } else { exit 1 }"
   - id: skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-content-creator/SKILL.md) { exit 0 } else { exit 1 }"
-  - id: workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-content-creator/quality-gate.md) { exit 0 } else { exit 1 }"
-  - id: hook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/hooks/opendock-content-creator/hook.json) { exit 0 } else { exit 1 }"

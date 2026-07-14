@@ -68,8 +68,8 @@ export function setupProject({ harness = false } = {}) {
   });
   if (harness) {
     cpSync(
-      join(dockRoot, "files", ".opendock", "harness", "opendock__video-ultrawork"),
-      join(projectRoot, ".opendock", "harness", "opendock__video-ultrawork"),
+      join(dockRoot, "files", ".opendock", "harness", "video-ultrawork"),
+      join(projectRoot, ".opendock", "harness", "video-ultrawork"),
       { recursive: true }
     );
   }
@@ -95,7 +95,7 @@ export function setupProject({ harness = false } = {}) {
     projectRoot,
     helperRoot,
     helper: join(helperRoot, "video-helper.mjs"),
-    harness: join(projectRoot, ".opendock", "harness", "opendock__video-ultrawork", "check.mjs")
+    harness: join(projectRoot, ".opendock", "harness", "video-ultrawork", "check.mjs")
   };
 }
 

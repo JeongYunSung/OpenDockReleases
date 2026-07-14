@@ -10,8 +10,8 @@ List only the files created or changed for this writing task.
 
 ## Writing Contract
 
-- WRITING.md reviewed:
-- TERMS.md reviewed:
+- `.opendock/docks/ux-writing-ultrawork/WRITING.md` reviewed:
+- `.opendock/docks/ux-writing-ultrawork/TERMS.md` reviewed:
 - Locale:
 - Product concept:
 - Tone:

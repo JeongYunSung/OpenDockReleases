@@ -1,8 +1,8 @@
 ---
-description: OpenDock dock package authoring and release checks
+description: OpenDock Dock authoring and scoped checks
 globs:
   - "docks/opendock/**"
 alwaysApply: false
 ---
 
-When editing OpenDock docks, follow `DOCK_BUILDER.md` and run the dock-builder harness before handoff.
+When editing an OpenDock Dock, follow `.opendock/docks/dock-builder/PLAYBOOK.md`. Check only the current Dock by default. Run the detailed harness only when the user explicitly requests 검수, ultrawork, or release.

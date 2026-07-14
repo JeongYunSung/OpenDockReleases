@@ -1,16 +1,15 @@
-# UX Audit Run
+# UX Audit 작업 메모
 
-Run ID: 작성하세요
+필요한 섹션만 선택해 사용하고, 요청과 무관한 섹션은 삭제합니다.
+
 Date: 작성하세요
-Owner: 작성하세요
-Status: draft
 Language: ko
 
-## Target Files
+## Result Files
 
 - `audits/ux/작성하세요.md`
 
-첫 target은 아래 section을 모두 포함하는 기준 Markdown 보고서여야 합니다.
+결과 파일이 필요할 때만 경로를 적고, 아래 section 중 감사 범위에 관련된 것만 사용합니다.
 
 ## Scope
 
@@ -56,9 +55,9 @@ label, 오류 복구, 확인 문구, 용어 일관성 범위를 작성하세요.
 
 사용한 최소 데이터와 여행 일정, 집 주소, 정확한 위치, 실명, 연락처, 예약·계정 식별자 비식별화 내용을 작성하세요.
 
-## Validation
+## Review Notes
 
-실행한 확인 방법과 관찰 결과를 작성하세요.
+사용자가 검토를 요청한 경우에만 확인한 항목, 수정 내용과 남은 한계를 작성하세요.
 
 ## Limitations
 

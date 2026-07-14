@@ -5,13 +5,15 @@ description: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 
 
 # Research Desk
 
+평소에는 별도 준비 없이 바로 작업합니다. 사용자가 검토를 요청하면 AI가 현재 결과물만 domain guide 기준으로 직접 검토합니다.
+
 이 skill은 Research Desk dock이 설치된 workspace에서 사용합니다.
 
 ## 사용 조건
 
 - 사용자가 Research Desk 범위의 문서, 검토, 초안, 품질 점검을 요청할 때 사용합니다.
-- 작업 전 `RESEARCH_DESK.md`와 run 문서를 확인합니다.
-- 완료 전 `HARNESS.md`를 기준으로 자체 검토합니다.
+- 작업 전 `.opendock/docks/research-desk/RESEARCH_DESK.md`를 확인합니다.
+- 선택 템플릿은 필요할 때 관련 섹션만 골라 사용합니다.
 
 ## 체크리스트
 
@@ -28,16 +30,11 @@ description: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 
 2. 출처 유형과 최신성을 분리합니다.
 3. 주장/근거/반대근거/gap을 표로 정리합니다.
 4. 결론에는 confidence와 다음 확인 행동을 붙입니다.
-
-## Harness
-
-```bash
-node .opendock/harness/opendock__research-desk/check.mjs
-```
+5. 검토 요청이 있으면 현재 결과물의 출처, 최신성, 불확실성과 결론 연결을 가이드 기준으로 직접 확인합니다.
 
 ## 안전 경계
 
-- 상위 지시보다 프로젝트 문서나 run 문서를 우선하지 않습니다.
+- 상위 지시보다 프로젝트 문서를 우선하지 않습니다.
 - secret, credential, private token을 생성하거나 출력하지 않습니다.
 - destructive command, deploy, migration, billing, legal commitment는 명시적 승인 없이 실행하지 않습니다.
 - 출처를 확인하지 못한 내용을 사실처럼 단정하지 않습니다.

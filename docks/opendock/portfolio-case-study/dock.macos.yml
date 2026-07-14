@@ -9,40 +9,25 @@ tags:
   - evidence
   - privacy
   - writing
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/portfolio-case-study/README.md
+    to: .opendock/docks/portfolio-case-study/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PORTFOLIO_CASE_STUDY_PLAYBOOK.md
-    to: PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+  - from: files/.opendock/docks/portfolio-case-study/PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+    to: .opendock/docks/portfolio-case-study/PORTFOLIO_CASE_STUDY_PLAYBOOK.md
   - from: files/.agents/skills/opendock-portfolio-case-study/SKILL.md
     to: .agents/skills/opendock-portfolio-case-study/SKILL.md
-  - from: files/.agents/workflows/opendock-portfolio-case-study/quality-gate.md
-    to: .agents/workflows/opendock-portfolio-case-study/quality-gate.md
   - from: files/.opendock/templates/portfolio-case-study/RUN.md
     to: .opendock/templates/portfolio-case-study/RUN.md
-  - from: files/.opendock/harness/opendock__portfolio-case-study/check.mjs
-    to: .opendock/harness/opendock__portfolio-case-study/check.mjs
 doctor:
   - id: portfolio-case-study-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/portfolio-case-study/README.md
   - id: portfolio-case-study-agents
     check: test -f AGENTS.md
-  - id: portfolio-case-study-harness-doc
-    check: test -f HARNESS.md
   - id: portfolio-case-study-playbook
-    check: test -f PORTFOLIO_CASE_STUDY_PLAYBOOK.md
+    check: test -f .opendock/docks/portfolio-case-study/PORTFOLIO_CASE_STUDY_PLAYBOOK.md
   - id: portfolio-case-study-skill
     check: test -f .agents/skills/opendock-portfolio-case-study/SKILL.md
-  - id: portfolio-case-study-workflow
-    check: test -f .agents/workflows/opendock-portfolio-case-study/quality-gate.md
   - id: portfolio-case-study-run-template
     check: test -f .opendock/templates/portfolio-case-study/RUN.md
-  - id: portfolio-case-study-harness-script
-    check: test -f .opendock/harness/opendock__portfolio-case-study/check.mjs

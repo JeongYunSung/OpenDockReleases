@@ -1,9 +1,0 @@
----
-description: Context Engineering rules
-globs:
-  - "**/*.md"
-  - ".opendock/runs/context-engineering/**/*"
-alwaysApply: false
----
-
-Use `CONTEXT_ENGINEERING.md` as the dock contract. Keep run notes under `.opendock/runs/context-engineering/` and run `node .opendock/harness/opendock__context-engineering/check.mjs` before handoff.

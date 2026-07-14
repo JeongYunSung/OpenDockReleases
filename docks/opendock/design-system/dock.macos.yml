@@ -9,40 +9,25 @@ tags:
   - accessibility
   - governance
   - adoption
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/design-system/README.md
+    to: .opendock/docks/design-system/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/DESIGN_SYSTEM_PLAYBOOK.md
-    to: DESIGN_SYSTEM_PLAYBOOK.md
+  - from: files/.opendock/docks/design-system/DESIGN_SYSTEM_PLAYBOOK.md
+    to: .opendock/docks/design-system/DESIGN_SYSTEM_PLAYBOOK.md
   - from: files/.agents/skills/opendock-design-system/SKILL.md
     to: .agents/skills/opendock-design-system/SKILL.md
-  - from: files/.agents/workflows/opendock-design-system/quality-gate.md
-    to: .agents/workflows/opendock-design-system/quality-gate.md
   - from: files/.opendock/templates/design-system/RUN.md
     to: .opendock/templates/design-system/RUN.md
-  - from: files/.opendock/harness/opendock__design-system/check.mjs
-    to: .opendock/harness/opendock__design-system/check.mjs
 doctor:
   - id: design-system-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/design-system/README.md
   - id: design-system-agents
     check: test -f AGENTS.md
-  - id: design-system-harness-doc
-    check: test -f HARNESS.md
   - id: design-system-playbook
-    check: test -f DESIGN_SYSTEM_PLAYBOOK.md
+    check: test -f .opendock/docks/design-system/DESIGN_SYSTEM_PLAYBOOK.md
   - id: design-system-skill
     check: test -f .agents/skills/opendock-design-system/SKILL.md
-  - id: design-system-workflow
-    check: test -f .agents/workflows/opendock-design-system/quality-gate.md
   - id: design-system-run-template
     check: test -f .opendock/templates/design-system/RUN.md
-  - id: design-system-harness-script
-    check: test -f .opendock/harness/opendock__design-system/check.mjs

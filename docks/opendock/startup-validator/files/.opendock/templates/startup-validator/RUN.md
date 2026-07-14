@@ -1,14 +1,15 @@
-# Startup Validator Run Manifest
+# Startup Validator 작업 메모
 
-Status: draft
+요청에 필요한 섹션만 선택해 사용하고, 불필요한 섹션은 삭제합니다.
+
 Language: ko
 Venture: [[아이디어 또는 제품]]
 Scope: [[검증할 가설과 제외 범위]]
 Review Date: [[YYYY-MM-DD]]
 
-## Target Files
+## Result Files
 
-- `validation/[[run-id]].md`
+- 결과 파일이 있을 때만 경로를 작성합니다.
 
 ## Facts
 
@@ -39,7 +40,7 @@ Decision Rule: [[진행, 수정, 중단을 가르는 조건]]
 ## Validation Evidence
 
 Validation Method: [[인터뷰, concierge, smoke test 등 방법]]
-Validation Result: [[통과 결과 또는 현재 evidence 상태]]
+Validation Result: [[현재 evidence와 배운 점]]
 
 ## Safety / Limitations
 

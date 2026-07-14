@@ -1,5 +1,5 @@
 opendock: 1
-summary: agent-browser 기반 browser automation 작업을 허용 도메인, 안전 경계, run 기록과 함께 관리하는 dock.
+summary: AI 도구-browser CLI를 프로젝트 전용로 설치하고 안전한 브라우저 자동화 사용 경로를 제공하는 도구 Dock.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -11,7 +11,8 @@ tags:
   - research
 requires:
   runtimes:
-    node: ">=22.0.0 <25.0.0"
+    node: ">=24.0.0 <25.0.0"
+    npm: ">=10.0.0"
 tools:
   agent-browser:
     manager: npm
@@ -26,40 +27,14 @@ files:
     to: CLAUDE.md
   - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/BROWSER_AGENT.md
-    to: BROWSER_AGENT.md
-  - from: files/.opendock/templates/browser-agent/BROWSER_AGENT_RUN.md
-    to: .opendock/templates/browser-agent/BROWSER_AGENT_RUN.md
-  - from: files/.opendock/harness/opendock__browser-agent/check.mjs
-    to: .opendock/harness/opendock__browser-agent/check.mjs
-  - from: files/.opendock/harness/opendock__browser-agent/check.sh
-    to: .opendock/harness/opendock__browser-agent/check.sh
-  - from: files/.opendock/harness/opendock__browser-agent/check.ps1
-    to: .opendock/harness/opendock__browser-agent/check.ps1
-  - from: files/.agents/skills/opendock-browser-agent/SKILL.md
-    to: .agents/skills/opendock-browser-agent/SKILL.md
-  - from: files/.agents/workflows/opendock-browser-agent/quality-gate.md
-    to: .agents/workflows/opendock-browser-agent/quality-gate.md
-  - from: files/.claude/commands/opendock-browser-agent/quality-gate.md
-    to: .claude/commands/opendock-browser-agent/quality-gate.md
-  - from: files/.cursor/rules/opendock-browser-agent.mdc
-    to: .cursor/rules/opendock-browser-agent.mdc
-  - from: files/.agents/hooks/opendock-browser-agent/hook.json
-    to: .agents/hooks/opendock-browser-agent/hook.json
+  - from: files/.opendock/docks/browser-agent/README.md
+    to: .opendock/docks/browser-agent/README.md
+  - from: files/.opendock/docks/browser-agent/BROWSER_AGENT.md
+    to: .opendock/docks/browser-agent/BROWSER_AGENT.md
+  - from: files/.opendock/docks/browser-agent/BROWSER_AGENT_RUN.md
+    to: .opendock/docks/browser-agent/BROWSER_AGENT_RUN.md
 doctor:
-  - id: browser-agent
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath BROWSER_AGENT.md) { exit 0 } else { exit 1 }"
-  - id: harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
-  - id: harness-script
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__browser-agent/check.mjs) { exit 0 } else { exit 1 }"
-  - id: run-template
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/browser-agent/BROWSER_AGENT_RUN.md) { exit 0 } else { exit 1 }"
-  - id: skill
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-browser-agent/SKILL.md) { exit 0 } else { exit 1 }"
-  - id: workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-browser-agent/quality-gate.md) { exit 0 } else { exit 1 }"
+  - id: agent-browser-cli
+    run: agent-browser --version
+  - id: browser-agent-docs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/browser-agent/README.md) { exit 0 } else { exit 1 }"

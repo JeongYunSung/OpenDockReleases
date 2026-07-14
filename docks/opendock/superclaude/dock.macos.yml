@@ -1,0 +1,40 @@
+opendock: 1
+summary: SuperClaude CLI를 프로젝트 전용로 설치하고 승인 기반 설정 변경 경로를 제공하는 도구 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - superclaude
+  - claude-code
+  - agent-workflow
+  - commands
+  - personas
+  - planning
+requires:
+  runtimes:
+    python: ">=3.11.0 <3.14.0"
+    uv: ">=0.7.0"
+tools:
+  superclaude:
+    manager: uv
+    package: superclaude
+    version: "4.3.0"
+    commands:
+      - superclaude
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/.opendock/docks/superclaude/README.md
+    to: .opendock/docks/superclaude/README.md
+  - from: files/.opendock/docks/superclaude/SUPERCLAUDE.md
+    to: .opendock/docks/superclaude/SUPERCLAUDE.md
+  - from: files/.opendock/docks/superclaude/SUPERCLAUDE_RUN.md
+    to: .opendock/docks/superclaude/SUPERCLAUDE_RUN.md
+doctor:
+  - id: superclaude-cli
+    run: superclaude --version
+  - id: superclaude-docs
+    check: test -f .opendock/docks/superclaude/README.md

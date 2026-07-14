@@ -10,41 +10,25 @@ tags:
   - budget
   - evidence
   - recommendation
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/purchase-decision/README.md
+    to: .opendock/docks/purchase-decision/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PURCHASE_DECISION_PLAYBOOK.md
-    to: PURCHASE_DECISION_PLAYBOOK.md
+  - from: files/.opendock/docks/purchase-decision/PURCHASE_DECISION_PLAYBOOK.md
+    to: .opendock/docks/purchase-decision/PURCHASE_DECISION_PLAYBOOK.md
   - from: files/.agents/skills/opendock-purchase-decision/SKILL.md
     to: .agents/skills/opendock-purchase-decision/SKILL.md
-  - from: files/.agents/workflows/opendock-purchase-decision/quality-gate.md
-    to: .agents/workflows/opendock-purchase-decision/quality-gate.md
   - from: files/.opendock/templates/purchase-decision
     to: .opendock/templates/purchase-decision
-  - from: files/.opendock/harness/opendock__purchase-decision
-    to: .opendock/harness/opendock__purchase-decision
 doctor:
   - id: purchase-decision-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/purchase-decision/README.md
   - id: purchase-decision-agents
     check: test -f AGENTS.md
-  - id: purchase-decision-harness-doc
-    check: test -f HARNESS.md
   - id: purchase-decision-playbook
-    check: test -f PURCHASE_DECISION_PLAYBOOK.md
+    check: test -f .opendock/docks/purchase-decision/PURCHASE_DECISION_PLAYBOOK.md
   - id: purchase-decision-skill
     check: test -f .agents/skills/opendock-purchase-decision/SKILL.md
-  - id: purchase-decision-workflow
-    check: test -f .agents/workflows/opendock-purchase-decision/quality-gate.md
   - id: purchase-decision-run-template
     check: test -f .opendock/templates/purchase-decision/RUN.md
-  - id: purchase-decision-harness
-    check: test -f .opendock/harness/opendock__purchase-decision/check.mjs
-

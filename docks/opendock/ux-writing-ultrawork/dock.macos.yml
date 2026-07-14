@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/ux-writing-ultrawork
 summary: WRITING.md 기준으로 한국어/영어 UX writing, 서비스 용어, 작명을 점검하는 품질 게이트.
 readme: DOCK.md
 logo: logo.png
@@ -19,20 +18,20 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/WRITING.md
-    to: WRITING.md
-  - from: files/TERMS.md
-    to: TERMS.md
-  - from: files/.opendock/harness/opendock__ux-writing-ultrawork/check.mjs
-    to: .opendock/harness/opendock__ux-writing-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__ux-writing-ultrawork/check.sh
-    to: .opendock/harness/opendock__ux-writing-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__ux-writing-ultrawork/check.ps1
-    to: .opendock/harness/opendock__ux-writing-ultrawork/check.ps1
+  - from: files/.opendock/docks/ux-writing-ultrawork/README.md
+    to: .opendock/docks/ux-writing-ultrawork/README.md
+  - from: files/.opendock/docks/ux-writing-ultrawork/HARNESS.md
+    to: .opendock/docks/ux-writing-ultrawork/HARNESS.md
+  - from: files/.opendock/docks/ux-writing-ultrawork/WRITING.md
+    to: .opendock/docks/ux-writing-ultrawork/WRITING.md
+  - from: files/.opendock/docks/ux-writing-ultrawork/TERMS.md
+    to: .opendock/docks/ux-writing-ultrawork/TERMS.md
+  - from: files/.opendock/harness/ux-writing-ultrawork/check.mjs
+    to: .opendock/harness/ux-writing-ultrawork/check.mjs
+  - from: files/.opendock/harness/ux-writing-ultrawork/check.sh
+    to: .opendock/harness/ux-writing-ultrawork/check.sh
+  - from: files/.opendock/harness/ux-writing-ultrawork/check.ps1
+    to: .opendock/harness/ux-writing-ultrawork/check.ps1
   - from: files/.opendock/templates/ux-writing/WRITING_RUN.md
     to: .opendock/templates/ux-writing/WRITING_RUN.md
   - from: files/.agents/skills/opendock-ux-writing-ultrawork/SKILL.md
@@ -43,22 +42,20 @@ files:
     to: .agents/workflows/opendock-ux-writing-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-ux-writing-ultrawork/quality-gate.md
     to: .claude/commands/opendock-ux-writing-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-ux-writing-ultrawork/hook.json
-    to: .agents/hooks/opendock-ux-writing-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: test -f .opendock/docks/ux-writing-ultrawork/README.md
   - id: writing-contract
-    check: test -f WRITING.md
+    check: test -f .opendock/docks/ux-writing-ultrawork/WRITING.md
   - id: terms
-    check: test -f TERMS.md
+    check: test -f .opendock/docks/ux-writing-ultrawork/TERMS.md
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/ux-writing-ultrawork/HARNESS.md
   - id: harness-script
-    check: test -f .opendock/harness/opendock__ux-writing-ultrawork/check.mjs
+    check: test -f .opendock/harness/ux-writing-ultrawork/check.mjs
   - id: writing-run-template
     check: test -f .opendock/templates/ux-writing/WRITING_RUN.md
   - id: skill
     check: test -f .agents/skills/opendock-ux-writing-ultrawork/SKILL.md
   - id: workflow
     check: test -f .agents/workflows/opendock-ux-writing-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-ux-writing-ultrawork/hook.json

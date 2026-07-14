@@ -1,0 +1,43 @@
+opendock: 1
+summary: Task Master AI CLI를 프로젝트 전용로 설치해 PRD와 요구사항을 task로 관리하는 도구 Dock.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - task-master
+  - planning
+  - prd
+  - tasks
+  - agent-workflow
+  - pm
+  - execution
+requires:
+  runtimes:
+    node: ">=22.0.0 <25.0.0"
+    npm: ">=10.0.0"
+tools:
+  task-master:
+    manager: npm
+    package: task-master-ai
+    version: "0.43.1"
+    commands:
+      - task-master
+      - task-master-mcp
+      - task-master-ai
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/AGENTS.md
+    to: GEMINI.md
+  - from: files/.opendock/docks/task-master/README.md
+    to: .opendock/docks/task-master/README.md
+  - from: files/.opendock/docks/task-master/TASK_MASTER.md
+    to: .opendock/docks/task-master/TASK_MASTER.md
+  - from: files/.opendock/docks/task-master/TASK_MASTER_RUN.md
+    to: .opendock/docks/task-master/TASK_MASTER_RUN.md
+doctor:
+  - id: task-master-cli
+    run: task-master --version
+  - id: task-master-docs
+    check: test -f .opendock/docks/task-master/README.md

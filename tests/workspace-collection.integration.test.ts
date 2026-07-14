@@ -1,5 +1,4 @@
 import { afterEach, describe, expect, test } from "bun:test";
-import { spawnSync } from "node:child_process";
 import {
 	chmodSync,
 	cpSync,
@@ -67,36 +66,32 @@ afterEach(() => {
 });
 
 describe("OpenDock workspace collection", () => {
-	test("21개 Dock의 독립 하네스 fixture suite가 모두 통과한다", () => {
+	test("21개 작업공간 Dock은 전용 하네스 없이 가이드와 스킬만 제공한다", () => {
 		for (const name of collection) {
-			const result = spawnSync(
-				"node",
-				[join(dockRoot(name), "tests", "run-harness-tests.mjs")],
-				{
-					cwd: repositoryRoot,
-					encoding: "utf8",
-					timeout: 30_000,
-				},
-			);
-			expect(
-				result.status,
-				`${name}: ${result.stdout}\n${result.stderr}`,
-			).toBe(0);
+			for (const platform of platforms) {
+				const manifest = boundManifest(name, platform, testVersion);
+				const destinations = manifest.files.map(({ to }) => to);
+				expect(destinations.some((to) => to.startsWith(".opendock/harness/"))).toBe(false);
+				expect(destinations.some((to) => to.endsWith("/HARNESS.md"))).toBe(false);
+				expect(destinations.some((to) => /quality-gate/i.test(to))).toBe(false);
+				expect(destinations).toContain(`.agents/skills/opendock-${name}/SKILL.md`);
+			}
+			expect(existsSync(join(dockRoot(name), "tests", "run-harness-tests.mjs"))).toBe(false);
 		}
-	}, 120_000);
+	});
 
 	test("42개 manifest가 최신 schema와 command policy를 통과한다", () => {
 		const isolatedDestinations = new Map<string, string>();
 		const logoPayloads = new Set<string>();
-		const sharedManagedFiles = new Set([
-			"AGENTS.md",
-			"HARNESS.md",
-			"README.md",
-		]);
+		const sharedManagedFiles = new Set(["AGENTS.md"]);
 
 		for (const name of collection) {
 			const root = dockRoot(name);
-			for (const document of ["DOCK.md", "files/README.md", "files/AGENTS.md"]) {
+			for (const document of [
+				"DOCK.md",
+				`files/.opendock/docks/${name}/README.md`,
+				"files/AGENTS.md",
+			]) {
 				const content = readFileSync(join(root, document), "utf8");
 				expect(content, `${name}: ${document} needs Korean guidance`).toMatch(
 					/[가-힣]/,
@@ -124,21 +119,10 @@ describe("OpenDock workspace collection", () => {
 				expect(Object.keys(manifest.dependencies ?? {})).toEqual([]);
 				expect(manifest.tasks.install).toEqual([]);
 				expect(manifest.tasks.update).toEqual([]);
-				for (const requiredFile of [
-					`.agents/skills/opendock-${name}/SKILL.md`,
-					`.agents/workflows/opendock-${name}/quality-gate.md`,
-					`.opendock/templates/${name}/RUN.md`,
-					`.opendock/harness/opendock__${name}/check.mjs`,
-				]) {
-					expect(
-					[...destinations].some(
-						(destination) =>
-							destination === requiredFile ||
-							requiredFile.startsWith(`${destination}/`),
-					),
-					`${name}/${platform}: missing ${requiredFile}`,
-				).toBe(true);
-				}
+				expect(destinations.has(`.agents/skills/opendock-${name}/SKILL.md`)).toBe(true);
+				expect([...destinations].some((destination) => destination.startsWith(".opendock/harness/"))).toBe(false);
+				expect([...destinations].some((destination) => destination.endsWith("/HARNESS.md"))).toBe(false);
+				expect([...destinations].some((destination) => /quality-gate/i.test(destination))).toBe(false);
 
 				for (const mapping of manifest.files) {
 					const source = join(root, mapping.from);
@@ -161,13 +145,6 @@ describe("OpenDock workspace collection", () => {
 							`${name}/${platform}: source contains managed markers`,
 						).not.toContain("<!-- OPENDOCK:END");
 					}
-					if (mapping.to.endsWith("/check.mjs")) {
-						expect(
-							readFileSync(source, "utf8"),
-							`${name}/${platform}: harness must ignore fenced structural headings`,
-						).toContain("function stripFencedBlocks");
-					}
-
 					if (platform === "macos" && !sharedManagedFiles.has(mapping.to)) {
 						const prior = isolatedDestinations.get(mapping.to);
 						expect(
@@ -225,7 +202,7 @@ describe("OpenDock workspace collection", () => {
 
 		const store = new OpenDockStateStore(project);
 		expect(store.readLock().docks).toHaveLength(collection.length);
-		for (const rootDocument of ["AGENTS.md", "HARNESS.md", "README.md"]) {
+		for (const rootDocument of ["AGENTS.md"]) {
 			const content = readFileSync(join(project, rootDocument), "utf8");
 			expect((content.match(/<!-- OPENDOCK:START/g) ?? []).length).toBe(
 				collection.length,
@@ -250,7 +227,7 @@ describe("OpenDock workspace collection", () => {
 				join(project, ".agents/skills/opendock-pm-workspace/SKILL.md"),
 			),
 		).toBe(true);
-		for (const rootDocument of ["AGENTS.md", "HARNESS.md", "README.md"]) {
+		for (const rootDocument of ["AGENTS.md"]) {
 			const content = readFileSync(join(project, rootDocument), "utf8");
 			expect((content.match(/<!-- OPENDOCK:START/g) ?? []).length).toBe(
 				collection.length - 1,
@@ -273,9 +250,11 @@ describe("OpenDock workspace collection", () => {
 		expect(
 			readFileSync(join(project, ".agents/skills/user-owned/KEEP.md"), "utf8"),
 		).toBe("사용자 소유\n");
-		for (const rootDocument of ["AGENTS.md", "HARNESS.md", "README.md"]) {
+		for (const rootDocument of ["AGENTS.md"]) {
 			expect(existsSync(join(project, rootDocument))).toBe(false);
 		}
+		expect(existsSync(join(project, "README.md"))).toBe(false);
+		expect(existsSync(join(project, "HARNESS.md"))).toBe(false);
 	});
 
 	test("기존 사용자 파일 충돌은 어떤 Dock 파일도 쓰기 전에 중단한다", async () => {
@@ -321,33 +300,20 @@ describe("OpenDock workspace collection", () => {
 		}
 	}, 30_000);
 
-	test("중첩된 Status 문구는 활성 run으로 오인하지 않는다", async () => {
-		for (const name of collection) {
-			const project = tempDir(`${name}-nested-status-`);
-			await install(name, "macos", project, testVersion);
-			write(
-				project,
-				`.opendock/runs/${name}/nested/manifest.md`,
-				"# 비활성 기록\n\nStatus: completed\n\n## 분석 메모\n\nStatus: active\n",
-			);
-
-			const result = spawnSync(
-				"node",
-				[`.opendock/harness/opendock__${name}/check.mjs`],
-				{ cwd: project, encoding: "utf8" },
-			);
-			expect(result.status, `${name}: ${result.stderr}`).toBe(0);
-			expect(`${result.stdout}\n${result.stderr}`).toMatch(/ready/i);
-		}
-	}, 30_000);
-
 	test("합성 버전 업데이트가 파일 추가, 변경, 삭제와 사용자 수정 충돌을 처리한다", async () => {
 		const v1Root = tempDir("ux-v1-");
 		const v2Root = tempDir("ux-v2-");
 		cpSync(dockRoot("ux-audit"), v1Root, { recursive: true });
 		cpSync(dockRoot("ux-audit"), v2Root, { recursive: true });
 
-		const playbookPath = join(v2Root, "files", "UX_AUDIT_PLAYBOOK.md");
+		const playbookPath = join(
+			v2Root,
+			"files",
+			".opendock",
+			"docks",
+			"ux-audit",
+			"UX_AUDIT_PLAYBOOK.md",
+		);
 		writeFileSync(
 			playbookPath,
 			`${readFileSync(playbookPath, "utf8")}\n## Synthetic 0.1.1\n업데이트 검증 표식입니다.\n`,
@@ -356,13 +322,24 @@ describe("OpenDock workspace collection", () => {
 			join(v2Root, "files", "UX_AUDIT_RELEASE_NOTE.md"),
 			"# 0.1.1 변경 기록\n",
 		);
+		writeFileSync(join(v1Root, "files", "UX_AUDIT_LEGACY.md"), "# 제거될 파일\n");
 
 		const v1Ref = DockRef.parse("opendock/ux-audit@0.1.0");
 		const v2Ref = DockRef.parse("opendock/ux-audit@0.1.1");
-		const v1Manifest = manifestForRef(
+		const v1Base = manifestForRef(
 			parseManifestFile(join(v1Root, "dock.macos.yml")),
 			v1Ref,
 		);
+		const v1Manifest: DockManifest = {
+			...v1Base,
+			files: [
+				...v1Base.files,
+				{
+					from: "files/UX_AUDIT_LEGACY.md",
+					to: ".opendock/docks/ux-audit/UX_AUDIT_LEGACY.md",
+				},
+			],
+		};
 		const v2Base = manifestForRef(
 			parseManifestFile(join(v2Root, "dock.macos.yml")),
 			v2Ref,
@@ -370,12 +347,10 @@ describe("OpenDock workspace collection", () => {
 		const v2Manifest: DockManifest = {
 			...v2Base,
 			files: [
-				...v2Base.files.filter(
-					(mapping) => mapping.from !== "files/HARNESS.md",
-				),
+				...v2Base.files,
 				{
 					from: "files/UX_AUDIT_RELEASE_NOTE.md",
-					to: "UX_AUDIT_RELEASE_NOTE.md",
+					to: ".opendock/docks/ux-audit/UX_AUDIT_RELEASE_NOTE.md",
 				},
 			],
 		};
@@ -396,12 +371,19 @@ describe("OpenDock workspace collection", () => {
 		);
 
 		expect(
-			readFileSync(join(cleanProject, "UX_AUDIT_PLAYBOOK.md"), "utf8"),
+			readFileSync(
+				join(cleanProject, ".opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md"),
+				"utf8",
+			),
 		).toContain("Synthetic 0.1.1");
-		expect(existsSync(join(cleanProject, "UX_AUDIT_RELEASE_NOTE.md"))).toBe(
-			true,
-		);
-		expect(existsSync(join(cleanProject, "HARNESS.md"))).toBe(false);
+		expect(
+			existsSync(
+				join(cleanProject, ".opendock/docks/ux-audit/UX_AUDIT_RELEASE_NOTE.md"),
+			),
+		).toBe(true);
+		expect(
+			existsSync(join(cleanProject, ".opendock/docks/ux-audit/UX_AUDIT_LEGACY.md")),
+		).toBe(false);
 		expect(report.filesUpdated).toBeGreaterThan(0);
 		expect(report.filesCreated).toBeGreaterThan(0);
 		expect(report.filesDeleted).toBeGreaterThan(0);
@@ -413,7 +395,10 @@ describe("OpenDock workspace collection", () => {
 			conflictProject,
 			resolved(v1Ref, "macos", v1Root, v1Manifest),
 		);
-		const installedPlaybook = join(conflictProject, "UX_AUDIT_PLAYBOOK.md");
+		const installedPlaybook = join(
+			conflictProject,
+			".opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md",
+		);
 		writeFileSync(
 			installedPlaybook,
 			readFileSync(installedPlaybook, "utf8").replace(
@@ -480,7 +465,7 @@ describe("OpenDock workspace collection", () => {
 					}
 				}
 
-				rmSync(join(project, "UX_AUDIT_PLAYBOOK.md"));
+				rmSync(join(project, ".opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md"));
 				const missingStep = selectTaskSteps(
 					boundManifest("ux-audit", platform, testVersion).tasks.doctor,
 					platform,

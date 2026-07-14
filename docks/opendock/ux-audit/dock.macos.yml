@@ -9,40 +9,25 @@ tags:
   - responsive
   - usability
   - evidence
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/ux-audit/README.md
+    to: .opendock/docks/ux-audit/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/UX_AUDIT_PLAYBOOK.md
-    to: UX_AUDIT_PLAYBOOK.md
+  - from: files/.opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md
+    to: .opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md
   - from: files/.agents/skills/opendock-ux-audit/SKILL.md
     to: .agents/skills/opendock-ux-audit/SKILL.md
-  - from: files/.agents/workflows/opendock-ux-audit/quality-gate.md
-    to: .agents/workflows/opendock-ux-audit/quality-gate.md
   - from: files/.opendock/templates/ux-audit/RUN.md
     to: .opendock/templates/ux-audit/RUN.md
-  - from: files/.opendock/harness/opendock__ux-audit/check.mjs
-    to: .opendock/harness/opendock__ux-audit/check.mjs
 doctor:
   - id: ux-audit-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/ux-audit/README.md
   - id: ux-audit-agents
     check: test -f AGENTS.md
-  - id: ux-audit-harness-doc
-    check: test -f HARNESS.md
   - id: ux-audit-playbook
-    check: test -f UX_AUDIT_PLAYBOOK.md
+    check: test -f .opendock/docks/ux-audit/UX_AUDIT_PLAYBOOK.md
   - id: ux-audit-skill
     check: test -f .agents/skills/opendock-ux-audit/SKILL.md
-  - id: ux-audit-workflow
-    check: test -f .agents/workflows/opendock-ux-audit/quality-gate.md
   - id: ux-audit-run-template
     check: test -f .opendock/templates/ux-audit/RUN.md
-  - id: ux-audit-harness-script
-    check: test -f .opendock/harness/opendock__ux-audit/check.mjs

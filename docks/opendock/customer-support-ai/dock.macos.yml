@@ -1,5 +1,5 @@
 opendock: 1
-summary: FAQ, CS 매크로, 환불/교환 정책, 티켓 분류, 톤 가이드, VOC 분석을 정리하는 고객지원 workspace.
+summary: FAQ, CS 매크로, 환불/교환 정책, 티켓 분류, 톤 가이드, VOC 분석을 정리하는 고객지원 작업 공간.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -14,46 +14,24 @@ tags:
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/CLAUDE.md
+  - from: files/AGENTS.md
     to: CLAUDE.md
-  - from: files/GEMINI.md
+  - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/CUSTOMER_SUPPORT.md
-    to: CUSTOMER_SUPPORT.md
+  - from: files/.opendock/docks/customer-support-ai/README.md
+    to: .opendock/docks/customer-support-ai/README.md
+  - from: files/.opendock/docks/customer-support-ai/CUSTOMER_SUPPORT.md
+    to: .opendock/docks/customer-support-ai/CUSTOMER_SUPPORT.md
   - from: files/.opendock/templates/customer-support/SUPPORT_RUN.md
     to: .opendock/templates/customer-support/SUPPORT_RUN.md
-  - from: files/.opendock/harness/opendock__customer-support-ai/check.mjs
-    to: .opendock/harness/opendock__customer-support-ai/check.mjs
-  - from: files/.opendock/harness/opendock__customer-support-ai/check.sh
-    to: .opendock/harness/opendock__customer-support-ai/check.sh
-  - from: files/.opendock/harness/opendock__customer-support-ai/check.ps1
-    to: .opendock/harness/opendock__customer-support-ai/check.ps1
   - from: files/.agents/skills/opendock-customer-support-ai/SKILL.md
     to: .agents/skills/opendock-customer-support-ai/SKILL.md
-  - from: files/.agents/workflows/opendock-customer-support-ai/quality-gate.md
-    to: .agents/workflows/opendock-customer-support-ai/quality-gate.md
-  - from: files/.claude/commands/opendock-customer-support-ai/quality-gate.md
-    to: .claude/commands/opendock-customer-support-ai/quality-gate.md
-  - from: files/.cursor/rules/opendock-customer-support-ai.mdc
-    to: .cursor/rules/opendock-customer-support-ai.mdc
-  - from: files/.agents/hooks/opendock-customer-support-ai/hook.json
-    to: .agents/hooks/opendock-customer-support-ai/hook.json
 doctor:
+  - id: readme
+    check: test -f .opendock/docks/customer-support-ai/README.md
   - id: domain-guide
-    check: test -f CUSTOMER_SUPPORT.md
-  - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/customer-support-ai/CUSTOMER_SUPPORT.md
   - id: run-template
     check: test -f .opendock/templates/customer-support/SUPPORT_RUN.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__customer-support-ai/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-customer-support-ai/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-customer-support-ai/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-customer-support-ai/hook.json

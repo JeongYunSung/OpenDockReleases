@@ -1,14 +1,16 @@
 ---
 name: opendock-agent-cost
-description: AI agent 사용량, 모델, 작업 단위, 비용 추정을 workspace별로 기록해야 할 때 사용합니다.
+description: AI 도구 사용량, 모델, 작업 단위와 비용 추정을 프로젝트별로 기록하거나 검토할 때 사용합니다.
 ---
 
 # Agent Cost
 
 ## 절차
 
-1. `COST.md`를 읽습니다.
-2. 장기 작업, 반복 agent 실행, 고비용 모델 사용을 식별합니다.
-3. `.opendock/templates/agent-cost/USAGE_LOG.md` 또는 `COST_REVIEW.md`로 기록합니다.
-4. 비용은 추정치면 estimate라고 표시합니다.
-5. handoff 전에 `node .opendock/harness/opendock__agent-cost/check.mjs`를 실행합니다.
+1. `.opendock/docks/agent-cost/COST.md`를 읽고 요청한 작업을 바로 수행합니다.
+2. 장기 작업, 반복 실행, 고비용 모델 사용 중 현재 요청과 관련된 항목만 식별합니다.
+3. 기록 형식이 필요할 때만 `USAGE_LOG.md` 또는 `COST_REVIEW.md`를 사용하고 필요한 섹션만 남깁니다.
+4. 비용이 추정치라면 추정이라고 표시하고 산정 근거를 남깁니다.
+5. 사용자가 검토를 요청하면 현재 결과물만 도메인 가이드 기준으로 직접 검토합니다.
+
+API key, 결제 정보, invoice 원문과 개인 계정 식별 정보는 기록하지 않습니다.

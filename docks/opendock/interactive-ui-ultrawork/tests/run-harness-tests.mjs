@@ -8,7 +8,7 @@ import { spawnSync } from "node:child_process";
 const testDir = path.dirname(fileURLToPath(import.meta.url));
 const harness = path.resolve(
   testDir,
-  "../files/.opendock/harness/opendock__interactive-ui-ultrawork/check.mjs",
+  "../files/.opendock/harness/interactive-ui-ultrawork/check.mjs",
 );
 
 function write(root, rel, contents) {

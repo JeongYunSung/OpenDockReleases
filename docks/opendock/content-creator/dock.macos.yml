@@ -14,46 +14,24 @@ tags:
 files:
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/CLAUDE.md
+  - from: files/AGENTS.md
     to: CLAUDE.md
-  - from: files/GEMINI.md
+  - from: files/AGENTS.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/CONTENT_CREATOR.md
-    to: CONTENT_CREATOR.md
+  - from: files/.opendock/docks/content-creator/README.md
+    to: .opendock/docks/content-creator/README.md
+  - from: files/.opendock/docks/content-creator/CONTENT_CREATOR.md
+    to: .opendock/docks/content-creator/CONTENT_CREATOR.md
   - from: files/.opendock/templates/content-creator/CONTENT_RUN.md
     to: .opendock/templates/content-creator/CONTENT_RUN.md
-  - from: files/.opendock/harness/opendock__content-creator/check.mjs
-    to: .opendock/harness/opendock__content-creator/check.mjs
-  - from: files/.opendock/harness/opendock__content-creator/check.sh
-    to: .opendock/harness/opendock__content-creator/check.sh
-  - from: files/.opendock/harness/opendock__content-creator/check.ps1
-    to: .opendock/harness/opendock__content-creator/check.ps1
   - from: files/.agents/skills/opendock-content-creator/SKILL.md
     to: .agents/skills/opendock-content-creator/SKILL.md
-  - from: files/.agents/workflows/opendock-content-creator/quality-gate.md
-    to: .agents/workflows/opendock-content-creator/quality-gate.md
-  - from: files/.claude/commands/opendock-content-creator/quality-gate.md
-    to: .claude/commands/opendock-content-creator/quality-gate.md
-  - from: files/.cursor/rules/opendock-content-creator.mdc
-    to: .cursor/rules/opendock-content-creator.mdc
-  - from: files/.agents/hooks/opendock-content-creator/hook.json
-    to: .agents/hooks/opendock-content-creator/hook.json
 doctor:
+  - id: readme
+    check: test -f .opendock/docks/content-creator/README.md
   - id: domain-guide
-    check: test -f CONTENT_CREATOR.md
-  - id: harness-doc
-    check: test -f HARNESS.md
+    check: test -f .opendock/docks/content-creator/CONTENT_CREATOR.md
   - id: run-template
     check: test -f .opendock/templates/content-creator/CONTENT_RUN.md
-  - id: harness-script
-    check: test -f .opendock/harness/opendock__content-creator/check.mjs
   - id: skill
     check: test -f .agents/skills/opendock-content-creator/SKILL.md
-  - id: workflow
-    check: test -f .agents/workflows/opendock-content-creator/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-content-creator/hook.json

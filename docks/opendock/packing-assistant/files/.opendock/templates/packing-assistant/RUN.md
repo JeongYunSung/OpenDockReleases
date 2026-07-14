@@ -1,9 +1,6 @@
-# Packing Assistant 실행 기록
+# Packing Assistant 선택 템플릿
 
-Status: draft
-Mode: packing-list
-Created: YYYY-MM-DD
-Language: ko
+여행 방식과 활동에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
 ## 목적지·날짜·날씨 (Destination, Dates, Weather)
 
@@ -43,10 +40,6 @@ Language: ko
 
 수집하지 않을 식별정보와 공유본 가림·삭제 계획을 작성하세요.
 
-## 대상 파일 (Target Files)
+## 확인 메모 (Review Notes)
 
-- `packing/example.md`
-
-## 검증 결과 (Validation)
-
-하네스 실행 결과와 수정 내용을 작성하세요.
+출발 전 다시 확인할 날씨·규정·수하물 조건과 사용자 확인 항목을 작성하세요.

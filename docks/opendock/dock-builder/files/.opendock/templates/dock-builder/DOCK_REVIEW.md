@@ -1,38 +1,40 @@
-# Dock Review
+# Dock 검수 기록
 
-## Target
+## 대상
 
-- Deploy reference:
+- Dock:
+- 요청 범위:
 - Platform:
-- Reviewer:
-- Date:
+- 검수자:
+- 날짜:
 
-## Scope
+## 빠른 확인
 
-- Changed files:
-- Installed files:
-- Task commands:
+- 변경 파일:
+- 정적 checker:
+- root 문서 정책:
+- namespaced README:
+- macOS/Windows parity:
 
-## Static Review
+## Dock 유형
 
-- Manifest path safety:
-- Missing `files.from`:
-- Shared path collision:
-- Stale spec wording:
+- Tool Dock / 비-tool Dock:
+- Tool Dock 실제 command:
+- custom harness 경로:
 
-## Security Review
+## 정밀 검수
 
-- Blockers:
-- Warnings:
-- Evidence:
+사용자가 `검수`, `ultrawork`, `release`를 요청한 경우에만 작성합니다.
 
-## Harness
+- Install:
+- Update:
+- Doctor:
+- Uninstall:
+- 실제 tool 또는 harness valid/invalid:
+- 사용자 파일 보존:
 
-- Direct run:
-- Valid case:
-- Invalid case:
-
-## Decision
+## 결정
 
 - Ready / Hold / Blocked:
-- Reason:
+- 보안 blocker:
+- 남은 위험:

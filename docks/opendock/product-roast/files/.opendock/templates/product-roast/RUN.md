@@ -1,15 +1,11 @@
-# Product Roast Run Manifest
+# Product Roast 선택 템플릿
 
-Status: draft
-Language: ko
-Product: [[리뷰할 제품 또는 기능]]
-Scope: [[포함한 화면과 제외한 범위]]
-Review Date: [[YYYY-MM-DD]]
-Selected Tone: [[supportive, balanced, direct 중 하나]]
+검토 범위에 필요한 섹션만 골라 사용하고, 관련 없는 섹션은 삭제하세요.
 
-## Target Files
-
-- `reviews/product-roast/[[run-id]].md`
+- 제품 또는 기능:
+- 포함한 화면과 제외한 범위:
+- 검토 날짜가 필요한 경우:
+- 톤: supportive, balanced, direct 중 선택
 
 ## Review Evidence
 
@@ -47,10 +43,10 @@ Change Decision: [[변경 판단과 근거]]
 
 Priority Method: [[사용자 영향, 빈도, 신뢰 위험, 비용으로 정한 순서]]
 
-## Validation Evidence
+## 확인 계획
 
-Validation Method: [[수동 확인 또는 검증 방법]]
-Validation Result: [[통과 결과와 확인한 항목]]
+확인 방법: [[수동 확인 또는 후속 사용자 테스트 방법]]
+확인 결과: [[확인한 내용과 남은 질문]]
 
 ## Safety / Limitations
 

@@ -1,27 +1,25 @@
 # Agent Planning
 
-긴 AI 작업이 context loss, 세션 종료, 중간 재시작에도 이어질 수 있도록 계획과 진행 상태를 workspace-local 파일로 남깁니다.
+복잡한 작업을 목표, 범위, 단계, 의존성, 진행 상태와 완료 근거로 나눕니다.
 
-## 설치되는 것
+## 설치 후 생기는 것
 
-- `PLANNING.md`: 계획 문서 작성 기준
-- `HARNESS.md`: 계획 품질 체크리스트
-- `.opendock/templates/agent-planning/TASK_PLAN.md`: 작업 계획 템플릿
-- `.opendock/templates/agent-planning/FINDINGS.md`: 발견 사항 템플릿
-- `.opendock/templates/agent-planning/PROGRESS.md`: 진행률 템플릿
-- `.agents/skills/opendock-agent-planning/SKILL.md`: 계획 유지 skill
-- `.opendock/harness/opendock__agent-planning/check.mjs`: planning harness
+- `.opendock/docks/agent-planning/README.md`: 사용 안내
+- `.opendock/docks/agent-planning/PLANNING.md`: 계획 작성 기준
+- `.opendock/templates/agent-planning/TASK_PLAN.md`: 선택형 계획 템플릿
+- `.opendock/templates/agent-planning/FINDINGS.md`: 선택형 발견 사항 템플릿
+- `.opendock/templates/agent-planning/PROGRESS.md`: 선택형 진행 기록 템플릿
+- `.agents/skills/opendock-agent-planning/SKILL.md`: AI 작업 절차
+- 루트 `AGENTS.md`: 짧은 요청 라우팅과 안전 규칙
 
-## 사용 시점
+## 사용 방법
 
-- 작업이 여러 단계로 나뉘는 경우
-- 여러 agent가 같은 목표를 나눠 수행하는 경우
-- 중간에 context가 사라져도 이어서 작업해야 하는 경우
-- “완료”라고 말하기 전에 근거와 남은 일을 분리해야 하는 경우
+평소에는 `PLANNING.md` 기준으로 요청을 바로 처리합니다. 템플릿은 선택 사항이며 작업 규모에 필요한 섹션만 골라 사용합니다.
 
-## 원칙
+> 이 요구사항을 실행 가능한 단계와 완료 조건으로 나눠줘.
 
-- 계획은 실행 가능한 step으로 쪼갭니다.
-- 완료 상태에는 검증 근거가 있어야 합니다.
-- blocker와 needs-input은 명확히 분리합니다.
-- 임시 계획은 `.opendock/plans/` 아래에 두고, root 문서는 기준만 담습니다.
+사용자가 검토를 요청하면 AI가 현재 결과물만 `PLANNING.md` 기준으로 직접 검토하고 범위, 의존성, 완료 근거, 위험과 blocker를 설명합니다.
+
+## 안전
+
+계획은 승인된 범위를 넓히는 권한이 아닙니다. 승인 없이 관련 없는 파일을 변경하거나 credential에 접근하거나 배포, 이전, 파괴적 명령을 실행하지 않습니다.

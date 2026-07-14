@@ -1,5 +1,5 @@
 opendock: 1
-summary: 문제 정의부터 요구사항, acceptance criteria, metric과 decision log까지 검증하는 PM 문서 workspace.
+summary: 문제 정의부터 요구사항, acceptance criteria, metric과 decision log까지 검증하는 PM 문서 작업 공간.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -8,41 +8,25 @@ tags:
   - requirements
   - user-stories
   - decisions
-  - quality-gate
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/pm-workspace/README.md
+    to: .opendock/docks/pm-workspace/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PM_WORKSPACE_PLAYBOOK.md
-    to: PM_WORKSPACE_PLAYBOOK.md
+  - from: files/.opendock/docks/pm-workspace/PM_WORKSPACE_PLAYBOOK.md
+    to: .opendock/docks/pm-workspace/PM_WORKSPACE_PLAYBOOK.md
   - from: files/.agents/skills/opendock-pm-workspace/SKILL.md
     to: .agents/skills/opendock-pm-workspace/SKILL.md
-  - from: files/.agents/workflows/opendock-pm-workspace/quality-gate.md
-    to: .agents/workflows/opendock-pm-workspace/quality-gate.md
   - from: files/.opendock/templates/pm-workspace/RUN.md
     to: .opendock/templates/pm-workspace/RUN.md
-  - from: files/.opendock/harness/opendock__pm-workspace/check.mjs
-    to: .opendock/harness/opendock__pm-workspace/check.mjs
 doctor:
   - id: pm-workspace-readme
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/pm-workspace/README.md) { exit 0 } else { exit 1 }"
   - id: pm-workspace-agents
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
-  - id: pm-workspace-harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
   - id: pm-workspace-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath PM_WORKSPACE_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/pm-workspace/PM_WORKSPACE_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: pm-workspace-skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-pm-workspace/SKILL.md) { exit 0 } else { exit 1 }"
-  - id: pm-workspace-workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-pm-workspace/quality-gate.md) { exit 0 } else { exit 1 }"
   - id: pm-workspace-run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/pm-workspace/RUN.md) { exit 0 } else { exit 1 }"
-  - id: pm-workspace-harness
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__pm-workspace/check.mjs) { exit 0 } else { exit 1 }"

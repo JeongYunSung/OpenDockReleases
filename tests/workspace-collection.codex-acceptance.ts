@@ -5,7 +5,6 @@ import {
 	mkdtempSync,
 	readdirSync,
 	readFileSync,
-	realpathSync,
 	rmSync,
 	writeFileSync,
 } from "node:fs";
@@ -23,10 +22,8 @@ import {
 import { OpenDockStateStore } from "../../opendock/packages/cli/src/core/domain/state-store.ts";
 import type { ResolvedDock } from "../../opendock/packages/cli/src/resolver.ts";
 import {
-	assertAcceptanceManifestMetadata,
 	parseAcceptanceConcurrency,
 	sanitizedChildEnvironment,
-	sanitizedHarnessEnvironment,
 	selectAcceptanceCases,
 } from "./workspace-collection.acceptance-config.ts";
 
@@ -38,8 +35,7 @@ type AcceptanceCase = {
 
 type AcceptanceProgress = {
 	project?: string;
-	manifestVerified: boolean;
-	harnessVerified: boolean;
+	guidanceVerified: boolean;
 	targetVerified: boolean;
 	lockVerified: boolean;
 	uninstallVerified: boolean;
@@ -177,9 +173,6 @@ const concurrency = parseAcceptanceConcurrency(process.env.CODEX_ACCEPTANCE_CONC
 const keepProjects = process.env.KEEP_CODEX_ACCEPTANCE === "1";
 const selectedCases = selectAcceptanceCases(cases, process.env.CODEX_ACCEPTANCE_DOCKS);
 const childEnvironment = sanitizedChildEnvironment(process.env);
-const harnessEnvironment = sanitizedHarnessEnvironment(process.env);
-const nodeBin = process.env.NODE_BIN ?? Bun.which("node");
-if (!nodeBin) throw new Error("Node.js is required for Codex acceptance harness execution.");
 const reportInput =
 	process.env.CODEX_ACCEPTANCE_REPORT ??
 	".opendock/reports/workspace-collection-codex-acceptance.json";
@@ -201,8 +194,7 @@ await Promise.all(
 			const acceptance = selectedCases[index];
 			const started = Date.now();
 			const progress: AcceptanceProgress = {
-				manifestVerified: false,
-				harnessVerified: false,
+				guidanceVerified: false,
 				targetVerified: false,
 				lockVerified: false,
 				uninstallVerified: false,
@@ -317,13 +309,12 @@ async function runAcceptance(
 
 	const prompt = [
 		`$opendock-${acceptance.name} 스킬을 사용해 SCENARIO.md의 요청을 실제로 수행하세요.`,
-		`설치된 AGENTS.md, .agents/skills/opendock-${acceptance.name}/SKILL.md, .agents/workflows/opendock-${acceptance.name}/quality-gate.md, 관련 playbook, .opendock/templates/${acceptance.name}/RUN.md를 먼저 읽으세요.`,
-		`.opendock/runs/${acceptance.name}/acceptance/manifest.md를 만들고 Status: active, Language: ko를 top-level metadata로 기록하세요.`,
-		`주요 산출물 경로는 ${acceptance.target}입니다. template과 harness가 추가 파일을 요구하면 함께 만드세요.`,
+		`설치된 AGENTS.md, .agents/skills/opendock-${acceptance.name}/SKILL.md와 .opendock/docks/${acceptance.name}/ 아래 안내를 먼저 읽으세요.`,
+		`주요 산출물 경로는 ${acceptance.target}입니다. 별도 run manifest나 검사 script를 만들거나 실행하지 마세요.`,
 		"SCENARIO.md에 없는 현재 사실은 단정하지 말고 사실, 제공 근거, 가정, 추천을 구분하세요. TODO/TBD/placeholder, credential, PII 값은 남기지 마세요.",
 		"외부 웹 검색, 브라우저, 앱, MCP는 사용하지 마세요. 이 acceptance에서는 SCENARIO.md와 설치된 Dock 파일만 사실 근거로 사용하고, 현재 확인이 필요한 정보는 재확인 항목으로 표시하세요.",
-		`node .opendock/harness/opendock__${acceptance.name}/check.mjs를 실행하고 실패 항목을 수정해 exit 0까지 통과시키세요.`,
-		"OpenDock이 설치한 managed 문서, skill, workflow, template, harness 자체는 수정하지 마세요.",
+		"완료 전에 현재 산출물만 도메인 가이드와 비교해 누락과 근거 없는 단정을 자체 검토하세요.",
+		"OpenDock이 설치한 managed 문서와 skill 자체는 수정하지 마세요.",
 	].join("\n");
 
 	const codex = Bun.spawn(
@@ -385,50 +376,19 @@ async function runAcceptance(
 	}
 	if (exitCode !== 0) throw new Error(`codex exit ${exitCode}; project=${project}\n${tail(stderr || stdout)}`);
 
-	const manifestRel = `.opendock/runs/${acceptance.name}/acceptance/manifest.md`;
-	assertRegularFile(project, manifestRel, "acceptance manifest");
-	assertAcceptanceManifestMetadata(readFileSync(join(project, manifestRel), "utf8"));
-	progress.manifestVerified = true;
-
-	const installedHarnessRel = `.opendock/harness/opendock__${acceptance.name}/check.mjs`;
-	const trustedHarness = join(
-		root,
-		"files",
-		".opendock",
-		"harness",
-		`opendock__${acceptance.name}`,
-		"check.mjs",
-	);
-	assertRegularFile(project, installedHarnessRel, "installed harness");
-	const trustedHarnessStat = lstatSync(trustedHarness);
-	if (trustedHarnessStat.isSymbolicLink() || !trustedHarnessStat.isFile()) {
-		throw new Error(`trusted harness must be a regular non-symlink file: ${trustedHarness}`);
-	}
-	if (!readFileSync(join(project, installedHarnessRel)).equals(readFileSync(trustedHarness))) {
-		throw new Error(`installed harness integrity mismatch; project=${project}`);
-	}
-
-	const harness = Bun.spawnSync(
-		[
-			nodeBin,
-			"--permission",
-			`--allow-fs-read=${realpathSync(project)}`,
-			`--allow-fs-read=${trustedHarness}`,
-			trustedHarness,
-			manifestRel,
-		],
-		{ cwd: project, env: harnessEnvironment, stdout: "pipe", stderr: "pipe" },
-	);
-	const harnessOutput = `${harness.stdout.toString()}\n${harness.stderr.toString()}`;
-	if (harness.exitCode !== 0) {
-		throw new Error(`harness exit ${harness.exitCode}; project=${project}\n${tail(harnessOutput)}`);
-	}
-	if (/harness:\s*Ready\b/i.test(harnessOutput)) {
-		throw new Error(`harness reported Ready instead of validating the manifest; project=${project}`);
-	}
-	progress.harnessVerified = true;
+	assertRegularFile(project, "AGENTS.md", "installed AGENTS guidance");
+	assertRegularFile(project, `.agents/skills/opendock-${acceptance.name}/SKILL.md`, "installed skill");
+	assertRegularFile(project, `.opendock/docks/${acceptance.name}/README.md`, "installed domain guide");
+	progress.guidanceVerified = true;
 
 	assertRegularFile(project, acceptance.target, "expected target");
+	const output = readFileSync(join(project, acceptance.target), "utf8");
+	if (output.trim().length < 100) {
+		throw new Error(`expected target is too small to prove the scenario was completed; project=${project}`);
+	}
+	if (/\b(?:TODO|TBD|PLACEHOLDER)\b/i.test(output)) {
+		throw new Error(`expected target still contains a placeholder; project=${project}`);
+	}
 	progress.targetVerified = true;
 	if (!new OpenDockStateStore(project).findDock(`opendock/${acceptance.name}`)) {
 		throw new Error(`installed lock record missing; project=${project}`);

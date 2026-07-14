@@ -1,4 +1,4 @@
 interface:
   display_name: "OpenDock Dock Builder"
-  short_description: "Build and harden OpenDock docks"
-  default_prompt: "Create or improve an OpenDock dock with install, update, uninstall, security, harness, and release-quality validation."
+  short_description: "OpenDock Dock 제작과 출시 전 검수"
+  default_prompt: "OpenDock Dock을 만들거나 개선해줘. Tool과 일반 Dock에는 custom harness를 넣지 말고, *-ultrawork와 dock-builder만 대상 한정 objective checker를 사용해. 평소에는 현재 대상만 빠르게 확인하고, 검수·ultrawork·release 요청일 때만 설치·업데이트·doctor·제거와 실제 동작까지 확인해줘."

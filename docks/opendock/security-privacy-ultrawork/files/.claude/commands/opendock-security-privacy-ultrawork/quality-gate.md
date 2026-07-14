@@ -1,16 +1,15 @@
 # Security Privacy Ultrawork Quality Gate
 
-현재 작업이 Security Privacy Ultrawork 산출물과 관련될 때 이 command를 사용합니다.
+## 실행 조건
+- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 이 workflow를 실행합니다.
+- 평소 요청에서는 이 workflow를 실행하지 않고 현재 작업의 target만 빠르게 확인합니다.
 
-1. `SECURITY_PRIVACY.md`를 읽고 데이터/보안 점검 범위를 확인합니다.
-2. `.opendock/runs/security-privacy/<run-id>.md`가 없으면 만들고, 있으면 현재 작업 내용을 업데이트합니다.
-3. `HARNESS.md` 기준으로 secret, PII, auth guard, dependency risk, prompt injection, data handling을 점검합니다.
-4. 아래 harness를 실행합니다.
+## 검수 절차
+1. security guide와 current run에서 데이터 inventory, access control, secret, provider, prompt injection과 위협 시나리오를 검토합니다.
+2. `node .opendock/harness/security-privacy-ultrawork/check.mjs --release`를 실행하고 승인된 예외만 기록합니다.
+3. 통과, 실패, 미검증 항목과 남은 위험을 구분해 보고합니다.
 
-```bash
-node .opendock/harness/opendock__security-privacy-ultrawork/check.mjs
-```
-
-5. 실패 항목은 최종 응답 전에 수정합니다. 수정하지 않을 항목은 human-approved exception으로 이유와 승인자를 남깁니다.
-
-안전 경계: 보안 검사는 발견 가능성을 높이는 절차이며, 침투테스트나 법적 컴플라이언스 보증으로 표현하지 않습니다.
+## 안전 경계
+- 이번 변경의 데이터 inventory, access control, secret, 외부 provider와 위협 시나리오를 확인합니다.
+- secret, credential, 환경 변수 유출, destructive command, deploy와 migration을 실행하지 않습니다.
+- 검토된 scope만 수정하며 관련 없는 파일을 삭제·reset·재생성하지 않습니다.

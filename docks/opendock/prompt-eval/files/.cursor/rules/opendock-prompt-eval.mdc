@@ -1,9 +1,0 @@
----
-description: Prompt Eval rules
-globs:
-  - "**/*.md"
-  - ".opendock/runs/prompt-eval/**/*"
-alwaysApply: false
----
-
-Use `PROMPT_EVAL.md` as the dock contract. Keep run notes under `.opendock/runs/prompt-eval/` and run `node .opendock/harness/opendock__prompt-eval/check.mjs` before handoff.

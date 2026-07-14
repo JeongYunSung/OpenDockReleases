@@ -8,41 +8,25 @@ tags:
   - review
   - ux
   - conversion
-  - quality-gate
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/product-roast/README.md
+    to: .opendock/docks/product-roast/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PRODUCT_ROAST_PLAYBOOK.md
-    to: PRODUCT_ROAST_PLAYBOOK.md
+  - from: files/.opendock/docks/product-roast/PRODUCT_ROAST_PLAYBOOK.md
+    to: .opendock/docks/product-roast/PRODUCT_ROAST_PLAYBOOK.md
   - from: files/.agents/skills/opendock-product-roast/SKILL.md
     to: .agents/skills/opendock-product-roast/SKILL.md
-  - from: files/.agents/workflows/opendock-product-roast/quality-gate.md
-    to: .agents/workflows/opendock-product-roast/quality-gate.md
   - from: files/.opendock/templates/product-roast/RUN.md
     to: .opendock/templates/product-roast/RUN.md
-  - from: files/.opendock/harness/opendock__product-roast/check.mjs
-    to: .opendock/harness/opendock__product-roast/check.mjs
 doctor:
   - id: product-roast-readme
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath README.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-roast/README.md) { exit 0 } else { exit 1 }"
   - id: product-roast-agents
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
-  - id: product-roast-harness-doc
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath HARNESS.md) { exit 0 } else { exit 1 }"
   - id: product-roast-playbook
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath PRODUCT_ROAST_PLAYBOOK.md) { exit 0 } else { exit 1 }"
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-roast/PRODUCT_ROAST_PLAYBOOK.md) { exit 0 } else { exit 1 }"
   - id: product-roast-skill
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-product-roast/SKILL.md) { exit 0 } else { exit 1 }"
-  - id: product-roast-workflow
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-product-roast/quality-gate.md) { exit 0 } else { exit 1 }"
   - id: product-roast-run-template
     check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/product-roast/RUN.md) { exit 0 } else { exit 1 }"
-  - id: product-roast-harness
-    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/opendock__product-roast/check.mjs) { exit 0 } else { exit 1 }"

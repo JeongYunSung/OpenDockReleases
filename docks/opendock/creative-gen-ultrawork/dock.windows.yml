@@ -1,5 +1,4 @@
 opendock: 1
-id: opendock/creative-gen-ultrawork
 summary: 이미지, 벡터, 로고, 파비콘, 영상, 음성, asset 분석 산출물을 관리하는 생성 품질 루프.
 readme: DOCK.md
 logo: logo.png
@@ -21,20 +20,20 @@ files:
     to: CLAUDE.md
   - from: files/GEMINI.md
     to: GEMINI.md
-  - from: files/README.md
-    to: README.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
+  - from: files/.opendock/docks/creative-gen-ultrawork/README.md
+    to: .opendock/docks/creative-gen-ultrawork/README.md
+  - from: files/.opendock/docks/creative-gen-ultrawork/HARNESS.md
+    to: .opendock/docks/creative-gen-ultrawork/HARNESS.md
   - from: files/.opendock/templates/creative-gen/GENERATION_BRIEF.md
     to: .opendock/templates/creative-gen/GENERATION_BRIEF.md
   - from: files/.opendock/templates/creative-gen/OUTPUT_MANIFEST.md
     to: .opendock/templates/creative-gen/OUTPUT_MANIFEST.md
-  - from: files/.opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-    to: .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
-  - from: files/.opendock/harness/opendock__creative-gen-ultrawork/check.sh
-    to: .opendock/harness/opendock__creative-gen-ultrawork/check.sh
-  - from: files/.opendock/harness/opendock__creative-gen-ultrawork/check.ps1
-    to: .opendock/harness/opendock__creative-gen-ultrawork/check.ps1
+  - from: files/.opendock/harness/creative-gen-ultrawork/check.mjs
+    to: .opendock/harness/creative-gen-ultrawork/check.mjs
+  - from: files/.opendock/harness/creative-gen-ultrawork/check.sh
+    to: .opendock/harness/creative-gen-ultrawork/check.sh
+  - from: files/.opendock/harness/creative-gen-ultrawork/check.ps1
+    to: .opendock/harness/creative-gen-ultrawork/check.ps1
   - from: files/.agents/skills/opendock-creative-gen-ultrawork/SKILL.md
     to: .agents/skills/opendock-creative-gen-ultrawork/SKILL.md
   - from: files/.cursor/rules/opendock-creative-gen-ultrawork.mdc
@@ -43,20 +42,18 @@ files:
     to: .agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md
   - from: files/.claude/commands/opendock-creative-gen-ultrawork/quality-gate.md
     to: .claude/commands/opendock-creative-gen-ultrawork/quality-gate.md
-  - from: files/.agents/hooks/opendock-creative-gen-ultrawork/hook.json
-    to: .agents/hooks/opendock-creative-gen-ultrawork/hook.json
 doctor:
+  - id: dock-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/creative-gen-ultrawork/README.md) { exit 0 } else { exit 1 }"
   - id: generation-brief-template
-    check: test -f .opendock/templates/creative-gen/GENERATION_BRIEF.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/creative-gen/GENERATION_BRIEF.md) { exit 0 } else { exit 1 }"
   - id: output-manifest-template
-    check: test -f .opendock/templates/creative-gen/OUTPUT_MANIFEST.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/creative-gen/OUTPUT_MANIFEST.md) { exit 0 } else { exit 1 }"
   - id: harness-doc
-    check: test -f HARNESS.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/creative-gen-ultrawork/HARNESS.md) { exit 0 } else { exit 1 }"
   - id: harness-script
-    check: test -f .opendock/harness/opendock__creative-gen-ultrawork/check.mjs
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/harness/creative-gen-ultrawork/check.mjs) { exit 0 } else { exit 1 }"
   - id: skill
-    check: test -f .agents/skills/opendock-creative-gen-ultrawork/SKILL.md
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-creative-gen-ultrawork/SKILL.md) { exit 0 } else { exit 1 }"
   - id: workflow
-    check: test -f .agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md
-  - id: hook
-    check: test -f .agents/hooks/opendock-creative-gen-ultrawork/hook.json
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/workflows/opendock-creative-gen-ultrawork/quality-gate.md) { exit 0 } else { exit 1 }"

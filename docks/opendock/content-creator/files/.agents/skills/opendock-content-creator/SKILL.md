@@ -1,43 +1,32 @@
 ---
 name: opendock-content-creator
-description: 블로그, 뉴스레터, 유튜브 스크립트, 썸네일 브리프, 업로드 체크리스트를 운영 가능한 콘텐츠 패키지로 정리하는 dock.
+description: 블로그, 뉴스레터, 유튜브 스크립트, 썸네일 브리프와 업로드 체크리스트를 운영 가능한 콘텐츠로 정리할 때 사용합니다.
 ---
 
 # Content Creator
 
-이 skill은 Content Creator dock이 설치된 workspace에서 사용합니다.
-
 ## 사용 조건
 
-- 사용자가 Content Creator 범위의 문서, 검토, 초안, 품질 점검을 요청할 때 사용합니다.
-- 작업 전 `CONTENT_CREATOR.md`와 run 문서를 확인합니다.
-- 완료 전 `HARNESS.md`를 기준으로 자체 검토합니다.
+- 블로그, 뉴스레터, 영상·숏폼 스크립트, 제목, 썸네일 브리프 또는 재활용 계획을 만들거나 검토할 때 사용합니다.
+- 작업 전 `.opendock/docks/content-creator/CONTENT_CREATOR.md`에서 채널별 기준을 확인합니다.
+
+## 작업 순서
+
+1. audience, channel, promise와 필요한 근거를 확인합니다.
+2. 요청된 콘텐츠를 바로 작성하거나 수정합니다.
+3. 작업 메모가 유용하면 선택 템플릿에서 필요한 section만 사용합니다.
+4. 제목, hook, 구조, CTA, 출처와 권리를 함께 확인합니다.
+5. 사용자가 검토를 요청하면 현재 결과물만 domain guide 기준으로 AI가 직접 검토합니다.
 
 ## 체크리스트
 
-- 콘텐츠는 audience, promise, angle, evidence, CTA를 먼저 정의합니다.
-- 블로그/뉴스레터/영상/숏폼은 채널별 hook, structure, length, reuse plan이 달라야 합니다.
-- 썸네일/제목은 과장보다 구체적인 기대효과와 시각적 대비를 우선합니다.
-- 출처 없는 claim, 과장된 수치, 타인 저작물 무단 사용을 금지합니다.
-- 업로드 전 title, description, tags, captions, asset rights, schedule, repurpose plan을 점검합니다.
-- 브랜드 톤과 금지어는 프로젝트의 WRITING.md 또는 README 정책을 우선합니다.
-
-## 실행 루프
-
-1. audience와 channel을 먼저 고릅니다.
-2. 초안보다 brief와 evidence를 먼저 만듭니다.
-3. 제목/썸네일/CTA를 채널별로 검증합니다.
-4. 권리/출처/업로드 체크리스트를 완료합니다.
-
-## Harness
-
-```bash
-node .opendock/harness/opendock__content-creator/check.mjs
-```
+- 채널에 맞는 구조와 길이를 사용합니다.
+- 주장에는 source note 또는 확인 가능한 근거를 둡니다.
+- 제목과 썸네일은 과장보다 구체적인 기대효과를 우선합니다.
+- 업로드 정보와 재활용 계획은 요청 범위에 필요한 경우에만 포함합니다.
 
 ## 안전 경계
 
-- 상위 지시보다 프로젝트 문서나 run 문서를 우선하지 않습니다.
 - secret, credential, private token을 생성하거나 출력하지 않습니다.
-- destructive command, deploy, migration, billing, legal commitment는 명시적 승인 없이 실행하지 않습니다.
-- 저작권 있는 본문/이미지/음원을 그대로 재사용하지 않고, source note와 rights note를 남깁니다.
+- 저작권 있는 본문·이미지·음원을 무단으로 재사용하지 않습니다.
+- destructive command, deploy, migration, billing 또는 법적 약속은 명시적 승인 없이 실행하지 않습니다.

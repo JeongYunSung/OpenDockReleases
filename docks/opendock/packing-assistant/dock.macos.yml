@@ -1,5 +1,5 @@
 opendock: 1
-summary: 목적지·날씨·활동·수하물 제약을 수량 기반 체크리스트, 재착용·세탁과 현지 구매 계획으로 바꾸는 짐싸기 품질 게이트.
+summary: 목적지·날씨·활동·수하물 제약을 수량 기반 체크리스트, 재착용·세탁과 현지 구매 계획으로 바꾸는 짐싸기 작업공간.
 readme: DOCK.md
 logo: logo.png
 tags:
@@ -9,40 +9,25 @@ tags:
   - baggage
   - weather
   - planning
-requires:
-  runtimes:
-    node: ">=22.0.0 <25.0.0"
 files:
-  - from: files/README.md
-    to: README.md
+  - from: files/.opendock/docks/packing-assistant/README.md
+    to: .opendock/docks/packing-assistant/README.md
   - from: files/AGENTS.md
     to: AGENTS.md
-  - from: files/HARNESS.md
-    to: HARNESS.md
-  - from: files/PACKING_PLAYBOOK.md
-    to: PACKING_PLAYBOOK.md
+  - from: files/.opendock/docks/packing-assistant/PACKING_PLAYBOOK.md
+    to: .opendock/docks/packing-assistant/PACKING_PLAYBOOK.md
   - from: files/.agents/skills/opendock-packing-assistant/SKILL.md
     to: .agents/skills/opendock-packing-assistant/SKILL.md
-  - from: files/.agents/workflows/opendock-packing-assistant/quality-gate.md
-    to: .agents/workflows/opendock-packing-assistant/quality-gate.md
   - from: files/.opendock/templates/packing-assistant
     to: .opendock/templates/packing-assistant
-  - from: files/.opendock/harness/opendock__packing-assistant
-    to: .opendock/harness/opendock__packing-assistant
 doctor:
   - id: packing-assistant-readme
-    check: test -f README.md
+    check: test -f .opendock/docks/packing-assistant/README.md
   - id: packing-assistant-agents
     check: test -f AGENTS.md
-  - id: packing-assistant-harness-doc
-    check: test -f HARNESS.md
   - id: packing-assistant-playbook
-    check: test -f PACKING_PLAYBOOK.md
+    check: test -f .opendock/docks/packing-assistant/PACKING_PLAYBOOK.md
   - id: packing-assistant-skill
     check: test -f .agents/skills/opendock-packing-assistant/SKILL.md
-  - id: packing-assistant-workflow
-    check: test -f .agents/workflows/opendock-packing-assistant/quality-gate.md
   - id: packing-assistant-template
     check: test -f .opendock/templates/packing-assistant/RUN.md
-  - id: packing-assistant-harness
-    check: test -f .opendock/harness/opendock__packing-assistant/check.mjs

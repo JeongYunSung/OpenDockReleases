@@ -1,18 +1,22 @@
 ---
 name: opendock-kitchen-ultrawork
-description: 보유 식자재를 기반으로 레시피, 식단, 대체재, 장보기 목록을 만들고 알레르기와 식품 안전을 검증할 때 사용합니다.
+description: 사용자가 검수, ultrawork, release 중 하나를 명시해 Kitchen Ultrawork 정밀 검수를 요청한 경우에만 사용합니다.
 ---
 
 # Kitchen Ultrawork
 
-1. `KITCHEN_PLAYBOOK.md`와 `kitchen/KITCHEN_PROFILE.md`, `kitchen/PANTRY.md`가 있으면 먼저 읽습니다.
-2. 인원, 알레르기, 시간, 장비, 예산 중 결과를 바꾸는 누락 정보만 질문합니다.
-3. 소비기한과 pantry 재고를 우선해 후보 2-3개를 제안합니다.
-4. 선택된 작업에 대해 `.opendock/runs/kitchen/<run-id>/manifest.md`를 작성합니다.
-5. 결과는 `kitchen/` 아래 사용자 소유 파일로 만듭니다.
-6. 대체재에는 기능·비율·변화·주의점을 기록합니다.
-7. 안전 온도는 poultry 74°C/165°F, 다짐육·달걀 요리 71°C/160°F, whole beef/pork/lamb cut과 생선·해산물 63°C/145°F를 적용하고 whole cut은 3분 휴지합니다.
-8. 영양과 식품 안전 값은 알려진 공공 보건 기관의 HTTPS URL, 조회일, 적용 범위·한계를 기록하고 불확실성을 숨기지 않습니다.
-9. `node .opendock/harness/opendock__kitchen-ultrawork/check.mjs`를 실행하고 실패를 수정합니다.
+## 기본 동작
+- 평소 요청에서는 현재 사용자가 이번 작업에서 만든 파일과 수정한 파일만 확인합니다.
+- 명시된 target을 우선하고, 없으면 활성 run manifest의 target만 확인합니다.
+- 관련 없는 프로젝트 전체를 재귀 검사하지 않습니다.
+- 현재 요청의 재료, 분량, 대체재, leftovers, 알레르기와 식품 안전 근거를 확인합니다.
 
-의료 진단, 치료, 알레르기 안전 보장, pantry에 없는 재료의 임의 가정은 하지 않습니다.
+## 정밀 검수
+- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- checker는 target 경로와 파일 구조, 의료·알레르기·식품 안전처럼 객관적인 위험만 판정합니다. 맛, 대체재, 장보기 구성과 표현 품질은 `KITCHEN_PLAYBOOK.md`를 기준으로 직접 검토합니다.
+- 기준 문서는 `.opendock/docks/kitchen-ultrawork/README.md`, `.opendock/docks/kitchen-ultrawork/HARNESS.md`, `.opendock/docks/kitchen-ultrawork/KITCHEN_PLAYBOOK.md`입니다.
+- 실패, 미검증 항목과 승인된 예외를 구분해 보고합니다.
+
+## 안전 경계
+- secret, credential, 환경 변수 유출, destructive command, deploy와 migration을 실행하지 않습니다.
+- 검토된 scope만 수정하고 관련 없는 파일을 삭제·reset·재생성하지 않습니다.

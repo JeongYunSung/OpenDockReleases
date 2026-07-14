@@ -1,9 +1,0 @@
-{
-  "name": "opendock-agent-security-quality-gate",
-  "description": "Run the Agent Security harness before final handoff when security-sensitive files were touched.",
-  "events": [
-    "Stop"
-  ],
-  "command": "node .opendock/harness/opendock__agent-security/check.mjs",
-  "manualFallback": "If hooks are not active, run `node .opendock/harness/opendock__agent-security/check.mjs` manually before final response."
-}

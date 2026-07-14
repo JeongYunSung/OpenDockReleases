@@ -19,7 +19,7 @@ Status: draft
 
 ## Props
 
-Record the chosen component and props from PAPER_SHADERS.md.
+`.opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md`에서 선택한 component와 props를 기록합니다.
 
 ```tsx
 // component and props here

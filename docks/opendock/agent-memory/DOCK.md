@@ -1,26 +1,23 @@
 # Agent Memory
 
-프로젝트 구조, 의사결정, 코드 탐색 결과를 agent가 다시 사용할 수 있는 workspace-local 지식으로 정리합니다.
+다음 작업에 필요한 결정, 근거와 미해결 맥락만 안전하게 기억으로 남깁니다.
 
-## 설치되는 것
+## 설치 후 생기는 것
 
-- `MEMORY.md`: 이 workspace에서 기억해야 할 정보와 금지해야 할 정보의 기준
-- `HARNESS.md`: memory 기록 품질 체크리스트
-- `.opendock/templates/agent-memory/MEMORY_RUN.md`: 탐색/요약 작업 템플릿
-- `.agents/skills/opendock-agent-memory/SKILL.md`: Codex, Claude Code, Gemini 등에서 사용할 skill
-- `.agents/workflows/opendock-agent-memory/quality-gate.md`: memory refresh workflow
-- `.opendock/harness/opendock__agent-memory/check.mjs`: workspace-local memory harness
+- `.opendock/docks/agent-memory/README.md`: 사용 안내
+- `.opendock/docks/agent-memory/MEMORY.md`: 기억 작성 기준
+- `.opendock/templates/agent-memory/MEMORY_RUN.md`: 선택형 작업 메모 템플릿
+- `.agents/skills/opendock-agent-memory/SKILL.md`: AI 작업 절차
+- 루트 `AGENTS.md`: 짧은 요청 라우팅과 안전 규칙
 
-## 사용 시점
+## 사용 방법
 
-- 새 프로젝트를 처음 분석할 때
-- 큰 리팩터링 전후에 구조와 의사결정을 남길 때
-- 여러 agent가 같은 프로젝트를 이어서 볼 때
-- 코드/문서/DB/인프라 구조를 요약해 다음 작업의 시작 비용을 낮추고 싶을 때
+평소에는 `MEMORY.md` 기준으로 요청을 바로 처리합니다. 템플릿은 선택 사항이며 현재 작업에 필요한 섹션만 골라 사용합니다.
 
-## 원칙
+> 이번 작업에서 다음 세션에 남길 결정과 미해결 항목만 정리해줘.
 
-- credential, token, secret, private prompt는 memory에 저장하지 않습니다.
-- 추측과 확인된 사실을 분리합니다.
-- 현재 작업과 무관한 전체 프로젝트 재스캔을 강요하지 않습니다.
-- 필요한 경우 Graphify 같은 knowledge graph 도구를 workspace-local 보조 도구로 사용할 수 있지만, 이 dock은 글로벌 설치를 기본으로 하지 않습니다.
+사용자가 검토를 요청하면 AI가 현재 결과물만 `MEMORY.md` 기준으로 직접 검토하고 사실과 추측의 구분, 근거, 최신성, 민감 정보 위험을 설명합니다.
+
+## 안전
+
+Credential, private prompt, 불필요한 대화 원문과 개인 식별정보는 기억에 남기지 않습니다. 승인 없이 관련 없는 파일을 변경하거나 배포, 이전, 파괴적 명령을 실행하지 않습니다.

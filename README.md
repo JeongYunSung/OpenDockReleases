@@ -2,13 +2,27 @@
 
 이 저장소는 OpenDock 카탈로그에 올라가는 dock들의 원본 작업 공간입니다.
 
-현재 카탈로그는 세 갈래로 운영합니다.
+Dock은 하는 일에 따라 네 종류로 나뉩니다.
 
-- **Ultrawork dock**: 디자인, 프론트엔드, 백엔드, QA처럼 특정 업무 산출물의 품질을 강하게 점검합니다.
-- **Agent Capability dock**: 특정 글로벌 CLI를 깔기보다, 현재 workspace 안에 AI 작업 능력을 추가합니다. 기억, 계획, 보안, 비용 추적처럼 여러 agent가 함께 쓰는 기반을 프로젝트별로 설치하고 추적합니다.
-- **Ready Workspace dock**: UX 감사, 제품 문서, 여행, 이사, 구매 비교처럼 반복되는 준비 과정을 바로 시작할 수 있는 작업공간으로 설치합니다.
+- **Ultrawork Dock**: 디자인, 프론트엔드, 백엔드, QA처럼 결과물의 품질을 꼼꼼하게 확인합니다.
+- **AI 기능 Dock**: 기억, 계획, 보안, 비용 추적처럼 여러 AI 도구가 함께 쓸 능력을 프로젝트에 더합니다.
+- **준비된 작업 공간 Dock**: UX 감사, 제품 문서, 여행, 이사, 구매 비교처럼 반복되는 준비 과정을 바로 시작할 수 있게 합니다.
+- **도구 Dock**: MCP나 외부 명령줄 도구를 이 프로젝트 안에 설치하고 `opendock doctor`로 상태를 확인합니다.
 
-각 dock은 목적에 맞는 플레이북, 에이전트 가이드, workflow, run 템플릿과 실행 가능한 harness를 조합합니다. hook이나 별도 도구는 실제 사용성이 있을 때만 포함합니다. 글로벌 설치가 꼭 필요한 도구는 기본값으로 두지 않고, 가능하면 `.opendock/` 아래에서 workspace-local로 관리하는 방향을 우선합니다.
+각 Dock은 꼭 필요한 구성만 담습니다. 도구 Dock은 설치와 상태 확인에 집중하고, AI 기능·준비된 작업 공간 Dock은 짧은 지침과 도메인 가이드로 바로 일합니다. 전용 검사 도구는 `*-ultrawork`와 `dock-builder`에만 둡니다. 전역 설치 대신 가능하면 `.opendock/` 아래에서 프로젝트별로 관리합니다.
+
+## 평소에는 빠르게, 필요할 때는 꼼꼼하게
+
+Dock을 설치했다고 해서 요청할 때마다 프로젝트 전체를 검사하지 않습니다.
+
+- **평소 요청**: 이번에 만들거나 수정한 파일만 빠르게 확인합니다.
+- **`검수` 요청**: AI가 도메인 가이드와 현재 산출물을 비교해 필요한 부분만 자세히 확인합니다.
+- **`ultrawork` 요청**: 수정과 재검사를 반복해 실패 항목을 해결합니다.
+- **`release` 요청**: 설치, 문서, 보안, 업데이트와 제거까지 출시 기준으로 확인합니다.
+
+설치 안내와 품질 기준은 root를 어지럽히지 않도록 `.opendock/docks/<dock>/` 아래에 둡니다. root `AGENTS.md`에는 여러 Dock이 함께 사용할 수 있는 짧은 안내만 합쳐집니다.
+
+Ultrawork의 **작업 기록**은 이번에 검사할 파일과 결과를 적은 `manifest`를, **정밀 검사 도구**는 그 범위의 객관적 조건만 확인하는 `harness`를 뜻합니다. 일반 Dock은 이런 파일을 강제하지 않으며 템플릿도 필요할 때만 사용합니다.
 
 ## OpenDock 실행 모델
 
@@ -24,7 +38,7 @@
 | Workdir | oma 같은 generator가 파일을 만드는 작업 폴더 | task `workdir` | project `.opendock/workdirs/<dock>/` 또는 root |
 | Files / export | `AGENTS.md`, `.codex/**`, generated output | OpenDock file engine | project root, lock에 checksum/owner 기록 |
 
-예를 들어 `opendock install opendock/oma@1.0.0`은 대략 다음 순서로 진행됩니다.
+예를 들어 `opendock install opendock/oh-my-agent@0.1.0`은 대략 다음 순서로 진행됩니다.
 
 1. Registry에서 승인된 dock release를 다운로드합니다.
 2. 기존 설치 상태를 확인하고 `files`에 선언된 file candidate를 수집합니다. 이 시점에는 project root를 쓰지 않습니다.
@@ -42,53 +56,19 @@
 ```text
 docks/
   opendock/
-        agent-memory/
-        agent-planning/
-        agent-security/
-        agent-cost/
-        dock-builder/
-        ux-audit/
-        website-genome/
-        design-system/
-        portfolio-case-study/
-        product-roast/
-        pm-workspace/
-        startup-validator/
-        error-investigator/
-        readme-doctor/
-        ai-project-starter/
-        trip-planner/
-        travel-research/
-        group-trip/
-        packing-assistant/
-        travel-journal/
-        moving/
-        home-setup/
-        purchase-decision/
-        life-admin/
-        finance-review/
-        memory-book/
-        korea-real-estate-research/
-        korea-equity-research/
-        korea-macro-research/
-        design-ultrawork/
-        paper-shaders-ultrawork/
-        creative-gen-ultrawork/
-        frontend-ultrawork/
-        backend-ultrawork/
-        kotlin-spring-ultrawork/
-        data-ultrawork/
-        devops-ultrawork/
-        docs-ultrawork/
-        ux-writing-ultrawork/
-        business-ultrawork/
-        mobile-ultrawork/
-        qa-ultrawork/
+    <dock-name>/
+      DOCK.md
+      logo.png
+      dock.macos.yml
+      dock.windows.yml
+      files/
 ```
+
+현재 카탈로그는 Tool 9개, 일반 작업공간 32개, Ultrawork 18개와 Dock Builder 1개로 구성됩니다. 실제 목록은 `docks/opendock/`가 기준이며, 새 Dock을 추가할 때 문서의 수동 목록을 갱신할 필요가 없습니다.
 
 ## 바로 쓰는 작업공간 dock
 
-이 컬렉션은 반복되는 준비 과정을 템플릿, agent 지침, workflow, run 기록과 결정적 harness로 묶습니다. 실제 결과물은 사용자가 소유하므로 dock을 업데이트하거나 제거해도 감사 보고서, 여행 계획, 생활 기록 같은 작업 결과는 남습니다.
+이 컬렉션은 반복되는 준비 과정을 짧은 agent 지침, 도메인 가이드와 선택적 템플릿으로 묶습니다. 별도 검사 스크립트나 run 기록을 강제하지 않으며, 사용자는 바로 요청해서 작업할 수 있습니다. 실제 결과물은 사용자가 소유하므로 dock을 업데이트하거나 제거해도 감사 보고서, 여행 계획, 생활 기록 같은 작업 결과는 남습니다.
 
 ### 업무와 제품
 
@@ -131,9 +111,10 @@ docks/
 | `opendock/agent-planning` | 긴 작업의 계획, 발견 사항, 진행률을 파일 기반으로 유지합니다. | planning-with-files 같은 crash-proof planning 흐름 |
 | `opendock/agent-security` | 보안 리뷰, threat model, secret/credential 주의, 변경 위험 기록을 표준화합니다. | curated cybersecurity skill pack 흐름 |
 | `opendock/agent-cost` | agent 사용량, 모델, 작업 단위, 비용 추정을 workspace별로 추적합니다. | codeburn 같은 token/cost tracking 흐름 |
-| `opendock/dock-builder` | OpenDock dock 제작, 보안 검토, harness, install/update/uninstall 테스트를 표준화합니다. | 우리가 반복해온 dock 제작/검증/release gate 흐름 |
 
 이 dock들은 기본적으로 시스템 전역 도구를 설치하지 않습니다. 필요한 실행 도구가 있을 때도 `brew install`, `npm install -g`, daemon 설치보다 `.opendock/tools/` 또는 프로젝트-local wrapper를 우선합니다.
+
+`opendock/dock-builder`는 별도의 품질 Dock입니다. 일반 Dock에는 전용 하네스를 만들지 않고, `*-ultrawork`와 Dock Builder에만 현재 산출물 범위의 객관적 조건을 검사하는 도구를 허용합니다.
 
 ## Visual Library dock
 
@@ -172,6 +153,9 @@ opendock deploy opendock/design-ultrawork@1.0.0 --platform windows --file docks/
 - 외부 visual/effect 라이브러리 품질 게이트는 `opendock/<library>-ultrawork` 형식으로 둡니다.
 - 플랫폼별 파일은 `dock.macos.yml`, `dock.windows.yml`처럼 분리합니다.
 - `DOCK.md`와 `logo.png`는 manifest와 같은 dock 폴더에 둡니다.
-- 설치할 agent 파일, workflow, template, harness와 선택적 command·hook은 `files/` 아래에 둡니다.
+- 설치할 agent 파일, domain guide와 선택적 template을 `files/` 아래에 둡니다.
+- 설명용 README, HARNESS, playbook은 root가 아니라 `.opendock/docks/<dock>/` 아래에 설치합니다.
+- Tool Dock과 일반 Dock에는 custom harness, HARNESS, quality-gate workflow를 두지 않습니다.
+- `*-ultrawork`와 `dock-builder`의 checker는 현재 지정한 산출물의 존재·형식·안전처럼 객관적으로 판정 가능한 조건만 확인합니다.
 - 가능하면 커밋된 소스 기준으로만 배포합니다.
 - 글로벌 설치를 기본값으로 만들지 않습니다. workspace-local 추적, update, uninstall이 가능한 구조를 먼저 검토합니다.

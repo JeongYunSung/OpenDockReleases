@@ -1,9 +1,0 @@
----
-description: Code Review Agent rules
-globs:
-  - "**/*.md"
-  - ".opendock/runs/code-review-agent/**/*"
-alwaysApply: false
----
-
-Use `CODE_REVIEW.md` as the dock contract. Keep run notes under `.opendock/runs/code-review-agent/` and run `node .opendock/harness/opendock__code-review-agent/check.mjs` before handoff.
