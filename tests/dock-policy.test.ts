@@ -67,11 +67,11 @@ const docks = readdirSync(docksRoot, { withFileTypes: true })
 	.sort();
 
 describe("Dock 사용 경험 정책", () => {
-	test("60개 Dock을 빠른 기본 동작과 요청형 정밀검사로 구분한다", () => {
-		expect(docks).toHaveLength(60);
+	test("61개 Dock을 빠른 기본 동작과 요청형 정밀검사로 구분한다", () => {
+		expect(docks).toHaveLength(61);
 		expect(toolDocks.size).toBe(9);
 		expect(qualityDocks.size).toBe(19);
-		expect(docks.filter((name) => !toolDocks.has(name) && !qualityDocks.has(name))).toHaveLength(32);
+		expect(docks.filter((name) => !toolDocks.has(name) && !qualityDocks.has(name))).toHaveLength(33);
 
 		for (const name of docks) {
 			const root = join(docksRoot, name);
@@ -172,7 +172,7 @@ describe("Dock 사용 경험 정책", () => {
 		}
 	});
 
-	test("60개 Dock을 플랫폼별로 설치, 업데이트, 제거해 사용자 파일을 보존한다", async () => {
+	test("61개 Dock을 플랫폼별로 설치, 업데이트, 제거해 사용자 파일을 보존한다", async () => {
 		for (const name of docks) {
 			for (const platform of platforms) {
 				const project = mkdtempSync(join(tmpdir(), `opendock-policy-${name}-`));
@@ -198,7 +198,7 @@ describe("Dock 사용 경험 정책", () => {
 		}
 	}, 60_000);
 
-	test("60개 Dock을 함께 설치해 공유 지침을 병합하고 중간 제거 후 역순 정리한다", async () => {
+	test("61개 Dock을 함께 설치해 공유 지침을 병합하고 중간 제거 후 역순 정리한다", async () => {
 		for (const platform of platforms) {
 			const project = mkdtempSync(join(tmpdir(), `opendock-all-${platform}-`));
 			try {
@@ -206,7 +206,7 @@ describe("Dock 사용 경험 정책", () => {
 					await installWithoutTasks(name, platform, project, "1.0.0", "install");
 				}
 				const store = new OpenDockStateStore(project);
-				expect(store.readLock().docks).toHaveLength(60);
+				expect(store.readLock().docks).toHaveLength(61);
 
 				for (const shared of ["AGENTS.md", "CLAUDE.md", "GEMINI.md"]) {
 					const owners = docks.filter((name) => {

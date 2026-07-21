@@ -1,0 +1,52 @@
+opendock: 1
+summary: 참고 이미지를 단계별로 분석하고 원본과 비교하며 animation-ready Three.js 모델 코드로 재구성합니다.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - img2threejs
+  - threejs
+  - image-to-3d
+  - procedural-3d
+  - 3d-modeling
+  - animation
+  - codex
+  - claude-code
+requires:
+  runtimes:
+    python: ">=3.10.0 <4.0.0"
+    node: ">=22.12.0 <25.0.0"
+    npm: ">=10.0.0"
+dependencies:
+  img2threejs-runtime:
+    manager: npm
+    path: .codex/opendock/img2threejs
+    mode: install
+    timeout_ms: 600000
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/AGENTS.md
+    to: CLAUDE.md
+  - from: files/.agents/skills/opendock-img2threejs/SKILL.md
+    to: .agents/skills/opendock-img2threejs/SKILL.md
+  - from: files/.opendock/docks/img2threejs/README.md
+    to: .opendock/docks/img2threejs/README.md
+  - from: files/.opendock/docks/img2threejs/upstream
+    to: .opendock/docks/img2threejs/upstream
+  - from: files/.codex/opendock/img2threejs
+    to: .codex/opendock/img2threejs
+doctor:
+  - id: python-runtime
+    run: python --version
+  - id: img2threejs-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/img2threejs/README.md) { exit 0 } else { exit 1 }"
+  - id: img2threejs-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-img2threejs/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: img2threejs-validator
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/img2threejs/upstream/forge/stage2_spec/validate_sculpt_spec.py) { exit 0 } else { exit 1 }"
+  - id: img2threejs-runtime
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .codex/opendock/img2threejs/package.json) { exit 0 } else { exit 1 }"
+  - id: img2threejs-three
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .codex/opendock/img2threejs/node_modules/three) { exit 0 } else { exit 1 }"
+  - id: img2threejs-normalizer
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .codex/opendock/img2threejs/normalize-image.mjs) { exit 0 } else { exit 1 }"

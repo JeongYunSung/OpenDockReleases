@@ -64,7 +64,7 @@ docks/
       files/
 ```
 
-현재 카탈로그는 Tool 9개, 일반 작업공간 32개, Ultrawork 18개와 Dock Builder 1개로 구성됩니다. 실제 목록은 `docks/opendock/`가 기준이며, 새 Dock을 추가할 때 문서의 수동 목록을 갱신할 필요가 없습니다.
+현재 카탈로그는 Tool 9개, 일반 작업공간 33개, Ultrawork 18개와 Dock Builder 1개로 구성됩니다. 실제 목록은 `docks/opendock/`가 기준이며, 새 Dock을 추가할 때 문서의 수동 목록을 갱신할 필요가 없습니다.
 
 ## 바로 쓰는 작업공간 dock
 
@@ -123,6 +123,7 @@ docks/
 | Dock | 목적 | 기준 |
 |------|------|------|
 | `opendock/paper-shaders-ultrawork` | Paper Shaders의 image filter, logo animation, effect 29개를 정확한 React component/prop/range로 쓰게 합니다. | `shaders.paper.design` 상세 페이지와 `@paper-design/shaders-react` 예시 |
+| `opendock/img2threejs` | 참고 이미지를 procedural Three.js 코드로 재구성하고 단계별 렌더링을 원본과 비교합니다. | `hoainho/img2threejs` 1.2.0 품질 게이트와 프로젝트 로컬 preview runtime |
 
 ## Research dock
 
