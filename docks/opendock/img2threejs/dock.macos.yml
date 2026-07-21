@@ -36,8 +36,6 @@ files:
   - from: files/.codex/opendock/img2threejs
     to: .codex/opendock/img2threejs
 doctor:
-  - id: python-runtime
-    run: python --version
   - id: img2threejs-readme
     check: test -f .opendock/docks/img2threejs/README.md
   - id: img2threejs-skill
