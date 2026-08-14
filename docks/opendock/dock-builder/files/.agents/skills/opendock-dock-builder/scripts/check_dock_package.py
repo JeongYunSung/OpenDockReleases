@@ -301,6 +301,88 @@ def supports_custom_harness(dock_name: str) -> bool:
     return dock_name.endswith("-ultrawork") or dock_name == "dock-builder"
 
 
+def manifest_tool_commands(parsed_manifests: dict[str, dict]) -> set[str]:
+    commands: set[str] = set()
+    for manifest in parsed_manifests.values():
+        for spec in mapping(manifest.get("tools")).values():
+            if not isinstance(spec, dict):
+                continue
+            value = spec.get("commands")
+            if isinstance(value, list):
+                commands.update(item for item in value if isinstance(item, str) and item.strip())
+    return commands
+
+
+def scan_catalog_description(
+    root: Path,
+    text: str,
+    parsed_manifests: dict[str, dict],
+    results: list[dict],
+) -> None:
+    dock_name = root.name
+    commands = manifest_tool_commands(parsed_manifests)
+    is_tool_dock = bool(commands)
+    is_quality_dock = supports_custom_harness(dock_name)
+    required_sections = [
+        "## 이런 때 사용하세요",
+        "## AI에서 이렇게 사용하세요",
+        "### 요청 예시",
+        "## 사용 후 얻는 것",
+    ]
+
+    if len(re.sub(r"\s+", "", text)) < 300:
+        add(
+            results,
+            "error",
+            "dock-catalog-depth",
+            "DOCK.md",
+            "catalog description is too short; explain the user situation, AI usage, examples, and outcomes",
+        )
+    for section in required_sections:
+        if section not in text:
+            add(results, "error", "dock-catalog-structure", "DOCK.md", f"missing user-facing section `{section}`")
+
+    expected_skill = f"$opendock-{dock_name}"
+    if expected_skill not in text:
+        add(results, "error", "dock-catalog-skill", "DOCK.md", f"catalog must show the exact AI skill name `{expected_skill}`")
+
+    if len(re.findall(r"(?m)^>\s+\S", text)) < 2:
+        add(results, "error", "dock-catalog-examples", "DOCK.md", "catalog must include at least two concrete blockquoted AI request examples")
+
+    forbidden_catalog_copy = [
+        ".opendock/docks/",
+        "설치 후 안내와 기준 문서는",
+        "## 출시 전 검수",
+    ]
+    for value in forbidden_catalog_copy:
+        if value in text:
+            add(
+                results,
+                "error",
+                "dock-catalog-path-copy",
+                "DOCK.md",
+                f"catalog must explain user value instead of internal paths or release jargon: `{value}`",
+            )
+
+    if is_tool_dock:
+        if "## 설치되는 도구" not in text:
+            add(results, "error", "dock-catalog-tool", "DOCK.md", "Tool Dock catalog must explain what is installed under `## 설치되는 도구`")
+        for command in sorted(commands):
+            if f"`{command}`" not in text:
+                add(results, "error", "dock-catalog-tool", "DOCK.md", f"Tool Dock catalog must show installed command `{command}`")
+    elif is_quality_dock:
+        if "## 검수 강도" not in text or not all(word in text for word in ["검수", "ultrawork", "하네스"]):
+            add(
+                results,
+                "error",
+                "dock-catalog-quality",
+                "DOCK.md",
+                "quality Dock catalog must explain that 검수 or ultrawork applies a strict harness to the current result",
+            )
+    elif "## 검토가 필요할 때" not in text:
+        add(results, "error", "dock-catalog-regular", "DOCK.md", "regular Dock catalog must explain lightweight review without pretending to install a custom harness")
+
+
 def add(results: list[dict], level: str, rule: str, path: str, detail: str) -> None:
     results.append({"level": level, "rule": rule, "path": path, "detail": detail})
 
@@ -366,6 +448,12 @@ def scan_manifest(root: Path, manifest: Path, results: list[dict]) -> dict | Non
             add(results, "error", f"manifest-{key}", mrel, f"{key} target must be a regular file")
     if data.get("readme") != "DOCK.md":
         add(results, "error", "registry-readme", mrel, "manifest `readme` must point to the Korean Registry catalog description DOCK.md")
+
+    summary = scalar_string(data.get("summary")) or ""
+    if not re.search(r"[가-힣]", summary) or len(summary.strip()) < 25:
+        add(results, "error", "catalog-summary", mrel, "summary must briefly explain the user outcome in natural Korean")
+    if any(value in summary.lower() for value in [".opendock", "quality gate", "managed file", "harness"]):
+        add(results, "error", "catalog-summary", mrel, "summary must describe user value instead of internal implementation terms")
 
     if not isinstance(data.get("tags"), list) or not data.get("tags"):
         add(results, "warning", "manifest-tags", mrel, "missing tags; catalog discovery may be weaker")
@@ -690,6 +778,8 @@ def main() -> int:
                     dock_text = dock_readme.read_text("utf-8", errors="replace")
                     if not re.search(r"[가-힣]", dock_text):
                         add(results, "error", "dock-readme-language", "DOCK.md", "DOCK.md must be a natural Korean Registry catalog description")
+                    else:
+                        scan_catalog_description(root, dock_text, parsed_manifests, results)
         if not (root / "logo.png").exists():
             add(results, "warning", "logo", rel(root, root.parent), "missing logo.png")
         scan_files(root, results, parsed_manifests)

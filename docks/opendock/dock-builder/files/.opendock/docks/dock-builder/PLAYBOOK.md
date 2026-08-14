@@ -38,7 +38,7 @@ dock-folder/
 
 일반 작업은 정적 checker로 바뀐 Dock만 확인합니다. 문서와 manifest를 빠르게 맞추고, 실패한 항목만 수정합니다.
 
-검수·ultrawork·release 요청에서는 임시 workspace를 사용해 다음을 확인합니다.
+검수·ultrawork 요청에서는 현재 Dock만 임시 workspace에서 다음과 같이 확인합니다. 전체 컬렉션은 사용자가 `전체 검수`를 명시한 경우에만 확인합니다.
 
 - install과 doctor
 - update no-change와 managed file 충돌

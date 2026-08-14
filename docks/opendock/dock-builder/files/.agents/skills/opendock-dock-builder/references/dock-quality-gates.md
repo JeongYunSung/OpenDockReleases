@@ -2,7 +2,7 @@
 
 ## 기본 방향
 
-평소에는 현재 요청에서 바꾼 Dock만 빠르게 확인합니다. 사용자가 `검수`, `ultrawork`, `release`를 명시했을 때만 정밀 harness와 전체 설치 흐름을 확인합니다.
+평소에는 현재 요청에서 바꾼 Dock만 빠르게 확인합니다. 사용자가 `검수` 또는 `ultrawork`를 명시했을 때 현재 Dock과 현재 결과를 정밀하게 확인합니다. 전체 설치 컬렉션 검사는 전체 범위를 명확히 요청한 경우에만 수행합니다.
 
 ## 공통 구조
 
@@ -17,7 +17,10 @@ dock-folder/
     .opendock/docks/<dock-name>/README.md
 ```
 
-- `DOCK.md`는 Registry에서 읽는 자연스러운 한국어 설명입니다.
+- `DOCK.md`는 Registry에서 처음 보는 사용자도 목적과 사용법을 이해하는 자연스러운 한국어 설명입니다.
+- `이런 때 사용하세요`, `AI에서 이렇게 사용하세요`, 정확한 `$opendock-<dock-name>` 스킬명, 구체적인 요청 예시 2개 이상, `사용 후 얻는 것`을 포함합니다.
+- 내부 경로를 나열하거나 `설치 후 안내와 기준 문서는 ...`로 설명을 대신하지 않습니다.
+- Tool Dock은 실제 command를, 일반 Dock은 가벼운 검토 방식을, Ultrawork와 Dock Builder는 검수 강도를 추가로 설명합니다.
 - root `AGENTS.md`는 routing과 safety만 담은 20개 이하의 규칙입니다.
 - root `README.md`, root `HARNESS.md`, root `*PLAYBOOK*.md`는 설치하지 않습니다.
 - 사용자 문서와 필요한 playbook·domain guide는 `.opendock/docks/<dock-name>/`에 둡니다.
@@ -52,7 +55,7 @@ AI 기능과 준비된 작업 공간처럼 `tools`가 없고 이름이 `-ultrawo
 .opendock/harness/<dock-name>/check.mjs
 ```
 
-custom harness는 일반 요청에서 자동 실행하지 않습니다. 검수와 ultrawork에서는 명시한 작업만, release에서는 명시적 전체 모드만 검사합니다. 파일 존재, 안전한 경로, 허용된 형식, 보안 위반처럼 객관적으로 판정 가능한 조건만 확인하고 의미·문체·창의성은 AI 리뷰가 맡습니다. 실패 이유를 읽기 쉽게 출력하고 잘못된 사례에서 non-zero로 끝나야 합니다.
+custom harness는 일반 요청에서 자동 실행하지 않습니다. 검수와 ultrawork에서는 현재 지정한 작업만 강하게 검사하며, 프로젝트 전체는 사용자가 전체 범위를 명확히 요청했을 때만 봅니다. 파일 존재, 안전한 경로, 허용된 형식, 보안 위반처럼 객관적으로 판정 가능한 조건만 확인하고 의미·문체·창의성은 AI 리뷰가 맡습니다. 실패 이유를 읽기 쉽게 출력하고 잘못된 사례에서 non-zero로 끝나야 합니다.
 
 ## Manifest
 
@@ -82,4 +85,4 @@ custom harness는 일반 요청에서 자동 실행하지 않습니다. 검수�
 
 일반 요청에서는 대상 Dock 하나에 정적 checker를 실행하고 실패 항목만 고칩니다.
 
-출시 전 정밀 검수에서는 임시 workspace에서 install, update, doctor, uninstall, managed file 충돌, dependency 정리, platform 선택을 확인합니다. Tool Dock은 실제 명령 실행을, 일반 Dock은 대표 AI 작업을, Ultrawork와 Dock Builder는 대상 한정 checker의 성공·실패 사례를 증거로 남깁니다.
+강한 검수에서는 임시 workspace에서 install, update, doctor, uninstall, managed file 충돌, dependency 정리, platform 선택을 확인합니다. Tool Dock은 실제 명령 실행을, 일반 Dock은 대표 AI 작업을, Ultrawork와 Dock Builder는 대상 한정 checker의 성공·실패 사례를 증거로 남깁니다.

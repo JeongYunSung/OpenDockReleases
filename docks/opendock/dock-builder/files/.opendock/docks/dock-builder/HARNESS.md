@@ -6,10 +6,10 @@
 node .opendock/harness/dock-builder/check.mjs docks/opendock/<dock-name>
 ```
 
-사용자가 `검수`, `ultrawork`, `release`를 요청한 경우에만 정밀 모드를 사용합니다.
+사용자가 `검수` 또는 `ultrawork`를 요청한 경우 현재 Dock에만 정밀 모드를 사용합니다. 프로젝트 전체는 `전체 검수`를 명시한 경우에만 확인합니다.
 
 ```bash
-node .opendock/harness/dock-builder/check.mjs --release docks/opendock/<dock-name>
+node .opendock/harness/dock-builder/check.mjs docks/opendock/<dock-name>
 ```
 
 정밀 모드는 Dock Builder 설치 파일과 대상 Dock 정책을 함께 확인합니다. 실제 install, update, doctor, uninstall과 Tool Dock의 실제 명령 실행은 임시 workspace에서 별도로 증거를 남깁니다.

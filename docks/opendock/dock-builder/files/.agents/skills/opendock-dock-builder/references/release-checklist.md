@@ -1,12 +1,14 @@
-# 출시 전 체크리스트
+# 강한 검수 체크리스트
 
-이 체크리스트는 사용자가 `검수`, `ultrawork`, `release`를 명시했을 때 사용합니다. 일반 요청에서는 대상 Dock의 정적 checker까지만 실행합니다.
+이 체크리스트는 사용자가 `검수` 또는 `ultrawork`를 명시했을 때 현재 Dock에 사용합니다. 일반 요청에서는 대상 Dock의 정적 checker까지만 실행하며, 전체 컬렉션 검사는 전체 범위를 명확히 요청했을 때만 수행합니다.
 
 ## 공통 증거
 
 - deploy reference와 대상 Registry
 - macOS와 Windows manifest 목록
 - 정적 package checker 결과
+- 카탈로그의 사용자 상황, 정확한 스킬명, 요청 예시 2개 이상과 기대 결과
+- Tool command 또는 Ultrawork 검수 강도 설명
 - root 문서 금지와 namespaced README 확인
 - 두 platform의 file mapping, tool/dependency, doctor parity 확인
 - 보안 blocker와 warning
@@ -61,4 +63,4 @@ Residual risk:
 - ...
 ```
 
-설치 source가 없거나, 최신 manifest를 위반하거나, platform 계약이 다르거나, 보안 blocker가 남아 있으면 출시 준비가 끝났다고 말하지 않습니다. Tool Dock의 실제 명령, 일반 Dock의 대표 AI 작업, Ultrawork checker의 실패 사례 중 해당 증거를 확인하지 못했을 때도 그 사실을 남깁니다.
+설치 source가 없거나, 최신 manifest를 위반하거나, platform 계약이 다르거나, 사용자 설명이 경로 나열에 그치거나, 보안 blocker가 남아 있으면 검수가 끝났다고 말하지 않습니다. Tool Dock의 실제 명령, 일반 Dock의 대표 AI 작업, Ultrawork checker의 실패 사례 중 해당 증거를 확인하지 못했을 때도 그 사실을 남깁니다.

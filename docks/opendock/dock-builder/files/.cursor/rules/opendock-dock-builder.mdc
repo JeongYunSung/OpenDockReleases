@@ -5,4 +5,4 @@ globs:
 alwaysApply: false
 ---
 
-When editing an OpenDock Dock, follow `.opendock/docks/dock-builder/PLAYBOOK.md`. Check only the current Dock by default. Run the detailed harness only when the user explicitly requests 검수, ultrawork, or release.
+When editing an OpenDock Dock, follow `.opendock/docks/dock-builder/PLAYBOOK.md`. Check only the current Dock by default. Run the detailed harness for the current result only when the user explicitly requests 검수 or ultrawork. Scan the full project only for an explicit 전체 검수 request.

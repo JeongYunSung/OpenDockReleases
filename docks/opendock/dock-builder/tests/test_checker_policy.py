@@ -16,10 +16,10 @@ class CheckerPolicyTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name) / "demo"
         self.root.mkdir()
-        (self.root / "DOCK.md").write_text("# 데모 Dock\n\nRegistry에서 읽는 한국어 설명입니다.\n", encoding="utf-8")
         (self.root / "logo.png").write_bytes(b"png")
         self.write("files/AGENTS.md", "# Demo\n\n1. Route work.\n2. Keep it safe.\n")
         self.write("files/docs/README.md", "# 사용 안내\n")
+        self.write_catalog()
 
     def tearDown(self) -> None:
         self.temp.cleanup()
@@ -37,12 +37,72 @@ class CheckerPolicyTest(unittest.TestCase):
         target = self.root.parent / name
         self.root.rename(target)
         self.root = target
+        self.write_catalog("quality" if name.endswith("-ultrawork") else "regular")
+
+    def write_catalog(self, kind: str = "regular") -> None:
+        name = self.root.name
+        lines = [
+            "# 데모 Dock",
+            "",
+            "반복되는 데모 작업을 누구나 바로 시작할 수 있게 준비하고, 입력부터 결과까지 이해하기 쉬운 순서로 정리합니다.",
+            "",
+            "## 이런 때 사용하세요",
+            "",
+            "- 처음 데모 작업을 시작할 때",
+            "- 기존 결과에서 빠진 내용을 찾을 때",
+            "- 다른 사람과 같은 기준으로 결과를 만들 때",
+            "",
+        ]
+        if kind == "tool":
+            lines.extend([
+                "## 설치되는 도구",
+                "",
+                "- 프로젝트 안에서 데모 명령을 사용할 수 있게 준비합니다.",
+                "- 사용할 수 있는 명령: `demo-cli`",
+                "",
+            ])
+        lines.extend([
+            "## AI에서 이렇게 사용하세요",
+            "",
+            f"AI에서 `$opendock-{name}` 스킬을 선택한 뒤 원하는 결과를 자연어로 설명하세요.",
+            "",
+            "### 요청 예시",
+            "",
+            "> 데모 입력을 읽고 중요한 항목을 표로 정리해줘.",
+            "",
+            "> 현재 결과를 다시 검토하고 빠진 항목과 다음 행동을 알려줘.",
+            "",
+        ])
+        if kind == "quality":
+            lines.extend([
+                "## 검수 강도",
+                "",
+                "평소에는 현재 작업만 빠르게 처리합니다. `검수` 또는 `ultrawork`를 요청하면 현재 결과물에 강한 하네스를 적용하고 실패 항목을 고친 뒤 다시 확인합니다.",
+                "",
+            ])
+        elif kind == "regular":
+            lines.extend([
+                "## 검토가 필요할 때",
+                "",
+                "검토를 요청하면 현재 결과만 다시 읽고 별도의 무거운 검사 없이 내용의 누락과 모순을 고칩니다.",
+                "",
+            ])
+        lines.extend([
+            "## 사용 후 얻는 것",
+            "",
+            "- 바로 편집할 수 있는 데모 결과",
+            "- 입력과 판단 근거가 구분된 요약",
+            "- 다음 작업으로 이어지는 확인 목록",
+            "",
+        ])
+        (self.root / "DOCK.md").write_text("\n".join(lines), encoding="utf-8")
 
     def manifest(self, extra_mappings: str = "", tool: bool = False) -> str:
         dock_name = self.root.name
+        self.write_catalog("tool" if tool else "quality" if dock_name.endswith("-ultrawork") else "regular")
         text = (
             "opendock: 1\n"
-            "summary: 데모 Dock\n"
+            "summary: 반복되는 데모 작업을 누구나 바로 시작하고 결과까지 정리하도록 돕습니다.\n"
             "readme: DOCK.md\n"
             "logo: logo.png\n"
             "tags:\n"
@@ -127,6 +187,43 @@ class CheckerPolicyTest(unittest.TestCase):
         )
         self.write_platforms(text)
         self.assertIn("namespaced-readme", self.rules(self.check()))
+
+    def test_catalog_rejects_internal_path_copy_instead_of_user_value(self) -> None:
+        self.write_platforms(self.manifest())
+        catalog = (self.root / "DOCK.md").read_text(encoding="utf-8")
+        (self.root / "DOCK.md").write_text(
+            catalog + "\n설치 후 안내와 기준 문서는 `.opendock/docks/demo/README.md`에서 확인합니다.\n",
+            encoding="utf-8",
+        )
+        self.assertIn("dock-catalog-path-copy", self.rules(self.check()))
+
+    def test_catalog_requires_exact_skill_name(self) -> None:
+        self.write_platforms(self.manifest())
+        catalog = (self.root / "DOCK.md").read_text(encoding="utf-8").replace("$opendock-demo", "$other-skill")
+        (self.root / "DOCK.md").write_text(catalog, encoding="utf-8")
+        self.assertIn("dock-catalog-skill", self.rules(self.check()))
+
+    def test_catalog_requires_two_concrete_request_examples(self) -> None:
+        self.write_platforms(self.manifest())
+        catalog = (self.root / "DOCK.md").read_text(encoding="utf-8")
+        catalog = catalog.replace("> 현재 결과를 다시 검토하고 빠진 항목과 다음 행동을 알려줘.\n", "")
+        (self.root / "DOCK.md").write_text(catalog, encoding="utf-8")
+        self.assertIn("dock-catalog-examples", self.rules(self.check()))
+
+    def test_quality_catalog_explains_strict_requested_harness(self) -> None:
+        self.rename_dock("demo-ultrawork")
+        mappings = self.mapping("files/docs/HARNESS.md", ".opendock/docks/demo-ultrawork/HARNESS.md")
+        mappings += self.mapping("files/harness/check.mjs", ".opendock/harness/demo-ultrawork/check.mjs")
+        self.write_platforms(self.manifest(mappings))
+        catalog = (self.root / "DOCK.md").read_text(encoding="utf-8").replace("하네스", "검사")
+        (self.root / "DOCK.md").write_text(catalog, encoding="utf-8")
+        self.assertIn("dock-catalog-quality", self.rules(self.check()))
+
+    def test_tool_catalog_lists_installed_command(self) -> None:
+        self.write_platforms(self.manifest(tool=True))
+        catalog = (self.root / "DOCK.md").read_text(encoding="utf-8").replace("`demo-cli`", "`other-cli`")
+        (self.root / "DOCK.md").write_text(catalog, encoding="utf-8")
+        self.assertIn("dock-catalog-tool", self.rules(self.check()))
 
     def test_tool_dock_rejects_custom_harness_and_quality_gate(self) -> None:
         mappings = self.mapping("files/docs/HARNESS.md", ".opendock/docks/demo/HARNESS.md")
@@ -230,11 +327,12 @@ class CheckerPolicyTest(unittest.TestCase):
         self.assertNotIn("manifest-yaml", rules)
 
     def test_rejects_symlink_catalog_readme_without_reading_target(self) -> None:
+        manifest = self.manifest()
         (self.root / "DOCK.md").unlink()
         outside = self.root.parent / "outside-directory"
         outside.mkdir()
         (self.root / "DOCK.md").symlink_to(outside, target_is_directory=True)
-        self.write_platforms(self.manifest())
+        self.write_platforms(manifest)
         result = self.check()
         self.assertIn("dock-readme-symlink", self.rules(result))
 

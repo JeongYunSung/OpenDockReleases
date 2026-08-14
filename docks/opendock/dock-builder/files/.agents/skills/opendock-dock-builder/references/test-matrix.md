@@ -13,7 +13,7 @@
 
 여기까지 통과하면 일반 수정의 빠른 확인은 끝납니다. 저장소 전체 harness나 실제 설치 시나리오는 자동으로 확장하지 않습니다.
 
-## 검수·ultrawork·release
+## 검수·ultrawork
 
 ### 공통
 
@@ -53,7 +53,7 @@ Tool Dock에는 custom harness 성공·실패 사례를 요구하지 않습니�
 - 올바른 사례 성공
 - 의도적으로 잘못된 사례 non-zero 실패
 - 현재 요청 산출물 밖의 unrelated file을 검사하지 않음
-- 일반 실행은 빠르게 대기하고, 검수는 지정 작업만, release는 명시적 전체 모드에서만 넓게 검사
+- 일반 실행은 빠르게 대기하고, 검수와 ultrawork는 지정한 현재 작업만 강하게 검사
 - 의미·문체·창의성을 regex로 점수화하지 않고 객관적 조건만 자동 판정
 
 ### Dependencies
@@ -68,5 +68,7 @@ Tool Dock에는 custom harness 성공·실패 사례를 요구하지 않습니�
 
 - 정확한 `owner/name@version` reference 사용
 - platform별 artifact와 `--file` 일치
-- Registry의 `DOCK.md`, logo, tag 표시 확인
+- Registry의 `DOCK.md`가 목적, 정확한 스킬명, 요청 예시와 결과를 비개발자도 이해하게 설명하는지 확인
+- Tool Dock의 실제 command와 Ultrawork의 요청형 하네스 설명이 정확한지 확인
+- logo와 tag 표시 확인
 - 검증하지 못한 platform과 남은 위험 기록
