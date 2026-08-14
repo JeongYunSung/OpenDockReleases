@@ -1,5 +1,5 @@
 opendock: 1
-summary: 사진·메모를 시간선, 캡션, 회고와 여러 이야기 변형으로 정리하면서 동의·불확실성·개인정보 가림을 지키는 여행 기록 dock.
+summary: 여행 중 남긴 사진과 메모를 날짜별 기록과 자연스러운 여행기로 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

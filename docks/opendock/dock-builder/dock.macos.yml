@@ -1,5 +1,5 @@
 opendock: 1
-summary: 평소에는 필요한 범위만 빠르게 확인하고, 검수와 출시 전에는 Dock을 꼼꼼하게 점검하는 제작 도구.
+summary: 누구나 이해하고 바로 쓸 수 있는 OpenDock Dock을 만들고 실제 설치까지 검증합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

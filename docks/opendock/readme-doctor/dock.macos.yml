@@ -1,5 +1,5 @@
 opendock: 1
-summary: 프로젝트 근거로 README의 독자, 명령, 예제, 문제 해결, 호환성과 제안 변경을 검증합니다.
+summary: README를 처음 보는 사람이 제품을 이해하고 바로 실행할 수 있게 고칩니다.
 readme: DOCK.md
 logo: logo.png
 tags:

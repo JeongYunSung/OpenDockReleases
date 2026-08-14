@@ -1,28 +1,31 @@
 # Context Engineering
 
-설치하면 `code-review-graph`와 `codectx` CLI를 이 프로젝트에서만 쓰는 명령으로 사용할 수 있습니다. 큰 저장소에서 질문과 관련된 코드·문서 맥락만 좁혀 읽을 때 사용합니다.
+저장소 전체를 무작정 AI에 넣지 않고 현재 질문에 필요한 코드, 의존 관계, 변경 이력만 추립니다. 컨텍스트가 너무 길어지는 문제와 중요한 파일이 빠지는 문제를 함께 줄입니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- `code-review-graph`, `codectx` 명령
-- root `AGENTS.md`의 context 도구 routing과 안전 경계
-- `.opendock/docks/context-engineering/README.md`와 상세 가이드
-- 선택적으로 조사 범위를 기록할 `CONTEXT_PACK.md`
+- 큰 저장소에서 기능의 시작점과 영향 범위를 찾을 때
+- AI에게 전달할 코드 묶음을 작고 정확하게 만들 때
+- 리뷰 전에 변경 파일과 관련 호출 관계를 정리할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-code-review-graph --help
-codectx --help
-opendock doctor
-```
+- 코드 관계 분석과 컨텍스트 수집 CLI를 프로젝트 안에 준비합니다.
+- 사용할 수 있는 명령: `code-review-graph`, `codectx`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-질문, 대상 경로, 제외 경로를 먼저 정하고 생성되는 index와 context output은 workspace 범위 안에서 관리합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-context-engineering` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Context Engineering 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock은 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`가 두 CLI의 실제 `--help` 실행과 설치 문서 존재 여부를 확인합니다.
+### 요청 예시
 
-## 알려진 한계
+> 결제 취소 흐름과 관련된 파일과 호출 관계만 찾아 작업 컨텍스트로 묶어줘.
 
-생성된 graph나 context는 최신 source와 다를 수 있으므로 중요한 판단 전 현재 파일을 다시 확인해야 합니다. secret과 민감 설정 파일은 입력 범위에서 제외합니다.
+> 이 변경분을 리뷰하는 데 필요한 코드만 추리고 빠진 의존 파일이 없는지 확인해줘.
+
+## 사용 후 얻는 것
+
+- 질문과 직접 관련된 코드 컨텍스트
+- 파일과 심볼의 관계를 보여주는 구조화된 자료
+- 불필요한 토큰을 줄인 AI 입력 묶음

@@ -1,5 +1,5 @@
 opendock: 1
-summary: 프로젝트 구조와 의사결정을 프로젝트 전용 memory로 남기는 AI 도구 기능 Dock.
+summary: AI가 다음 작업에서도 기억해야 할 결정과 맥락을 짧고 안전하게 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

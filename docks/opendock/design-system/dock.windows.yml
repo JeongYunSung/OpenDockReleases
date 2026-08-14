@@ -1,5 +1,5 @@
 opendock: 1
-summary: 원칙, semantic token, component state, 접근성, 거버넌스와 도입 계획을 연결해 운영 가능한 디자인 시스템을 설계하는 dock.
+summary: 색상, 글자, 간격과 컴포넌트 규칙을 한 제품 안에서 일관되게 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

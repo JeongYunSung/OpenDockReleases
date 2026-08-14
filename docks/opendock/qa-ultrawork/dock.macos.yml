@@ -1,5 +1,5 @@
 opendock: 1
-summary: 회귀 범위, smoke test, security check, release confidence, 최종 handoff discipline을 점검하는 QA 품질 게이트.
+summary: 실제 사용 흐름과 엣지케이스를 테스트하고 회귀와 품질 위험을 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

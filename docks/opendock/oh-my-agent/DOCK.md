@@ -1,27 +1,35 @@
 # oh-my-agent
 
-설치하면 oh-my-agent의 `oma`, `oh-my-agent` 명령을 workspace-local로 사용할 수 있습니다. Dock의 분리된 config를 기준으로 OMA agent 설정을 설치·업데이트하고 상태를 진단합니다.
+여러 AI 도구의 agent 설정과 skill을 매번 손으로 복사하지 않고 현재 프로젝트 안에 설치합니다. OpenDock이 분리된 설정에서 OMA를 실행하므로 전역 환경을 어지럽히지 않고 프로젝트별로 업데이트할 수 있습니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- `oh-my-agent@10.10.0`과 `oma`, `oh-my-agent` 명령
-- Dock 전용 작업 공간에 준비되는 `.agents/oma-config.yaml` 초기 설정
-- OMA install/update가 생성해 project로 export하는 agent 설정
-- `.opendock/docks/oh-my-agent/README.md`와 운영 가이드
+- Codex와 Claude Code에 여러 전문 스킬을 한 번에 추가할 때
+- 프로젝트마다 다른 OMA 설정을 유지할 때
+- 설치된 agent와 workflow를 함께 업데이트할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-oma --version
-opendock doctor
-```
+- oh-my-agent와 OMA 설정을 프로젝트 전용 작업 공간에서 설치하고 연결합니다.
+- 사용할 수 있는 명령: `oma`, `oh-my-agent`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-OpenDock install은 dock workdir에서 `oma -y install`을, update는 `oma update --ci --all`을 실행합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-oh-my-agent` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “oh-my-agent 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock 자체는 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`는 `oma --version`, 설정 파일, 설치 문서를 읽기 전용으로 확인합니다. `oma doctor`는 필요하면 파일을 내려받거나 바꿀 수 있으므로 사용자가 직접 실행합니다.
+### 요청 예시
 
-## 알려진 한계
+> oh-my-agent로 설치된 디버그 스킬을 사용해서 이 오류의 원인을 찾아줘.
 
-`oma-config.yaml`은 실행 가능한 AI 도구 설정과 같은 수준으로 검토해야 합니다. 사용자 홈의 공유 설정, 전역 설치, 인증 정보 저장은 기본 범위에 포함하지 않습니다.
+> 현재 프로젝트에 설치된 OMA 스킬 중 디자인 작업에 맞는 것을 골라 화면을 검토해줘.
+
+## 사용 후 얻는 것
+
+- 프로젝트 안에 준비된 OMA agent, skill, workflow
+- Codex와 Claude Code가 읽을 수 있는 연결 설정
+- OpenDock으로 추적되는 설치와 업데이트 상태
+
+## 알아둘 점
+
+설치 후 AI 도구를 다시 열어야 새 스킬 목록이 갱신될 수 있습니다.

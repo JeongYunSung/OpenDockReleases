@@ -1,5 +1,5 @@
 opendock: 1
-summary: AI 도구 작업의 secret, auth, permission, 보안 검토 근거를 프로젝트 전용으로 점검하는 기능 Dock.
+summary: AI가 외부 문서와 도구를 다룰 때 지시 탈취와 정보 유출 위험을 먼저 확인합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,5 +1,5 @@
 opendock: 1
-summary: WRITING.md 기준으로 한국어/영어 UX writing, 서비스 용어, 작명을 점검하는 품질 게이트.
+summary: 한국어와 영어 UI 문구를 제품 맥락에 맞게 쓰고 이해도와 행동성을 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

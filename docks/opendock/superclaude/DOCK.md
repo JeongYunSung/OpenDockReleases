@@ -1,28 +1,35 @@
 # SuperClaude
 
-설치하면 `superclaude` CLI를 이 프로젝트에서만 쓰는 명령으로 사용할 수 있습니다. Claude Code의 command, persona, workflow 구성을 확인하고 승인된 범위에서 설치할 때 사용합니다.
+Claude Code를 단순 질의응답보다 계획, 구현, 분석, 검토 같은 역할 중심으로 사용하고 싶을 때 설치합니다. 프로젝트 안에서 SuperClaude CLI를 사용할 수 있게 준비합니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- `superclaude` 명령
-- root `AGENTS.md`의 SuperClaude routing과 안전 경계
-- `.opendock/docks/superclaude/README.md`와 설정 가이드
-- 선택적으로 변경 내용을 기록할 `SUPERCLAUDE_RUN.md`
+- Claude Code에 구조화된 개발 명령을 추가할 때
+- 큰 작업을 역할과 단계로 나눠 진행할 때
+- 반복되는 분석과 리뷰 흐름을 표준화할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-superclaude --help
-superclaude --version
-opendock doctor
-```
+- SuperClaude CLI를 프로젝트 전용 Python 도구로 준비합니다.
+- 사용할 수 있는 명령: `superclaude`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-`superclaude install`처럼 Claude Code 설정을 바꾸는 명령은 변경 위치와 영향을 확인하고 사용자 승인을 받은 뒤 실행합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-superclaude` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “SuperClaude 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock은 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`가 실제 `superclaude --version` 실행과 설치 문서 존재 여부를 확인합니다.
+### 요청 예시
 
-## 알려진 한계
+> SuperClaude의 계획 기능으로 이 리팩터링의 범위와 순서를 먼저 정리해줘.
 
-Claude Code HOME 설정이나 user command를 자동 변경하지 않습니다. SuperClaude가 생성한 지시는 기존 project rule보다 우선하지 않습니다.
+> 이 변경을 보안과 성능 관점의 전문 역할로 나눠 검토해줘.
+
+## 사용 후 얻는 것
+
+- Claude Code에서 사용할 수 있는 SuperClaude CLI
+- 역할과 목적이 분명한 작업 흐름
+- 프로젝트 단위로 추적되는 도구 설치 상태
+
+## 알아둘 점
+
+Claude Code 자체 설치와 인증은 포함하지 않으며, SuperClaude 설정 변경은 내용을 확인한 뒤 적용해야 합니다.

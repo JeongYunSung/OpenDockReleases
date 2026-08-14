@@ -1,5 +1,5 @@
 opendock: 1
-summary: 사용 사례, 가중 기준, 근거, 총소유비용을 연결해 검증 가능한 구매 결정을 만드는 dock.
+summary: 큰 구매를 조건, 실제 사용, 숨은 비용과 탈락 기준으로 비교합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

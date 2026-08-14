@@ -1,5 +1,5 @@
 opendock: 1
-summary: Context7 MCP CLI를 프로젝트 전용로 설치해 최신 library 문서를 조회할 수 있게 하는 도구 Dock.
+summary: AI가 라이브러리의 최신 공식 문서를 찾아 현재 버전에 맞는 답을 하도록 돕습니다.
 readme: DOCK.md
 logo: logo.png
 tags:

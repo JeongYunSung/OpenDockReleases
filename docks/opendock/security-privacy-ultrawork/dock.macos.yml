@@ -1,5 +1,5 @@
 opendock: 1
-summary: secret, PII, 권한, 인증 guard, dependency risk, 프롬프트 injection, 데이터 처리 흐름을 점검하는 보안/프라이버시 품질 게이트.
+summary: 코드와 AI 작업 흐름의 비밀정보, 권한, 개인정보, 의존성 위험을 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

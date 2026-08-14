@@ -1,28 +1,35 @@
 # Playwright MCP
 
-설치하면 `playwright-mcp` CLI를 이 프로젝트에서만 쓰는 명령으로 사용할 수 있습니다. Agent가 browser UI를 탐색하고 screenshot, console, network 상태를 확인할 때 사용합니다.
+코드만 보고 추측하지 않고 페이지를 열어 요소를 찾고 클릭하며 실제 동작을 확인합니다. 화면 흐름 재현, 접근성 트리 확인, 스크린샷 기반 검증에 사용할 수 있습니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- `playwright-mcp` 명령
-- root `AGENTS.md`의 browser MCP routing과 안전 경계
-- `.opendock/docks/playwright-mcp/README.md`와 실행 가이드
-- 선택적으로 실행 범위를 기록할 `PLAYWRIGHT_MCP_RUN.md`
+- 웹 기능을 실제 브라우저로 확인할 때
+- 로그인, 검색, 결제 같은 사용자 흐름을 재현할 때
+- 데스크톱과 모바일 화면을 캡처해 비교할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-playwright-mcp --help
-playwright-mcp --headless --isolated --allowed-hosts localhost,127.0.0.1
-opendock doctor
-```
+- Playwright MCP 서버 명령을 프로젝트 전용으로 준비합니다.
+- 사용할 수 있는 명령: `playwright-mcp`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-실행 전에 대상 URL, 허용 host, login 필요 여부를 정합니다. 실제 계정이나 상태를 바꾸는 action은 사용자 승인을 받은 범위에서만 수행합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-playwright-mcp` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Playwright MCP 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock은 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`가 실제 `playwright-mcp --version` 실행과 설치 문서 존재 여부를 확인합니다.
+### 요청 예시
 
-## 알려진 한계
+> 로컬 앱을 열어 회원가입 흐름을 따라가고 실패하는 단계를 알려줘.
 
-브라우저 binary와 기존 login session은 자동 준비하지 않습니다. unrestricted file access나 외부 사이트로의 private data 입력은 기본 사용 범위에 포함하지 않습니다.
+> 데스크톱과 모바일에서 이 페이지를 캡처하고 겹침이나 가로 스크롤을 찾아줘.
+
+## 사용 후 얻는 것
+
+- 실제 브라우저에서 확인한 동작 결과
+- 재현 단계와 실패 지점
+- 화면 캡처와 접근성 정보를 활용한 검증 자료
+
+## 알아둘 점
+
+AI 도구에서 MCP 연결을 추가해야 하며, 계정이나 외부 데이터를 바꾸는 테스트는 별도 승인이 필요합니다.

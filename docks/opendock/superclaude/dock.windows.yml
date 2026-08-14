@@ -1,5 +1,5 @@
 opendock: 1
-summary: SuperClaude CLI를 프로젝트 전용로 설치하고 승인 기반 설정 변경 경로를 제공하는 도구 Dock.
+summary: Claude Code에 전문 명령과 작업 역할을 더해 복잡한 개발 작업을 구조적으로 수행합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

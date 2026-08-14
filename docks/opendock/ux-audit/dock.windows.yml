@@ -1,5 +1,5 @@
 opendock: 1
-summary: 사용자 경험 문제를 근거와 심각도로 분류하고 접근성, 반응형, 카피까지 실행 가능한 개선안으로 정리하는 UX 감사 dock.
+summary: 화면과 사용자 흐름을 분석해 불편의 근거, 심각도와 개선 우선순위를 찾습니다.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,6 +1,6 @@
 opendock: 1
 name: Korea Equity Research
-summary: 한국 주식 리서치를 KRX, OpenDART, 기준일, 공시, 리스크, 비추천 고지 기준으로 점검하는 dock.
+summary: 한국 상장사의 사업, 실적, 공시와 위험을 출처와 함께 비교 분석합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

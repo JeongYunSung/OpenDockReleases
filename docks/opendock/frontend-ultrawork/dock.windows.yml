@@ -1,5 +1,5 @@
 opendock: 1
-summary: React, TypeScript, 접근성, route smoke check, build readiness를 점검하는 프론트엔드 품질 게이트.
+summary: 프론트엔드 기능을 구현하고 타입, 접근성, 상태, 성능까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

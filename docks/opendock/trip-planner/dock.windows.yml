@@ -1,5 +1,5 @@
 opendock: 1
-summary: 여행 조건을 현실적인 동선, 예산, 예약 점검, 우천 대안과 안전 계획으로 바꾸는 여행 계획 dock.
+summary: 날짜, 예산, 동선과 취향을 반영해 실행 가능한 여행 일정을 만듭니다.
 readme: DOCK.md
 logo: logo.png
 tags:

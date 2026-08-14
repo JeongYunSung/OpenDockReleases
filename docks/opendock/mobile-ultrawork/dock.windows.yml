@@ -1,5 +1,5 @@
 opendock: 1
-summary: Flutter, React Native, Swift, Android, 권한, 접근성, release readiness, runtime safety를 점검하는 모바일 품질 게이트.
+summary: 모바일 기능을 구현하고 화면 크기, 권한, 생명주기, 접근성까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

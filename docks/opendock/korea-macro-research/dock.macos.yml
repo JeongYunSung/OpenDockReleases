@@ -1,6 +1,6 @@
 opendock: 1
 name: Korea Macro Research
-summary: 한국 거시경제 리서치를 ECOS, KOSIS, 기준일, 지표 정의, 한계, 시나리오 기준으로 점검하는 dock.
+summary: 금리, 환율, 물가와 고용이 한국 경제와 자산에 미치는 영향을 근거로 분석합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

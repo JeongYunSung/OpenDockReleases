@@ -1,5 +1,5 @@
 opendock: 1
-summary: Terraform, Kubernetes, Helm, secret, public exposure, image tag, resource limit, runbook을 점검하는 DevOps 품질 게이트.
+summary: 배포와 인프라 변경을 보안, 복구, 비용, 운영 가능성까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

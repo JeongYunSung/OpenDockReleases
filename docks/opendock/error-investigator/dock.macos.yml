@@ -1,5 +1,5 @@
 opendock: 1
-summary: 재현 증거, 가설 실험, 근본 원인, 최소 수정과 회귀 테스트를 현재 오류 조사 보고서에서 검증합니다.
+summary: 에러를 재현하고 가설을 하나씩 검증해 근본 원인과 재발 방지책을 찾습니다.
 readme: DOCK.md
 logo: logo.png
 tags:

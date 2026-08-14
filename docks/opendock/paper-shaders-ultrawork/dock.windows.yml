@@ -1,5 +1,5 @@
 opendock: 1
-summary: Paper Shaders의 29개 image filter, logo animation, effect를 정확한 props catalog와 하네스로 쓰게 하는 dock.
+summary: 요청한 분위기에 맞는 Paper Shader를 고르고 바로 적용한 뒤 성능과 가독성을 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

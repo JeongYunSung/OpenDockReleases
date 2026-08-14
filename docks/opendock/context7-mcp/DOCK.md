@@ -1,28 +1,35 @@
 # Context7 MCP
 
-설치하면 `context7-mcp` CLI를 이 프로젝트에서만 쓰는 명령으로 사용할 수 있습니다. Agent가 library와 framework의 최신 문서를 MCP로 조회해야 할 때 사용합니다.
+오래된 사용법을 기억에 의존해 답하는 대신 현재 라이브러리 문서를 조회해 API와 예제를 확인합니다. 프레임워크 버전 차이 때문에 생기는 잘못된 코드 제안을 줄일 수 있습니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- `context7-mcp` 명령
-- root `AGENTS.md`의 문서 조회 routing과 안전 경계
-- `.opendock/docks/context7-mcp/README.md`와 MCP 연결 가이드
-- 선택적으로 조회 근거를 기록할 `CONTEXT7_MCP_RUN.md`
+- 라이브러리의 최신 설치법과 API를 확인할 때
+- 버전별로 달라진 설정을 정확히 찾을 때
+- 공식 문서 근거가 있는 구현 예시가 필요할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-context7-mcp --help
-context7-mcp --transport stdio
-opendock doctor
-```
+- Context7 MCP 서버 명령을 프로젝트 전용으로 준비합니다.
+- 사용할 수 있는 명령: `context7-mcp`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-MCP 연결은 사용하는 agent 설정에서 명시적으로 구성합니다. 조회 결과는 현재 project의 실제 dependency version과 다시 대조합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-context7-mcp` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Context7 MCP 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock은 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`가 실제 `context7-mcp --version` 실행과 설치 문서 존재 여부를 확인합니다.
+### 요청 예시
 
-## 알려진 한계
+> 현재 Next.js 버전의 공식 문서를 확인해서 서버 액션 사용법을 알려줘.
 
-MCP server를 자동으로 장기 실행하거나 agent 설정에 등록하지 않습니다. API key가 필요한 구성은 secret을 문서나 작업 기록에 저장하지 않습니다.
+> 이 라이브러리의 최신 마이그레이션 가이드를 찾아 우리 코드에 필요한 변경만 정리해줘.
+
+## 사용 후 얻는 것
+
+- 현재 버전에 맞는 공식 문서 기반 답변
+- 문서 출처와 함께 제시되는 설정 또는 코드
+- 오래된 API 사용을 줄인 구현 방향
+
+## 알아둘 점
+
+사용하는 AI 도구에서 MCP 서버 연결 설정이 별도로 필요할 수 있습니다.

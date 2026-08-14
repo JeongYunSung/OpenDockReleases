@@ -1,6 +1,6 @@
 opendock: 1
 name: Korea Real Estate Research
-summary: 한국 부동산 리서치를 공식 출처, 기준일, 지역, 거래유형, 한계, 비추천 고지 기준으로 점검하는 dock.
+summary: 한국 아파트, 토지, 상권을 실거래와 입지 자료로 비교 분석합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

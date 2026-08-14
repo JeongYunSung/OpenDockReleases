@@ -1,5 +1,5 @@
 opendock: 1
-summary: SQL 안전성, 파괴적 쿼리, timezone 명시, metric 정의, PII masking, dashboard 비용을 점검하는 데이터 품질 게이트.
+summary: SQL, 지표, 대시보드를 정확성, 비용, 개인정보 기준으로 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

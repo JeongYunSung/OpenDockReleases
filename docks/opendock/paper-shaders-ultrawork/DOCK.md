@@ -1,15 +1,31 @@
 # Paper Shaders Ultrawork
 
-## 무엇을 도와주나요
+효과 이름을 외우지 않아도 원하는 분위기, 이미지, 로고나 배경을 설명하면 적합한 shader 후보를 먼저 보여줍니다. 선택 후 실제 컴포넌트에 적용하고, 강한 검수를 요청하면 대비, 움직임, reduced motion과 렌더링 비용을 엄격하게 확인합니다.
 
-Paper Shaders 효과를 실제 catalog의 component와 prop 범위 안에서 선택하고 적용하도록 돕습니다.
+## 이런 때 사용하세요
 
-## 평소 사용
+- 로고 애니메이션이나 배경 효과를 빠르게 만들 때
+- 이미지에 물결, 열감, 왜곡 같은 필터를 적용할 때
+- shader가 글자 가독성과 성능을 해치지 않는지 확인할 때
 
-평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
+## AI에서 이렇게 사용하세요
 
-설치 후 안내와 기준 문서는 `.opendock/docks/paper-shaders-ultrawork/README.md`, `.opendock/docks/paper-shaders-ultrawork/HARNESS.md`, `.opendock/docks/paper-shaders-ultrawork/PAPER_SHADERS.md`, `.opendock/docks/paper-shaders-ultrawork/SHADER_PLAYBOOK.md`에서 확인합니다.
+AI에서 `$opendock-paper-shaders-ultrawork` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Paper Shaders Ultrawork 기준으로”라고 적어도 됩니다.
 
-## 출시 전 검수
+### 요청 예시
 
-사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.
+> 이 로고가 은은하게 살아 움직이는 shader 후보 3개를 보여주고 선택받은 뒤 적용해줘.
+
+> 적용한 shader를 ultrawork로 검수해서 모바일 성능, 텍스트 대비와 reduced motion을 고쳐줘.
+
+## 검수 강도
+
+- 평소 요청에서는 지금 만들거나 수정한 결과물에 필요한 기준만 적용해 빠르게 작업합니다.
+- 요청에 `검수` 또는 `ultrawork`를 넣으면 현재 결과물에 강한 하네스와 AI 검토를 적용하고, 실패 항목을 고친 뒤 다시 확인합니다.
+- 프로젝트 전체 검사는 사용자가 전체 범위를 명확히 요청한 경우에만 실행합니다. 관련 없는 기존 파일 때문에 작업을 늦추지 않습니다.
+
+## 사용 후 얻는 것
+
+- 요청 목적에 맞는 shader 후보와 선택 근거
+- 바로 실행 가능한 Paper Shaders 코드
+- 현재 효과의 가독성·접근성·성능 검수 결과

@@ -1,5 +1,5 @@
 opendock: 1
-summary: 화면 인터랙션의 입력 parity, 상태, 모션, cleanup, 반응형 위험을 현재 검사 대상 범위에서 검증하는 품질 게이트.
+summary: 모션과 인터랙션을 목적에 맞게 구현하고 조작성과 성능까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

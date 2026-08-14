@@ -1,5 +1,5 @@
 opendock: 1
-summary: 로컬 영상의 검사, 트림, 변환, 자막 삽입, 썸네일 생성, Lanczos 업스케일을 안전하게 수행하고 검증하는 dock.
+summary: 영상의 목적부터 대본, 장면, 자막, 음향과 최종 출력까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

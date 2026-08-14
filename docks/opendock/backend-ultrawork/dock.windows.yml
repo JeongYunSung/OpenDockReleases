@@ -1,5 +1,5 @@
 opendock: 1
-summary: API 계약, 검증, 인증, 마이그레이션, 로깅, 서비스 안전성을 점검하는 백엔드 품질 게이트.
+summary: API와 데이터 변경을 구현하고 정합성, 실패 처리, 보안까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

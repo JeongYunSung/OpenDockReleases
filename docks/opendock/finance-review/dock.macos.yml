@@ -1,5 +1,5 @@
 opendock: 1
-summary: 수입, 지출, 반복 결제, 목표와 예산 차이를 개인정보 없는 집계로 검토하는 교육용 budgeting dock.
+summary: 개인 지출과 구독을 정리하고 다음 달에 실천할 예산 조정안을 만듭니다.
 readme: DOCK.md
 logo: logo.png
 tags:

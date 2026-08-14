@@ -1,29 +1,35 @@
 # Task Master
 
-설치하면 Task Master AI의 `task-master`, `task-master-mcp`, `task-master-ai` 명령을 workspace-local로 사용할 수 있습니다. PRD와 요구사항을 실행 가능한 task로 나누고 순서를 관리할 때 사용합니다.
+긴 요구사항 문서를 사람이 일일이 쪼개지 않고 구현 순서와 의존 관계가 있는 작업 목록으로 바꿉니다. 큰 기능의 진행 상황과 다음 작업을 AI가 일관되게 이어가도록 돕습니다.
 
-## 설치 후 준비되는 것
+## 이런 때 사용하세요
 
-- Task Master AI CLI 명령
-- root `AGENTS.md`의 planning 도구 routing과 안전 경계
-- `.opendock/docks/task-master/README.md`와 task 작성 가이드
-- 선택적으로 실행 결과를 기록할 `TASK_MASTER_RUN.md`
+- PRD를 개발 작업으로 나눌 때
+- 여러 작업의 의존 관계와 우선순위를 관리할 때
+- AI가 다음에 할 일을 프로젝트 상태에서 이어가게 할 때
 
-## 사용 방법
+## 설치되는 도구
 
-```sh
-task-master --help
-task-master list
-task-master next
-opendock doctor
-```
+- Task Master AI의 CLI와 MCP 명령을 프로젝트 안에 준비합니다.
+- 사용할 수 있는 명령: `task-master`, `task-master-mcp`, `task-master-ai`
+- 도구는 현재 프로젝트에서 OpenDock이 추적하므로 다른 프로젝트의 전역 환경과 섞이지 않습니다.
 
-`init`, `parse-prd`, `models --setup`처럼 project 파일이나 provider 설정을 바꾸는 명령은 예상 변경을 확인하고 사용자 승인 후 실행합니다.
+## AI에서 이렇게 사용하세요
 
-## 검수 방식
+AI에서 `$opendock-task-master` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Task Master 기준으로”라고 적어도 됩니다.
 
-이 도구 Dock은 별도 정밀 검사 도구를 설치하지 않습니다. `opendock doctor`가 실제 `task-master --version` 실행과 설치 문서 존재 여부를 확인합니다.
+### 요청 예시
 
-## 알려진 한계
+> 이 PRD를 Task Master로 분석해서 구현 가능한 작업과 의존 관계로 나눠줘.
 
-Task Master가 만든 task는 자동 승인되지 않습니다. 범위, dependency, risk, acceptance criteria를 현재 project 구조와 대조한 뒤 확정합니다.
+> 현재 완료된 작업을 반영하고 다음에 진행할 수 있는 작업을 알려줘.
+
+## 사용 후 얻는 것
+
+- PRD에서 만들어진 실행 가능한 작업 목록
+- 의존 관계와 우선순위가 보이는 계획
+- 프로젝트 단위로 유지되는 진행 상태
+
+## 알아둘 점
+
+외부 AI 모델을 연결하는 기능은 별도 인증이 필요할 수 있습니다.

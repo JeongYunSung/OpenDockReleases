@@ -1,5 +1,5 @@
 opendock: 1
-summary: promptfoo CLI를 프로젝트 전용로 설치해 프롬프트, AI 도구, RAG 응답을 평가하는 도구 Dock.
+summary: 프롬프트를 여러 입력과 모델에서 반복 평가해 좋아졌는지 수치와 사례로 확인합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

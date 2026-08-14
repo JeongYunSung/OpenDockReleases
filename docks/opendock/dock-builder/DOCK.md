@@ -1,39 +1,31 @@
 # Dock Builder
 
-OpenDock Dock을 만들고 다듬을 때 필요한 제작 기준과 검사 도구를 설치합니다.
+Dock 아이디어를 manifest와 파일 묶음으로 포장하는 것에서 끝나지 않고, 사용자가 무엇을 얻고 AI에게 어떻게 요청하는지까지 완성합니다. 강한 검수를 요청하면 설치, 업데이트, doctor, 제거와 충돌 상황을 격리된 공간에서 확인합니다.
 
-Dock Builder의 원칙은 단순합니다. 평소에는 지금 바꾼 Dock만 빠르게 확인하고, 검수나 출시를 준비할 때는 설치부터 제거까지 실제 흐름을 꼼꼼하게 확인합니다. 작은 수정 때문에 저장소 전체 검사가 매번 실행되지 않으면서도, Registry에 올리기 전에는 필요한 증거를 빠뜨리지 않게 합니다.
+## 이런 때 사용하세요
 
-## 제공 기능
+- 새 Dock을 처음 만들 때
+- 기존 Dock을 최신 OpenDock 규격에 맞출 때
+- 다른 사람에게 배포하기 전에 실제 설치와 사용자 경험을 확인할 때
 
-- 최신 OpenDock manifest와 안전한 설치 경로를 확인하는 정적 checker
-- macOS와 Windows manifest가 같은 설치 계약을 유지하는지 확인하는 검사
-- 도구, 일반 작업공간, Ultrawork에 맞는 문서·검수 구조 안내
-- install, update, doctor, uninstall과 보안 검토를 위한 release 자료
-- Dock별 사용자 안내와 필요한 경우에만 쓰는 namespaced template
+## AI에서 이렇게 사용하세요
 
-## 사용 방식
+AI에서 `$opendock-dock-builder` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Dock Builder 기준으로”라고 적어도 됩니다.
 
-일반 제작과 수정에서는 대상 Dock 하나만 확인합니다.
+### 요청 예시
 
-```bash
-python3 .agents/skills/opendock-dock-builder/scripts/check_dock_package.py docks/opendock/<dock-name>
-```
+> 회의록을 정리하는 Dock을 만들어줘. 비개발자도 이해할 설명과 실제 요청 예시를 포함해줘.
 
-사용자가 `검수`, `ultrawork`, `release`를 명시한 경우에만 정밀 검사 도구를 실행하고, 임시 workspace에서 실제 설치·업데이트·제거 흐름을 확인합니다.
+> 이 Dock을 ultrawork로 검수해서 macOS와 Windows 설치, 업데이트, 제거, 보안 문제를 모두 고쳐줘.
 
-```bash
-node .opendock/harness/dock-builder/check.mjs --release docks/opendock/<dock-name>
-```
+## 검수 강도
 
-설치 후 자세한 안내는 `.opendock/docks/dock-builder/README.md`에서 확인할 수 있습니다.
+- 평소 요청에서는 지금 만들거나 수정한 결과물에 필요한 기준만 적용해 빠르게 작업합니다.
+- 요청에 `검수` 또는 `ultrawork`를 넣으면 현재 결과물에 강한 하네스와 AI 검토를 적용하고, 실패 항목을 고친 뒤 다시 확인합니다.
+- 프로젝트 전체 검사는 사용자가 전체 범위를 명확히 요청한 경우에만 실행합니다. 관련 없는 기존 파일 때문에 작업을 늦추지 않습니다.
 
-## 기본 정책
+## 사용 후 얻는 것
 
-- `DOCK.md`는 Registry에서 읽는 한국어 카탈로그 설명입니다.
-- root에는 간결한 `AGENTS.md`만 두며, 사용자 문서는 `.opendock/docks/<dock-name>/`에 설치합니다.
-- 도구 Dock은 custom harness를 덧붙이지 않고 실제 도구가 설치되고 실행되는지 확인합니다.
-- AI 기능과 준비된 작업 공간 Dock은 짧은 지침, 도메인 가이드와 선택적 템플릿만 제공합니다.
-- `*-ultrawork`와 `dock-builder`만 Dock별 HARNESS 문서와 `check.mjs`를 같은 이름으로 묶습니다.
-- custom checker는 의미 품질을 점수화하지 않고 지정 산출물의 존재, 범위, 형식과 안전 조건만 판정합니다.
-- 검증되지 않은 명령은 실제 사용자 프로젝트에서 실행하지 않습니다.
+- 최신 규격을 따르는 플랫폼별 manifest
+- 목적, 스킬명, 요청 예시가 분명한 한국어 카탈로그 설명
+- 실제 설치 흐름과 보안 검사를 통과한 Dock 패키지

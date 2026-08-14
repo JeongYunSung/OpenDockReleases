@@ -1,5 +1,5 @@
 opendock: 1
-summary: Playwright MCP CLI를 프로젝트 전용로 설치해 AI 도구 브라우저 자동화를 준비하는 도구 Dock.
+summary: AI가 실제 브라우저에서 화면을 확인하고 웹 기능을 테스트할 수 있게 합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,5 +1,5 @@
 opendock: 1
-summary: AI 도구 사용량, 모델, 작업 단위, 비용 추정을 프로젝트 전용으로 추적하는 기능 Dock.
+summary: AI 작업의 토큰과 비용을 기록하고 예산 안에서 더 효율적으로 일하도록 돕습니다.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,5 +1,5 @@
 opendock: 1
-summary: PR-Agent CLI를 프로젝트 전용로 설치하고 근거 중심 코드 리뷰 사용 경로를 제공하는 도구 Dock.
+summary: 변경된 코드를 자동으로 읽고 버그와 위험을 우선순위별로 리뷰합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

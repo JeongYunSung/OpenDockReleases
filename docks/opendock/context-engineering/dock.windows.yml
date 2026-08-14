@@ -1,5 +1,5 @@
 opendock: 1
-summary: code-review-graph와 codectx CLI를 프로젝트 전용로 설치해 필요한 코드 맥락을 찾는 도구 Dock.
+summary: 큰 코드베이스에서 AI에게 필요한 파일과 관계만 골라 정확한 작업 맥락을 만듭니다.
 readme: DOCK.md
 logo: logo.png
 tags:

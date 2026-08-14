@@ -1,5 +1,5 @@
 opendock: 1
-summary: 프로젝트의 AI 협업 맥락, 규칙, 작업 절차, 품질 기준, 보안과 onboarding을 .ai/ 범위에 정리합니다.
+summary: 새 프로젝트에 AI가 읽을 규칙과 작업 흐름을 빠르게 세팅합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

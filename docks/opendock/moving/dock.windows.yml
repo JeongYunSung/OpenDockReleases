@@ -1,5 +1,5 @@
 opendock: 1
-summary: 이사 일정, 견적, 서비스 이전, 물품과 치수, 예산 및 비상 계획을 근거와 함께 검증하는 품질 Dock.
+summary: 이사 날짜를 기준으로 계약, 업체, 주소 변경, 포장과 구매 일정을 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

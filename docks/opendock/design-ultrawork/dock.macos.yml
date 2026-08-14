@@ -1,5 +1,5 @@
 opendock: 1
-summary: DESIGN.md 기준과 강한 UI 체크에 맞춰 디자인 구현 품질을 점검하는 게이트.
+summary: 화면을 설계하고 색상, 레이아웃, 접근성, 상태 표현까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

@@ -1,15 +1,31 @@
 # Design Ultrawork
 
-## 무엇을 도와주나요
+예쁜 한 화면보다 실제 사용 흐름과 제품의 디자인 기준에 맞는 UI를 만듭니다. 레이아웃과 컬러 방향을 먼저 정하고, 강한 검수를 요청하면 현재 작업한 화면의 시각적 일관성, 접근성, 반응형과 모든 상태를 엄격하게 확인합니다.
 
-화면 구조, 색상 역할, component 상태, 접근성과 시각적 일관성을 출시 수준으로 점검합니다.
+## 이런 때 사용하세요
 
-## 평소 사용
+- 웹이나 앱 화면을 처음 설계하고 구현할 때
+- 기존 UI가 조잡하거나 색과 간격이 일관되지 않을 때
+- 모바일, 접근성, 로딩·오류 상태까지 점검할 때
 
-평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 빠르게 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
+## AI에서 이렇게 사용하세요
 
-설치 후 안내와 기준 문서는 `.opendock/docks/design-ultrawork/README.md`, `.opendock/docks/design-ultrawork/HARNESS.md`, `.opendock/docks/design-ultrawork/REFERENCE_RESEARCH.md`, `.opendock/docks/design-ultrawork/LAYOUT_PLAYBOOK.md`, `.opendock/docks/design-ultrawork/COLOR_PLAYBOOK.md`, `.opendock/docks/design-ultrawork/PATTERN_GUIDE.md`, `.opendock/docks/design-ultrawork/CREATE_UI_PLAYBOOK.md`에서 확인합니다.
+AI에서 `$opendock-design-ultrawork` 스킬을 선택한 뒤 자연어로 요청하세요. 스킬 선택 기능이 없는 AI에서는 요청에 “Design Ultrawork 기준으로”라고 적어도 됩니다.
 
-## 출시 전 검수
+### 요청 예시
 
-사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다. 실패 항목은 수정하고, 실행하지 못한 검증과 승인된 예외는 결과에 분리해 남깁니다.
+> B2B 대시보드 첫 화면을 정보 우선순위와 색상 역할부터 정한 뒤 구현해줘.
+
+> 이번에 만든 결제 화면을 ultrawork로 검수해서 간격, 대비, 모바일 overflow와 상태 누락을 모두 고쳐줘.
+
+## 검수 강도
+
+- 평소 요청에서는 지금 만들거나 수정한 결과물에 필요한 기준만 적용해 빠르게 작업합니다.
+- 요청에 `검수` 또는 `ultrawork`를 넣으면 현재 결과물에 강한 하네스와 AI 검토를 적용하고, 실패 항목을 고친 뒤 다시 확인합니다.
+- 프로젝트 전체 검사는 사용자가 전체 범위를 명확히 요청한 경우에만 실행합니다. 관련 없는 기존 파일 때문에 작업을 늦추지 않습니다.
+
+## 사용 후 얻는 것
+
+- 목적과 첫 시선이 분명한 화면 구조
+- 제품 기준에 맞는 색상, 글자, 간격과 컴포넌트
+- 현재 화면에 대한 시각·접근성·반응형 검수 결과

@@ -1,5 +1,5 @@
 opendock: 1
-summary: Markdown hygiene, link, heading, code fence, quick start, CLI drift, 다국어 sync를 점검하는 문서 품질 게이트.
+summary: README와 가이드가 실제 제품과 맞고 누구나 따라 할 수 있는지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

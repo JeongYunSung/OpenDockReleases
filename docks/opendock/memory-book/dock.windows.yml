@@ -1,5 +1,5 @@
 opendock: 1
-summary: 사진·메모·인터뷰를 출처, 동의, 위치 가림과 연결해 검증 가능한 기억책 서사로 정리하는 dock.
+summary: 사진과 짧은 메모를 날짜, 사람, 장소별 이야기로 정리합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

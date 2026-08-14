@@ -1,5 +1,5 @@
 opendock: 1
-summary: 자료 수집, 출처 비교, 주장/근거 분리, 인용 정리, 신뢰도 판단, 리서치 노트를 만드는 조사 작업 공간.
+summary: 여러 출처를 비교해 주장, 근거, 불확실성을 구분한 리서치 결과를 만듭니다.
 readme: DOCK.md
 logo: logo.png
 tags:

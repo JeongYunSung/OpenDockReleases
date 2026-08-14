@@ -1,5 +1,5 @@
 opendock: 1
-summary: Gradle, ktlint, detekt, DTO 검증, profile, transaction, readiness를 점검하는 Kotlin/Spring Boot 품질 게이트.
+summary: Kotlin과 Spring 기능을 구현하고 코루틴, 트랜잭션, Gradle 품질까지 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

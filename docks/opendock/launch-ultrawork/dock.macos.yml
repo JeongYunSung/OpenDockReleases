@@ -1,5 +1,5 @@
 opendock: 1
-summary: 서비스 오픈 직전 랜딩, 가격, 약관, SEO, 온보딩, 결제, 분석, 에러 상태를 점검하는 출시 품질 게이트.
+summary: 서비스 공개에 필요한 랜딩, 가격, 약관, SEO, 결제와 운영 상태를 강하게 검수합니다.
 readme: DOCK.md
 logo: logo.png
 tags:

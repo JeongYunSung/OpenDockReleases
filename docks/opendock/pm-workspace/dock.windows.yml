@@ -1,5 +1,5 @@
 opendock: 1
-summary: 문제 정의부터 요구사항, acceptance criteria, metric과 decision log까지 검증하는 PM 문서 작업 공간.
+summary: 아이디어와 요구사항을 PRD, 사용자 이야기, 우선순위와 실행 계획으로 바꿉니다.
 readme: DOCK.md
 logo: logo.png
 tags:

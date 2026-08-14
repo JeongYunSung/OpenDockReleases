@@ -1,5 +1,5 @@
 opendock: 1
-summary: oh-my-AI 도구(oma)를 프로젝트 전용로 설치하고 OMA 설정의 install, update, doctor를 제공하는 도구 Dock.
+summary: Codex와 Claude Code에서 쓸 agent, skill, workflow를 프로젝트 단위로 한 번에 준비합니다.
 readme: DOCK.md
 logo: logo.png
 tags:
