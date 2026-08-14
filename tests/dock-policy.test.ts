@@ -79,6 +79,40 @@ describe("Dock 사용 경험 정책", () => {
 			expect(catalog, `${name}: DOCK.md는 한국어 안내여야 합니다`).toMatch(
 				/[가-힣]/,
 			);
+			for (const heading of [
+				"## 이런 때 사용하세요",
+				"## AI에서 이렇게 사용하세요",
+				"### 요청 예시",
+				"## 사용 후 얻는 것",
+			]) {
+				expect(catalog, `${name}: ${heading}`).toContain(heading);
+			}
+			expect(catalog, `${name}: 정확한 AI 스킬명`).toContain(
+				`$opendock-${name}`,
+			);
+			expect(
+				catalog.match(/^> .+/gm)?.length ?? 0,
+				`${name}: 실제 요청 예시는 두 개 이상이어야 합니다`,
+			).toBeGreaterThanOrEqual(2);
+			expect(
+				catalog,
+				`${name}: 내부 설치 경로를 설명으로 대신할 수 없습니다`,
+			).not.toContain(".opendock/docks/");
+			expect(catalog).not.toContain("설치 후 안내와 기준 문서는");
+			expect(catalog).not.toContain("## 출시 전 검수");
+
+			if (toolDocks.has(name)) {
+				expect(catalog, `${name}: 설치되는 도구`).toContain("## 설치되는 도구");
+			} else if (qualityDocks.has(name)) {
+				expect(catalog, `${name}: 검수 강도`).toContain("## 검수 강도");
+				expect(catalog).toMatch(/검수/);
+				expect(catalog).toMatch(/ultrawork/i);
+				expect(catalog).toMatch(/하네스/);
+			} else {
+				expect(catalog, `${name}: 가벼운 결과 검토`).toContain(
+					"## 검토가 필요할 때",
+				);
+			}
 
 			const platformTargets = new Map<OpenDockPlatform, Set<string>>();
 			for (const platform of platforms) {
@@ -87,10 +121,23 @@ describe("Dock 사용 경험 정책", () => {
 					DockRef.parse(`opendock/${name}@1.0.0`),
 				);
 				validateManifestTaskCommands(manifest, platform);
+				expect(
+					manifest.summary,
+					`${name}/${platform}: 사용자 중심 요약`,
+				).toMatch(/[가-힣]/);
+				expect(manifest.summary.length).toBeGreaterThanOrEqual(25);
+				expect(manifest.summary).not.toMatch(
+					/\.opendock|quality gate|managed file|harness/i,
+				);
 				const targets = new Set(manifest.files.map(({ to }) => to));
 				platformTargets.set(platform, targets);
 
 				for (const tool of Object.values(manifest.tools ?? {})) {
+					for (const command of tool.commands ?? []) {
+						expect(catalog, `${name}: 설치 command ${command}`).toContain(
+							`\`${command}\``,
+						);
+					}
 					if (tool.manager === "npm") {
 						expect(
 							manifest.requires?.runtimes?.npm,
@@ -161,7 +208,7 @@ describe("Dock 사용 경험 정책", () => {
 					);
 					expect(agents).toMatch(/검수/);
 					expect(agents).toMatch(/ultrawork/i);
-					expect(agents).toMatch(/release/i);
+					expect(agents).toMatch(/전체 검수/);
 					expect(agents).toMatch(/평소|일반/);
 				}
 			}
@@ -280,7 +327,7 @@ describe("Dock 사용 경험 정책", () => {
 		}
 	});
 
-	test("Creative 정밀 검사는 명시한 작업만 보고 release에서만 전체를 검사한다", async () => {
+	test("Creative 정밀 검사는 명시한 작업만 보고 전체 검수에서만 범위를 넓힌다", async () => {
 		const project = mkdtempSync(join(tmpdir(), "opendock-creative-scope-"));
 		const outside = mkdtempSync(join(tmpdir(), "opendock-creative-outside-"));
 		const releaseProject = mkdtempSync(join(tmpdir(), "opendock-creative-release-"));
@@ -380,7 +427,7 @@ describe("Dock 사용 경험 정책", () => {
 		}
 	});
 
-	test("품질 workflow는 검수에서 target만 보고 명시적 release에서만 전체를 검사한다", () => {
+	test("품질 workflow는 검수에서 target만 보고 전체 검수에서만 범위를 넓힌다", () => {
 		const targetScopedWorkflows = [
 			"backend-ultrawork",
 			"data-ultrawork",
@@ -409,11 +456,11 @@ describe("Dock 사용 경험 정책", () => {
 			if (!workflow) continue;
 			const text = readFileSync(join(workflowRoot, workflow), "utf8");
 			expect(text, `${name}: 검수 target 안내`).toContain("--target");
-			expect(text, `${name}: release 명시 조건`).toMatch(/명시[^\n]*--release|--release[^\n]*명시/);
+			expect(text, `${name}: 전체 검수 명시 조건`).toMatch(/명시[^\n]*--release|--release[^\n]*명시/);
 		}
 	});
 
-	test("품질 하네스는 release와 target을 함께 지정한 범위 축소를 거부한다", async () => {
+	test("품질 하네스는 전체 모드와 target을 함께 지정한 범위 축소를 거부한다", async () => {
 		const scopedDocks = [
 			"backend-ultrawork",
 			"business-ultrawork",
