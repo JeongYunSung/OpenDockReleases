@@ -2,7 +2,7 @@
 
 ## 실행 조건
 
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 이 workflow를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 이 workflow를 실행합니다.
 - 평소 요청에서는 현재 작업의 target만 확인하고 프로젝트 전체 검사를 실행하지 않습니다.
 
 ## 검수 절차
@@ -11,7 +11,7 @@
 2. 이번 작업의 target과 문서 유형, 목적, 독자, 결정 맥락을 확인합니다.
 3. 모델이 도메인 가이드에 따라 PRD, user story, GTM, marketing copy, claim, release note의 의미 품질을 검토하고 근거가 있는 finding을 기록합니다.
 4. 각 target에 `node .opendock/harness/business-ultrawork/check.mjs --target <path>`를 실행합니다.
-5. 사용자가 release 전체 검사를 명시한 경우에만 `node .opendock/harness/business-ultrawork/check.mjs --release`를 추가 실행합니다.
+5. 사용자가 프로젝트 전체 검수를 명시한 경우에만 `node .opendock/harness/business-ultrawork/check.mjs --release`를 추가 실행합니다.
 6. 의미 findings와 harness failures를 수정하거나 human-approved exception의 담당자, 이유, 남은 위험을 기록합니다.
 7. 통과, 실패, 미실행 검증과 승인된 예외를 구분해 보고합니다.
 

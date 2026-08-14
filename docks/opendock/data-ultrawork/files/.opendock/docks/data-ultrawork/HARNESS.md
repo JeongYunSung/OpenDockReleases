@@ -2,7 +2,7 @@
 
 ## 실행 범위
 
-이 정밀 검수 문서는 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 적용합니다. 평소 요청에서는 현재 작업의 명시 target 또는 활성 run manifest target만 빠르게 확인하고 프로젝트 전체를 재귀 검사하지 않습니다.
+이 정밀 검수 문서는 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 적용합니다. 평소 요청에서는 현재 작업의 명시 target 또는 활성 run manifest target만 빠르게 확인하고 프로젝트 전체를 재귀 검사하지 않습니다.
 
 SQL 안전성, 파괴적 쿼리, timezone 명시, metric 정의, PII masking, dashboard 비용을 점검하는 데이터 품질 게이트입니다.
 

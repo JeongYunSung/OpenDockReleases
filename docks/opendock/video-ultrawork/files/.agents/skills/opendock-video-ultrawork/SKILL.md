@@ -1,6 +1,6 @@
 ---
 name: opendock-video-ultrawork
-description: 사용자가 검수, ultrawork, release 중 하나를 명시해 Video Ultrawork 정밀 검수를 요청한 경우에만 사용합니다.
+description: 사용자가 검수 또는 ultrawork를 명시해 Video Ultrawork 정밀 검수를 요청한 경우에만 사용합니다.
 ---
 
 # Video Ultrawork
@@ -12,7 +12,7 @@ description: 사용자가 검수, ultrawork, release 중 하나를 명시해 Vid
 - 현재 run의 source, output, report, codec, 크기, 길이, audio intent와 rights를 확인합니다.
 
 ## 정밀 검수
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 정밀 harness를 실행합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 - 기준 문서는 `.opendock/docks/video-ultrawork/README.md`, `.opendock/docks/video-ultrawork/HARNESS.md`, `.opendock/docks/video-ultrawork/VIDEO_PLAYBOOK.md`입니다.
 - 실패, 미검증 항목과 승인된 예외를 구분해 보고합니다.
 

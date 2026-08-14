@@ -2,7 +2,7 @@
 
 ## 실행 범위
 
-이 정밀 검수 문서는 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 적용합니다. 평소 요청에서는 현재 작업의 명시 target 또는 활성 run manifest target만 빠르게 확인하고 프로젝트 전체를 재귀 검사하지 않습니다.
+이 정밀 검수 문서는 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 적용합니다. 평소 요청에서는 현재 작업의 명시 target 또는 활성 run manifest target만 빠르게 확인하고 프로젝트 전체를 재귀 검사하지 않습니다.
 
 이 gate는 `.opendock/runs/kitchen/`의 현재 active run manifest와 그 manifest가 명시한 `kitchen/` target file만 검사합니다.
 

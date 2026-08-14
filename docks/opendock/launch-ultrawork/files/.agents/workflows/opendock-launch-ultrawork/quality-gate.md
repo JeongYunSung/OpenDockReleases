@@ -1,12 +1,12 @@
 # Launch Ultrawork Quality Gate
 
 ## 실행 조건
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 이 workflow를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 이 workflow를 실행합니다.
 - 평소 요청에서는 이 workflow를 실행하지 않고 현재 작업의 target만 빠르게 확인합니다.
 
 ## 검수 절차
 1. launch guide와 current run 문서를 읽고 가치 제안, CTA, 가격, onboarding, 핵심 흐름, SEO·분석과 blocker를 검토합니다.
-2. 검수와 ultrawork에서는 current run 문서에 `node .opendock/harness/launch-ultrawork/check.mjs --target <run-document>`를 실행합니다. 사용자가 release 전체 검사를 명시한 경우에만 `--release`를 사용합니다.
+2. 검수와 ultrawork에서는 current run 문서에 `node .opendock/harness/launch-ultrawork/check.mjs --target <run-document>`를 실행합니다. 사용자가 프로젝트 전체 검수를 명시한 경우에만 `--release`를 사용합니다.
 3. 승인된 예외만 기록하고 통과, 실패, 미검증 항목과 남은 위험을 구분해 보고합니다.
 
 ## 안전 경계

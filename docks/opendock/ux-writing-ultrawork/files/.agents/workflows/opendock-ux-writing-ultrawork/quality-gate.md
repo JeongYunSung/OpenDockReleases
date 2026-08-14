@@ -1,7 +1,7 @@
 # UX Writing Ultrawork Quality Gate
 
 ## 실행 조건
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 이 workflow를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 이 workflow를 실행합니다.
 - 평소 요청에서는 이 workflow를 실행하지 않고 현재 작업의 target만 빠르게 확인합니다.
 
 ## 검수 절차

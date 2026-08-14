@@ -2,7 +2,7 @@
 
 ## 실행 범위
 
-이 정밀 검수 문서는 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 적용합니다. 평소 요청에서는 이번에 바꾼 파일만 빠르게 확인하고 프로젝트 전체를 훑지 않습니다.
+이 정밀 검수 문서는 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 적용합니다. 평소 요청에서는 이번에 바꾼 파일만 빠르게 확인하고 프로젝트 전체를 훑지 않습니다.
 
 실행:
 
@@ -10,7 +10,7 @@
 node .opendock/harness/creative-gen-ultrawork/check.mjs --manifest .opendock/runs/creative-gen/<작업-id>/manifest.md
 ```
 
-출시 전 전체 확인에서만 `node .opendock/harness/creative-gen-ultrawork/check.mjs --release`를 사용합니다.
+프로젝트 전체 검수를 명시한 경우에만 `node .opendock/harness/creative-gen-ultrawork/check.mjs --release`를 사용합니다.
 
 ## 검사 항목
 

@@ -1,6 +1,6 @@
 ---
 name: opendock-business-ultrawork
-description: 사용자가 검수, ultrawork, release 중 하나를 명시해 PM, founder, marketing 산출물의 의미 품질과 객관적 안전 게이트를 함께 검토할 때 사용합니다.
+description: 사용자가 검수 또는 ultrawork를 명시해 PM, founder, marketing 산출물의 의미 품질과 객관적 안전 게이트를 함께 검토할 때 사용합니다.
 ---
 
 # Business Ultrawork
@@ -9,7 +9,7 @@ description: 사용자가 검수, ultrawork, release 중 하나를 명시해 PM,
 
 - 평소 요청에서는 이번 작업의 명시 target만 확인합니다.
 - 명시 target이 없으면 최신 활성 run manifest의 `Target Files`만 확인합니다.
-- 프로젝트 전체 검사는 사용자가 **검수**, **ultrawork**, **release**를 명시한 경우에만 실행합니다.
+- **검수** 또는 **ultrawork** 요청에서는 현재 결과물만 정밀하게 확인합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 
 ## 검토 절차
 

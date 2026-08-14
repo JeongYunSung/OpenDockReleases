@@ -7,7 +7,7 @@
 - 이번 Kotlin·Spring 변경의 validation, transaction, profile, readiness와 build 준비를 확인합니다.
 
 ## 정밀 검수 트리거
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 정밀 harness를 실행합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 - 검수 기준은 `.opendock/docks/kotlin-spring-ultrawork/README.md`, `.opendock/docks/kotlin-spring-ultrawork/HARNESS.md`에서 읽습니다.
 - 실패는 수정하고, 미실행 검증과 human-approved exception은 최종 결과에 구분해 기록합니다.
 

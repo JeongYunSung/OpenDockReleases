@@ -28,7 +28,7 @@ Harness는 키워드 개수, 키워드 간 거리·밀도, 문서 점수로 품�
 node .opendock/harness/business-ultrawork/check.mjs --target path/to/document.md
 ```
 
-사용자가 release 전체 검사를 명시한 경우에만 프로젝트 범위를 검사합니다.
+사용자가 프로젝트 전체 검수를 명시한 경우에만 프로젝트 범위를 검사합니다.
 
 ```bash
 node .opendock/harness/business-ultrawork/check.mjs --release

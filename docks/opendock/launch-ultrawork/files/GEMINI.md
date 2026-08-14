@@ -7,7 +7,7 @@
 - 이번 출시 산출물의 가치 제안, CTA, 신뢰 근거, 핵심 흐름, blocker와 rollback을 확인합니다.
 
 ## 정밀 검수
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 정밀 harness를 실행합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 - 기준 문서는 `.opendock/docks/launch-ultrawork/README.md`, `.opendock/docks/launch-ultrawork/HARNESS.md`, `.opendock/docks/launch-ultrawork/LAUNCH.md`입니다.
 - 실패, 미검증 항목과 승인된 예외를 구분해 보고합니다.
 

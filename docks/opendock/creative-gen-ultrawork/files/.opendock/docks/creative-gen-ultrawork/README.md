@@ -4,7 +4,7 @@
 
 평소 요청에서는 이번 작업에서 만들거나 수정한 파일만 확인합니다. 검사할 파일이나 현재 작업 기록이 지정되어 있으면 그 범위만 보고, 관련 없는 프로젝트 전체는 훑지 않습니다.
 
-사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 검사 도구와 전체 품질 게이트를 실행합니다.
+사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 정밀 검사 도구를 실행합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 
 이 dock은 반복 가능한 prompt-first 생성 작업을 위한 workspace를 준비합니다.
 
@@ -51,6 +51,6 @@ brief -> prompt draft -> prompt review -> final prompt -> generate -> record -> 
 node .opendock/harness/creative-gen-ultrawork/check.mjs --manifest .opendock/runs/creative-gen/<작업-id>/manifest.md
 ```
 
-`release` 검수에서만 `--release`를 사용해 모든 생성 작업을 확인합니다.
+프로젝트 **전체 검수**를 명시한 경우에만 `--release`를 사용해 모든 생성 작업을 확인합니다.
 
 양식 원본은 OpenDock이 관리합니다. 작업별로 복사한 기록은 생성 작업에 맞게 자유롭게 수정해도 됩니다.

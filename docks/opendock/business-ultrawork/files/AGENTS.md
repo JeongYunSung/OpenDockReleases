@@ -3,7 +3,7 @@
 ## 실행 범위
 - 평소 요청에서는 이번 작업에서 만들거나 수정한 target만 확인합니다.
 - 명시 target이 없으면 활성 run manifest의 `Target Files`만 확인합니다.
-- 프로젝트 전체 검사는 사용자가 **검수**, **ultrawork**, **release**를 명시한 경우에만 실행합니다.
+- **검수** 또는 **ultrawork** 요청에서는 현재 결과물만 정밀하게 확인합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 
 ## 검토 책임
 - 자동 harness는 target 존재 여부, 안전한 상대 경로, symlink, 파일 크기, 명백한 secret·prompt injection·destructive command 패턴만 검사합니다.

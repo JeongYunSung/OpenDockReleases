@@ -1,6 +1,6 @@
 ---
 name: opendock-kitchen-ultrawork
-description: 사용자가 검수, ultrawork, release 중 하나를 명시해 Kitchen Ultrawork 정밀 검수를 요청한 경우에만 사용합니다.
+description: 사용자가 검수 또는 ultrawork를 명시해 Kitchen Ultrawork 정밀 검수를 요청한 경우에만 사용합니다.
 ---
 
 # Kitchen Ultrawork
@@ -12,7 +12,7 @@ description: 사용자가 검수, ultrawork, release 중 하나를 명시해 Kit
 - 현재 요청의 재료, 분량, 대체재, leftovers, 알레르기와 식품 안전 근거를 확인합니다.
 
 ## 정밀 검수
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 정밀 harness와 전체 품질 게이트를 실행합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 결과물에 정밀 harness를 실행합니다. 프로젝트 전체는 **전체 검수**를 명시한 경우에만 확인합니다.
 - checker는 target 경로와 파일 구조, 의료·알레르기·식품 안전처럼 객관적인 위험만 판정합니다. 맛, 대체재, 장보기 구성과 표현 품질은 `KITCHEN_PLAYBOOK.md`를 기준으로 직접 검토합니다.
 - 기준 문서는 `.opendock/docks/kitchen-ultrawork/README.md`, `.opendock/docks/kitchen-ultrawork/HARNESS.md`, `.opendock/docks/kitchen-ultrawork/KITCHEN_PLAYBOOK.md`입니다.
 - 실패, 미검증 항목과 승인된 예외를 구분해 보고합니다.

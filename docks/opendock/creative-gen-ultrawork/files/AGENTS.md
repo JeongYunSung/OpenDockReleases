@@ -6,8 +6,8 @@
 - 생성 전 프롬프트를 검토하고 결과 경로, 사용 도구, 날짜, 권리, 검토 기록을 남깁니다.
 
 ## 정밀 검수 트리거
-- 사용자가 **검수**, **ultrawork**, **release** 중 하나를 명시한 경우에만 현재 작업의 `manifest.md` 경로를 지정해 정밀 검사합니다.
-- `release` 검수에서만 `--release`로 모든 생성 작업을 확인합니다.
+- 사용자가 **검수** 또는 **ultrawork**를 명시한 경우에만 현재 작업의 `manifest.md` 경로를 지정해 정밀 검사합니다.
+- 프로젝트 **전체 검수**를 명시한 경우에만 `--release`로 모든 생성 작업을 확인합니다.
 - 검수 기준은 `.opendock/docks/creative-gen-ultrawork/README.md`, `.opendock/docks/creative-gen-ultrawork/HARNESS.md`에서 읽습니다.
 - 실패는 수정하고, 실행하지 못한 검증과 사용자가 승인한 예외는 최종 결과에 구분해 기록합니다.
 
