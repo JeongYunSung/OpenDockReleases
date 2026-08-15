@@ -64,7 +64,7 @@ docks/
       files/
 ```
 
-현재 카탈로그는 Tool 9개, 일반 작업공간 33개, Ultrawork 18개와 Dock Builder 1개로 구성됩니다. 실제 목록은 `docks/opendock/`가 기준이며, 새 Dock을 추가할 때 문서의 수동 목록을 갱신할 필요가 없습니다.
+현재 카탈로그는 Tool 9개, 일반 작업공간 34개, Ultrawork 18개와 Dock Builder 1개로 구성됩니다. 실제 목록은 `docks/opendock/`가 기준이며, 새 Dock을 추가할 때 문서의 수동 목록을 갱신할 필요가 없습니다.
 
 ## 바로 쓰는 작업공간 dock
 
@@ -84,6 +84,7 @@ docks/
 | `opendock/error-investigator` | 오류 재현, 가설, 검증, 최소 수정과 재발 방지를 추적합니다. |
 | `opendock/readme-doctor` | 구현과 공식 근거에 맞춰 README의 빠른 시작, 예제와 누락 내용을 진단합니다. |
 | `opendock/ai-project-starter` | AI 협업용 context, 규칙, workflow, 의사결정과 보안 구조를 `.ai/`에 준비합니다. |
+| `opendock/product-designer` | 모호한 아이디어를 딥인터뷰로 좁혀 설계 방향, 프로토타입, 검증과 개발 handoff까지 이어갑니다. |
 
 ### 여행과 생활
 

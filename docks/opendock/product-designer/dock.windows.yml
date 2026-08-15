@@ -1,0 +1,41 @@
+opendock: 1
+summary: 모호한 제품 아이디어를 질문과 근거로 좁혀 설계, 프로토타입, 검증과 개발 전달까지 이어갑니다.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - product-design
+  - deep-interview
+  - design-workflow
+  - prototyping
+  - handoff
+  - session
+files:
+  - from: files/.opendock/docks/product-designer/README.md
+    to: .opendock/docks/product-designer/README.md
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/CLAUDE.md
+    to: CLAUDE.md
+  - from: files/.agents/skills/opendock-product-designer/SKILL.md
+    to: .agents/skills/opendock-product-designer/SKILL.md
+  - from: files/.opendock/docks/product-designer/PRODUCT_DESIGN_WORKFLOW.md
+    to: .opendock/docks/product-designer/PRODUCT_DESIGN_WORKFLOW.md
+  - from: files/.opendock/docks/product-designer/SESSION_PROTOCOL.md
+    to: .opendock/docks/product-designer/SESSION_PROTOCOL.md
+  - from: files/.opendock/templates/product-designer/DESIGN_SESSION.md
+    to: .opendock/templates/product-designer/DESIGN_SESSION.md
+doctor:
+  - id: product-designer-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-designer/README.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-claude
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath CLAUDE.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-product-designer/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-workflow
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-designer/PRODUCT_DESIGN_WORKFLOW.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-session-protocol
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-designer/SESSION_PROTOCOL.md) { exit 0 } else { exit 1 }"
+  - id: product-designer-session-template
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/templates/product-designer/DESIGN_SESSION.md) { exit 0 } else { exit 1 }"

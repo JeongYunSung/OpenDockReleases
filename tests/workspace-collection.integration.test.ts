@@ -39,6 +39,7 @@ const collection = [
 	"error-investigator",
 	"readme-doctor",
 	"ai-project-starter",
+	"product-designer",
 	"trip-planner",
 	"travel-research",
 	"group-trip",
@@ -66,7 +67,7 @@ afterEach(() => {
 });
 
 describe("OpenDock workspace collection", () => {
-	test("21개 작업공간 Dock은 전용 하네스 없이 가이드와 스킬만 제공한다", () => {
+	test("22개 작업공간 Dock은 전용 하네스 없이 가이드와 스킬만 제공한다", () => {
 		for (const name of collection) {
 			for (const platform of platforms) {
 				const manifest = boundManifest(name, platform, testVersion);
@@ -80,7 +81,7 @@ describe("OpenDock workspace collection", () => {
 		}
 	});
 
-	test("42개 manifest가 최신 schema와 command policy를 통과한다", () => {
+	test("44개 manifest가 최신 schema와 command policy를 통과한다", () => {
 		const isolatedDestinations = new Map<string, string>();
 		const logoPayloads = new Set<string>();
 		const sharedManagedFiles = new Set(["AGENTS.md"]);
@@ -192,7 +193,7 @@ describe("OpenDock workspace collection", () => {
 		}
 	});
 
-	test("21개 복합 설치, 중간 제거, 사용자 파일 보존, 전체 제거가 동작한다", async () => {
+	test("22개 복합 설치, 중간 제거, 사용자 파일 보존, 전체 제거가 동작한다", async () => {
 		const project = tempDir("collection-mixed-");
 		write(project, "KEEP.md", "root user file\n");
 
@@ -299,6 +300,50 @@ describe("OpenDock workspace collection", () => {
 			}
 		}
 	}, 30_000);
+
+	test("Product Designer 업데이트와 제거는 사용자 세션을 보존한다", async () => {
+		for (const platform of platforms) {
+			const project = tempDir(`product-designer-${platform}-session-`);
+			const sessionPath = join(
+				project,
+				".opendock/runs/product-designer/acceptance-session/SESSION.md",
+			);
+			const session = [
+				"---",
+				"schema: opendock/product-designer-session/v1",
+				"session_id: acceptance-session",
+				"status: paused",
+				"current_stage: SPECIFY",
+				"current_gate: G3",
+				"gate_state: waiting_input",
+				"persona: opendock.product-designer@1",
+				"---",
+				"# Current Checkpoint",
+				"- Next action: permission 상태를 확정한다.",
+				"",
+			].join("\n");
+
+			await install("product-designer", platform, project, "1.0.0");
+			mkdirSync(dirname(sessionPath), { recursive: true });
+			writeFileSync(sessionPath, session);
+
+			await install("product-designer", platform, project, "1.0.1", {
+				phase: "update",
+			});
+			expect(readFileSync(sessionPath, "utf8")).toBe(session);
+
+			uninstall("product-designer", project);
+			expect(readFileSync(sessionPath, "utf8")).toBe(session);
+			expect(
+				existsSync(
+					join(
+						project,
+						".opendock/templates/product-designer/DESIGN_SESSION.md",
+					),
+				),
+			).toBe(false);
+		}
+	});
 
 	test("합성 버전 업데이트가 파일 추가, 변경, 삭제와 사용자 수정 충돌을 처리한다", async () => {
 		const v1Root = tempDir("ux-v1-");
