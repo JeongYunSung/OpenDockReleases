@@ -28,6 +28,12 @@ Product Designer는 작업의 크기가 아니라 이번 요청에서 실제로 
 
 어떤 profile에서도 현재 결과가 주장하는 내용, 안전과 적용되는 접근성 조건은 확인합니다. 다만 요청하지 않은 문서, 시안, 구현 또는 별도 handoff 파일은 만들지 않습니다.
 
+## 복잡한 작업의 분업
+
+작은 Quick 작업은 한 Product Designer가 직접 처리합니다. Guided나 Deep 작업에서 근거 조사, 흐름과 상태, 접근성과 문구, prototype 검증처럼 서로 독립적인 검토가 실제로 둘 이상일 때만 AI가 필요한 역할을 선택해 병렬로 확인할 수 있습니다. Guided는 최대 2개, Deep은 최대 3개의 child 작업으로 제한하며 모든 역할을 자동으로 만들지 않습니다.
+
+각 child는 읽을 범위와 담당 결과가 분리되고 원본 프로젝트나 main session을 직접 수정하지 않습니다. 최종 Product Designer가 결과의 충돌, 가정과 근거를 다시 확인하고 기존 gate를 통과한 하나의 결과만 전달합니다. 여러 child가 동작하더라도 사용자에게 질문을 동시에 쏟지 않고 가장 영향이 큰 질문 하나만 드립니다. AI host가 subagent를 지원하지 않으면 같은 검토를 순서대로 수행하며 결과 기준은 달라지지 않습니다.
+
 ## 세션 이어가기
 
 긴 작업은 .opendock/runs/product-designer/<session-id>/SESSION.md에 checkpoint를 남길 수 있습니다. AI가 승인된 독립 작업공간에서 template을 바탕으로 생성·갱신하며, 사용자가 직접 파일 형식을 관리할 필요는 없습니다. 사용자에게는 Goal, 현재 결정, 미해결 선택과 Next action만 간결하게 보여줍니다. 실제 session은 사용자가 소유합니다.

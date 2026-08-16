@@ -1264,6 +1264,53 @@ describe("Product Designer workflow core", () => {
     );
   });
 
+  test("복잡도 기반 subagent 분업은 작은 작업을 보호하고 root가 최종 gate를 소유한다", () => {
+    const skill = read(skillPath);
+    const workflow = read(workflowPath);
+    const protocol = read(sessionProtocolPath);
+    const readme = read(readmePath);
+
+    expectAll(
+      `${skill}\n${workflow}`,
+      [
+        /Quick.*?(subagent).*?(자동 생성하지|사용하지)/is,
+        /Guided.*?(기본).*?(root Product Designer|단독).*?(독립).*?(workstream).*?(최대 2)/is,
+        /Deep.*?(다수 사용자 역할|복수 역할).*?(surface|platform).*?(안전|권한).*?(최대 3)/is,
+        /(같은 unresolved decision|하나의 unresolved decision).*?(병렬|subagent).*?(만들지|사용하지)/is,
+        /Research.*?Flow & State.*?Accessibility & Content.*?Prototype & Validation/is,
+        /(필요한 것만|필요한 역할만).*?선택.*?(모든 역할).*?(만들지|생성하지)/is,
+        /(지원하지 않|지원하지 않거나).*?(순차).*?(gate|delivery claim).*?(낮추지|달라지지)/is,
+      ],
+      "complexity-based subagent selection",
+    );
+
+    expectAll(
+      protocol,
+      [
+        /(ownership charter).*?(role).*?(bounded question).*?(input checkpoint revision).*?(stable ID).*?(read scope).*?(write target).*?(금지 path).*?(capability approval).*?(완료 조건)/is,
+        /(response-only child).*?(read-only finding).*?(SESSION|gate evidence).*?(간주하지)/is,
+        /(어떤 child도).*?(parent SESSION).*?(원본 project source).*?(직접 수정하지)/is,
+        /(Research evidence).*?(Flow & State).*?(Accessibility & Content).*?(Prototype & Validation).*?(root 최종 검토)/is,
+        /(child의 `pass`|child.*?pass).*?(gate 통과|human approval).*?(아닙)/is,
+        /(root Product Designer).*?(충돌).*?(traceability).*?(gate).*?(최종 parent write).*?(사용자-facing 응답)/is,
+        /(사용자).*?(설계 질문|질문).*?(하나만)/is,
+        /(file read\/write|file read|write).*?(network).*?(외부 provider).*?(capability approval)/is,
+      ],
+      "subagent ownership and synthesis",
+    );
+
+    expectAll(
+      readme,
+      [
+        /(작은 Quick).*?(직접 처리)/is,
+        /(Guided).*?(최대 2).*?(Deep).*?(최대 3)/is,
+        /(원본 프로젝트|main session).*?(직접 수정하지)/is,
+        /(질문).*?(동시에).*?(않|하나)/is,
+      ],
+      "subagent user experience",
+    );
+  });
+
   test("작업 깊이는 canonical mode와 명시적 전환 근거를 보존한다", () => {
     const protocol = read(sessionProtocolPath);
     const template = read(sessionTemplatePath);

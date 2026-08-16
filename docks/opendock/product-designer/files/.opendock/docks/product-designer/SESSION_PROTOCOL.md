@@ -203,6 +203,21 @@ single_use에서는 완성된 SESSION payload와 approved→consumed event를 �
 
 한 세션에는 한 writer만 둡니다. 병렬 작업은 별도 child session으로 나누고 parent session id, 고유 branch id, fork checkpoint revision, fork last event id와 branch purpose를 front matter에 기록합니다. main session의 merge_status는 not_applicable, 새 child는 open으로 시작합니다. 해결되지 않은 merge conflict가 있으면 child를 waiting_approval, 성공적으로 반영하면 merged, 폐기 승인을 받으면 abandoned로 전이합니다. merged와 abandoned child는 읽기 전용입니다.
 
+병렬화 여부와 최종 책임은 parent의 root Product Designer가 소유합니다. Quick은 child를 자동 생성하지 않습니다. Guided는 독립 workstream이 둘 이상일 때 최대 2개, Deep은 복수 역할·surface·platform·안전·권한·근거 조사·prototype validation 중 분리 가능한 독립 축이 둘 이상일 때 최대 3개만 엽니다. 같은 unresolved decision에 의존하거나 순차 dependency가 있거나 merge 비용이 직접 처리보다 크면 child를 만들지 않습니다. mode나 숫자만으로 child를 생성하지 않습니다.
+
+child를 열기 전 parent는 ownership charter를 확정합니다. 새 template field를 추가하지 않고 front matter `branch_purpose`, `# Project Context and Isolation Boundary`, `# Design Contract Scope Map`과 `# Current Checkpoint`에 다음을 투영합니다.
+
+1. role과 bounded question, 명시적 제외 범위
+2. parent input checkpoint revision, last event id, artifact digest와 담당 stable ID
+3. 허용 read scope와 유일한 child SESSION 또는 artifact write target
+4. 원본 source, parent SESSION과 다른 child 경로를 포함한 금지 path·행동
+5. child에 자동 이전되지 않는 capability approval와 새 범위의 승인 조건
+6. 기대 output, evidence 형식과 완료 조건
+
+역할은 현재 범위에 필요한 `Research`, `Flow & State`, `Accessibility & Content`, `Prototype & Validation`만 선택합니다. 모든 역할을 관성적으로 생성하지 않습니다. Research는 fact·inference·assumption을 분리하고, Flow & State는 action·state·permission·recovery·data contract를, Accessibility & Content는 keyboard·focus·label·non-color cue·responsive content를, Prototype & Validation은 frozen specification의 coverage와 Acceptance를 담당합니다. 한 child가 다른 child의 미완료 결과를 입력으로 요구하면 병렬 child로 시작하지 않고 dependency가 충족된 뒤 별도 작업으로 엽니다.
+
+response-only child 분석은 parent나 source를 쓰지 않는 read-only finding입니다. canonical SESSION, 승인 또는 gate evidence로 간주하지 않고 root가 input revision과 현재 근거를 검증한 뒤 필요한 stable subject만 parent event로 발행합니다. persistent child만 위 lineage field를 가진 독립 SESSION을 사용하며 자기 경로의 one writer입니다. 어떤 child도 parent SESSION, 원본 project source 또는 다른 child artifact를 직접 수정하지 않습니다.
+
 merge는 parent의 fork revision, 현재 parent와 child head를 비교하는 명시적 3-way merge입니다. 서로 다른 새 id가 충돌하면 한쪽을 rename하고, 같은 기존 subject를 양쪽이 바꿨으면 자동 선택하지 않고 waiting_approval로 둡니다. revision에 묶인 design approval과 capability approval은 다른 branch로 자동 이전하지 않습니다.
 
 승인된 merge는 다음 한 번의 parent checkpoint revision에서만 반영합니다.
@@ -213,6 +228,10 @@ merge는 parent의 fork revision, 현재 parent와 child head를 비교하는 �
 4. 새 parent event head들로 snapshot projection을 다시 만들고, parent last_passed_gate와 stale 상태를 재계산합니다.
 5. 같은 revision의 마지막 event로 merge Change Log audit row를 추가해 fork revision, merge 전 parent head, child head, 적용·제외·rename·conflict 결정을 기록하고 parent front matter의 last_event_id를 이 Change event와 맞춥니다.
 6. parent checkpoint 저장이 성공한 뒤에만 child merge_status를 merged로 바꾸고 읽기 전용으로 둡니다. parent 저장 실패 시 child는 open 또는 waiting_approval을 유지합니다.
+
+결과는 Research evidence 확인 → 같은 frozen Frame·Direction의 Flow & State와 Accessibility & Content 교차 대조 → 병합된 specification revision의 Prototype & Validation → root 최종 검토 순서로 취합합니다. child의 `pass`, 추천, prototype이나 validation은 gate 통과 또는 human approval이 아닙니다. root Product Designer가 충돌, scope, assumption, stable ID·Acceptance traceability, stale projection과 gate를 다시 계산하고 최종 parent write와 하나의 사용자-facing 응답을 소유합니다. child 수와 무관하게 사용자에게는 가장 영향이 큰 설계 질문 하나만 묻습니다.
+
+host가 native subagent를 제공하지 않으면 같은 역할 검토를 root가 순차 실행합니다. subagent 생성이 기존 승인 범위를 넘어선 file read/write, network, 외부 provider 또는 데이터 전송을 요구하면 아래 변경과 승인 경계에 따라 별도 capability approval을 받으며, 지원 부재만으로 delivery claim이나 gate 기준을 낮추지 않습니다.
 
 ## 변경과 승인 경계
 

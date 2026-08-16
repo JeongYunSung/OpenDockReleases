@@ -83,6 +83,29 @@ decision turn은 인터뷰 질문과 일반 design approval을 합친 사용자 
 
 Quick에서 count가 2인 상태로 다음 미해결 design decision을 물어야 하면 그 질문을 보내기 전에 Guided로 자동 승격하고 count를 0으로 reset한 뒤 이유를 알립니다. 따라서 세 번째 답은 Quick의 3이 아니라 Guided의 첫 decision turn으로 기록됩니다. Guided count는 피로와 진행 상황을 보여주는 관측값일 뿐 gate가 아닙니다. count가 7에 도달해도 stage, gate_state 또는 completion을 강제로 바꾸지 않습니다. 실제 design decision이 남으면 해결된 결정, 남은 blocker, 가정 가능한 항목과 다음 질문의 가치를 먼저 요약한 뒤 가장 영향이 큰 실제 질문 하나만 이어갑니다. 별도 진행 방식 선택을 요구하거나 count 때문에 `waiting_input`을 만들지 않습니다. 사용자가 피로, 중단이나 범위 축소를 표현한 경우에만 현재 stage를 유지한 paused checkpoint를 남깁니다. pause, resume와 provider 전환은 mode나 count를 바꾸지 않습니다. capability approval은 예상 횟수에 포함되지 않으므로 저장·명령·외부 연결이 필요하면 실제 총 왕복이 늘 수 있음을 함께 알립니다.
 
+### 조건부 subagent 분업
+
+subagent는 host가 이미 제공하는 안전한 native adapter로 독립된 검토 축을 병렬화할 때만 사용합니다. 외부 도구나 별도 provider를 Product Designer의 전제 조건으로 만들지 않으며, subagent 수를 설계 품질이나 진행률로 간주하지 않습니다.
+
+- **Quick**: 자동 subagent를 사용하지 않습니다. 사용자가 multi-agent 검토를 명시해도 작업이 실제로 독립 축을 요구하는지 먼저 판단하고, 필요하면 Guided 이상으로 mode를 올린 이유를 알린 뒤 적용합니다.
+- **Guided**: 기본은 root Product Designer 단독입니다. 같은 미해결 decision이나 아직 고정되지 않은 Frame에 의존하지 않고 각각 독립적으로 검토할 workstream이 둘 이상이며 병렬화가 사용자 대기와 재작업을 줄일 때만 최대 2개 child를 사용합니다.
+- **Deep**: 다수 사용자 역할, 여러 surface 또는 platform, 안전·권한·민감 데이터 위험, 실질적인 근거 조사, prototype과 validation처럼 서로 분리 가능한 workstream이 둘 이상일 때만 최대 3개 child를 사용합니다. Deep이라는 이유만으로 생성하지 않습니다.
+
+병렬화 전에 root는 bounded goal, delivery profile, 승인된 project root, 현재 input revision과 공통 blocker를 확인합니다. 하나의 unresolved decision이 모든 workstream을 막거나, 앞 작업의 결과가 있어야 다음 작업을 시작할 수 있거나, 취합 비용이 직접 처리보다 크면 subagent를 만들지 않고 가장 영향이 큰 결정 하나를 먼저 해결합니다.
+
+역할은 아래 후보에서 현재 범위에 필요한 것만 선택합니다. 역할 이름은 책임 경계이며 고정 인원제가 아닙니다.
+
+- **Research**: 사용자·제품·기존 DESIGN 근거를 수집하고 fact, inference와 assumption을 구분합니다.
+- **Flow & State**: action, state transition, permission, recovery와 flow-critical data contract를 검토합니다.
+- **Accessibility & Content**: keyboard·focus·label·non-color cue, responsive content와 상태 문구를 교차 검토합니다.
+- **Prototype & Validation**: frozen specification revision에 대한 prototype coverage, Acceptance 연결과 미검증 claim을 확인합니다.
+
+각 child의 ownership charter에는 role, bounded question과 제외 범위, input revision·digest와 stable ID, 허용 read scope, 유일한 child SESSION 또는 artifact write target, 금지한 source path와 행동, 상속하지 않는 capability approval, 기대 output과 완료 조건을 명시합니다. persistent 병렬 작업은 SESSION_PROTOCOL의 child lineage와 one-writer 규칙을 따릅니다. 파일을 저장하지 않는 response-only 분석은 read-only finding일 뿐 SESSION이나 gate evidence가 아니며 root가 현재 근거와 대조해 확인하기 전에는 pass로 사용할 수 없습니다.
+
+취합은 의존 순서를 지킵니다. Research evidence를 먼저 확인하고, 같은 frozen Frame·Direction에 대한 Flow & State와 Accessibility & Content를 교차 대조한 뒤, 병합된 specification revision을 대상으로 Prototype & Validation을 검토합니다. 마지막에는 root Product Designer가 scope 누락, 충돌, assumption, stable ID·Acceptance traceability와 현재 gate를 다시 계산합니다. child가 보고한 `pass`, 추천, prototype 또는 validation은 gate 통과나 사용자 승인이 아니며 최종 판정, parent 반영과 사용자-facing 응답은 root만 소유합니다.
+
+subagent가 여러 개여도 사용자 질문은 한 번에 하나이고 capability approval은 실제로 새 read/write/network 범위가 생길 때만 묻습니다. host가 subagent를 지원하지 않거나 생성에 외부 연결·데이터 전송이 필요하면 같은 역할을 root가 순차 실행하며 delivery claim과 gate를 낮추지 않습니다.
+
 ## 6. 전달 범위와 delivery profile
 
 작업 깊이와 별도로 이번 요청이 실제로 요구하는 최종 결과를 product-neutral delivery profile로 고정합니다. 제품 종류나 도구 이름이 아니라 사용자가 승인하려는 결정과 필요한 산출물로 판단합니다. 요청이 명확하면 profile 선택만을 위한 질문을 만들지 않고 첫 진행 요약에 profile과 범위를 함께 알립니다.
