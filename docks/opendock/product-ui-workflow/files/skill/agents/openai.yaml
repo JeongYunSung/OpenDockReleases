@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product UI Workflow"
+  short_description: "제품 요구를 설계 시스템과 검증된 Storybook 화면으로 완성합니다"
+  default_prompt: "Use $opendock-product-ui-workflow to turn this product UI request into bounded decisions, scenarios, reusable components, and verified screens."

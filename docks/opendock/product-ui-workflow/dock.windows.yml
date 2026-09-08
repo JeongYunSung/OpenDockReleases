@@ -1,0 +1,62 @@
+opendock: 1
+summary: 모호한 제품 아이디어를 사용자 흐름, 디자인 시스템과 검증된 Storybook 화면으로 완성합니다.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - product-design
+  - storybook
+  - design-system
+  - visual-testing
+  - accessibility
+  - frontend
+requires:
+  runtimes:
+    node: ">=18.0.0 <25.0.0"
+    npm: ">=9.0.0"
+tools:
+  oh-my-design:
+    manager: npm
+    package: oh-my-design-cli
+    version: "2.0.0"
+    commands:
+      - oh-my-design
+      - omd
+permissions:
+  - oh-my-design --help
+  - omd --help
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/skill/SKILL.md
+    to: .agents/skills/opendock-product-ui-workflow/SKILL.md
+  - from: files/skill/SKILL.md
+    to: .claude/skills/opendock-product-ui-workflow/SKILL.md
+  - from: files/skill/agents/openai.yaml
+    to: .agents/skills/opendock-product-ui-workflow/agents/openai.yaml
+  - from: files/docs/README.md
+    to: .opendock/docks/product-ui-workflow/README.md
+  - from: files/docs/WORKFLOW.md
+    to: .opendock/docks/product-ui-workflow/WORKFLOW.md
+  - from: files/docs/SCENARIOS.md
+    to: .opendock/docks/product-ui-workflow/SCENARIOS.md
+  - from: files/docs/DESIGN_SYSTEM.md
+    to: .opendock/docks/product-ui-workflow/DESIGN_SYSTEM.md
+  - from: files/docs/STORYBOOK.md
+    to: .opendock/docks/product-ui-workflow/STORYBOOK.md
+  - from: files/docs/VISUAL_VERIFICATION.md
+    to: .opendock/docks/product-ui-workflow/VISUAL_VERIFICATION.md
+  - from: files/docs/POLISH.md
+    to: .opendock/docks/product-ui-workflow/POLISH.md
+  - from: files/docs/SOURCES.md
+    to: .opendock/docks/product-ui-workflow/SOURCES.md
+doctor:
+  - id: product-ui-workflow-cli
+    run: omd --help
+  - id: product-ui-workflow-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-product-ui-workflow/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: product-ui-workflow-claude-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .claude/skills/opendock-product-ui-workflow/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: product-ui-workflow-guide
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-ui-workflow/WORKFLOW.md) { exit 0 } else { exit 1 }"
+  - id: product-ui-workflow-sources
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/product-ui-workflow/SOURCES.md) { exit 0 } else { exit 1 }"
