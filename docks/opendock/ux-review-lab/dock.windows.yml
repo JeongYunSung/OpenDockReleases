@@ -1,0 +1,48 @@
+opendock: 1
+summary: 화면과 프로토타입을 빠르게 점검하고 역할별 UX 의견과 개선 우선순위를 정리합니다.
+readme: DOCK.md
+logo: logo.png
+tags:
+  - ux
+  - review
+  - figma
+  - usability
+  - prototype
+files:
+  - from: files/AGENTS.md
+    to: AGENTS.md
+  - from: files/skill/SKILL.md
+    to: .agents/skills/opendock-ux-review-lab/SKILL.md
+  - from: files/skill/SKILL.md
+    to: .claude/skills/opendock-ux-review-lab/SKILL.md
+  - from: files/skill/agents/openai.yaml
+    to: .agents/skills/opendock-ux-review-lab/agents/openai.yaml
+  - from: files/docs/README.md
+    to: .opendock/docks/ux-review-lab/README.md
+  - from: files/docs/QUICK_REVIEW.md
+    to: .opendock/docks/ux-review-lab/QUICK_REVIEW.md
+  - from: files/docs/ROLE_REVIEW.md
+    to: .opendock/docks/ux-review-lab/ROLE_REVIEW.md
+  - from: files/docs/ATTENTION_MAP.md
+    to: .opendock/docks/ux-review-lab/ATTENTION_MAP.md
+  - from: files/docs/SOURCES.md
+    to: .opendock/docks/ux-review-lab/SOURCES.md
+doctor:
+  - id: ux-review-lab-agents
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath AGENTS.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-ux-review-lab/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-claude-skill
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .claude/skills/opendock-ux-review-lab/SKILL.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-skill-metadata
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .agents/skills/opendock-ux-review-lab/agents/openai.yaml) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-readme
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/ux-review-lab/README.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-quick-review
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/ux-review-lab/QUICK_REVIEW.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-role-review
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/ux-review-lab/ROLE_REVIEW.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-attention-map
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/ux-review-lab/ATTENTION_MAP.md) { exit 0 } else { exit 1 }"
+  - id: ux-review-lab-sources
+    check: powershell -NoProfile -NonInteractive -Command "if (Test-Path -LiteralPath .opendock/docks/ux-review-lab/SOURCES.md) { exit 0 } else { exit 1 }"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX 리뷰랩"
+  short_description: "화면과 프로토타입을 역할별로 점검하고 UX 개선 우선순위를 정리합니다"
+  default_prompt: "Use $opendock-ux-review-lab to review the supplied screen and prioritize evidence-based UX improvements."
